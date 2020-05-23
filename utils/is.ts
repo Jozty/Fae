@@ -1,4 +1,4 @@
-import { Func } from "./types"
+import { Func } from "./types.ts"
 
 export function is(x: any, type: string) {
   return Object.prototype.toString.call(x) === `[object ${type}]`

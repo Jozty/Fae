@@ -1,6 +1,6 @@
 import { isPlaceHolder } from "./is_placeholder.ts"
 import { _ } from "./constants.ts"
-import { Func } from "./types"
+import { Func } from "./types.ts"
 
 function _curryN<F extends (...args: any[]) => any>(totalArgs: number, received: Parameters<F>, original: F) {
   return function f(this: any, ...passed: any[]) {
