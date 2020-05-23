@@ -1,3 +1,5 @@
+import { Func } from "./types"
+
 export function is(x: any, type: string) {
   return Object.prototype.toString.call(x) === `[object ${type}]`
 }
@@ -10,11 +12,11 @@ export function isString(x: any): x is String {
   return is(x, 'String')
 }
 
-export function isObject(x: any) {
+export function isObject(x: any): x is Object {
   return is(x, 'Object')
 }
 
-export function isFunction(x: any) {
+export function isFunction(x: any): x is Func {
   return is(x, 'Function') || typeof x === 'function'
 }
 

@@ -1,5 +1,6 @@
 import { isPlaceHolder } from "./is_placeholder.ts"
 import { _ } from "./constants.ts"
+import { Func } from "./types"
 
 function _curryN<F extends (...args: any[]) => any>(totalArgs: number, received: Parameters<F>, original: F) {
   return function f(this: any, ...passed: any[]) {
@@ -21,7 +22,7 @@ function _curryN<F extends (...args: any[]) => any>(totalArgs: number, received:
   }  
 }
 
-export default function curryN<F extends (...args: any[]) => any>(totalArgs: number, original: F) {
+export default function curryN<F extends Func>(totalArgs: number, original: F) {
   const received = new Array(totalArgs).fill(void 0) as Parameters<F>
   return _curryN(totalArgs, received, original)
 }
