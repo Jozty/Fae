@@ -25,4 +25,4 @@ function reduce<T, R = T>(func: Function, list: Iterable<T> | Iterator<T>, acc: 
   if(isIterator(list)) return _iterableReduce(func, list, acc)
 }
 
-export default curryN<typeof reduce>(3, reduce) as Curry3<Function, Iterable<unknown> | Iterator<unknown>, unknown, unknown>
+export default curryN<typeof reduce>(3, reduce) as Curry3<Function, Iterable<any> | Iterator<any>, any, any>
