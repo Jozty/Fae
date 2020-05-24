@@ -1,5 +1,5 @@
 import { describe, it, expect } from "./_describe.ts"
-import map from './../map.ts'
+import { map } from '../mod.ts'
 
 function add3(a: number) {
   return 3 + a
