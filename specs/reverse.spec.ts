@@ -25,3 +25,25 @@ describe('reverse array', () => {
     expect(arr).toEqual(arr2)    
   })
 })
+
+describe('reverse string', () => {
+  it('should reverse strings', () => {
+    const str = 'asdfghjklqwertyuiopQWERTYUIOPZXCVBNM'
+    const str2 = str.split('').join('')
+    const expected = str.split('').reverse().join('')
+    expect(reverse(str)).toEqual(expected)
+    expect(str).toEqual(str2)
+    expect(reverse(_)(str)).toEqual(expected)
+    expect(str).toEqual(str2)
+  })
+  it('should reverse strings with non-ascii characters', () => {
+    let str = 'sdf1234@#$%^&~\u2345♫çñè\x00'
+    for(let i = 0; i < 10000; i++) str += String.fromCharCode(i)
+    const str2 = str.split('').join('')
+    const expected = str.split('').reverse().join('')
+    expect(reverse(str)).toEqual(expected)
+    expect(str).toEqual(str2)
+    expect(reverse(_)(str)).toEqual(expected)
+    expect(str).toEqual(str2)
+  })
+})
