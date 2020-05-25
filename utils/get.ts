@@ -8,7 +8,7 @@ export function getIterator<T = any>(iterable: Iterable<T>) {
 }
 
 export function getFunctionLength(func: Func) {
-  return func[FUNCTION_LENGTH]
+  return func.length || func[FUNCTION_LENGTH]
 }
 
 export function getTransformer(func: Func | Transformer): Transformer {
