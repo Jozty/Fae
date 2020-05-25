@@ -2,16 +2,11 @@ import * as R from './mod.ts'
 
 let t = R.pipe(
   R.map((a: string) => a.toUpperCase()),
-  R.map(R.reverse),
-  R.reverse
+  R.map((b: string) => b.split('').reverse().join('')),
 )
 
 let x = ['abc', 'def', 'ghi', 'jkl']
 
 console.log(t(x))
 
-function *it(i = 0) {
-  while(i++ <= 5) yield i
-}
-
-console.log(R.reduce(R.add)(it(), 0))
+console.log(R.transduce(t, R.flip(R.append), [], x))
