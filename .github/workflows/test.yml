@@ -1,0 +1,16 @@
+name: Run Tests
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Use Deno
+      uses: actions/checkout@v2
+    - name: Install Deno
+      run: curl -fsSL https://deno.land/x/install/install.sh | sh
+    - name: test
+      run: /home/runner/.deno/bin/deno run --allow-read --allow-run --allow-net specs/_run.ts
