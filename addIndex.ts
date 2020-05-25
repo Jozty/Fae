@@ -6,7 +6,7 @@ import { Func } from './utils/types.ts';
 import { getFunctionLength } from "./utils/get.ts"
 
 
-var addIndex = curryN(function addIndex(fn:Func) {
+var addIndex = curryN(1, function addIndex(fn: Func) {
   return curryN(getFunctionLength(fn)!, function(this:any) {
     var index = 0;
     var origFn = arguments[0];
@@ -19,6 +19,6 @@ var addIndex = curryN(function addIndex(fn:Func) {
     };
     return fn.apply(this,args);
   });
-},null);
+});
 
 export default addIndex;
