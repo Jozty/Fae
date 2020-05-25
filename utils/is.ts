@@ -31,11 +31,10 @@ export function isArray<T = any>(x: any): x is Array<T> {
 
 export function isArrayLike<T = any>(x: any): x is ArrayLike<T> {
   if(!x) return false
-  if(!isObject(x)) return false
   if(isArray(x)) return true
   if(x.length){
     if(x.length === 0) return true
-    if(x.length > 0 && x.hasOwnProperty(0) && x.hasOwnProperty(1)) return true
+    if(x.length > 0 && x.hasOwnProperty(0) && x.hasOwnProperty(x.length - 1)) return true
   }
   return false
 }

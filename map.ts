@@ -16,7 +16,7 @@ function _objectMap(func: Func, functor: Obj) {
   return reduce((acc: Obj, key: string) => {
     acc[key] = func(functor[key])
     return acc
-  }, Object.keys(functor), {})
+  }, {}, Object.keys(functor))
 }
 
 function _arrayMap<T>(func: Func, functor: Array<T>) {

@@ -8,7 +8,7 @@ export function dispatch(TR: typeof Transformer, func: Func) {
 
     const args2 = [...args]
     const obj = args2.pop()
-    if(obj.transformer) {
+    if(isTransformer(obj)) {
       return new TR(args[0], obj)
     }
     return func.apply(this, args)
