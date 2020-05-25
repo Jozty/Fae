@@ -8,9 +8,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Use Deno
-      uses: actions/checkout@v2
-    - name: Install Deno
-      run: curl -fsSL https://deno.land/x/install/install.sh | sh
-    - name: test
-      run: /home/runner/.deno/bin/deno run --allow-read --allow-run --allow-net specs/_run.ts
+    - uses: actions/checkout@master
+    - uses: denolib/setup-deno@master
+      with:
+        deno-version: 1.0.0-rc1
+    - run: deno run --allow-read --allow-run --allow-net specs/_run.ts
