@@ -1,5 +1,5 @@
 import { isPlaceHolder, areAllPlaceHolder } from "./is_placeholder.ts"
-import curry1 from "./curry_1"
+import curry1 from "./curry_1.ts"
 
 /** 
  * @deprecated
