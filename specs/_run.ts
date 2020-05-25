@@ -8,6 +8,7 @@ function write(...args: any[]) {
 
 const italic = (str: string | number) => colors.italic(str.toString())
 const bold = (str: string | number) => colors.bold(str.toString())
+const yellow = (str: string | number) => colors.yellow(str.toString())
 const error = (str: string | number) => colors.red(str.toString())
 const success = (str: string | number) => colors.green(str.toString())
 const errorBold = (str: string | number) => bold(error(str.toString()))
@@ -16,11 +17,12 @@ const tick = () => successBold('\u2713')
 const cross = () => errorBold('\u2717')
 
 
-function showResults() {
+function showResults(start: number, end: number) {
   // @ts-ignore
   const tests: Tests = globalThis.tests
+  let time = ((end - start) / 1000) + 's'
   write()
-  write(bold('Test Results'))
+  write(bold(yellow('Test Results Completed in')), bold(yellow(time)))
   write(tick(), success('Test suits passed'), successBold(tests.passedTestSuits))
   write(cross(), error('Test suits failed'), errorBold(tests.failedTestSuits))
   write()
@@ -51,11 +53,12 @@ function readSpecFiles(dir: string): any[] {
 }
 
 async function run() {
+  let start = Date.now()
   const files = readSpecFiles('./specs')
   for(let i =0; i < files.length; i++) {
     await import(`./${files[i].name}`)
   }
-  showResults()
+  showResults(start, Date.now())
 }
 
 await run()

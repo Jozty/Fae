@@ -1,4 +1,5 @@
 import { Func } from "./types.ts"
+import { Transformer } from "./transformers.ts"
 
 export function is(x: any, type: string) {
   return Object.prototype.toString.call(x) === `[object ${type}]`
@@ -30,11 +31,10 @@ export function isArray<T = any>(x: any): x is Array<T> {
 
 export function isArrayLike<T = any>(x: any): x is ArrayLike<T> {
   if(!x) return false
-  if(!isObject(x)) return false
   if(isArray(x)) return true
   if(x.length){
     if(x.length === 0) return true
-    if(x.length > 0 && x.hasOwnProperty(0) && x.hasOwnProperty(1)) return true
+    if(x.length > 0 && x.hasOwnProperty(0) && x.hasOwnProperty(x.length - 1)) return true
   }
   return false
 }
@@ -45,4 +45,8 @@ export function isIterable<T = any>(x: any): x is Iterable<T> {
 
 export function isIterator<T = any>(x: any): x is Iterator<T> {
   return isFunction(x.next)
+}
+
+export function isTransformer(s: any): s is Transformer {
+  return s instanceof Transformer
 }

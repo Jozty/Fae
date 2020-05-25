@@ -1,25 +1,30 @@
 import { isPlaceHolder } from "./is_placeholder.ts"
 import { _ } from "./constants.ts"
 import { Func } from "./types.ts"
+import { setFunctionLength } from "./set.ts"
 
 function _curryN<F extends (...args: any[]) => any>(totalArgs: number, received: Parameters<F>, original: F) {
-  return function f(this: any, ...passed: any[]) {
-    const allArgs = new Array(totalArgs).fill(void 0) as Parameters<F>
+  function f(this: any, ...passed: any[]) {
+    const allArgs = [...received] as Parameters<F>
     let allArgsI = 0
     let i = 0
-    let rem = totalArgs
-    while(allArgsI < totalArgs) {
+    while(i < passed.length && allArgsI < totalArgs) {
       let r: any = void 0
-      if(received[allArgsI] !== void 0) r = received[allArgsI]
-      else if(!isPlaceHolder(passed[i])) r = passed[i++]
-      else i++
-      allArgs[allArgsI++] = r
-      if(r !== void 0) rem--
+      if(allArgs[allArgsI] !== void 0) {
+        allArgsI++
+        continue
+      }
+      if(!isPlaceHolder(passed[i])) allArgs[allArgsI] = passed[i]
+      i++
+      allArgsI++
     }
-    return rem <= 0
+    return allArgs.every(r => r !== void 0)
       ? original.apply(this, allArgs)
       : _curryN(totalArgs, allArgs, original)
-  }  
+  }
+  let rem = received.filter(r => r === void 0).length
+  setFunctionLength(f, rem)
+  return f
 }
 
 export default function curryN<F extends Func>(totalArgs: number, original: F) {
