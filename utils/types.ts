@@ -32,7 +32,8 @@ export interface Curry3<T1, T2 = T1, T3 = T1, R = T1> {
   (t1: T1, t2: T2, t3: T3): R
 }
 
-export type Functor<T> = Iterable<T> | Iterator<T>
+export type Functor<T = any> = Iterable<T> | Iterator<T>
+export type FunctorWithArLk<T = any> = Functor<T> | ArrayLike<T>
 
 export type Func = ((...args: any[]) => any) & {[FUNCTION_LENGTH]?: number}
 
