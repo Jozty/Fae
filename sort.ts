@@ -1,7 +1,8 @@
-import _curry2 from './utils/curry_2.ts';
+import curryN from './utils/curry_n.ts'
+import { Curry2, Func } from "./utils/types.ts"
 
-var sort = _curry2(function sort(comparator:any, list:Array<number>) {
-  return Array.prototype.slice.call(list, 0).sort(comparator);
-});
+function sort(comparator: Func, list: any[]) {
+  return [...list].sort(comparator)
+}
 
-export default sort;
+export default <Curry2<Func, any[], any[]>>curryN(2, sort)
