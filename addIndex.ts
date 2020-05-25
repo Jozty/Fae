@@ -21,4 +21,5 @@ var addIndex = curryN(1, function addIndex(fn: Func) {
   });
 });
 
+
 export default addIndex;
