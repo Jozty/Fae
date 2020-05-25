@@ -50,3 +50,10 @@ export function isIterator<T = any>(x: any): x is Iterator<T> {
 export function isTransformer(s: any): s is Transformer {
   return s instanceof Transformer
 }
+
+export function isUndefinedOrNull(x: any): boolean {
+  return x === void 0 || x === null || x === undefined
+}
+export function isNotUndefinedOrNull(x: any): boolean {
+  return !isUndefinedOrNull(x)
+}

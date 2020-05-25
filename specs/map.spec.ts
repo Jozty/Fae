@@ -1,23 +1,12 @@
 import { describe, it, expect } from "./_describe.ts"
-import { map } from '../mod.ts'
+import { map, add, multiply, subtract, _ } from '../mod.ts'
+import { eq } from "./utils/utils.ts"
 
 function add3(a: number) {
   return 3 + a
 }
 
-describe('map on arrays', () => {
-  it('should add 3 to all elements', () => {
-    const arr = [1, 2, 3, 4, 5, 6, 7, 8]
-    const arr2 = [...arr]
-    const expected = [4, 5, 6, 7, 8, 9, 10, 11]
-    expect(map(add3)(arr)).toEqual(expected)
-    expect(arr).toEqual(arr2)
-    expect(map(add3, arr)).toEqual(expected)
-    expect(arr).toEqual(arr2)
-  })
-})
-
-describe('map on objects', () => {
+describe('map', () => {
   const obj = {
     a: 1,
     b: 2,
@@ -29,8 +18,21 @@ describe('map on objects', () => {
     'abc': 13,
   }
   const obj2 = {...obj}
+  const add1 = add(1)
+  const times2 = multiply(2)
+  const dec = subtract(_, 1)
 
-  it('should add 3 to all elements', () => {
+  it('should add 3 to all elements on array', () => {
+    const arr = [1, 2, 3, 4, 5, 6, 7, 8]
+    const arr2 = [...arr]
+    const expected = [4, 5, 6, 7, 8, 9, 10, 11]
+    expect(map(add3)(arr)).toEqual(expected)
+    expect(arr).toEqual(arr2)
+    expect(map(add3, arr)).toEqual(expected)
+    expect(arr).toEqual(arr2)
+  })
+
+  it('should add 3 to all elements of object', () => {
     const expected = {
       a: 4,
       b: 5,
@@ -46,9 +48,7 @@ describe('map on objects', () => {
     expect(map(add3, obj)).toEqual(expected)
     expect(obj).toEqual(obj2)
   })
-})
 
-describe('map on functions', () => {
   it('should add 3 to result of function1', () => {
     function function1(a: number, b: number) {
       return a * b + a % b
@@ -67,4 +67,17 @@ describe('map on functions', () => {
     expect(map(add3, function1)(a, b)).toBe(result)
     expect(map(add3, function1)(a)(b)).toBe(result)
   })
+
+  it('interprets ((->) r) as a functor', function() {
+    const f = function(a: number) { return a - 1; }
+    const g = function(b: number) { return b * 2; }
+    const h = map(f, g)
+    eq(h(10), (10 * 2) - 1)
+  })
+
+  it('composes', function() {
+    const mdouble = map(times2)
+    const mdec = map(dec)
+    eq(mdec(mdouble([10, 20, 30])), [19, 39, 59])
+  });
 })

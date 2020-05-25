@@ -4,7 +4,7 @@ import {
   _,
 } from "../mod.ts"
 
-describe('reverse array', () => {
+describe('reverse', () => {
   it('should reverse array', () => {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8]
     const arr2 = [...arr]
@@ -24,9 +24,7 @@ describe('reverse array', () => {
     expect(reverse(_)(arr)).toEqual(expected)
     expect(arr).toEqual(arr2)    
   })
-})
 
-describe('reverse string', () => {
   it('should reverse strings', () => {
     const str = 'asdfghjklqwertyuiopQWERTYUIOPZXCVBNM'
     const str2 = str.split('').join('')
@@ -36,6 +34,7 @@ describe('reverse string', () => {
     expect(reverse(_)(str)).toEqual(expected)
     expect(str).toEqual(str2)
   })
+
   it('should reverse strings with non-ascii characters', () => {
     let str = 'sdf1234@#$%^&~\u2345♫çñè\x00'
     for(let i = 0; i < 10000; i++) str += String.fromCharCode(i)
