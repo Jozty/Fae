@@ -1,12 +1,9 @@
 import _concat from './utils/concat.ts'
 import curryN from './utils/curry_n.ts'
-import map from './map.ts'
-import add from './add.ts'
 import { Func } from './utils/types.ts'
 import { getFunctionLength } from "./utils/get.ts"
 
-
-var addIndex = curryN(1, function addIndex(fn: Func) {
+function addIndexF(fn: Func) {
   return curryN(getFunctionLength(fn)!, function(this: any) {
     var index = 0
     var origFn = arguments[0]
@@ -19,7 +16,9 @@ var addIndex = curryN(1, function addIndex(fn: Func) {
     }
     return fn.apply(this,args)
   })
-})
+}
+
+let addIndex = curryN(1, addIndexF)
 
 
 export default addIndex
