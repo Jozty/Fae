@@ -5,9 +5,9 @@
 import curryN from "./utils/curry_n.ts"
 import { Curry2 } from "./utils/types.ts"
 
-function findIndex(Arr: Array<any>,element: any){
-    for(let i=0;i<=Arr.length;i++){
-        if(element == Arr[i]) return i
+function findIndex(arr: Array<any>, element: any){
+    for(let i = 0; i <= arr.length; i++){
+        if(element === arr[i]) return i
     }
     return -1
 }

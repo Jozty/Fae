@@ -1,16 +1,17 @@
 import concat from './utils/concat.ts'
+import { Curry1 } from "./utils/types.ts"
 import curryN from './utils/curry_n.ts'
 import { Func } from './utils/types.ts'
 import { getFunctionLength } from "./utils/get.ts"
 
-function addIndexF(fn: Func) {
+function addIndex(fn: Func) {
   return curryN(getFunctionLength(fn)!, function(this: any) {
     let index = 0
     let origFn = arguments[0]
     let list = arguments[arguments.length - 1]
     let args = [...arguments]
     args[0] = function() {
-      let result = origFn.apply(this, concat(args, [index, list]))
+      let result = origFn.apply(this, concat([...arguments], [index, list]))
       index += 1
       return result
     }
@@ -18,7 +19,5 @@ function addIndexF(fn: Func) {
   })
 }
 
-let addIndex = curryN(1, addIndexF)
 
-
-export default addIndex
+export default <Curry1<Func, any>>curryN(1, addIndex)
