@@ -20,17 +20,10 @@ const cross = () => errorBold('\u2717')
 function showResults(start: number, end: number) {
   // @ts-ignore
   const tests: Tests = globalThis.tests
-  let time = ((end - start) / 1000) + 's'
-  write()
-  write(bold(yellow('Test Results Completed in')), bold(yellow(time)))
-  write(tick(), success('Test suits passed'), successBold(tests.passedTestSuits))
-  write(cross(), error('Test suits failed'), errorBold(tests.failedTestSuits))
-  write()
-  write(tick(), success('Test passed'), successBold(tests.passedTest))
-  write(cross(), error('Test failed'), errorBold(tests.failedTest))
-  write()
-
+  const time = ((end - start) / 1000) + 's'
   const stats = tests.stats
+
+  write()
   for(let i = 1, l = stats.length; i <= l; i++) {
     const {name, it} = stats[i - 1]
     write(bold(italic(`${i}. ${name}`)))
@@ -42,8 +35,18 @@ function showResults(start: number, end: number) {
         console.error(it2.error)
       }
     }
-    write()
   }
+
+  write()
+  write()
+  write()
+  write(bold(yellow('Test Results Completed in')), bold(yellow(time)))
+  write(tick(), success('Test suits passed'), successBold(tests.passedTestSuits))
+  write(cross(), error('Test suits failed'), errorBold(tests.failedTestSuits))
+  write()
+  write(tick(), success('Test passed'), successBold(tests.passedTest))
+  write(cross(), error('Test failed'), errorBold(tests.failedTest))
+  write()
 }
 
 function readSpecFiles(dir: string): any[] {

@@ -3,6 +3,7 @@ import reduce from './reduce.ts'
 import { Curry2, FunctorWithArLk } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import { isArray, isIterable, isIterator, isArrayLike, isNotUndefinedOrNull } from './utils/is.ts'
+import { throwFunctorError } from './utils/throw.ts'
 
 function _arrayJoin<T>(separator: string, list: Array<T>) {
   return list.join(separator)
@@ -18,9 +19,7 @@ function join<T extends Object>(separator: string | number, functor: FunctorWith
       functor
     )
   }
-  throw new TypeError(
-    'The functor should be an array like or iterable/iterator'
-  )
+  throwFunctorError()
 }
 
 export default curryN(2, join) as Curry2<string | number, FunctorWithArLk, string>

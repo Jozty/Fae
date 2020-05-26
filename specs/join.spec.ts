@@ -1,4 +1,4 @@
-import { describe, it, expect } from "./_describe.ts"
+import { describe, it } from "./_describe.ts"
 import { join } from '../mod.ts'
 import { eq, thr } from "./utils/utils.ts"
 
