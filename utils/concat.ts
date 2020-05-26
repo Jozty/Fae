@@ -1,4 +1,4 @@
-export default function _concat(set1:Array<any>, set2:Array<any>) {
+export default function concat(set1:Array<any>, set2:Array<any>) {
     set1 = set1 || []
     set2 = set2 || []
     let idx
