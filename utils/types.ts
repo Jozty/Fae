@@ -40,3 +40,11 @@ export type Func = ((...args: any[]) => any) & {[FUNCTION_LENGTH]?: number}
 export type Obj<T = any> = {
   [key: string]: T
 }
+
+export type ObjArr<T = any> = {
+  [key: string]: T | T[]
+}
+
+export type ObjRec = {
+  [key: string]: ObjRec | ObjArr
+}

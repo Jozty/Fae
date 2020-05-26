@@ -7,6 +7,12 @@ export function getIterator<T = any>(iterable: Iterable<T>) {
   return iterable[Symbol.iterator]()
 }
 
+export function getIterable<T = any>(iterator: Iterator<T>) {
+  return {
+    [Symbol.iterator]: () => iterator
+  }
+}
+
 export function getFunctionLength(func: Func) {
   return func.length || func[FUNCTION_LENGTH]
 }
