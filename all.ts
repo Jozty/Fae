@@ -9,7 +9,7 @@ function all(fun: Func, list: ArrayLike<any>){
         if(!fun(arrList[index])){
             return false
         }
-        index += 1
+        index++
     }
     return true
 }
