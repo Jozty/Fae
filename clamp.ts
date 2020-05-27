@@ -9,8 +9,8 @@ function clamp(value: any, min: any, max: any){
     return value < min 
         ? min 
         : value > max
-        ? max 
-        : value 
+            ? max 
+            : value 
 }
 
 export default <Curry3<any, any, any>>curryN(3, clamp)
