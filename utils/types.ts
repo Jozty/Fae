@@ -48,3 +48,5 @@ export type ObjArr<T = any> = {
 export type ObjRec = {
   [key: string]: ObjRec | ObjArr
 }
+
+export type Comparator<T> = (a: T, b: T) => 1 | -1 | 0

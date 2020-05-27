@@ -26,3 +26,12 @@ export class MapTransformer extends Transformer {
     super(f, transformer)
   }
 }
+
+export class FilterTransformer extends Transformer {
+  constructor(f: Func, transformer: Transformer) {
+    super(f, transformer)
+  }
+  step(result: any, input: any) {
+    return this.f(input) ? this.transformer!.step(result, input) : result
+  }
+}
