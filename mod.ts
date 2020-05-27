@@ -1,6 +1,7 @@
 export { _ } from './utils/constants.ts'
 export { default as add } from './add.ts'
 export { default as addIndex } from './addIndex.ts'
+export { default as all } from './all.ts'
 export { default as append } from './append.ts'
 export { default as compose } from './compose.ts'
 export { default as divide } from './divide.ts'
