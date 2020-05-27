@@ -1,4 +1,8 @@
-export default function concat(set1: Array<any>, set2: Array<any>) {
+import curryN from "./utils/curry_n.ts"
+import { Curry2 } from "./utils/types.ts"
+
+
+function concat(set1: Array<any>, set2: Array<any>) {
     set1 = set1 || []
     set2 = set2 || []
     let index
@@ -18,3 +22,5 @@ export default function concat(set1: Array<any>, set2: Array<any>) {
     }
     return result
   }
+
+  export default <Curry2<Array<any>, Array<any>, Array<any>>>curryN(2,concat)
