@@ -1,5 +1,5 @@
 import { Func } from "./types.ts"
-import { Transformer } from "./transformers.ts"
+import Transformer from "./Transformers/transformers.ts"
 
 export function is(x: any, type: string) {
   return Object.prototype.toString.call(x) === `[object ${type}]`

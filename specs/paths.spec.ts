@@ -1,6 +1,6 @@
 import { describe, it } from "./_describe.ts"
 import { paths, _ } from '../mod.ts'
-import { eq, thr } from "./utils/utils.ts"
+import { eq } from "./utils/utils.ts"
 
 const obj1 = {
   a: {

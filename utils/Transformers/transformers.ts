@@ -1,6 +1,6 @@
-import { Func } from "./types.ts"
+import { Func } from "../types.ts"
 
-export class Transformer {
+export default class Transformer {
   protected transformer?: Transformer
   protected f: Func
   static transform = Symbol('Transformer')
@@ -21,17 +21,12 @@ export class Transformer {
   }
 }
 
-export class MapTransformer extends Transformer {
-  constructor(f: Func, transformer: Transformer) {
-    super(f, transformer)
+export class ReducedTransformer<T> {
+  private _value: T
+  constructor(value: T) {
+    this._value = value
   }
-}
-
-export class FilterTransformer extends Transformer {
-  constructor(f: Func, transformer: Transformer) {
-    super(f, transformer)
-  }
-  step(result: any, input: any) {
-    return this.f(input) ? this.transformer!.step(result, input) : result
+  get value() {
+    return this._value
   }
 }
