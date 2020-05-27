@@ -1,4 +1,4 @@
-import concat from './utils/concat.ts'
+import concat from './concat.ts'
 import { Curry1 } from "./utils/types.ts"
 import curryN from './utils/curry_n.ts'
 import { Func } from './utils/types.ts'
