@@ -1,4 +1,5 @@
 export { expect } from 'https://deno.land/x/expect/expect.ts'
+export { assertStrictEq } from 'https://deno.land/std/testing/asserts.ts'
 
 interface It {
   desc: string

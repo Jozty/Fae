@@ -3,7 +3,7 @@ import { isArrayLike, isArray, isIterable, isIterator, isObject } from './utils/
 import reduce from './reduce.ts'
 import { throwFunctorError } from './utils/throw.ts'
 import { dispatch } from './utils/dispatch.ts'
-import { FilterTransformer } from './utils/transformers.ts'
+import FilterTransformer from './utils/Transformers/filter.ts'
 import curryN from './utils/curry_n.ts'
 
 type Predicate<T> = (a: T) => boolean

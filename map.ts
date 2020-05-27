@@ -3,7 +3,7 @@ import {  Func, Curry2, Obj } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import reduce from "./reduce.ts"
 import { dispatch } from "./utils/dispatch.ts"
-import { MapTransformer } from "./utils/transformers.ts"
+import MapTransformer from "./utils/Transformers/map.ts"
 
 function _functionMap(fn: Func, functor: Func) {
   return curryN(functor.length, function () {

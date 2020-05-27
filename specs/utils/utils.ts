@@ -1,7 +1,11 @@
-import { expect } from '../_describe.ts'
+import { expect, assertStrictEq } from '../_describe.ts'
 
 export function eq(actual: any, expected: any) {
   expect(actual).toEqual(expected)
+}
+
+export function strictNotEq(actual: any, expected: any) {
+  assertStrictEq(actual, expected)
 }
 
 export function thr(func: Function, expected: any) {

@@ -1,7 +1,7 @@
 import { Func } from "./types.ts"
 import { FUNCTION_LENGTH } from "./constants.ts"
 import { isTransformer } from "./is.ts"
-import { Transformer } from "./transformers.ts"
+import Transformer from "./Transformers/transformers.ts"
 
 export function getIterator<T = any>(iterable: Iterable<T>) {
   return iterable[Symbol.iterator]()

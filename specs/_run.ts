@@ -35,6 +35,7 @@ function showResults(start: number, end: number) {
         console.error(it2.error)
       }
     }
+    write()
   }
 
   write()

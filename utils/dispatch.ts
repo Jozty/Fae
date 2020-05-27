@@ -1,4 +1,4 @@
-import { Transformer } from "./transformers.ts"
+import Transformer from "./Transformers/transformers.ts"
 import { Func } from "./types.ts"
 import { isArray, isTransformer } from './is.ts'
 
