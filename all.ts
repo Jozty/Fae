@@ -3,10 +3,9 @@ import { Curry2, Func } from "./utils/types.ts"
 
 
 function all(fun: Func, list: ArrayLike<any>){
-    let arrList = Array.from(list)
     let index = 0
-    while(index < arrList.length){
-        if(!fun(arrList[index])){
+    while(index < list.length){
+        if(!fun(list[index])){
             return false
         }
         index++

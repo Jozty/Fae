@@ -3,10 +3,9 @@ import curryN from "./utils/curry_n.ts"
 import { Curry2 } from "./utils/types.ts"
 
 function contains(element: any, list: ArrayLike<any>){
-    let arr = Array.from(list)
     let index = 0
-    while(index != arr.length){
-        if(arr[index] === element) return true
+    while(index != list.length){
+        if(list[index] === element) return true
         index++
     }
     return false
