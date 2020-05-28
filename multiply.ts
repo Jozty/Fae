@@ -5,4 +5,4 @@ function multiply(a: number, b: number) {
   return a * b
 }
 
-export default <Curry2<number, number, number>>curryN(2, multiply)
+export default curryN(2, multiply) as Curry2<number>

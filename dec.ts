@@ -5,4 +5,4 @@ function dec(element: number){
     return --element
 }
 
-export default <Curry1<number, number>>curryN(1, dec)
+export default curryN(1, dec) as Curry1<number>

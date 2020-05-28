@@ -5,4 +5,4 @@ function min(a: number | string, b: number | string){
     return a < b ? a : b
 }
 
-export default <Curry2<number | string, number | string, number | string>>curryN(2, min)
+export default curryN(2, min) as Curry2<number | string, number | string, number | string>

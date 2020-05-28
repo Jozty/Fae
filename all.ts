@@ -1,11 +1,16 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2, Func } from "./utils/types.ts"
+import { Curry2 } from "./utils/types.ts"
 
+type Predicate<T> = (a: T) => boolean
 
-function all(fun: Func, list: ArrayLike<any>){
+/**
+ * Return `true` if all the elements of the functor match `predicate`
+ * `false` otherwise
+ */
+function all<T>(predicate: Predicate<T>, functor: ArrayLike<T>) {
     let index = 0
-    while(index < list.length){
-        if(!fun(list[index])){
+    while(index < functor.length){
+        if(!predicate(functor[index])){
             return false
         }
         index++
@@ -13,4 +18,4 @@ function all(fun: Func, list: ArrayLike<any>){
     return true
 }
 
-export default <Curry2<Func, ArrayLike<any>, boolean>>curryN(2, all)
+export default curryN(2, all) as Curry2<Predicate<any>, Array<any>, boolean>

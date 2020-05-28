@@ -4,6 +4,11 @@ import TakeTransformer from './utils/Transformers/take.ts'
 import curryN from './utils/curry_n.ts'
 import { Curry2 } from './utils/types.ts'
 
+/**
+ * Returns first `n` elements of the array or string.
+ * 
+ * Acts as a transducer if a transformer is given in `list`.
+ */
 function take<T>(n: number, list: T[] | string) {
   return slice(0, n < 0 ? Infinity : n, list)
 }

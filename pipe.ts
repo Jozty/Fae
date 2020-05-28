@@ -9,6 +9,12 @@ function _pipe(f: Func, g: Func) {
   }
 }
 
+/**
+ * Performs a left-to-right function composition.
+ * The first function may have any number of arguments;
+ * the remaining must have single argument.
+ * **Note:** The returned function is automatically curried.
+ */
 export default function pipe(func: Func, ...functions: Func[]) {
   return curryN(
     getFunctionLength(func)!,
