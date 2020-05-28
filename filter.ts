@@ -8,7 +8,7 @@ import curryN from './utils/curry_n.ts'
 
 type Predicate<T> = (a: T) => boolean
 
-function _objectReduce<T>(predicate: Predicate<T>, functor: Obj<T>) {
+function _objectFilter<T>(predicate: Predicate<T>, functor: Obj<T>) {
   return reduce(
     (acc, key) => {
       if(predicate(functor[key])) acc[key] = functor[key]
@@ -30,6 +30,12 @@ function _functorFilter<T>(predicate: Predicate<T>, functor: FunctorWithArLk<T>)
   )
 }
 
+/**
+ * Filters the those elements from `functor` that satisfies `predicate`.
+ * The `functor` may be an array/object/iterable/iterator.
+ * 
+ * Acts as a transducer if a transformer is passed in place of `functor`
+ */
 function filter<T = any>(predicate: Predicate<T>, functor: FunctorWithArLk<T> | Obj<T>): Array<T> {
   if(isArray(functor)) return functor.filter(predicate)
   if(
@@ -38,7 +44,7 @@ function filter<T = any>(predicate: Predicate<T>, functor: FunctorWithArLk<T> | 
     || isIterator(functor)) {
       return _functorFilter(predicate, functor)
   }
-  if(isObject(functor)) return _objectReduce(predicate, functor)
+  if(isObject(functor)) return _objectFilter(predicate, functor)
   throw throwFunctorError()
 }
 

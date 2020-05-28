@@ -2,6 +2,8 @@ import curryN from "./utils/curry_n.ts"
 import { Curry1 } from "./utils/types.ts"
 import add from './add.ts'
 import sort from "./sort.ts"
+
+/** Returns the median of the given list of numbers. */
 function median(list: Array<number>){
     let lCheck = list.length % 2 
     if(list.length === 0) return NaN
@@ -10,4 +12,4 @@ function median(list: Array<number>){
     return add(sList[list.length / 2], sList[list.length / 2 - 1]) / 2 
 }
 
-export default <Curry1<Array<number>, number>>curryN(1, median)
+export default curryN(1, median) as Curry1<Array<number>, number>

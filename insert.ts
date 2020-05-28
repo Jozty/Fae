@@ -1,7 +1,6 @@
-/*
-** Works on List/Array
-** Adds the given element to the array at given index
-** Return the new copy of array without affecting original one.
+/**
+ * Returns a new array with `element` inserted at `index` to `list`
+ * without affecting original one.
 */
 import curryN from "./utils/curry_n.ts"
 import { Curry3 } from "./utils/types.ts"

@@ -5,4 +5,4 @@ function inc(element: number){
     return ++element
 }
 
-export default <Curry1<number, number>>curryN(1, inc)
+export default curryN(1, inc) as Curry1<number>

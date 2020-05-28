@@ -2,7 +2,7 @@ import curryN from "./utils/curry_n.ts"
 import { Curry2 } from "./utils/types.ts"
 
 function divide(a: number, b: number) {
-  return a/b;
+  return a / b
 }
 
-export default <Curry2<number, number, number>>curryN(2, divide);
+export default curryN(2, divide) as Curry2<number>
