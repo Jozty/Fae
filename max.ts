@@ -5,4 +5,4 @@ function max(a: number | string, b: number | string){
     return a > b ? a : b
 }
 
-export default <Curry2<any, any, any>>curryN(2, max)
+export default <Curry2<number | string, number | string, number | string>>curryN(2, max)

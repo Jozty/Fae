@@ -5,7 +5,7 @@ import sort from "./sort.ts"
 function median(list: Array<number>){
     let lCheck = list.length % 2 
     if(list.length === 0) return NaN
-    let sList: number[] = sort((a: number, b: number) => a-b, list) 
+    let sList: number[] = sort((a: number, b: number) => a - b, list) 
     if(lCheck === 1) return sList[Math.trunc(list.length / 2)]
     return add(sList[list.length / 2], sList[list.length / 2 - 1]) / 2 
 }
