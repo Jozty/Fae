@@ -1,7 +1,7 @@
 import curryN from "./utils/curry_n.ts"
 import { Curry2 } from "./utils/types.ts"
 
-function max(a: any, b: any){
+function max(a: number | string, b: number | string){
     return a > b ? a : b
 }
 

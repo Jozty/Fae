@@ -1,7 +1,7 @@
 import curryN from "./utils/curry_n.ts"
 import { Curry2 } from "./utils/types.ts"
 
-function min(a: any, b: any){
+function min(a: number | string, b: number | string){
     return a < b ? a : b
 }
 
