@@ -5,4 +5,4 @@ function subtract(a: number, b: number) {
   return a - b
 }
 
-export default <Curry2<number, number, number>>curryN(2, subtract)
+export default curryN(2, subtract) as Curry2<number, number, number>

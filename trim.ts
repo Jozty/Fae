@@ -5,6 +5,14 @@ function escapeRegEx(str: string) {
   return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
 }
 
+/**
+ * Trims the string `str` from both end with `t`.
+ * Trims with white space if `t` is [''], with `t` otherwise.
+ * 
+ *      Krow.trim('   xyz  ', ''); // 'xyz
+ *      Krow.trim('[[Hello]]]', '[') // Hello]]]
+ *      Krow.trim('[[Hello]]]', ']]') // [[Hello]]
+*/
 function trim(str: string, t: string = '') {
   t = escapeRegEx(t)
   const regEx = new RegExp(`^(${t})+|(${t})+$`, 'g')
