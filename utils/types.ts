@@ -50,3 +50,10 @@ export type ObjRec = {
 }
 
 export type Comparator<T> = (a: T, b: T) => 1 | -1 | 0
+
+export type RetPar1<T extends Func> = ReturnType<Parameters<T>[0]>
+export type RetPar2<T extends Func> = ReturnType<Parameters<T>[1]>
+
+export type ArrEl<T extends any[]> = T[number]
+
+export type Pr<T extends Func> = Parameters<T>

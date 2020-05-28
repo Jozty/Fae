@@ -4,8 +4,9 @@ import reduce from "./reduce.ts"
 import concat from "./concat.ts"
 import map from "./map.ts"
 
-function chain(fun: Func, list: ArrayLike<any>){
+// TODO(ch-shubham) write documentation and test it
+function chain(fun: Func, list: ArrayLike<any>) {
     return reduce(concat, [], map(fun, list))
 }
 
-export default <Curry2<Func, ArrayLike<any>, boolean>>curryN(2, chain)
+export default curryN(2, chain) as Curry2<Func, ArrayLike<any>, boolean>
