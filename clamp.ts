@@ -9,7 +9,7 @@ import { Curry3 } from "./utils/types.ts"
  *      Fae.clamp(1, 10, 15) // => 10
  *      Fae.clamp(1, 10, 4)  // => 4
  */
-function clamp(value: string | number, min: string | number, max: string | number){
+function clamp(min: string | number, max: string | number, value: string | number){
     if(min > max) throw new Error("Minimum value must be smaller than Maximum value") 
     return value < min
         ? min 
