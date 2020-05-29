@@ -12,7 +12,7 @@ import { getFunctionLength } from "./utils/get.ts"
  * The passed function must have first argument as the iteration functions
  * and last arguments as the list
  * 
- *      const indexedMap = Krow.addIndex(Krow.map)
+ *      const indexedMap = Fae.addIndex(Fae.map)
  *      indexedMap((val, idx) => idx + '-' + val, ['f', 'o', 'o', 'b', 'a', 'r'])
  *      // ['0-f', '1-o', '2-o', '3-b', '4-a', '5-r']
  */

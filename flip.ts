@@ -8,7 +8,7 @@ import curryN from './utils/curry_n.ts'
  * 
  *      const mergeThree = (a, b, c) => [].concat(a, b, c)
  *      mergeThree(1, 2, 3); // [1, 2, 3]
- *      Krow.flip(mergeThree)(1, 2, 3); // [2, 1, 3]
+ *      Fae.flip(mergeThree)(1, 2, 3); // [2, 1, 3]
  */
 export default function flip(fn: Func) {
   return curryN(

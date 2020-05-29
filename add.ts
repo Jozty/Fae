@@ -4,7 +4,7 @@ import { Curry2 } from "./utils/types.ts"
 /**
  * Adds two numbers
  * 
- *      const add5 = Krow.add(5, Krow._)
+ *      const add5 = Fae.add(5, Fae._)
  *      const a = add5(4) // 9
 */
 function add(a: number, b: number) {

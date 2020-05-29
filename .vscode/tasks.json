@@ -6,7 +6,7 @@
     {
       "label": "test",
       "type": "shell",
-      "command": "deno run --allow-read --allow-run --allow-net specs/_run.ts"
+      "command": "deno run --allow-read --allow-net specs/_run.ts"
     }
   ]
 }
