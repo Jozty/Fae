@@ -1,5 +1,5 @@
 import { isPlaceHolder } from "./is_placeholder.ts"
-import { _ } from "./constants.ts"
+import { _, UNDEFINED } from "./constants.ts"
 import { Func } from "./types.ts"
 import { setFunctionLength } from "./set.ts"
 
@@ -9,8 +9,8 @@ function _curryN<F extends (...args: any[]) => any>(totalArgs: number, received:
     let allArgsI = 0
     let i = 0
     while(i < passed.length && allArgsI < totalArgs) {
-      let r: any = void 0
-      if(allArgs[allArgsI] !== void 0) {
+      let r: any = UNDEFINED
+      if(allArgs[allArgsI] !== UNDEFINED) {
         allArgsI++
         continue
       }
@@ -18,16 +18,16 @@ function _curryN<F extends (...args: any[]) => any>(totalArgs: number, received:
       i++
       allArgsI++
     }
-    return allArgs.every(r => r !== void 0)
+    return allArgs.every(r => r !== UNDEFINED)
       ? original.apply(this, allArgs)
       : _curryN(totalArgs, allArgs, original)
   }
-  let rem = received.filter(r => r === void 0).length
+  let rem = received.filter(r => r === UNDEFINED).length
   setFunctionLength(f, rem)
   return f
 }
 
 export default function curryN<F extends Func>(totalArgs: number, original: F) {
-  const received = new Array(totalArgs).fill(void 0) as Parameters<F>
+  const received = new Array(totalArgs).fill(UNDEFINED) as Parameters<F>
   return _curryN(totalArgs, received, original)
 }
