@@ -6,6 +6,7 @@ import curryN from "./utils/curry_n.ts"
 import { Curry2 } from "./utils/types.ts"
 
 // TODO: (singla-shivam) Add transformer
+// TODO: (ch-shubham) Add Support for Predicates
 
 function findIndex(arr: Array<any>, element: any){
     for(let i = 0; i <= arr.length; i++){
