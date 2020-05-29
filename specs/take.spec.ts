@@ -1,6 +1,6 @@
 import { describe, it } from "./_describe.ts"
 import { take, _, pipe, map, filter, transduce, append, flip } from '../mod.ts'
-import { eq, strictNotEq } from "./utils/utils.ts"
+import { eq } from "./utils/utils.ts"
 
 describe('take', () => {
   it('should take only the first `n` elements from a list', () => {

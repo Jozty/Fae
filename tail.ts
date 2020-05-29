@@ -6,8 +6,8 @@ import slice from "./slice.ts"
  * Returns all but the first element of `functor`.
  * Accepts array-like(including string).
  */
-function tail<T>(functor: ArrayLike<T>) {
+function tail<T>(functor: ArrayLike<T> | string) {
   return slice(1, Infinity, functor)
 }
 
-export default curryN(1, tail) as Curry1<Array<any>>
+export default curryN(1, tail) as Curry1<Array<any> | string>
