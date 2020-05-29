@@ -9,6 +9,7 @@ import { Curry2 } from "./utils/types.ts"
  *      Fae.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
  */
 function append<T>(el: T, list: T[]) {
+  console.log(el, list)
   return [...list, el]
 }
 

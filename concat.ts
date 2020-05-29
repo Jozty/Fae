@@ -1,26 +1,15 @@
 import curryN from "./utils/curry_n.ts"
 import { Curry2 } from "./utils/types.ts"
+import { isArray, isString } from "./utils/is.ts"
 
+/**
+ * Concat two arrays or strings.
+ * Both the arguments passed must be of same type.
+ */
+function concat<T = any>(a: Array<T> | string, b: Array<T> | string) {
+  if(isArray(a) && isArray(b)) return a.concat(b)
+  if(isString(a) && isString(b)) return a + b
+  throw new TypeError('Types are not compatible. Both the arguments passed must be of same type.')
+}
 
-function concat(set1: Array<any>, set2: Array<any>) {
-    set1 = set1 || []
-    set2 = set2 || []
-    let index
-    let length1 = set1.length
-    let length2 = set2.length
-    let result = []
-    
-    index=0
-    while (index < length1) {
-      result[result.length] = set1[index]
-      index += 1
-    }
-    index = 0
-    while (index < length2) {
-      result[result.length] = set2[index]
-      index += 1
-    }
-    return result
-  }
-
-  export default <Curry2<Array<any>, Array<any>, Array<any>>>curryN(2,concat)
+export default curryN(2,concat) as Curry2<Array<any> | string, Array<any> | string, Array<any> | string>
