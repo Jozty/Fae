@@ -33,6 +33,7 @@ function map<T>(fn: Func, functor: Object | Func | Array<T>) {
   if(isFunction(functor)) return _functionMap(fn, functor)
   if(isObject(functor)) return _objectMap(fn, functor)
   if(isArray(functor)) return _arrayMap(fn, functor)
+  throw new TypeError('Functor can be only array, object or a transformer')
 }
 
 const dispatchedMap = dispatch(MapTransformer, map)
