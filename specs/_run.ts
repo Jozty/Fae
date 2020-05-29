@@ -59,8 +59,16 @@ function readSpecFiles(dir: string): any[] {
 async function run() {
   let start = Date.now()
   const files = readSpecFiles('./specs')
-  for(let i =0; i < files.length; i++) {
-    await import(`./${files[i].name}`)
+  const args = Deno.args
+  if(args.length) {
+    for(let i = 0; i < args.length; i++) {
+      await import(`../${args[i]}`)
+    }
+  }
+  else {
+    for(let i = 0; i < files.length; i++) {
+      await import(`./${files[i].name}`)
+    }
   }
   showResults(start, Date.now())
 }
@@ -68,3 +76,4 @@ async function run() {
 await run()
 
 // deno run --allow-read --allow-run --allow-net specs/_run.ts
+// deno run --allow-read --allow-run --allow-net specs/_run.ts specs/all.spec.ts specs/join.spec.ts
