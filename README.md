@@ -13,5 +13,5 @@ Function usage and documentation can be found [here](https://doc.deno.land/https
 
 ### Running tests
 ```typescript
-deno run --allow-read --allow-run --allow-net specs/_run.ts
+deno run --allow-read --allow-net specs/_run.ts
 ```
