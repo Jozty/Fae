@@ -1,17 +1,15 @@
-import { describe, it, expect } from "./_describe.ts"
-import { contains } from '../mod.ts'
+import { describe, it } from "./_describe.ts"
+import { contains , _ } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
-import { _ } from "../mod.ts"
 
 describe('contains', () => {
-
-  const list: ArrayLike<any> =[
+  const list: ArrayLike<any> = [
     10,
     20,
     undefined,
     NaN,
     {a: 20, b: NaN, c: undefined},
-    Infinity
+    Infinity,
   ]
 
   const c = (contains(_, list))
