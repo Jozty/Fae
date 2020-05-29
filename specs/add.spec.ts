@@ -1,9 +1,10 @@
 import { describe, it, expect } from "./_describe.ts"
 import { add } from '../mod.ts'
+import { eq } from "./utils/utils.ts"
 
 
 describe('add', () => {
-    it('declared function correctly', () => {
-        expect(add(10, 20)).toEqual(30)
-    })
+  it('should be declared correctly', () => {
+    eq(add(10, 20), 30)
+  })
 })
