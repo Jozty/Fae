@@ -9,9 +9,9 @@ function escapeRegEx(str: string) {
  * Trims the string `str` from both end with `t`.
  * Trims with white space if `t` is [''], with `t` otherwise.
  * 
- *      Krow.trim('   xyz  ', ''); // 'xyz
- *      Krow.trim('[[Hello]]]', '[') // Hello]]]
- *      Krow.trim('[[Hello]]]', ']]') // [[Hello]]
+ *      Fae.trim('   xyz  ', ''); // 'xyz
+ *      Fae.trim('[[Hello]]]', '[') // Hello]]]
+ *      Fae.trim('[[Hello]]]', ']]') // [[Hello]]
 */
 function trim(str: string, t: string = '') {
   t = escapeRegEx(t)

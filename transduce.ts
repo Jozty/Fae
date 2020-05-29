@@ -11,13 +11,13 @@ import { getTransformer } from "./utils/get.ts"
  * and then passing the result to the next call.
  * 
  *      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
- *      const t1 = Krow.pipe(
- *        Krow.map(inc),
- *        Krow.filter(even),
- *        Krow.take(2)
+ *      const t1 = Fae.pipe(
+ *        Fae.map(inc),
+ *        Fae.filter(even),
+ *        Fae.take(2)
  *      )
  *      t1(arr) // [2, 4]
- *      Krow.transduce(t1, Krow.flip(Krow.append), [], arr) // [3]
+ *      Fae.transduce(t1, Fae.flip(Fae.append), [], arr) // [3]
  */
 export default function transduce<T, L = T>(trans1: Func, trans2: Func | Transformer, acc: T, functor: L[]) {
   const trans = getTransformer(trans2)
