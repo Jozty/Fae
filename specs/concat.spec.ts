@@ -8,7 +8,7 @@ describe('concat', () => {
     eq(concat([], ['c', 'd']), ['c', 'd'])
   })
 
-  it('works on strings', () => {
+  it('should work on strings', () => {
     eq(concat('foo', 'bar'), 'foobar')
     eq(concat('x', ''), 'x')
     eq(concat('', 'x'), 'x')
