@@ -27,9 +27,9 @@ Fae.addIndex(Fae.map)(Fae.add)([10, 20, 30]) // => [10, 21, 32]
 
 const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const transformer = Fae.pipe(
-Fae.map(inc),
-Fae.filter(even),
-Fae.take(3)
+  Fae.map(inc),
+  Fae.filter(even),
+  Fae.take(3)
 )
 transformer(array) // [2, 4, 6]
 ```
