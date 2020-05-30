@@ -5,4 +5,6 @@ function multiply(a: number, b: number) {
   return a * b
 }
 
+/** Multiplies two numbers. Equivalent to `a * b` but curried.
+ * @function */
 export default curryN(2, multiply) as Curry2<number>

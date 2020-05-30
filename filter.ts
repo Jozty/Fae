@@ -30,12 +30,6 @@ function _functorFilter<T>(predicate: Predicate<T>, functor: FunctorWithArLk<T>)
   )
 }
 
-/**
- * Filters the those elements from `functor` that satisfies `predicate`.
- * The `functor` may be an array/object/iterable/iterator.
- * 
- * Acts as a transducer if a transformer is passed in place of `functor`
- */
 function filter<T = any>(predicate: Predicate<T>, functor: FunctorWithArLk<T> | Obj<T>): Array<T> {
   if(isArray(functor)) return functor.filter(predicate)
   if(
@@ -50,5 +44,10 @@ function filter<T = any>(predicate: Predicate<T>, functor: FunctorWithArLk<T> | 
 
 const dispatchedFilter = dispatch(FilterTransformer, filter)
 
+/** Filters the those elements from `functor` that satisfies `predicate`.
+ * The `functor` may be an array/object/iterable/iterator.
+ * 
+ * Acts as a transducer if a transformer is passed in place of `functor` 
+ * @function */
 export default curryN(2, dispatchedFilter) as Curry2<Predicate<any>, FunctorWithArLk | Obj,  Array<any> | Object>
 

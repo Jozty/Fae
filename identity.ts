@@ -1,7 +1,8 @@
 import curryN from "./utils/curry_n.ts"
 import { Curry1 } from "./utils/types.ts"
 
-/** Returns the supplied parameter */
+/** Returns the supplied parameter
+ * @function */
 function identity<T = any>(x: T) {
   return x
 }

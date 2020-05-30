@@ -8,6 +8,7 @@ import { getTransformer } from "./utils/get.ts"
  * successively calling the transformed `trans2` and passing it `acc`
  * and the current value from the array, and then passing through `trans1`
  * and then passing the result to the next call.
+ * @function
  * 
  *      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
  *      const t1 = Fae.pipe(
