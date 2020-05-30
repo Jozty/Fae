@@ -15,7 +15,7 @@ function paths(pathsArr: Array<string | Array<string | number>>, obj: ObjRec) {
     if(isString(paths)) paths = getPath(paths)
     let val = obj
     for(let i = 0; i < paths.length; i++) {
-      if(isUndefinedOrNull(val)) return val
+      if(isUndefinedOrNull(val)) return
       const p = paths[i]
       val = isInteger(p as number) && isArrayLike(val)
         ? nth(p as number, val)

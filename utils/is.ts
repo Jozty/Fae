@@ -21,7 +21,7 @@ export function isFunction(x: any): x is Func {
   return is(x, 'Function') || typeof x === 'function'
 }
 
-export function isInteger(x: number): x is number {
+export function isInteger(x: any): x is number {
   return Number.isInteger(x)
 }
 
