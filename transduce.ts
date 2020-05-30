@@ -17,8 +17,7 @@ import { getTransformer } from "./utils/get.ts"
  *        Fae.take(2)
  *      )
  *      t1(arr) // [2, 4]
- *      Fae.transduce(t1, Fae.flip(Fae.append), [], arr) // [3]
- */
+ *      Fae.transduce(t1, Fae.flip(Fae.append), [], arr) // [3] */
 export default function transduce<T, L = T>(trans1: Func, trans2: Func | Transformer, acc: T, functor: L[]) {
   const trans = getTransformer(trans2)
   return reduce(trans1(trans), acc, functor)
