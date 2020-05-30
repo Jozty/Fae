@@ -3,12 +3,12 @@ import { prepend, _ } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 describe('prepend', () => {
-  it('adds the element to the beginning of the list', () => {
+  it('should add the element to the beginning of the list', () => {
     eq(prepend('x', ['y', 'z']), ['x', 'y', 'z'])
     eq(prepend(['a', 'z'], ['x', 'y']), [['a', 'z'], 'x', 'y'])
   })
 
-  it('works on empty list', () => {
+  it('should work on empty list', () => {
     eq(prepend(1, []), [1])
   })
 

@@ -11,12 +11,12 @@ describe('flip', () => {
     eq(g('a', 'b', 'c'), 'b a c')
   });
 
-  it('returns a curried function', () => {
+  it('should return a curried function', () => {
     const g = flip(f)('a')
     eq(g('b', 'c'), 'b a c')
   })
 
-  it('returns a function with the correct arity', () => {
+  it('should return a function with the correct arity', () => {
     const f2 = (a: string, b: string)  => a + ' ' + b
     const f3 = (a: string, b: string, c: string)  => a + ' ' + b + ' ' + c
     eq(getFunctionLength(flip(f2)), 2)

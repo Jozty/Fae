@@ -15,13 +15,13 @@ describe('findIndex', () => {
   // let isStr = (x: any) => { return typeof x === 'string'}
   // let isObj = (x: any) => { return typeof x === 'object'}
 
-  it('returns the index of the first element that satisfies the element equality', function() {
+  it('should return the index of the first element that satisfies the element equality', function() {
     eq(findIndex(a, 2), 0)
     eq(findIndex(a, undefined), 8);
     eq(findIndex(a, 'Foo'), 7);
   })
 
-  it('returns -1 when no element satisfies the predicate', function() {
+  it('should return -1 when no element satisfies the predicate', function() {
     eq(findIndex(['Bar'], 15), -1);
     eq(findIndex(a, 125), -1);
   })
