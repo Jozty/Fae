@@ -4,15 +4,14 @@ import TakeTransformer from './utils/Transformers/take.ts'
 import curryN from './utils/curry_n.ts'
 import { Curry2 } from './utils/types.ts'
 
-/**
- * Returns first `n` elements of the array or string.
- * 
- * Acts as a transducer if a transformer is given in `list`.
- */
 function take<T>(n: number, list: T[] | string) {
   return slice(0, n < 0 ? Infinity : n, list)
 }
 
 const dispatchedTake = dispatch(TakeTransformer as any, take)
 
+/** Returns first `n` elements of the array or string.
+ * 
+ * Acts as a transducer if a transformer is given in `list`.
+ * @function */
 export default curryN(2, dispatchedTake) as Curry2<number, any[] | string, any[] | string>

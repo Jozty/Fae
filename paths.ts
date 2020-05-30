@@ -10,17 +10,6 @@ function getPath(paths: string): string[] {
   return [paths]
 }
 
-/**
- * Retrieves the values at given paths `pathsArr` of `obj`.
- * Each path in the `pathsArr` may be any array of keys or
- * string of keys separated by `/` or `.` .
- * 
- *      Fae.paths([['a', 'b'], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); // [2, 3]
- *      Fae.paths([['a', 'b'], ['p', 'r']], {a: {b: 2}, p: [{q: 3}]}); // [2, undefined]
- *      Fae.path([['a', 'b']], {a: {b: 2}}); 2
- *      Fae.path(['a/b/0'], {a: {b: [1, 2, 3]}}); // 1
- *      Fae.path(['a.b.0'], {a: {b: [1, 2, 3]}}); // 2
- */
 function paths(pathsArr: Array<string | Array<string | number>>, obj: ObjRec) {
   return pathsArr.map((paths) => {
     if(isString(paths)) paths = getPath(paths)
@@ -36,4 +25,14 @@ function paths(pathsArr: Array<string | Array<string | number>>, obj: ObjRec) {
   })
 }
 
+/** Retrieves the values at given paths `pathsArr` of `obj`.
+ * Each path in the `pathsArr` may be any array of keys or
+ * string of keys separated by `/` or `.` .
+ * @function
+ * 
+ *      Fae.paths([['a', 'b'], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); // [2, 3]
+ *      Fae.paths([['a', 'b'], ['p', 'r']], {a: {b: 2}, p: [{q: 3}]}); // [2, undefined]
+ *      Fae.path([['a', 'b']], {a: {b: 2}}); 2
+ *      Fae.path(['a/b/0'], {a: {b: [1, 2, 3]}}); // 1
+ *      Fae.path(['a.b.0'], {a: {b: [1, 2, 3]}}); // 2 */
 export default curryN(2, paths) as Curry2<Array<string | Array<string | number>>, ObjRec>

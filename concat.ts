@@ -2,10 +2,9 @@ import curryN from "./utils/curry_n.ts"
 import { Curry2 } from "./utils/types.ts"
 import { isArray, isString } from "./utils/is.ts"
 
-/**
- * Concat two arrays or strings.
+/** Concat two arrays or strings.
  * Both the arguments passed must be of same type.
- */
+ * @function */
 function concat<T = any>(a: Array<T> | string, b: Array<T> | string) {
   if(isArray(a) && isArray(b)) return a.concat(b)
   if(isString(a) && isString(b)) return a + b

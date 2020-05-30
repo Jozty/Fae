@@ -14,6 +14,7 @@ function _pipe(f: Func, g: Func) {
  * The first function may have any number of arguments;
  * the remaining must have single argument.
  * **Note:** The returned function is automatically curried.
+ * @function
  */
 export default function pipe(func: Func, ...functions: Func[]) {
   return curryN(

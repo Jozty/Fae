@@ -4,5 +4,6 @@ import { Curry2 } from "./utils/types.ts"
 function max(a: number | string, b: number | string) {
     return a > b ? a : b
 }
-
+/** Returns the larger of its two arguments.
+ * @function */
 export default curryN(2, max) as Curry2<number | string, number | string, number | string>

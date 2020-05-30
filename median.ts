@@ -4,7 +4,6 @@ import add from './add.ts'
 import sort from "./sort.ts"
 import comparator from "./comparator.ts"
 
-/** Returns the median of the given list of numbers. */
 function median(list: Array<number>){
     let lCheck = list.length % 2 
     if(list.length === 0) return NaN
@@ -13,4 +12,7 @@ function median(list: Array<number>){
     return add(sList[list.length / 2], sList[list.length / 2 - 1]) / 2 
 }
 
+/**
+ * Returns the median of the given list of numbers.
+ * @function */
 export default curryN(1, median) as Curry1<Array<number>, number>

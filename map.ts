@@ -23,12 +23,6 @@ function _arrayMap<T>(func: Func, functor: Array<T>) {
   return [...functor].map(func)
 }
 
-/**
- * Applies `fn` to each of `functor`'s value
- * and returns functor of same shape
- *
- * Acts as a transducer if a transformer is given in `functor`.
- */
 function map<T>(fn: Func, functor: Object | Func | Array<T>) {
   if(isFunction(functor)) return _functionMap(fn, functor)
   if(isObject(functor)) return _objectMap(fn, functor)
@@ -38,4 +32,9 @@ function map<T>(fn: Func, functor: Object | Func | Array<T>) {
 
 const dispatchedMap = dispatch(MapTransformer, map)
 
+/** Applies `fn` to each of `functor`'s value
+ * and returns functor of same shape
+ *
+ * Acts as a transducer if a transformer is given in `functor`.
+ * @function */
 export default curryN(2, dispatchedMap) as Curry2<Func, Object | Func | Array<any>, any>
