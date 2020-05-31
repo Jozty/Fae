@@ -1,11 +1,15 @@
-import { expect, assertStrictEq } from '../_describe.ts'
+import { expect, assertStrictEq, AssertionError } from '../_describe.ts'
 
 export function eq(actual: any, expected: any) {
   expect(actual).toEqual(expected)
 }
 
-export function strictNotEq(actual: any, expected: any) {
+export function strictEq(actual: any, expected: any) {
   assertStrictEq(actual, expected)
+}
+export function strictNotEq(actual: any, expected: any) {
+  if(actual !== expected) return
+  throw new AssertionError('The objects passes has same reference')
 }
 
 export function thr(func: Function, expected: any) {
