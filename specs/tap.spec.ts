@@ -8,7 +8,7 @@ import {
   pipe,
   curry,
 } from '../mod.ts'
-import { eq, strictNotEq } from "./utils/utils.ts"
+import { eq } from "./utils/utils.ts"
 
 describe('tap', () => {
   const pushToList = curry(2, (a: number[], b: number[]) => a.push(...b))
