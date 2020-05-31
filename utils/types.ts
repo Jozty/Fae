@@ -57,3 +57,5 @@ export type RetPar2<T extends Func> = ReturnType<Parameters<T>[1]>
 export type ArrEl<T extends any[]> = T[number]
 
 export type Pr<T extends Func> = Parameters<T>
+
+export type Predicate1<T = any> = (v: T) => boolean
