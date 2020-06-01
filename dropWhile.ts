@@ -19,11 +19,9 @@ const dispatchedDropWhile = dispatch(DropWhileTransformer, dropWhile)
  * 
  * Acts as a transducer if a transformer is passed in place of `functor`
  * @function
- *
- *      Fae.dropLast(1, ['foo', 'bar', 'baz']); //=> ['foo', 'bar']
- *      Fae.dropLast(2, ['foo', 'bar', 'baz']); //=> ['foo']
- *      Fae.dropLast(3, ['foo', 'bar', 'baz']); //=> []
- *      Fae.dropLast(4, ['foo', 'bar', 'baz']); //=> []
- *      Fae.dropLast(3, 'foobar');               //=> 'foo'
+ * 
+ *      const lteTwo = x => x <= 2
+ *      Fae.dropWhile(lteTwo, [1, 2, 3, 4, 3, 2, 1]); //=> [3, 4, 3, 2, 1]
+ *      Fae.dropWhile(x => x !== 't' , 'dispatch'); //=> 'tch'
  */
 export default curryN(2, dispatchedDropWhile) as Curry2<Predicate1, any[] | string, any[] | string>

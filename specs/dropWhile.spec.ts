@@ -9,7 +9,7 @@ import {
   filter,
   range,
 } from '../mod.ts'
-import { eq, strictNotEq } from "./utils/utils.ts"
+import { eq } from "./utils/utils.ts"
 
 
 describe('dropWhile', () => {
