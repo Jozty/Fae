@@ -59,3 +59,32 @@ export type ArrEl<T extends any[]> = T[number]
 export type Pr<T extends Func> = Parameters<T>
 
 export type Predicate1<T = any> = (v: T) => boolean
+
+export type Predicate2<T1 = any, T2 = T1> = (a: T1, b: T2) => boolean
+
+export type AllTypes = 'Null'
+  | 'Undefined'
+  | 'Object'
+  | 'Number'
+  | 'Boolean'
+  | 'String'
+  | 'Array'
+  | 'RegExp'
+  | 'Function'
+  | 'Arguments'
+  | 'Date'
+  | 'Error'
+  | 'Map'
+  | 'Set'
+  | 'WeakMap'
+  | 'WeakSet'
+  | 'Int8Array'
+  | 'Uint8Array'
+  | 'Uint8ClampedArray'
+  | 'Int16Array'
+  | 'Uint16Array'
+  | 'Int32Array'
+  | 'Uint32Array'
+  | 'Float32Array'
+  | 'Float64Array'
+  | 'ArrayBuffer'
