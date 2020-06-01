@@ -3,7 +3,7 @@ import { max } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 describe('max', () => {
-  it('returns the larger of its two arguments', () => {
+  it('should return the larger of its two arguments', () => {
     eq(max(-10, 8), 8)
     eq(max(10, -8), 10)
     eq(max(NaN, 1000), 1000)
@@ -11,7 +11,7 @@ describe('max', () => {
     eq(max(Infinity, NaN), NaN)
   })
 
-  it('works for any orderable type', () => {
+  it('should work for any orderable type', () => {
     let d1: Date = new Date('2001-01-01')
     let d2: Date = new Date('2002-02-02')
 

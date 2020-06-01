@@ -12,5 +12,6 @@ describe('divide', () => {
     eq(divide(Infinity, Infinity), NaN)
     eq(divide(0, 0), NaN)
     eq(divide(25, 0), Infinity)
+    eq(divide(25)(10), 2.5)
   })
 })
