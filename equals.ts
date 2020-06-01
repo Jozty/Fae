@@ -3,7 +3,7 @@
 import curryN from './utils/curry_n.ts'
 import { Curry2, Obj } from './utils/types.ts'
 import { isFunction } from './utils/is.ts'
-import {type} from './type.ts'
+import typ from './typ.ts'
 import { getFunctionName } from './utils/get.ts'
 import nth from './nth.ts'
 import concat from './concat.ts'
@@ -26,8 +26,8 @@ function _last(arr: any[]) {
 
 function _equals(a: any, b: any, stk1: any[], stk2: any[]) {
   if(Object.is(a, b)) return true
-  const typeA = type(a)
-  if(typeA !== type(b)) return false
+  const typeA = typ(a)
+  if(typeA !== typ(b)) return false
   if(isFunction(a.equals) || isFunction(b.equals)) {
     return(
          isFunction(a.equals)
