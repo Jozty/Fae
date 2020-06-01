@@ -2,7 +2,7 @@ import { _, FUNCTION_LENGTH } from "./constants.ts";
 
 type PlaceHolder = typeof _
 export interface Curry1<T, R = T> {
-  (a: PlaceHolder): Curry1<T, R>
+  (a?: PlaceHolder): Curry1<T, R>
   (a: T): R
 }
 
@@ -64,7 +64,7 @@ export type Tests<T = any> = {
   [key: string]: Predicate1<T>
 }
 
-export type FuncArr1<T, R> = (a: T) => R
+export type FuncArr1<T = any, R = any> = (a: T) => R
 export type Predicate2<T1 = any, T2 = T1> = (a: T1, b: T2) => boolean
 
 export type AllTypes = 'Null'

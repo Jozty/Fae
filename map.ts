@@ -4,9 +4,10 @@ import curryN from "./utils/curry_n.ts"
 import reduce from "./reduce.ts"
 import { dispatch } from "./utils/dispatch.ts"
 import MapTransformer from "./utils/Transformers/map.ts"
+import { getFunctionLength } from "./utils/get.ts"
 
 function _functionMap(fn: Func, functor: Func) {
-  return curryN(functor.length, function () {
+  return curryN(getFunctionLength(functor)!, function () {
     // @ts-ignore
     return fn.call(this, functor.apply(this, arguments))
   })
@@ -20,7 +21,12 @@ function _objectMap(func: Func, functor: Obj) {
 }
 
 function _arrayMap<T>(func: Func, functor: Array<T>) {
-  return [...functor].map(func)
+  const len = functor.length
+  const result = new Array(len)
+  for(let i = 0; i < len; i++) {
+    result[i] = func(functor[i])
+  }
+  return result
 }
 
 function map<T>(fn: Func, functor: Object | Func | Array<T>) {
