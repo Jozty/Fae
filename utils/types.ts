@@ -63,3 +63,5 @@ export type Predicate1<T = any> = (v: T) => boolean
 export type Tests<T = any> = {
   [key: string]: Predicate1<T>
 }
+
+export type FuncArr1<T, R> = (a: T) => R
