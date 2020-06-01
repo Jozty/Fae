@@ -3,7 +3,7 @@ import { min } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 describe('min', () => {
-  it('returns the larger of its two arguments', () => {
+  it('should returns the larger of its two arguments', () => {
     eq(min(-10, 8), -10)
     eq(min(10, -8), -8)
     eq(min(NaN, 1000), 1000)
@@ -11,7 +11,7 @@ describe('min', () => {
     eq(min(Infinity, NaN), NaN)
   })
 
-  it('works for any String type', () => {
+  it('should work for any String type', () => {
     eq(min('a', 'z'), 'a')
     eq(min('z', 'a'), 'a')
   })
