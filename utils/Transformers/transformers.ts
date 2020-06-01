@@ -7,6 +7,9 @@ export default class Transformer {
   constructor(f: Func, transformer?: Transformer) {
     this.transformer = transformer
     this.f = f
+    this.init = this.init.bind(this)
+    this.result = this.result.bind(this)
+    this.step = this.step.bind(this)
   }
 
   init(): any {
