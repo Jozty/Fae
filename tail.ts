@@ -10,4 +10,4 @@ function tail<T>(functor: ArrayLike<T> | string) {
 /** Returns all but the first element of `functor`.
  * Accepts array-like(including string).
  * @function */
-export default curryN(1, tail) as Curry1<Array<any> | string>
+export default curryN(1, tail) as Curry1<ArrayLike<any> | string>
