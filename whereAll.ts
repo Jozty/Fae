@@ -1,9 +1,6 @@
-import { ObjRec, Curry2, Predicate1 } from "./utils/types.ts"
+import { ObjRec, Curry2, Tests } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
-
-type Tests<T = any> = {
-  [key: string]: Predicate1<T>
-}
+import has from "./utils/has.ts"
 
 function whereAll(specs: Tests, obj: ObjRec) {
   let count = 0
@@ -12,7 +9,7 @@ function whereAll(specs: Tests, obj: ObjRec) {
     const pred = specs[key]
     const value = obj[key]
     if(
-      Object.prototype.hasOwnProperty.call(specs, key)
+      has(specs, key)
       && !pred(value)
     ) return false
   }

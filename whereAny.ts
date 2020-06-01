@@ -1,9 +1,5 @@
-import { ObjRec, Curry2, Predicate1 } from "./utils/types.ts"
+import { ObjRec, Curry2, Predicate1, Tests } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
-
-type Tests<T = any> = {
-  [key: string]: Predicate1<T>
-}
 
 function whereAny(specs: Tests, obj: ObjRec) {
   for(const key in specs) {
