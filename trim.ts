@@ -13,11 +13,10 @@ function _trim(str: string, t: string = '') {
 
 /** Trims the string `str` from both end with `t`.
  * Trims with white space if `t` is [''], with `t` otherwise.
- * @function
- * @example
+ * @func
  * 
  *      Fae.trim('   xyz  ', ''); // 'xyz
  *      Fae.trim('[[Hello]]]', '[') // Hello]]]
- *      Fae.trim('[[Hello]]]', ']]') // [[Hello]] */
-export const trim = curryN(2, _trim) as Curry2<string, string, string>
+ *      Fae.trim('[[Hello]]]', ']]') // [[Hello]]*/
+export const trim: Curry2<string, string, string> = curryN(2, _trim)
 
