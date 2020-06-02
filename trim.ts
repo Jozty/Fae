@@ -18,10 +18,6 @@ const curried = curryN(2, _trim)
  * 
  *      Fae.trim('   xyz  ', ''); // 'xyz
  *      Fae.trim('[[Hello]]]', '[') // Hello]]]
- *      Fae.trim('[[Hello]]]', ']]') // [[Hello]]
- */
-export function trim(str: string, t: string): string;
-export function trim() {
-  return curried(arguments)
-}
+ *      Fae.trim('[[Hello]]]', ']]') // [[Hello]] */
+export const trim: Curry2<string, string, string> = curryN(2, _trim)
 
