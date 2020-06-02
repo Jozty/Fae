@@ -18,5 +18,5 @@ function _trim(str: string, t: string = '') {
  *      Fae.trim('   xyz  ', ''); // 'xyz
  *      Fae.trim('[[Hello]]]', '[') // Hello]]]
  *      Fae.trim('[[Hello]]]', ']]') // [[Hello]]*/
-export const trim: Curry2<string, string, string> = curryN(2, _trim)
+export const trim: () => void = curryN(2, _trim)
 
