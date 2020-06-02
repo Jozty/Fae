@@ -13,7 +13,6 @@ function _trim(str: string, t: string = '') {
 
 /** Trims the string `str` from both end with `t`.
  * Trims with white space if `t` is [''], with `t` otherwise.
- * @param {string} str
  * 
  *      Fae.trim('   xyz  ', ''); // 'xyz
  *      Fae.trim('[[Hello]]]', '[') // Hello]]]
