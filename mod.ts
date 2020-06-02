@@ -34,7 +34,18 @@ export { default as identity } from './identity.ts'
 export { default as inc } from './inc.ts'
 export { default as insert } from './insert.ts'
 export { default as join } from './join.ts'
-export { default as lens } from './lens.ts'
+export {
+  default as lens,
+  Getter,
+  Setter,
+  LensTransformer,
+  GetTransformer,
+  SeenGetTransformer,
+  Lens
+} from './lens.ts'
+export { default as lensIndex } from './lensIndex.ts'
+export { default as lensPath } from './lensPath.ts'
+export { default as lensProp } from './lensProp.ts'
 export { default as lift } from './lift.ts'
 export { default as liftN } from './liftN.ts'
 export { default as map } from './map.ts'
@@ -56,6 +67,7 @@ export { default as range } from './range.ts'
 export { default as rangeUntil } from './rangeUntil.ts'
 export { default as reduce } from './reduce.ts'
 export { default as reverse } from './reverse.ts'
+export { default as set } from './set.ts'
 export { default as slice } from './slice.ts'
 export { default as sort } from './sort.ts'
 export { default as subtract } from './subtract.ts'

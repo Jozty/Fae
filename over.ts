@@ -2,22 +2,27 @@ import { Lens, GetTransformer, LensTransformer } from "./lens.ts"
 import curryN from "./utils/curry_n.ts"
 import { FuncArr1, Curry3 } from "./utils/types.ts"
 
-const _overTransformer: GetTransformer = (focus: any) => ({
-  value: focus,
-  func: function(this: any) { return this },
-})
-
-function over(lens: Lens, fn: FuncArr1, target: any) {
-  function _overTransformer(focus: any): LensTransformer {
-    return {
-      value: focus,
-      func: function(setter: (focus: any) => any) {
-        const changed = fn(focus)
-        return setter(changed)
-      }
+function _overTransformer(focus: any): LensTransformer {
+  return {
+    value: focus,
+    func: function(setter: (focus: any) => any) {
+      return _overTransformer(setter(focus))
     }
   }
-  return lens(_overTransformer)(target)
 }
 
+function over(lens: Lens, fn: FuncArr1, target: any) {
+  return lens(
+    (focus: any) => _overTransformer(fn(focus))
+  )(target).value
+}
+
+/** 
+ * Returns the result of "setting" the portion of the given data structure `target`
+ * focused by the given `lens` to the result of applying the given function `fn` to
+ * the focused value.
+ * 
+ *      const headLens = Fae.lensIndex(0)
+ *      R.over(headLens, (x: string) => x.toUpperCase(), ['foo', 'bar', 'baz']) //=> ['FOO', 'bar', 'baz']
+ */
 export default curryN(3, over) as Curry3<Lens, FuncArr1, any, any>
