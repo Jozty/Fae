@@ -11,11 +11,17 @@ function _trim(str: string, t: string = '') {
   return t ? str.replace(regEx, '') : str.trim()
 }
 
+const curried = curryN(2, _trim)
+
 /** Trims the string `str` from both end with `t`.
  * Trims with white space if `t` is [''], with `t` otherwise.
  * 
  *      Fae.trim('   xyz  ', ''); // 'xyz
  *      Fae.trim('[[Hello]]]', '[') // Hello]]]
- *      Fae.trim('[[Hello]]]', ']]') // [[Hello]]*/
-export const trim: Curry2<string, string, string> = curryN(2, _trim)
+ *      Fae.trim('[[Hello]]]', ']]') // [[Hello]]
+ */
+export function trim(str: string, t: string): string;
+export function trim() {
+  return curried(arguments)
+}
 
