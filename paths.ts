@@ -4,19 +4,25 @@ import nth from "./nth.ts"
 import curryN from "./utils/curry_n.ts"
 import trim from "./trim.ts"
 
-function getPath(paths: string): string[] {
-  if(paths.includes('/')) return trim(paths, '/').split('/')
-  if(paths.includes('.')) return trim(paths, '.').split('.')
-  return [paths]
+
+export type Path = string | Array<string | number>
+
+export function getPath(path: Path): Array<string | number> {
+  if(isString(path)) {
+    if(path.includes('/')) return trim(path, '/').split('/')
+    if(path.includes('.')) return trim(path, '.').split('.')
+    return [path]
+  }
+  return path as Array<string | number>
 }
 
-function paths(pathsArr: Array<string | Array<string | number>>, obj: ObjRec) {
-  return pathsArr.map((paths) => {
-    if(isString(paths)) paths = getPath(paths)
+function paths(pathsArr: Path[], obj: ObjRec) {
+  return pathsArr.map((p) => {
+    const path = getPath(p)
     let val = obj
-    for(let i = 0; i < paths.length; i++) {
+    for(let i = 0; i < path.length; i++) {
       if(isUndefinedOrNull(val)) return
-      const p = paths[i]
+      const p = path[i]
       val = isInteger(p as number) && isArrayLike(val)
         ? nth(p as number, val)
         : val[p]
@@ -35,4 +41,4 @@ function paths(pathsArr: Array<string | Array<string | number>>, obj: ObjRec) {
  *      Fae.path([['a', 'b']], {a: {b: 2}}); 2
  *      Fae.path(['a/b/0'], {a: {b: [1, 2, 3]}}); // 1
  *      Fae.path(['a.b.0'], {a: {b: [1, 2, 3]}}); // 2 */
-export default curryN(2, paths) as Curry2<Array<string | Array<string | number>>, ObjRec>
+export default curryN(2, paths) as Curry2<Path[], ObjRec>

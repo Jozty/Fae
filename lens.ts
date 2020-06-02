@@ -2,13 +2,13 @@ import { Func, Curry2 } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 
-export type Getter<T> = (obj: any) => T
+export type Getter<T> = (target: any) => T
 
 export type Setter<T> = (focus: T, target: any) => any
 
-export type LensTransformer<T> = {
+export type LensTransformer<T = any> = {
   value: T,
-  func: (fn: Func) => T
+  func: (fn: (focus: any) => any) => any
 }
 
 export type GetTransformer<T = any> = (focus: T) => LensTransformer<T>
