@@ -1,13 +1,14 @@
 import curryN from "./utils/curry_n.ts"
 import { Curry2 } from "./utils/types.ts"
 
-function add(a: number, b: number) {
+function _add(a: number, b: number) {
   return a + b
 }
 
-/** Adds two numbers
- * @function
+/**
+ * Adds two numbers
  * 
  *      const add5 = Fae.add(5, Fae._)
- *      const a = add5(4) // 9 */
-export default curryN(2, add) as Curry2<number, number, ReturnType<typeof add>>
+ *      const a = add5(4) // 9
+ */
+ export const add: Curry2<number, number, number> = curryN(2, _add)

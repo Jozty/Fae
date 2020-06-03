@@ -1,9 +1,9 @@
 import { Path, getPath } from "./paths.ts"
 import { isInteger, isArray, isUndefinedOrNull } from "./utils/is.ts"
-import dissoc from "./dissoc.ts"
-import tail from "./tail.ts"
-import update from "./update.ts"
-import assoc from "./assoc.ts"
+import { dissoc } from "./dissoc.ts"
+import { tail } from "./tail.ts"
+import { update } from "./update.ts"
+import { assoc } from "./assoc.ts"
 import curryN from "./utils/curry_n.ts"
 import { Curry2 } from "./utils/types.ts"
 
@@ -14,7 +14,7 @@ function _remove(index: number, arr: any[]) {
   return result
 }
 
-function dissocPath(path: Path, obj: any): typeof obj {
+function _dissocPath(path: Path, obj: any): typeof obj {
   const p = getPath(path)
   const prop = p[0]
   if(p.length === 0) return obj
@@ -26,9 +26,9 @@ function dissocPath(path: Path, obj: any): typeof obj {
   const tl = tail(p) as typeof p
   if(isUndefinedOrNull(obj[prop])) return obj
   if(isInteger(prop) && isArray(obj)) {
-    return update(prop, dissocPath(tl, obj[prop]), obj)
+    return update(prop, _dissocPath(tl, obj[prop]), obj)
   } else {
-    return assoc(prop, dissocPath(tl, obj[prop]), obj)
+    return assoc(prop, _dissocPath(tl, obj[prop]), obj)
   }
 
 }
@@ -43,4 +43,4 @@ function dissocPath(path: Path, obj: any): typeof obj {
  *      Fae.dissocPath(['a', 'b', 'c'], {a: {b: {c: 42}}}); //=> {a: {b: {}}}
  *
  */ 
-export default curryN(2, dissocPath) as Curry2<Path, any, any>
+export const dissocPath: Curry2<Path, any, any> = curryN(2, _dissocPath)

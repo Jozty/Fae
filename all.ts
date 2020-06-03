@@ -1,11 +1,9 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry2, Predicate1 } from "./utils/types.ts"
 import { dispatch } from './utils/dispatch.ts'
 import AllTransformer from "./utils/Transformers/all.ts"
 
-type Predicate < T > = (a: T) => boolean
-
-function all <T> (predicate: Predicate <T> , functor: ArrayLike <T> ) {
+function _all<T>(predicate: Predicate1<T> , functor: ArrayLike <T> ) {
   let index = 0
   while (index < functor.length) {
     if (!predicate(functor[index])) {
@@ -16,11 +14,12 @@ function all <T> (predicate: Predicate <T> , functor: ArrayLike <T> ) {
   return true
 }
 
-const dispatchedAll = dispatch(AllTransformer, all)
+const dispatchedAll = dispatch(AllTransformer, _all)
 
-/** Return `true` if all the elements of the functor match `predicate`
+/**
+ * Return `true` if all the elements of the functor match `predicate`
  * `false` otherwise
  * 
  * Acts as a transducer if a transformer is passed in place of `functor`
- * @function */
-export default curryN(2, dispatchedAll) as Curry2 <Predicate <any> , ArrayLike <any> , boolean>
+ */
+export const all: Curry2 <Predicate1, ArrayLike <any> , boolean> = curryN(2, dispatchedAll)

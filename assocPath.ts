@@ -1,12 +1,12 @@
 import { Path, getPath } from "./paths.ts"
-import tail from "./tail.ts"
-import assoc from "./assoc.ts"
+import { tail } from "./tail.ts"
+import { assoc } from "./assoc.ts"
 import has from "./utils/has.ts"
 import { isNotUndefinedOrNull, isInteger, isArray } from "./utils/is.ts"
 import curryN from "./utils/curry_n.ts"
 import { Curry3 } from "./utils/types.ts"
 
-function assocPath(path: Path, val: any, obj: any) {
+function _assocPath(path: Path, val: any, obj: any) {
   if(path.length === 0) return val
   const p = getPath(path)
 
@@ -43,4 +43,4 @@ function assocPath(path: Path, val: any, obj: any) {
  *      Fae.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
  *
  */ 
-export default curryN(3, assocPath) as Curry3<Path, any, any, any>
+export const assocPath: Curry3<Path, any, any, any> = curryN(3, _assocPath)

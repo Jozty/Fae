@@ -1,11 +1,11 @@
-import concat from './concat.ts'
+import { concat } from './concat.ts'
 import { Curry1 } from "./utils/types.ts"
 import curryN from './utils/curry_n.ts'
 import { Func } from './utils/types.ts'
 import { getFunctionLength } from "./utils/get.ts"
 
-function addIndex(fn: Func) {
-  return curryN(getFunctionLength(fn)!, function(this: any) {
+function _addIndex(fn: Func) {
+  return curryN(getFunctionLength(fn), function(this: any) {
     let index = 0
     const origFn = arguments[0]
     const list = arguments[arguments.length - 1]
@@ -22,7 +22,8 @@ function addIndex(fn: Func) {
 }
 
 
-/** Returns a new iteration function from the passed function
+/**
+ * Returns a new iteration function from the passed function
  * by adding two more parameters to its callback function
  * 1. the current index
  * 2. the entire list
@@ -32,5 +33,6 @@ function addIndex(fn: Func) {
  * 
  *      const indexedMap = Fae.addIndex(Fae.map)
  *      indexedMap((val, idx) => idx + '-' + val, ['f', 'o', 'o', 'b', 'a', 'r'])
- *      // ['0-f', '1-o', '2-o', '3-b', '4-a', '5-r'] */
-export default curryN(1, addIndex) as Curry1<Func, ReturnType<Parameters<typeof addIndex>[0]>>
+ *      // ['0-f', '1-o', '2-o', '3-b', '4-a', '5-r']
+ */
+export const addIndex: Curry1<Func, ReturnType<Parameters<typeof _addIndex>[0]>> = curryN(1, _addIndex)

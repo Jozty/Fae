@@ -1,6 +1,6 @@
-import { Func } from "./utils/types.ts"
+import { Func, FuncArr1 } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
-import reduce from "./reduce.ts"
+import { reduce } from "./reduce.ts"
 import { getFunctionLength } from "./utils/get.ts"
 
 function _pipe(f: Func, g: Func) {
@@ -14,11 +14,11 @@ function _pipe(f: Func, g: Func) {
  * The first function may have any number of arguments;
  * the remaining must have single argument.
  * **Note:** The returned function is automatically curried.
- * @function
+ * 
  */
-export default function pipe(func: Func, ...functions: Func[]) {
+export function pipe(func: Func, ...functions: FuncArr1[]) {
   return curryN(
-    getFunctionLength(func)!,
+    getFunctionLength(func),
     reduce(_pipe, func, functions)
   )
 }

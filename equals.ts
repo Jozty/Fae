@@ -3,10 +3,10 @@
 import curryN from './utils/curry_n.ts'
 import { Curry2, Obj } from './utils/types.ts'
 import { isFunction } from './utils/is.ts'
-import typ from './typ.ts'
+import { typ } from './typ.ts'
 import { getFunctionName } from './utils/get.ts'
-import nth from './nth.ts'
-import concat from './concat.ts'
+import { nth } from './nth.ts'
+import { concat } from './concat.ts'
 
 // TODO: add to utils
 function _has(prop: string, obj: Obj) {
@@ -24,7 +24,7 @@ function _last(arr: any[]) {
 }
 
 
-function _equals(a: any, b: any, stk1: any[], stk2: any[]) {
+function _equals(a: any, b: any, stk1: any[] = [], stk2: any[] = []) {
   if(Object.is(a, b)) return true
   const typeA = typ(a)
   if(typeA !== typ(b)) return false
@@ -104,8 +104,4 @@ function _equals(a: any, b: any, stk1: any[], stk2: any[]) {
   return true
 }
 
-function equals(a: any, b: any) {
-  return _equals(a, b, [], [])
-}
-
-export default curryN(2, equals) as Curry2<any, any, boolean>
+export const equals: Curry2<any, any, boolean> = curryN(2, _equals)

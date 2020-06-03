@@ -7,8 +7,8 @@ const _viewTransformer: GetTransformer = (focus: any) => ({
   func: function(this: any) { return this },
 })
 
-function view(lens: Lens, target: any) {
+function _view(lens: Lens, target: any) {
   return lens(_viewTransformer)(target).value
 }
 
-export default curryN(2, view) as Curry2<Lens, any, any>
+export const view: Curry2<Lens, any, any> = curryN(2, _view)
