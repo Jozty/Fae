@@ -1,3 +1,4 @@
+![](./assets/logo-160x160-2.png)
 # Fae
 A functional library for Deno inspired from [Ramda](https://ramdajs.com).
 
