@@ -1,5 +1,5 @@
 import { describe, it } from "./_describe.ts"
-import { whereEq, curry } from '../mod.ts'
+import { whereEq } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 
