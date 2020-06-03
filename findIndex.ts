@@ -4,14 +4,15 @@ import { Curry2 } from "./utils/types.ts"
 // TODO: (singla-shivam) Add transformer
 // TODO: (ch-shubham) Add Support for Predicates
 
-function findIndex(arr: Array<any>, element: any){
+function _findIndex(arr: Array<any>, element: any){
     for(let i = 0; i <= arr.length; i++){
         if(element === arr[i]) return i
     }
     return -1
 }
 
-/** Takes in Array and Element as its 2 parameters
+/**
+ * Takes in Array and Element as its 2 parameters
  * Return the 1st index If element is matched or -1 is unmatched. 
- * @function */
-export default curryN(2, findIndex) as Curry2<Array<any>, any, any>
+ */
+export const findIndex: Curry2<Array<any>, any, any> = curryN(2, _findIndex)

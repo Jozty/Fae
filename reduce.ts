@@ -28,14 +28,15 @@ function _iterableReduce<T, R = T>(trans: Transformer, acc: R, it: Iterator<T>) 
   return trans.result(acc)
 }
 
-function reduce<T, R = T>(func: Func | Transformer, acc: R, functor: FunctorWithArLk<T>) {
+function _reduce<T, R = T>(func: Func | Transformer, acc: R, functor: FunctorWithArLk<T>) {
   let trans = getTransformer(func)
   if(isArrayLike(functor)) return _arrayReduce(trans, acc, functor)
   if(isIterable(functor)) return _iterableReduce(trans, acc, getIterator<T>(functor))
   if(isIterator(functor)) return _iterableReduce(trans, acc, functor)
 }
 
-/** Returns a single value by iterating though `functor`
+/**
+ * Returns a single value by iterating though `functor`
  * calling the iterator function `func`. `func` takes two arguments.
  * First - `acc`, Second - `value`.
  * 
@@ -44,5 +45,5 @@ function reduce<T, R = T>(func: Func | Transformer, acc: R, functor: FunctorWith
  * Acts as a transducer if a transformer is given in `functor`.
  * 
  * Works on array-like/iterable/iterator
- * @function */
-export default curryN<typeof reduce>(3, reduce) as Curry3<Func | Transformer, any, FunctorWithArLk, any>
+ */
+export const reduce: Curry3<Func | Transformer, any, FunctorWithArLk, any> = curryN(3, _reduce)

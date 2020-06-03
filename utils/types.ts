@@ -1,11 +1,15 @@
 import { _, FUNCTION_LENGTH } from "./constants.ts";
 
-type PlaceHolder = typeof _
+/** Type of placeholder for curried functions */
+export type PlaceHolder = typeof _
+
+/** Function type for curried function of arity 1 */
 export interface Curry1<T, R = T> {
   (a?: PlaceHolder): Curry1<T, R>
   (a: T): R
 }
 
+/** Function type for curried function of arity 2 */
 export interface Curry2<T1, T2 = T1, R = T1> {
   (t1?: PlaceHolder): Curry2<T1, T2, R>
   (t1: T1): Curry1<T2, R>
@@ -15,6 +19,7 @@ export interface Curry2<T1, T2 = T1, R = T1> {
   (t1: T1, t2: T2): R
 }
 
+/** Function type for curried function of arity 3 */
 export interface Curry3<T1, T2 = T1, T3 = T1, R = T1> {
   (t1?: PlaceHolder): Curry3<T1, T2, T3, R>
   (t1: T1): Curry2<T2, T3, R>
@@ -49,6 +54,7 @@ export type ObjRec<T = number> = {
   [key: string]: ObjRec | ObjArr | string | number | null | undefined | T
 }
 
+/** Comparator for functions like `sort` */
 export type Comparator<T> = (a: T, b: T) => 1 | -1 | 0
 
 export type RetPar1<T extends Func> = ReturnType<Parameters<T>[0]>
@@ -58,15 +64,20 @@ export type ArrEl<T extends any[]> = T[number]
 
 export type Pr<T extends Func> = Parameters<T>
 
+/** Predicate function type which checks one value `v` */
 export type Predicate1<T = any> = (v: T) => boolean
 
+/** Predicate function type which applies on two values `a` and `b` */
+export type Predicate2<T1 = any, T2 = T1> = (a: T1, b: T2) => boolean
+
+/** Type for spec object which contains predicate functions of type {Predicate1} */
 export type Tests<T = any> = {
   [key: string]: Predicate1<T>
 }
 
 export type FuncArr1<T = any, R = any> = (a: T) => R
-export type Predicate2<T1 = any, T2 = T1> = (a: T1, b: T2) => boolean
 
+/** All the types which are returned by function `typ` */
 export type AllTypes = 'Null'
   | 'Undefined'
   | 'Object'

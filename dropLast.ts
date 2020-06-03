@@ -1,22 +1,23 @@
 import { dispatch } from "./utils/dispatch.ts"
 import curryN from "./utils/curry_n.ts"
 import { Curry2 } from "./utils/types.ts"
-import take from "./take.ts"
+import { take } from "./take.ts"
 import DropLastTransformer from "./utils/Transformers/dropLast.ts"
 
-function dropLast<T>(n: number, list: T[] | string) {
+function _dropLast<T>(n: number, list: T[] | string) {
   return take(
     n < list.length ? list.length - n : 0,
     list
   )
 }
 
-const dispatchedDropLast = dispatch(DropLastTransformer as any, dropLast)
+const dispatchedDropLast = dispatch(DropLastTransformer as any, _dropLast)
 
-/** Returns all but last `n` elements of given list.
+/**
+ * Returns all but last `n` elements of given list.
  * 
  * Acts as a transducer if a transformer is passed in place of `list`
- * @function
+ * 
  *
  *      Fae.dropLast(1, ['foo', 'bar', 'baz']); //=> ['foo', 'bar']
  *      Fae.dropLast(2, ['foo', 'bar', 'baz']); //=> ['foo']
@@ -24,4 +25,4 @@ const dispatchedDropLast = dispatch(DropLastTransformer as any, dropLast)
  *      Fae.dropLast(4, ['foo', 'bar', 'baz']); //=> []
  *      Fae.dropLast(3, 'foobar');               //=> 'foo'
  */
-export default curryN(2, dispatchedDropLast) as Curry2<number, any[] | string, any[] | string>
+export const dropLast: Curry2<number, any[] | string, any[] | string> = curryN(2, dispatchedDropLast)

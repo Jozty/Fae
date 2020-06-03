@@ -1,10 +1,10 @@
 import { Lens } from "./lens.ts"
 import { Curry3 } from "./utils/types.ts"
-import over from "./over.ts"
-import always from "./always.ts"
+import { over } from "./over.ts"
+import { always } from "./always.ts"
 import curryN from "./utils/curry_n.ts"
  
-function set(lens: Lens, value: any, target: any) {
+function _set(lens: Lens, value: any, target: any) {
   return over(lens, always(value), target)
 }
 
@@ -16,4 +16,4 @@ function set(lens: Lens, value: any, target: any) {
  *      Fae.set(xLens, 4, {x: 1, y: 2})  //=> {x: 4, y: 2}
  *      Fae.set(xLens, 8, {x: 1, y: 2})  //=> {x: 8, y: 2}
  */
-export default curryN(3, set) as Curry3<Lens, any, any, any>
+export const set: Curry3<Lens, any, any, any> = curryN(3, _set)

@@ -3,7 +3,9 @@ import curryN from "./utils/curry_n.ts"
 import { Curry2, Obj, Tests } from "./utils/types.ts"
 import has from "./utils/has.ts"
 
-function where(specs : Tests , testObj: Obj) {
+// TODO: (ch-shubham) add docs
+
+function _where(specs : Tests , testObj: Obj) {
   for (let prop in specs) {
     if (
       has(specs, prop) 
@@ -13,4 +15,4 @@ function where(specs : Tests , testObj: Obj) {
   return true
 }
 
-export default curryN(2, where) as Curry2<any, any, boolean>
+export const where: Curry2<any, any, boolean> = curryN(2, _where)

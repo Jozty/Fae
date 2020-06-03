@@ -1,7 +1,7 @@
-import { ObjRec, Curry2, Predicate1, Tests } from "./utils/types.ts"
+import { ObjRec, Curry2, Tests } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 
-function whereAny(specs: Tests, obj: ObjRec) {
+function _whereAny(specs: Tests, obj: ObjRec) {
   for(const key in specs) {
     const pred = specs[key]
     const value = obj[key]
@@ -14,11 +14,12 @@ function whereAny(specs: Tests, obj: ObjRec) {
 }
 
 
-/** Takes a specs objects whose each of the spec's own properties is a predicate function
+/**
+ * Takes a specs objects whose each of the spec's own properties is a predicate function
  * Each predicate is applied to the value of the corresponding property of the
  * test object. Returns `true` if any of the predicates is satisfied, `false` otherwise.
  * **NOTE** returns `false` if there is no predicated functions
- * @function
+ * 
  * 
  *      const equals = curry(2, (x: number, y: number) => x === y)
  *      const spec = {x: equals(0), y: equals(20)}
@@ -26,5 +27,5 @@ function whereAny(specs: Tests, obj: ObjRec) {
  *      Fae.whereAny(spec, {x: 0, y: 10}) // true
  *      Fae.whereAny(spec, {x: 1, y: 101}) // false
  *      Fae.whereAny(spec, {x: 1, y: 2}) // true
-*/
-export default curryN(2, whereAny) as Curry2<Tests, ObjRec, boolean>
+ */
+export const whereAny: Curry2<Tests, ObjRec, boolean> = curryN(2, _whereAny)

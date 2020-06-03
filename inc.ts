@@ -1,10 +1,11 @@
 import curryN from "./utils/curry_n.ts"
 import { Curry1 } from "./utils/types.ts"
 
-function inc(element: number){
+function _inc(element: number){
     return ++element
 }
 
-/** Increases its argument by 1.
- * @function */
-export default curryN(1, inc) as Curry1<number>
+/**
+ * Increases its argument by 1.
+ */
+export const inc: Curry1<number> = curryN(1, _inc)

@@ -1,4 +1,4 @@
-import { Func, Curry2 } from './utils/types.ts'
+import { Curry2 } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 /** Getter for the lens */
@@ -31,7 +31,7 @@ export type SeenGetTransformer = (target: any) => any
  */
 export type Lens<T = any> = (getTransformer: GetTransformer<T>) => SeenGetTransformer
 
-function lens<T = any>(getter: Getter<T>, setter: Setter<T>): Lens {
+function _lens<T = any>(getter: Getter<T>, setter: Setter<T>): Lens {
   return function (getTransformer: GetTransformer<T>): SeenGetTransformer {
     return function (target: any) {
       const focusedObj = getter(target)
@@ -48,4 +48,4 @@ function lens<T = any>(getter: Getter<T>, setter: Setter<T>): Lens {
  * the value of the focus; the setter "sets" the value of the focus. The `setter`
  * should not mutate the data structure.
  */
-export default curryN(2, lens) as Curry2<Getter<any>, Setter<any>, Lens>
+export const lens: Curry2<Getter<any>, Setter<any>, Lens> = curryN(2, _lens)

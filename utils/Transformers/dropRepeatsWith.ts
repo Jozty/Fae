@@ -1,6 +1,6 @@
 import Transformer from "./transformers.ts"
 import { Predicate2 } from "../types.ts"
-import equals from "../../equals.ts"
+import { equals } from "../../equals.ts"
 
 export default class DropRepeatsWithTransformer<T = any> extends Transformer {
   private last: T
