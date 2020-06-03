@@ -11,4 +11,4 @@ function _tap<T>(func: (obj : T) => void, obj: T) {
 const dispatchedTap = dispatch(TapTransformer, _tap)
 
 /** Runs the given function `func` with the supplied object `obj`, then returns `obj`. */
-export const tap: Curry2<number, any[] | string, any[] | string> = curryN(2, dispatchedTap)
+export const tap: Curry2<(obj : any) => void, any, any> = curryN(2, dispatchedTap)
