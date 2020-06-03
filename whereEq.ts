@@ -4,7 +4,7 @@ import where from "./where.ts"
 import map from "./map.ts"
 import curry from './curry.ts'
 
-function whereEq(spec: Obj, testObj: ObjRec) {
+function whereEq(spec: ObjRec, testObj: ObjRec) {
   const equals = curry(2, (x: number, y: number) => x === y)
   return where(map(equals, spec), testObj)
 }
