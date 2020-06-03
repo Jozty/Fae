@@ -9,7 +9,6 @@ function _curryN<F extends (...args: any[]) => any>(totalArgs: number, received:
     let allArgsI = 0
     let i = 0
     while(i < passed.length && allArgsI < totalArgs) {
-      let r: any = UNDEFINED
       if(allArgs[allArgsI] !== UNDEFINED) {
         allArgsI++
         continue

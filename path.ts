@@ -1,8 +1,8 @@
 import { ObjRec, Curry2 } from "./utils/types.ts"
-import paths from './paths.ts'
+import paths, { Path } from './paths.ts'
 import curryN from "./utils/curry_n.ts"
 
-function path(ps: string | Array<string | number>, obj: ObjRec) {
+function path(ps: Path, obj: ObjRec) {
   return paths([ps], obj)[0]
 }
 
@@ -15,4 +15,4 @@ function path(ps: string | Array<string | number>, obj: ObjRec) {
  *      Fae.path(['a', 'b'], {c: {b: 2}}); // undefined
  *      Fae.path('a/b/0', {a: {b: [1, 2, 3]}}); // 1
  *      Fae.path('a.b.0', {a: {b: [1, 2, 3]}}); // 2 */
-export default curryN(2, path) as Curry2<string | Array<string | number>, ObjRec>
+export default curryN(2, path) as Curry2<Path, ObjRec>
