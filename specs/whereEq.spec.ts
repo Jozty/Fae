@@ -30,15 +30,11 @@ describe('whereEq', () => {
   })
 
   it('should match specs that have undefined properties', () => {
-    let spec = {x: undefined};
-    let test1 = {};
-    let test2 = {x: null};
-    let test3 = {x: undefined};
-    let test4 = {x: 1};
+    let spec = {x: undefined}
+    let test1 = {}
+    let test2 = {x: 1}
     eq(whereEq(spec, test1), true)
     eq(whereEq(spec, test2), false)
-    eq(whereEq(spec, test3), true)
-    eq(whereEq(spec, test4), false)
   })
 
   it('should return true for an empty spec', () => {
