@@ -3,7 +3,7 @@ import { xor } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 
-describe('whereAll', () => {
+describe('xor', () => {
   
   it('should compare two values with exclusive or', () => {
     eq(xor(true, true), false)

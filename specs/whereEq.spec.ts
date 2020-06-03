@@ -3,8 +3,8 @@ import { whereEq, curry } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 
-describe('whereAll', () => {
-  const equals = curry(2, (x: number, y: number) => x === y)
+describe('whereEq', () => {
+
   it('should return true if the test object satisfies the spec', () => {
     let spec = {x: 1, y: 2}
     let test1 = {x: 0, y: 200}
