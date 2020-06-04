@@ -40,11 +40,11 @@ export function isArrayLike<T = any>(x: any): x is ArrayLike<T> {
 }
 
 export function isIterable<T = any>(x: any): x is Iterable<T> {
-  return Symbol.iterator in Object(x) || isFunction(x.next)
+  return Symbol.iterator in Object(x)
 }
 
 export function isIterator<T = any>(x: any): x is Iterator<T> {
-  return isFunction(x.next)
+  return x && isFunction(x.next)
 }
 
 export function isTransformer(s: any): s is Transformer {

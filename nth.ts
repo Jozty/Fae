@@ -13,7 +13,13 @@ function _nth<T>(index: number, functor: FunctorWithArLk<T> | string) {
   else throwFunctorError()
 
   index = index < 0 ? index + f.length : index
-  return f[index]
+  return(
+    f[index]
+      ? f[index]
+      : isString(functor)
+        ? ''
+        : f[index]
+  )
 }
 
 /**
