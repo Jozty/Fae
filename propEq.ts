@@ -14,6 +14,6 @@ function _propEq(name: string, val: any, obj: ObjRec) {
  *      const Krish = {name: 'krish', age: 25, hair: 'black'}
  *      const students = [abby, fred, rusty, alois]
  *      const hasBrownHair = Fae.propEq('hair', 'brown')
- *      Fae.filter(hasBrownHair, kids) //=> [shubham] 
+ *      Fae.filter(hasBrownHair, students) //=> [shubham] 
  */
 export const propEq: Curry3<string, any, ObjRec, boolean> = curryN(3, _propEq)

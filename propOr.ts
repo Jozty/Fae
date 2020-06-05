@@ -1,8 +1,9 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry3, Obj } from "./utils/types.ts"
+import { Curry3, Obj, ObjRec } from "./utils/types.ts"
 import { pathOr } from "./pathOr.ts"
+import { Path } from "./paths.ts"
 
-function _propOr(val: any, p: string, obj: Obj | null) {
+function _propOr(val: any, p: Path, obj: ObjRec | null) {
   return pathOr(val, [p], obj)
 }
 
@@ -20,4 +21,4 @@ function _propOr(val: any, p: string, obj: Obj | null) {
  *      Great(Fae);  //=> undefined
  *      GreatWithDefault(Fae);  //=> 'FaeModule'
  */
-export const propOr: Curry3<any, string, Obj | null, any> = curryN(3, _propOr)
+export const propOr: Curry3<any, Path, ObjRec | null, any> = curryN(3, _propOr)
