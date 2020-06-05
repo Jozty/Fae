@@ -3,9 +3,10 @@ import { pathOr } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 describe('pathOr', () => {
+
   let deepObject = {a: {b: {c: 'c'}}, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: ['arr']}
 
-  it('takes a path and an object and returns the value at the path or the default value', () => {
+  it('should take a path and an object and returns the value at the path or the default value', () => {
     let obj = {
       a: {
         b: {
@@ -29,22 +30,23 @@ describe('pathOr', () => {
     eq(pathOr('Unknown', ['a', 'b', 'c'], null), 'Unknown')
   })
 
-  it("gets a deep property's value from objects", () => {
+  it("should get a deep property's value from objects", () => {
     eq(pathOr('Unknown', ['a', 'b', 'c'], deepObject), 'c')
     eq(pathOr('Unknown', ['a'], deepObject), deepObject.a)
   })
 
-  it('returns the default value for items not found', () => {
+  it('should return the default value for items not found', () => {
     eq(pathOr('Unknown', ['a', 'b', 'foo'], deepObject), 'Unknown')
     eq(pathOr('Unknown', ['bar'], deepObject), 'Unknown')
   })
 
-  it('returns the default value for null/undefined', () => {
+  it('should return the default value for null/undefined', () => {
     eq(pathOr('Unknown', ['toString'], null), 'Unknown')
     eq(pathOr('Unknown', ['toString'], undefined), 'Unknown')
   })
 
-  it('works with falsy items', () => {
+  it('should work with falsy items', () => {
     eq(pathOr('Unknown', ['toString'], false), Boolean.prototype.toString)
   })
+  
 })

@@ -5,7 +5,6 @@ function _propSatisfies(pred: Predicate1, name: string, obj: ObjRec) {
   return pred(obj[name]);
 }
 
-
 /**
  * Returns `true` if the specified object property satisfies the given
  * predicate; `false` otherwise.

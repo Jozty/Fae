@@ -2,7 +2,8 @@ import { describe, it} from "./_describe.ts"
 import { propSatisfies } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
-describe('propEq', () => {
+describe('propSatisfies', () => {
+
   let isPositive = (n: number) => n > 0
 
   it('should return true if the specified object property satisfies the given predicate', () => {
@@ -12,4 +13,5 @@ describe('propEq', () => {
   it('should return false otherwise', () => {
     eq(propSatisfies(isPositive, 'y', {x: 1, y: 0}), false)
   })
+  
 })

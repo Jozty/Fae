@@ -6,7 +6,6 @@ function _eqProps(prop: string, obj1: Obj, obj2: Obj) {
   return equals(obj1[prop], obj2[prop])
 }
 
-
 /**
  * Reports whether two objects have the same value, for the specified property. 
  * Useful as a curried predicate.

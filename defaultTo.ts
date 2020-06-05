@@ -5,7 +5,6 @@ function _defaultTo(defaultV: any, value: any) {
   return value == null || value !== value ? defaultV : value;
 }
 
-
 /**
  * Returns the second argument if it is not `null`, `undefined` or `NaN`;
  * otherwise the first argument is returned.

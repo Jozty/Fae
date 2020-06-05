@@ -27,4 +27,5 @@ describe('defaultTo', () => {
     eq(125, defaultTo(125, null))
     eq('a real value', defaultTo(125, 'a real value'))
   })
+  
 })
