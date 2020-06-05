@@ -12,7 +12,7 @@ function _propEq(name: string, val: any, obj: ObjRec) {
  *      const shivam = {name: 'shivam', age: 20, hair: 'brown'}
  *      const shubham = {name: 'shubham', age: 22, hair: 'black'}
  *      const Krish = {name: 'krish', age: 25, hair: 'black'}
- *      const students = [abby, fred, rusty, alois]
+ *      const students = [shivam, shubham, krish]
  *      const hasBrownHair = Fae.propEq('hair', 'brown')
  *      Fae.filter(hasBrownHair, students) //=> [shubham] 
  */
