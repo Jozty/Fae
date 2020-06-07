@@ -59,6 +59,7 @@ export { groupWith } from './groupWith.ts'
 export { head } from './head.ts'
 export { identity } from './identity.ts'
 export { inc } from './inc.ts'
+export { indexOf } from './indexOf.ts'
 export { insert } from './insert.ts'
 export { join } from './join.ts'
 export {

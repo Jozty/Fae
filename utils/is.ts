@@ -5,7 +5,7 @@ export function is(x: any, type: string) {
   return Object.prototype.toString.call(x) === `[object ${type}]`
 }
 
-export function isNumber(x: any): x is Number {
+export function isNumber(x: any): x is Number | number {
   return is(x, 'Number')
 }
 
