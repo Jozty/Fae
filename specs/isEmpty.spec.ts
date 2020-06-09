@@ -6,37 +6,38 @@ import { eq } from "./utils/utils.ts"
 
 describe('isEmpty', () => {
   
-  it('returns false for null', function() {
+  it('returns false for null', () => {
     eq(isEmpty(null), false)
   })
 
-  it('returns false for undefined', function() {
+  it('returns false for undefined', () => {
     eq(isEmpty(undefined), false)
   })
 
-  it('returns true for empty string', function() {
+  it('returns true for empty string', () => {
     eq(isEmpty(''), true)
     eq(isEmpty(' '), false)
   })
 
-  it('returns true for empty array', function() {
+  it('returns true for empty array', () => {
     eq(isEmpty([]), true)
     eq(isEmpty([[]]), false)
   })
 
-  it('returns true for empty object', function() {
+  it('returns true for empty object', () => {
     eq(isEmpty({}), true)
     eq(isEmpty({x: 0}), false)
   })
 
-  // it('returns true for empty arguments object', function() {
+  // it('returns true for empty arguments object', () => {
   //   eq(isEmpty((function() { return arguments })()), true)
   //   eq(isEmpty((function() { return arguments })()), false)
   // })
 
-  it('returns false for every other value', function() {
+  it('returns false for every other value', () => {
     eq(isEmpty(0), false)
     eq(isEmpty(NaN), false)
     eq(isEmpty(['']), false)
   })
+  
 })

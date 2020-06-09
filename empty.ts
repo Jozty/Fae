@@ -20,4 +20,14 @@ function _empty(x: any) {
   )
 }
 
+
+/**
+ * Returns the empty value of its argument's type. 
+ * Dispatches to the `empty` method of the first argument, if present.
+ * 
+ *      Fae.empty(Just(42))      //=> Nothing()
+ *      Fae.empty([1, 2, 3])     //=> []
+ *      Fae.empty('unicorns')    //=> ''
+ *      Fae.empty({x: 1, y: 2})  //=> {}
+ */
 export const empty: Curry1<any> = curryN(1, _empty)

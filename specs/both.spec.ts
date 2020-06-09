@@ -3,6 +3,7 @@ import { both } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 describe('both', () => {
+  
   it('should combine two boolean-returning functions into one', () => {
     let even = (x: number) => (x & 1) == 0
     let gt10 = (x: number) => x > 10

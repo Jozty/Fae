@@ -3,6 +3,7 @@ import { and } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 describe('and', () => {
+
   it('should compare two values properly', () =>  {
     eq(and(true, true), true)
     eq(and(true, false), false)
@@ -10,4 +11,5 @@ describe('and', () => {
     eq(and(false, false), false)
     eq(and(2, 1), 1)
   })
+  
 })

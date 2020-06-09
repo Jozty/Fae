@@ -3,6 +3,7 @@ import { pluck } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 describe('pluck', () => {
+
   let people = [
     {name: 'Shubham', age: 23},
     {name: 'Shivam', age: 21},
@@ -14,4 +15,5 @@ describe('pluck', () => {
     eq(pluck('name')(people), ['Shubham', 'Shivam', 'krish'])
     eq(pluck('age', people), [23, 21, 20])
   })
+  
 })

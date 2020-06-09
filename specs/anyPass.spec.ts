@@ -2,7 +2,8 @@ import { describe, it } from "./_describe.ts"
 import { anyPass } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
-describe('allPass', () => {
+describe('anyPass', () => {
+
   let odd = (n: number) => (n & 1) == 1
   let gt20 = (n: number) => n > 20 
   let lt5 = (n: number) => n < 5

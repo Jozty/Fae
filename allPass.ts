@@ -7,16 +7,19 @@ import { reduce } from './reduce.ts'
 
 function _allPass(preds: any) {
   return curryN(reduce(max, 0, pluck('length', preds)), function(this: any) {
-    let idx = 0
-    let len = preds.length
-    while (idx < len) {
+    for(let idx = 0; idx < preds.length; idx++){
       if (!preds[idx].apply(this, arguments)) {
         return false
       }
-      idx += 1
     }
     return true
   })
 }
 
+/**
+ * Takes a list of predicates and returns a predicate that returns true for a
+ * given list of arguments if every one of the provided predicates is satisfied
+ * by those arguments.
+ *
+ */
 export const allPass: Curry1<any, Func> = curryN(1, _allPass)

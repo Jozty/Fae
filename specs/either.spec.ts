@@ -3,7 +3,8 @@ import { either } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 describe('either', () => {
-  it('should combine two boolean-returning functions into one', function() {
+  
+  it('should combine two boolean-returning functions into one', () => {
     let even = (x: number) => (x & 1) === 0
     let gt10 = (x: number) => x > 10
     let f = either(even, gt10)
@@ -12,7 +13,7 @@ describe('either', () => {
     eq(f(7), false)
   })
 
-  it('should accept functions that take multiple parameters', function() {
+  it('should accept functions that take multiple parameters', () => {
     let between = (a: number, b: number, c: number) => (a < b) && (b < c)
     let total20 = (a: number, b: number, c: number) => a + b + c === 20
     let f = either(between, total20)
