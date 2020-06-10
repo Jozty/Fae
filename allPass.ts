@@ -6,14 +6,16 @@ import { reduce } from './reduce.ts'
 
 
 function _allPass(preds: Array<any>) {
-  return curryN(reduce(max, 0, pluck('length', preds)), function(this: any) {
-    for(let idx = 0; idx < preds.length; idx++){
+  let len = preds.length
+  let fn = function(this: any) {
+    for(let idx = 0; idx < len; idx++){
       if (!preds[idx].apply(this, arguments)) {
         return false
       }
     }
     return true
-  })
+  }
+  return curryN(reduce(max, 0, pluck('length', preds)), fn)
 }
 
 /**

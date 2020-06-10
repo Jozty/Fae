@@ -1,7 +1,7 @@
 import curryN from './utils/curry_n.ts'
-import { Func, Curry3, Predicate1 } from './utils/types.ts'
+import { Func, Curry3, Predicate1, FuncArr1 } from './utils/types.ts'
 
-function _until(pred: Predicate1, fn: Func, init: any) {
+function _until(pred: Predicate1, fn: FuncArr1, init: any) {
   let val = init
   while (!pred(val)) {
     val = fn(val)

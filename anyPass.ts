@@ -5,14 +5,16 @@ import { pluck } from './pluck.ts'
 import { reduce } from './reduce.ts'
 
 function _anyPass(preds: any) {
-  return curryN(reduce(max, 0, pluck('length', preds)), function(this: any) {
-    for(let idx = 0; idx < preds.length; idx++){
+  let len = preds.length
+  let fn = function(this: any) {
+    for(let idx = 0; idx < len; idx++){
       if (preds[idx].apply(this, arguments)) {
         return true
       }
     }
     return false
-  })
+  }
+  return curryN(reduce(max, 0, pluck('length', preds)), fn)
 }
 
 /**
