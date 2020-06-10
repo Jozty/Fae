@@ -59,8 +59,6 @@ export function isNotUndefinedOrNull(x: any) {
   return !isUndefinedOrNull(x)
 }
 
-export function isArguments(...x: any) {
-  return Object.prototype.toString.call(arguments) === '[object Arguments]' ?
-    function isArguments(x: any) { return Object.prototype.toString.call(x) === '[object Arguments]'; } :
-    function isArguments(x: any) { return has('callee', x); };
+export function isArguments(x: any) {
+  return is(x,'Arguments')
 }

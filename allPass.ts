@@ -5,7 +5,7 @@ import { pluck } from './pluck.ts'
 import { reduce } from './reduce.ts'
 
 
-function _allPass(preds: any) {
+function _allPass(preds: Array<any>) {
   return curryN(reduce(max, 0, pluck('length', preds)), function(this: any) {
     for(let idx = 0; idx < preds.length; idx++){
       if (!preds[idx].apply(this, arguments)) {
@@ -22,4 +22,4 @@ function _allPass(preds: any) {
  * by those arguments.
  *
  */
-export const allPass: Curry1<any, Func> = curryN(1, _allPass)
+export const allPass: Curry1<Array<any>, Func> = curryN(1, _allPass)

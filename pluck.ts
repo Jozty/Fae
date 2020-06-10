@@ -3,7 +3,7 @@ import { Functor, Curry2 } from "./utils/types.ts"
 import { map } from './map.ts'
 import { prop } from './prop.ts'
 
-function _pluck(p: number | string, list: Array<any> | Functor) {
+function _pluck(p: number | string, list: Array<any>) {
   return map(prop(p), list)
 }
 
@@ -17,4 +17,4 @@ function _pluck(p: number | string, list: Array<any> | Functor) {
  *      Fae.pluck(0, [[1, 2], [3, 4]])               //=> [1, 3]
  *      Fae.pluck('val', {a: {val: 3}, b: {val: 5}}) //=> {a: 3, b: 5}
  */
-export const pluck: Curry2<number | string, Array<any> | Functor> = curryN(2, _pluck)
+export const pluck: Curry2<number | string, Array<any>, Array<any>> = curryN(2, _pluck)

@@ -5,13 +5,15 @@ import { lift } from "./lift.ts"
 import { and } from "./and.ts"
 
 function _both(f: Func, g: Func) {
-  return isFunction(f) ?
-    function __both(this: any) {
+  if(isFunction(f)){
+    return function __both(this: any) {
       return f.apply(this, [...arguments]) && g.apply(this, [...arguments])
-    } :
+    }
+  }
+  else{
     lift(and)(f, g)
+  }
 }
-
 /**
  * A function which calls the two provided functions and returns the `&&`
  * of the results.

@@ -5,11 +5,14 @@ import { lift } from "./lift.ts"
 import { or } from "./or.ts"
 
 function _either(f: Func, g: Func) {
-  return isFunction(f) ?
-    function __either(this: any) {
-      return f.apply(this, [...arguments]) || g.apply(this, [...arguments]);
-    } :
-    lift(or)(f, g);
+  if(isFunction(f)){
+    return function __either(this: any) {
+      return f.apply(this, [...arguments]) || g.apply(this, [...arguments])
+    }
+  }
+  else{
+    lift(or)(f, g)
+  }
 }
 
 /**
