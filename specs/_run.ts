@@ -71,6 +71,12 @@ async function run() {
     }
   }
   showResults(start, Date.now())
+
+  const p = Deno.run({
+    cmd: ["bash", "./specs/deno_test.sh"],
+  })
+  
+  await p.status()
 }
 
 await run()
