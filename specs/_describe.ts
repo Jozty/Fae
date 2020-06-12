@@ -1,5 +1,5 @@
 export { expect } from 'https://deno.land/x/expect/expect.ts'
-export { assertStrictEq, AssertionError } from 'https://deno.land/std/testing/asserts.ts'
+export { assertStrictEquals, AssertionError } from 'https://deno.land/std/testing/asserts.ts'
 
 interface It {
   desc: string
