@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry2, Curry } from "./utils/types.ts"
 
 function _add(a: number, b: number) {
   return a + b
@@ -11,4 +11,4 @@ function _add(a: number, b: number) {
  *      const add5 = Fae.add(5, Fae._)
  *      const a = add5(4) // 9
  */
- export const add: Curry2<number, number, number> = curryN(2, _add)
+ export const add: Curry<typeof _add> = curryN(2, _add)
