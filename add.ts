@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2, Curry } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
 function _add(a: number, b: number) {
   return a + b

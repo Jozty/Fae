@@ -41,7 +41,7 @@ describe('nth', () => {
   const nthIt1 = nth(_, iterable)
 
   it('should except +ve offsets', () => {
-    eq(nthArr1(1), 2)
+    eq(nthArr1(1) as number, 2)
     eq(nthArr1(3), 4)
     eq(nthArr1(6), undefined)
 

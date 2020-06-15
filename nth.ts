@@ -1,4 +1,4 @@
-import { FunctorWithArLk, Curry2 } from "./utils/types.ts"
+import { FunctorWithArLk, Curry } from "./utils/types.ts"
 import { isArrayLike, isIterable, isIterator, isString } from "./utils/is.ts"
 import { getIterable } from "./utils/get.ts"
 import { throwFunctorError } from "./utils/throw.ts"
@@ -27,4 +27,4 @@ function _nth<T>(index: number, functor: FunctorWithArLk<T> | string) {
  * Returns element counting from right end if `index` is -ve.
  * Works in array-like/string/iterable/iterator
  */
-export const nth: Curry2<number, FunctorWithArLk | string, any> = curryN(2, _nth)
+export const nth: Curry<typeof _nth> = curryN(2, _nth)

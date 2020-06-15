@@ -1,16 +1,9 @@
-import { _, FUNCTION_LENGTH } from "./constants.ts";
-import { Cast, GapsOf, Gaps, IsEmpty } from "./utilityTypes.ts"
+import { _, FUNCTION_LENGTH } from "./constants.ts"
 
 /** Type of placeholder for curried functions */
 export type PlaceHolder = typeof _
 
-export type Curry<F extends ((...args: any[]) => any)> = 
-  <T extends any[]>(...args: Cast<Cast<T, Gaps<Parameters<F>>>, any[]>) =>
-    //@ts-ignore
-    IsEmpty<GapsOf<T, Parameters<F>>> extends false
-      ? Curry<(...args: Cast<GapsOf<T, Parameters<F>>, any[]>) => ReturnType<F>>
-      : ReturnType<F>
-
+export { Curry } from './types/curry.ts'
 /** Function type for curried function of arity 1 */
 export interface Curry1<T, R = T> {
   (a?: PlaceHolder): Curry1<T, R>
@@ -58,8 +51,8 @@ export type ObjArr<T = any> = {
   [key: string]: T | T[]
 }
 
-export type ObjRec<T = number> = {
-  [key: string]: ObjRec | ObjArr | string | number | null | undefined | T
+export type ObjRec<T = any> = {
+  [key: string]: ObjRec | ObjArr | T
 }
 
 /** Comparator for functions like `sort` */
