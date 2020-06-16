@@ -1,10 +1,10 @@
 import { isPlaceHolder } from "./is_placeholder.ts"
-import { _, UNDEFINED } from "./constants.ts"
+import { _, UNDEFINED, FUNCTION_IS_CURRIED } from "./constants.ts"
 import { Func } from "./types.ts"
 import { setFunctionLength } from "./set.ts"
 
 function _curryN<F extends (...args: any[]) => any>(totalArgs: number, received: Parameters<F>, original: F) {
-  function f(this: any, ...passed: any[]) {
+  const f: Func = function curried(this: any, ...passed: any[]) {
     const allArgs = [...received] as Parameters<F>
     let allArgsI = 0
     let i = 0
@@ -23,6 +23,7 @@ function _curryN<F extends (...args: any[]) => any>(totalArgs: number, received:
   }
   let rem = received.filter(r => r === UNDEFINED).length
   setFunctionLength(f, rem)
+  f[FUNCTION_IS_CURRIED] = true
   return f
 }
 

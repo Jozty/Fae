@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
 function _multiply(a: number, b: number) {
   return a * b
@@ -8,4 +8,4 @@ function _multiply(a: number, b: number) {
 /**
  * Multiplies two numbers. Equivalent to `a * b` but curried.
  */
-export const multiply: Curry2<number> = curryN(2, _multiply)
+export const multiply: Curry<typeof _multiply> = curryN(2, _multiply)

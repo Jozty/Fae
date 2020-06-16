@@ -1,16 +1,16 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2, FuncArr1, Func } from "./utils/types.ts"
+import { Curry, CurriedFuncArr11, Func } from "./utils/types.ts"
 import { concat } from './concat.ts'
 import { reduce } from './reduce.ts'
 import { map } from './map.ts'
 import { isFunction } from "./utils/is.ts"
 
 type ApplyFAp<T = any, R = any> = {
-  ap: FuncArr1<T[] | Func | T, R>
+  ap: CurriedFuncArr11<T[] | Func | T, R>
 }
 
-type ApplyF<T = any, R = any> = FuncArr1<T, R>
-  | FuncArr1<T, R>[] 
+type ApplyF<T = any, R = any> = CurriedFuncArr11<T, R>
+  | CurriedFuncArr11<T, R>[] 
   | ApplyFAp<T, R>
 
 function _checkForCustomAp<T, R>(applyF: ApplyF<T, R>): applyF is ApplyFAp<T, R> {
@@ -20,7 +20,7 @@ function _checkForCustomAp<T, R>(applyF: ApplyF<T, R>): applyF is ApplyFAp<T, R>
 function _ap<T, R>(
   applyF: ApplyF<T, R>,
   applyX: T[] | Func
-) {
+): unknown {
   if(_checkForCustomAp(applyF)) {
     return applyF.ap(applyX)
   }
@@ -30,14 +30,14 @@ function _ap<T, R>(
   }
 
   return reduce(
-    (acc: T[], f: Func) => concat(acc, map(f, applyX)),
+    (acc: T[], f: Func) => concat(acc, map(f, applyX) as T[]),
     [],
     applyF
   )
 }
 
 /**
- *Iit applies a list of functions to a list of values.
+ * It applies a list of functions to a list of values.
  * Dispatches to the `ap` method of the second argument, if present. Also
  * treats curried functions as applicatives.
  * 
@@ -49,4 +49,4 @@ function _ap<T, R>(
  *      const obj = {ap: (n: number) => 'called ap with ' + n}
  *      Fae.ap(obj, 10) // 'called ap with 10'
 */
-export const ap: Curry2<ApplyF, any, any> = curryN(2, _ap)
+export const ap: Curry<typeof _ap> = curryN(2, _ap)

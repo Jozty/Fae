@@ -1,6 +1,6 @@
 import { Func } from "./types.ts"
 import Transformer from "./Transformers/transformers.ts"
-import has from './has.ts'
+import { FUNCTION_IS_CURRIED } from "./constants.ts"
 
 export function is(x: any, type: string) {
   return Object.prototype.toString.call(x) === `[object ${type}]`
@@ -61,4 +61,8 @@ export function isNotUndefinedOrNull(x: any) {
 
 export function isArguments(x: any) {
   return is(x,'Arguments')
+}
+
+export function isCurried(x: unknown): x is Func {
+  return isFunction(x) && x[FUNCTION_IS_CURRIED] == true
 }

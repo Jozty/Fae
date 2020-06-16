@@ -4,6 +4,7 @@ export {
   Curry1,
   Curry2,
   Curry3,
+  Curry,
   Comparator,
   Predicate1,
   Predicate2,

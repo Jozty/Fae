@@ -1,5 +1,5 @@
 import { isFunction, isObject, isArray } from "./utils/is.ts"
-import {  Func, Curry2, Obj } from "./utils/types.ts"
+import {  Func, Curry, Obj } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { reduce } from "./reduce.ts"
 import { dispatch } from "./utils/dispatch.ts"
@@ -29,7 +29,7 @@ function _arrayMap<T>(func: Func, functor: Array<T>) {
   return result
 }
 
-function _map<T>(fn: Func, functor: Object | Func | Array<T>) {
+function _map<T>(fn: Func, functor: Object | Func | Array<T>): unknown {
   if(isFunction(functor)) return _functionMap(fn, functor)
   if(isObject(functor)) return _objectMap(fn, functor)
   if(isArray(functor)) return _arrayMap(fn, functor)
@@ -44,4 +44,4 @@ const dispatchedMap = dispatch(MapTransformer, _map)
  *
  * Acts as a transducer if a transformer is given in `functor`.
  */
-export const map: Curry2<Func, Object | Func | Array<any>, any> = curryN(2, dispatchedMap)
+export const map: Curry<typeof _map> = curryN(2, dispatchedMap)

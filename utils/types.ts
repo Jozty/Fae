@@ -1,4 +1,5 @@
-import { _, FUNCTION_LENGTH } from "./constants.ts"
+import { _, FUNCTION_LENGTH, FUNCTION_IS_CURRIED } from "./constants.ts"
+import { Curry } from './types/curry.ts'
 
 /** Type of placeholder for curried functions */
 export type PlaceHolder = typeof _
@@ -41,7 +42,10 @@ export interface Curry3<T1, T2 = T1, T3 = T1, R = T1> {
 export type Functor<T = any> = Iterable<T> | Iterator<T>
 export type FunctorWithArLk<T = any> = Functor<T> | ArrayLike<T>
 
-export type Func = ((...args: any[]) => any) & {[FUNCTION_LENGTH]?: number}
+export type Func = ((...args: any[]) => any) & {
+  [FUNCTION_LENGTH]?: number
+  [FUNCTION_IS_CURRIED]?: boolean
+}
 
 export type Obj<T = any> = {
   [key: string]: T
@@ -77,6 +81,8 @@ export type Tests<T = any> = {
 }
 
 export type FuncArr1<T = any, R = any> = (a: T) => R
+
+export type CurriedFuncArr11<T = any, R = any> = FuncArr1<T, R> | Curry<FuncArr1>
 
 /** All the types which are returned by function `typ` */
 export type AllTypes = 'Null'
