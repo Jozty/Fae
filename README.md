@@ -2,6 +2,10 @@
 # Fae
 A functional library for Deno inspired from [Ramda](https://ramdajs.com).
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/jozty/fae)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jozty/fae/Tests?label=tests)
+![GitHub](https://img.shields.io/github/license/jozty/fae)
+
 ## Installing
 *Deno allows you to directly import modules from URLs!*
 
