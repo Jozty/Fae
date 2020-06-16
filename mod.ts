@@ -6,6 +6,7 @@ export {
   Curry3,
   Curry,
   Comparator,
+  Predicate,
   Predicate1,
   Predicate2,
   Tests,

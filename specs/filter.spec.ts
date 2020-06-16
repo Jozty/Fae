@@ -77,6 +77,7 @@ describe('filter', () => {
   it('should work with transformers', () => {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const transform1 = pipe(
+      // @ts-ignore
       map((a: number) => a + 1),
       filter(even)
     )

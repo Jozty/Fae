@@ -7,8 +7,10 @@ import {
   transduce,
   flip,
   compose,
+  Predicate1
 } from '../mod.ts'
 import { eq, thr } from "./utils/utils.ts"
+import {Func} from '../utils/types.ts'
 
 describe('all', () => {
   const arr = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -18,8 +20,8 @@ describe('all', () => {
     6: 7,
     length: 10,
   }
-  const mod3 = (a: number) => a % 3 === 1
-  const greater0 = (a: number) => a > 0
+  const mod3: Predicate1 = (a: number) => a % 3 === 1
+  const greater0: Predicate1 = (a: number) => a > 0
   it('should work with arrays and array-likes', () => {
     eq(all(mod3, arr), false)
     eq(all(greater0, arr), true)
@@ -30,7 +32,9 @@ describe('all', () => {
 
   it('should work with transformers too', () => {
     const t1 = pipe(
+      // @ts-ignore
       map(inc),
+      // @ts-ignore
       all(greater0)
     )
 

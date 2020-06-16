@@ -1,8 +1,9 @@
 import { isArrayLike, isIterable, isIterator } from "./utils/is.ts"
 import { getIterator, getTransformer } from "./utils/get.ts"
 import curryN from "./utils/curry_n.ts"
-import { Curry3, Func, FunctorWithArLk } from "./utils/types.ts"
+import { Func, FunctorWithArLk, Curry } from "./utils/types.ts"
 import Transformer, { ReducedTransformer } from "./utils/Transformers/transformers.ts"
+import { throwFunctorError } from "./utils/throw.ts"
 
 function _arrayReduce<T, R = T>(trans: Transformer, acc: R, list: ArrayLike<T>) {
   for(let i = 0, l = list.length; i < l; i++) {
@@ -28,11 +29,13 @@ function _iterableReduce<T, R = T>(trans: Transformer, acc: R, it: Iterator<T>) 
   return trans.result(acc)
 }
 
-function _reduce<T, R = T>(func: Func | Transformer, acc: R, functor: FunctorWithArLk<T>) {
+function _reduce<T, R = T>(func: Func | Transformer, acc: R, functor: FunctorWithArLk<T>): R {
   let trans = getTransformer(func)
   if(isArrayLike(functor)) return _arrayReduce(trans, acc, functor)
   if(isIterable(functor)) return _iterableReduce(trans, acc, getIterator<T>(functor))
   if(isIterator(functor)) return _iterableReduce(trans, acc, functor)
+
+  throwFunctorError()
 }
 
 /**
@@ -46,4 +49,4 @@ function _reduce<T, R = T>(func: Func | Transformer, acc: R, functor: FunctorWit
  * 
  * Works on array-like/iterable/iterator
  */
-export const reduce: Curry3<Func | Transformer, any, FunctorWithArLk, any> = curryN(3, _reduce)
+export const reduce: Curry<typeof _reduce> = curryN(3, _reduce)

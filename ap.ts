@@ -10,7 +10,7 @@ type ApplyFAp<T = any, R = any> = {
 }
 
 type ApplyF<T = any, R = any> = CurriedFuncArr11<T, R>
-  | CurriedFuncArr11<T, R>[] 
+  | CurriedFuncArr11<T, R>[]
   | ApplyFAp<T, R>
 
 function _checkForCustomAp<T, R>(applyF: ApplyF<T, R>): applyF is ApplyFAp<T, R> {
@@ -32,7 +32,7 @@ function _ap<T, R>(
   return reduce(
     (acc: T[], f: Func) => concat(acc, map(f, applyX) as T[]),
     [],
-    applyF
+    applyF as CurriedFuncArr11<T, R>[]
   )
 }
 

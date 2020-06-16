@@ -36,9 +36,9 @@ function _filter<T = any>(predicate: Predicate<T>, functor: FunctorWithArLk<T> |
     isArrayLike(functor)
     || isIterable(functor)
     || isIterator(functor)) {
-      return _functorFilter(predicate, functor)
+      return _functorFilter(predicate, functor) as T[]
   }
-  if(isObject(functor)) return _objectFilter(predicate, functor)
+  if(isObject(functor)) return _objectFilter(predicate, functor) as T[]
   throw throwFunctorError()
 }
 

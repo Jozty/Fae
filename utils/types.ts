@@ -69,6 +69,9 @@ export type ArrEl<T extends any[]> = T[number]
 
 export type Pr<T extends Func> = Parameters<T>
 
+/** Predicate function type which checks `args` many */
+export type Predicate<T = any> = (...args: T[]) => boolean
+
 /** Predicate function type which checks one value `v` */
 export type Predicate1<T = any> = (v: T) => boolean
 
