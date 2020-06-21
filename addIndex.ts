@@ -3,10 +3,9 @@ import { Curry } from "./utils/types.ts"
 import curryN from './utils/curry_n.ts'
 import { Func } from './utils/types.ts'
 import { getFunctionLength } from "./utils/get.ts"
-import { isCurried } from './utils/is.ts'
 
 function _addIndex(fn: Func) {
-  const f = function(this: any, ..._: any[]) {
+  const f = function(this: any) {
     let index = 0
     const origFn = arguments[0]
     const list = arguments[arguments.length - 1]
@@ -21,8 +20,7 @@ function _addIndex(fn: Func) {
     return fn.apply(this,args)
   }
 
-  if(isCurried(fn)) return (...args: unknown[]) => f(...args)
-  return curryN(getFunctionLength(fn), fn)
+  return curryN(getFunctionLength(fn), f)
 }
 
 

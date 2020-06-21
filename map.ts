@@ -7,9 +7,8 @@ import MapTransformer from "./utils/Transformers/map.ts"
 import { getFunctionLength } from "./utils/get.ts"
 
 function _functionMap(fn: Func, functor: Func) {
-  return curryN(getFunctionLength(functor), function () {
-    // @ts-ignore
-    return fn.call(this, functor.apply(this, arguments))
+  return curryN(getFunctionLength(functor), function (this: unknown) {
+    return fn.call(this, functor.apply(this, [...arguments]))
   })
 }
 

@@ -28,7 +28,7 @@ describe('adjust', () => {
     function args() {
       return arguments
     }
-    // @ts-ignore
+    // @ts-ignore // ok
     eq(adjust(2, add(1), args(0, 1, 2, 3)), [0, 1, 3, 3])
   })
 

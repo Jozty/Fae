@@ -1,5 +1,5 @@
 import { describe, it } from "./_describe.ts"
-import { prop, path, _ } from '../mod.ts'
+import { prop, path } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 describe('prop', () => {
@@ -56,7 +56,6 @@ describe('prop', () => {
   })
 
   it('should show the same behavior as path for an undefined object', () => {
-    //@ts-ignore
     let propResult, propException, pathResult, pathException
     try {
       propResult = prop('name', undefined)

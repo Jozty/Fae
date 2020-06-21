@@ -19,7 +19,7 @@ function _pipe(f: Func, g: Func) {
 export function pipe(func: Func, ...functions: FuncArr1[]) {
   return curryN(
     getFunctionLength(func),
-    // @ts-ignore
+    // @ts-ignore ok
     reduce(_pipe, func, functions) as Func
   )
 }

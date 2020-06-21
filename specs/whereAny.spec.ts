@@ -33,9 +33,7 @@ describe('whereAny', () => {
     const test3 = {x: undefined}
     const test4 = {x: 1}
     eq(whereAny(spec, test1), true)
-    // @ts-ignore
     eq(whereAny(spec, test2), false)
-    // @ts-ignore
     eq(whereAny(spec, test3), true)
     eq(whereAny(spec, test4), false)
   })
