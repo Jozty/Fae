@@ -1,5 +1,5 @@
 import curryN from './utils/curry_n.ts'
-import { Curry2, Comparator } from "./utils/types.ts"
+import { Curry, Comparator } from "./utils/types.ts"
 
 function _sort<T>(comparator: Comparator<T>, list: T[]) {
   return [...list].sort(comparator)
@@ -13,4 +13,4 @@ function _sort<T>(comparator: Comparator<T>, list: T[]) {
  * 
  * It does not modify the original.
  */
-export const sort: Curry2<Comparator<any>, any[], any[]> = curryN(2, _sort)
+export const sort: Curry<typeof _sort> = curryN(2, _sort)

@@ -7,7 +7,7 @@ import { comparator } from "./comparator.ts"
 function _median(list: Array<number>){
     let lCheck = list.length % 2 
     if(list.length === 0) return NaN
-    let sList: number[] = sort(comparator((a, b) => a < b), list) 
+    let sList = sort(comparator((a, b) => a < b), list) as number[]
     if(lCheck === 1) return sList[Math.trunc(list.length / 2)]
     return add(sList[list.length / 2], sList[list.length / 2 - 1]) / 2 
 }

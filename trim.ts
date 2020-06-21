@@ -1,11 +1,11 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
 function escapeRegEx(str: string) {
   return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
 }
 
-function _trim(str: string, t: string = '') {
+function _trim(str: string, t: string) {
   t = escapeRegEx(t)
   const regEx = new RegExp(`^(${t})+|(${t})+$`, 'g')
   return t ? str.replace(regEx, '') : str.trim()
@@ -19,5 +19,5 @@ function _trim(str: string, t: string = '') {
  *      Fae.trim('[[Hello]]]', '[') // Hello]]]
  *      Fae.trim('[[Hello]]]', ']]') // [[Hello]]
  */
-export const trim: Curry2<string, string, string> = curryN(2, _trim)
+export const trim: Curry<typeof _trim> = curryN(2, _trim)
 
