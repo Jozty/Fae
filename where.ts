@@ -1,11 +1,11 @@
 
 import curryN from "./utils/curry_n.ts"
-import { Curry2, Obj, Tests } from "./utils/types.ts"
+import { Curry, Obj, Tests } from "./utils/types.ts"
 import has from "./utils/has.ts"
 
 // TODO: (ch-shubham) add docs
 
-function _where(specs : Tests , testObj: Obj) {
+function _where<T>(specs : Tests<T> , testObj: Obj<T>) {
   for (let prop in specs) {
     if (
       has(specs, prop) 
@@ -15,4 +15,4 @@ function _where(specs : Tests , testObj: Obj) {
   return true
 }
 
-export const where: Curry2<any, any, boolean> = curryN(2, _where)
+export const where: Curry<typeof _where> = curryN(2, _where)

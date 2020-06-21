@@ -1,4 +1,4 @@
-import { Func, Curry3 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 
 function _zipWith<T1 = any, T2 = any, R = any>(
@@ -23,4 +23,4 @@ function _zipWith<T1 = any, T2 = any, R = any>(
  * 
  *      Fae.zipWith(Fae.add, [100, 200, 300], [1, 2, 3]) // [101, 202, 303]
  */
-export const zipWith: Curry3<Func, any[], any[], any[]> = curryN(3, _zipWith)
+export const zipWith: Curry<typeof _zipWith> = curryN(3, _zipWith)

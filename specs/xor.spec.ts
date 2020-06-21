@@ -50,10 +50,10 @@ describe('xor', () => {
   })
 
   it('should return a curried function', () => {
-    eq(xor()(true)(true), false)
-    eq(xor()(true)(false), true)
-    eq(xor()(false)(true), true)
-    eq(xor()(false)(false), false)
+    eq(xor(true)(true), false)
+    eq(xor(true)(false), true)
+    eq(xor(false)(true), true)
+    eq(xor(false)(false), false)
   })
 
 })

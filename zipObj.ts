@@ -1,4 +1,4 @@
-import { Obj, Curry2 } from "./utils/types.ts"
+import { Obj, Curry } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 
 function _zipObj<T>(keys: string[], values: T[]): Obj<T> {
@@ -18,4 +18,4 @@ function _zipObj<T>(keys: string[], values: T[]): Obj<T> {
  * 
  *      Fae.zipObj(['a', 'b', 'c'], [1, 2, 3]) // {a: 1, b: 2, c: 3}
  */
-export const zipObj: Curry2<any[], any[], Obj> = curryN(2, _zipObj)
+export const zipObj: Curry<typeof _zipObj> = curryN(2, _zipObj)

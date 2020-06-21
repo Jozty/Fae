@@ -1,11 +1,11 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2, ObjRec, Obj } from "./utils/types.ts"
+import {Curry, ObjRec, Tests} from "./utils/types.ts"
 import { where } from "./where.ts"
 import { map } from "./map.ts"
 import { equals } from './equals.ts'
 
-function _whereEq(spec: ObjRec, testObj: ObjRec) {
-  return where(map(equals, spec), testObj)
+function _whereEq<T>(spec: ObjRec<T>, testObj: ObjRec<T>) {
+  return where(map(equals, spec) as Tests, testObj)
 }
 
 /**
@@ -20,4 +20,4 @@ function _whereEq(spec: ObjRec, testObj: ObjRec) {
  *      pred({a: 1, b: 2, c: 3})  //=> true
  *      pred({a: 1, b: 1})        //=> false
  */
-export const whereEq: Curry2<ObjRec, ObjRec, boolean> = curryN(2, _whereEq)
+export const whereEq: Curry<typeof _whereEq> = curryN(2, _whereEq)

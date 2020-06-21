@@ -1,7 +1,7 @@
 import curryN from './utils/curry_n.ts'
-import { Func, Curry3, Predicate1, FuncArr1 } from './utils/types.ts'
+import { Curry, Predicate1 } from './utils/types.ts'
 
-function _until(pred: Predicate1, fn: FuncArr1, init: any) {
+function _until<T>(pred: Predicate1<T>, fn: (a: T) => T, init: T): T {
   let val = init
   while (!pred(val)) {
     val = fn(val)
@@ -13,4 +13,4 @@ function _until(pred: Predicate1, fn: FuncArr1, init: any) {
  * Takes a predicate, a transformation function, and an initial value,
  * and returns a value of the same type as the initial value.
  */
-export const until: Curry3<Predicate1, Func, any, any> = curryN(3, _until)
+export const until: Curry<typeof _until> = curryN(3, _until)

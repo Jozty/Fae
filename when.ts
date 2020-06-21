@@ -1,4 +1,4 @@
-import { Func, Curry3 } from './utils/types.ts'
+import { Func, Curry } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 type Predicate<T> = (a: T) => boolean
@@ -19,4 +19,4 @@ function _when<T>(predicate: Predicate<T>, func: Func, value: T) {
  *      truncate('12345');         //=> '12345'
  *      truncate('0123456789ABC'); //=> '0123456789…'
  */
-export const when: Curry3<Predicate<any>, Func, any, any> = curryN(3, _when)
+export const when: Curry<typeof _when> = curryN(3, _when)

@@ -7,6 +7,7 @@ import { isNumber } from "../utils/is.ts"
 
 describe('when', () => {
   it('should call the whenTrue function if the validator returns a truthy value', () => {
+    // @ts-ignore check
     eq(when(isNumber, add(1))(10), 11)
   })
 

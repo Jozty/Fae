@@ -3,7 +3,7 @@ import curryN from "./utils/curry_n.ts"
 import { Curry2 } from "./utils/types.ts"
 
 function _zip<T1 = any, T2 = any>(list1: T1[], list2: T2[]) {
-  return zipWith((a, b) => [a, b], list1, list2)
+  return zipWith((a, b) => [a, b], list1, list2) as [T1, T2][]
 }
 
 /**
