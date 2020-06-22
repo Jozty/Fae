@@ -1,7 +1,7 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
-function _or(a: any, b: any){
+function _or<T>(a: T, b: T){
   return a || b
 }
 
@@ -14,4 +14,4 @@ function _or(a: any, b: any){
  *      Fae.or(false, true)   //=> true
  *      Fae.or(false, false)  //=> false
  */
-export const or: Curry2<any> = curryN(2, _or)
+export const or: Curry<typeof _or> = curryN(2, _or)

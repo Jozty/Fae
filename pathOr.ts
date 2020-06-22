@@ -1,4 +1,4 @@
-import { Curry3, Obj } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { defaultTo } from './defaultTo.ts'
 import { path } from './path.ts'
@@ -15,4 +15,4 @@ function _pathOr(d: any, p: Array<any>, obj: any) {
  *      Fae.pathOr('N/A', ['a', 'b'], {a: {b: 2}}); //=> 2
  *      Fae.pathOr('N/A', ['a', 'b'], {c: {b: 2}}); //=> "N/A"
  */
-export const pathOr: Curry3<any, Array<any>, any, any> = curryN(3, _pathOr)
+export const pathOr: Curry<typeof _pathOr> = curryN(3, _pathOr)

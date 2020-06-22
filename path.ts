@@ -1,4 +1,4 @@
-import { ObjRec, Curry2 } from "./utils/types.ts"
+import { ObjRec, Curry } from "./utils/types.ts"
 import {paths, Path } from './paths.ts'
 import curryN from "./utils/curry_n.ts"
 
@@ -17,4 +17,4 @@ function _path(ps: Path, obj: ObjRec) {
  *      Fae.path('a/b/0', {a: {b: [1, 2, 3]}}); // 1
  *      Fae.path('a.b.0', {a: {b: [1, 2, 3]}}); // 2
  */
-export const path: Curry2<Path, ObjRec> = curryN(2, _path)
+export const path: Curry<typeof _path> = curryN(2, _path)

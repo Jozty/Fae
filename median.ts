@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry1 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 import { add } from './add.ts'
 import { sort } from "./sort.ts"
 import { comparator } from "./comparator.ts"
@@ -15,4 +15,4 @@ function _median(list: Array<number>){
 /**
  * Returns the median of the given list of numbers.
  *  */
-export const median: Curry1<Array<number>, number> = curryN(1, _median)
+export const median: Curry<typeof _median> = curryN(1, _median)
