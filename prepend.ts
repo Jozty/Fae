@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
 function _prepend<T>(el: T, list: T[]) {
   return [el, ...list]
@@ -13,4 +13,4 @@ function _prepend<T>(el: T, list: T[]) {
  *      Fae.prepend('tests', []); //=> ['tests']
  *      Fae.prepend(['tests'], ['write', 'more']); //=> [['tests'], 'write', 'more']
  */
-export const prepend: Curry2<any, any[], any[]> = curryN(2, _prepend)
+export const prepend: Curry<typeof _prepend> = curryN(2, _prepend)

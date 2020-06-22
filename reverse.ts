@@ -1,6 +1,6 @@
 import { isString } from "./utils/is.ts"
 import curryN from "./utils/curry_n.ts"
-import { Curry1 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
 function _reverse<T = any>(functor: Array<T> | String) {
   if(isString(functor)) return functor.split('').reverse().join('')
@@ -8,4 +8,4 @@ function _reverse<T = any>(functor: Array<T> | String) {
 }
 
 /** Reverses given string or array without affecting the original. */
-export const reverse: Curry1<Array<any> | String> = curryN(1, _reverse)
+export const reverse: Curry<typeof _reverse> = curryN(1, _reverse)

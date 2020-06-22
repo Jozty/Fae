@@ -58,7 +58,7 @@ describe('prop', () => {
   it('should show the same behavior as path for an undefined object', () => {
     let propResult, propException, pathResult, pathException
     try {
-      propResult = prop('name', undefined)
+      propResult = prop('name', undefined as any)
     } catch (e) {
       propException = e
     }

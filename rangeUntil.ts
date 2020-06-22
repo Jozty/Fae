@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 import { range } from "./range.ts"
 
 function _rangeUntil(from: number, to: number) {
@@ -9,4 +9,4 @@ function _rangeUntil(from: number, to: number) {
 }
 
 /** Returns a list of numbers from `from` (**inclusive**) to `to` (**exclusive**). */
-export const rangeUntil: Curry2<number, number, number[]> = curryN(2, _rangeUntil)
+export const rangeUntil: Curry<typeof _rangeUntil> = curryN(2, _rangeUntil)

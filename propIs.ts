@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry3, Obj } from "./utils/types.ts"
+import { Curry, Obj } from "./utils/types.ts"
 import { is } from "./utils/is.ts";
 
 function _propIs(type: string, name: string, obj: Obj) {
@@ -14,4 +14,4 @@ function _propIs(type: string, name: string, obj: Obj) {
  *      Fae.propIs('String', 'a', {a: 'foo'});    //=> true
  *      Fae.propIs('Number', 'a', {});            //=> false
  */
-export const propIs: Curry3<string, string, Obj, boolean> = curryN(3, _propIs)
+export const propIs: Curry<typeof _propIs> = curryN(3, _propIs)

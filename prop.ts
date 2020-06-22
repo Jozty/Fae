@@ -1,4 +1,4 @@
-import { ObjRec, Curry2 } from "./utils/types.ts"
+import { ObjRec, Curry } from "./utils/types.ts"
 import { isUndefinedOrNull, isInteger, isArrayLike } from "./utils/is.ts"
 import { nth } from './nth.ts'
 import curryN from "./utils/curry_n.ts"
@@ -12,4 +12,4 @@ function _prop<T = any>(p: string | number, obj: ObjRec | ArrayLike<T>): T | und
 }
 
 /** Returns a property `p` on the `obj` if exists */
-export const prop: Curry2<string | number, ObjRec | ArrayLike<any>, any> = curryN(2, _prop)
+export const prop: Curry<typeof _prop> = curryN(2, _prop)

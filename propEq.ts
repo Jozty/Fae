@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry3, ObjRec } from "./utils/types.ts"
+import { Curry, ObjRec } from "./utils/types.ts"
 import { equals } from './equals.ts'
 
 function _propEq(name: string, val: any, obj: ObjRec) {
@@ -16,4 +16,4 @@ function _propEq(name: string, val: any, obj: ObjRec) {
  *      const hasBrownHair = Fae.propEq('hair', 'brown')
  *      Fae.filter(hasBrownHair, students) //=> [shubham] 
  */
-export const propEq: Curry3<string, any, ObjRec, boolean> = curryN(3, _propEq)
+export const propEq: Curry<typeof _propEq> = curryN(3, _propEq)
