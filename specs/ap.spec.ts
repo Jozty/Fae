@@ -17,16 +17,18 @@ describe('ap', () => {
         return r + a
       }
     }
+    // @ts-ignore check
     const h = ap(f, mul2) as Func
 
     eq(h(10), 10 + (10 * 2))
 
+    // @ts-ignore check
     eq((ap(add)(mul2) as Func)(10), 10 + (10 * 2))
   })
 
   it('should dispatch to the passed object\'s ap method when values is a non-Array object', () => {
     const obj = {ap: (n: number) => 'called ap with ' + n}
-    eq(ap(obj, 10), obj.ap(10))
+    eq(ap(obj as any, 10), obj.ap(10))
   })
 
 })

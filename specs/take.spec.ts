@@ -1,5 +1,15 @@
 import { describe, it } from "./_describe.ts"
-import { take, _, pipe, map, filter, transduce, append, flip } from '../mod.ts'
+import {
+  take,
+  _,
+  pipe,
+  map,
+  filter,
+  transduce,
+  append,
+  flip,
+  Predicate1, FuncArr1,
+} from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 describe('take', () => {
@@ -34,13 +44,16 @@ describe('take', () => {
   })
 
   it('should work with transformers', () => {
-    const inc = (x: number) => x + 1
-    const even = (x: number) => (x & 1) === 0
+    const inc: any = (x: number) => x + 1
+    const even: Predicate1 = (x: number) => (x & 1) === 0
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     const t1 = pipe(
+      // @ts-ignore
       map(inc),
+      // @ts-ignore
       filter(even),
+      // @ts-ignore
       take(2)
     )
 

@@ -29,6 +29,7 @@ const tests: Tests = {
   "should flatten promise returning functions": it(
     async (done: Function) => {
       const incAndWrap = compose(Promise.resolve.bind(Promise), inc)
+      // @ts-ignore
       const asyncAddThree = pipe(incAndWrap, andThen(incAndWrap), andThen(incAndWrap))
   
       andThen((result) => {

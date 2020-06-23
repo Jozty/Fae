@@ -19,7 +19,7 @@ function _checkForCustomAp<T, R>(applyF: ApplyF<T, R>): applyF is ApplyFAp<T, R>
 
 function _ap<T, R>(
   applyF: ApplyF<T, R>,
-  applyX: T[] | Func
+  applyX: T[] | Func | T
 ): unknown {
   if(_checkForCustomAp(applyF)) {
     return applyF.ap(applyX)

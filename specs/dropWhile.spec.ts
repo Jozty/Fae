@@ -7,7 +7,7 @@ import {
   transduce,
   map,
   filter,
-  range,
+  range, Predicate1,
 } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
@@ -37,13 +37,15 @@ describe('dropWhile', () => {
 
   it('can act as a transducer', () => {
     const inc = (x: number) => x + 1
-    const even = (x: number) => (x & 1) === 0
+    const even: Predicate1 = (x: number) => (x & 1) === 0
     const arr = range(1, 20)
     const less7 = (x: number) => x < 7
     const less20 = (x: number) => x < 20
 
     const t1 = pipe(
+      // @ts-ignore
       map(inc),
+      // @ts-ignore
       filter(even),
       dropWhile(less7)
     )

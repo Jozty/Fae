@@ -42,6 +42,9 @@ export interface Curry3<T1, T2 = T1, T3 = T1, R = T1> {
 export type Functor<T = any> = Iterable<T> | Iterator<T>
 export type FunctorWithArLk<T = any> = Functor<T> | ArrayLike<T>
 
+export type Primitive = string | number | bigint | boolean | symbol
+export type PrimitiveWithNull = Primitive | null | undefined
+
 export type Func = ((...args: any[]) => any) & {
   [FUNCTION_LENGTH]?: number
   [FUNCTION_IS_CURRIED]?: boolean

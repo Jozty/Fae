@@ -1,10 +1,10 @@
 import { describe, it} from "./_describe.ts"
-import { propSatisfies } from '../mod.ts'
+import {Predicate1, propSatisfies} from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 describe('propSatisfies', () => {
 
-  let isPositive = (n: number) => n > 0
+  let isPositive: Predicate1 = (n: number) => n > 0
 
   it('should return true if the specified object property satisfies the given predicate', () => {
     eq(propSatisfies(isPositive, 'x', {x: 1, y: 0}), true)

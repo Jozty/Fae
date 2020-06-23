@@ -11,7 +11,7 @@ function _both(f: Func, g: Func) {
     }
   }
   else{
-    lift(and)(f, g)
+    return lift(and)(f, g)
   }
 }
 /**

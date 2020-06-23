@@ -5,13 +5,13 @@ import {
   map,
   transduce,
   flip,
-  inc,
+  inc, Predicate1,
 } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 
 describe('any', () => {
-  const odd = (a: number) => (a & 1) === 1
+  const odd: Predicate1 = (a: number) => (a & 1) === 1
   const T = () => true
   // const intoArray = R.into([])
 
@@ -37,7 +37,7 @@ describe('any', () => {
       {first:'Mike', last: 'Hurley'},
       {first: 'Will', last: 'Klein'}
     ]
-    const alliterative = (person: typeof people[number]) => person.first.charAt(0) === person.last.charAt(0)
+    const alliterative: Predicate1 = (person: typeof people[number]) => person.first.charAt(0) === person.last.charAt(0)
 
     eq(any(alliterative, people), false)
     people.push({first: 'Scott', last: 'Sauyet'})
@@ -50,7 +50,7 @@ describe('any', () => {
       {name: 'Betty', age: 18},
       {name: 'Cindy', age: 17}
     ]
-    const atLeast = (age: number)  => (person: typeof teens[number]) => person.age >= age
+    const atLeast: any = (age: number)  => (person: typeof teens[number]) => person.age >= age
 
     eq(any(atLeast(16), teens), true)
     eq(any(atLeast(21), teens), false)
@@ -68,7 +68,9 @@ describe('any', () => {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8]
     const less2 = (a: number) => a < 2
     const t1 = pipe(
+      // @ts-ignore
       map(inc),
+      // @ts-ignore
       any(less2)
     )
 

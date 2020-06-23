@@ -8,7 +8,7 @@ import {
   flip,
   append,
   compose,
-  reverse,
+  reverse, Predicate1,
 } from '../mod.ts'
 import { eq, thr } from "./utils/utils.ts"
 
@@ -43,7 +43,7 @@ function* gen() {
 const iterator = gen()
 
 describe('filter', () => {
-  const even = (a: number) => a % 2 === 0
+  const even: Predicate1 = (a: number) => a % 2 === 0
   const fEven = filter(even)
 
   it('should reduce an array to those matching a filter', () => {
@@ -51,7 +51,8 @@ describe('filter', () => {
   })
 
   it('should return an empty array if no element matches', () => {
-    eq(filter((x: number) => x > 100, [1, 9, 99]), [])
+    const f: Predicate1 = (x: number) => x > 100
+    eq(filter(f, [1, 9, 99]), [])
   })
 
   it('returns an empty array if asked to filter an empty array', () => {
@@ -59,7 +60,7 @@ describe('filter', () => {
   })
 
   it('should filter objects', function() {
-    const positive = (x: number) => x > 0
+    const positive: Predicate1 = (x: number) => x > 0
     const f = filter(positive)
     eq(f({}), {})
     eq(f({x: 0, y: 0, z: 0}), {})
@@ -69,7 +70,7 @@ describe('filter', () => {
   })
 
   it('should work on iterables and iterator', () => {
-    const alpha = (a: string) => a > 'C'
+    const alpha: Predicate1 = (a: string) => a > 'C'
     eq(filter(alpha)(iterable), ['D', 'E'])
     eq(fEven(iterator), [0, 2, 4])
   })
@@ -79,6 +80,7 @@ describe('filter', () => {
     const transform1 = pipe(
       // @ts-ignore
       map((a: number) => a + 1),
+      // @ts-ignore
       filter(even)
     )
     eq(transform1(arr), [2, 4, 6, 8, 10])

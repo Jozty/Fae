@@ -33,6 +33,7 @@ describe('tap', () => {
     const sideEffect: number[] = []
     const numbers = [1, 2, 3, 4, 5]
 
+    // @ts-ignore
     const xf = pipe(map(identity), tap(pushToList(sideEffect)))
 
     eq(xf(numbers), numbers)

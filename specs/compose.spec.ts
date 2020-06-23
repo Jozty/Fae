@@ -7,16 +7,19 @@ import {
   filter,
   take,
   tap,
-  dec,
+  dec, Predicate1,
 } from '../mod.ts'
 
 describe('compose', () => {
-  const even = (a: number) => (a & 1) === 0
+  const even: Predicate1 = (a: number) => (a & 1) === 0
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   it('should do function composition', () => {
     const c1 = compose(
+      // @ts-ignore
       take(3),
+      // @ts-ignore
       filter(even),
+      // @ts-ignore
       map(inc)
     )
     eq(c1(arr), [2, 4, 6])
@@ -32,6 +35,7 @@ describe('compose', () => {
     const c3 = compose(
       take(3),
       filter(even),
+      // @ts-ignore
       tap((x: any) => y = x),
       map
     )

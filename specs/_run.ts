@@ -16,6 +16,8 @@ const successBold = (str: string | number) => bold(success(str.toString()))
 const tick = () => successBold('\u2713')
 const cross = () => errorBold('\u2717')
 
+const failedCompile: any[] = []
+
 
 function showResults(start: number, end: number) {
   // @ts-ignore
@@ -56,18 +58,28 @@ function readSpecFiles(dir: string): any[] {
   return files
 }
 
+async function runScript(script: string) {
+  try {
+    await import(script)
+  } catch (e) {
+    failedCompile.push(e)
+  }
+}
+
 async function run() {
   let start = Date.now()
   const files = readSpecFiles('./specs')
   const args = Deno.args
   if(args.length) {
     for(let i = 0; i < args.length; i++) {
-      await import(`../${args[i]}`)
+      await runScript(`../${args[i]}`)
+      // await import(`../${args[i]}`)
     }
   }
   else {
     for(let i = 0; i < files.length; i++) {
-      await import(`./${files[i].name}`)
+      await runScript(`./${files[i].name}`)
+      // await import(`./${files[i].name}`)
     }
   }
   showResults(start, Date.now())
@@ -77,6 +89,8 @@ async function run() {
   })
   
   await p.status()
+
+  write(failedCompile.join('\n\n\n'))
 }
 
 await run()

@@ -22,6 +22,7 @@ const alice = {
   pets: {dog: 'joker', cat: 'batman'}
 }
 
+// @ts-ignore check
 const nameLens = lens(prop('name'), assoc('name'))
 const addressLens = lensProp('address')
 const headLens = lensIndex(0)

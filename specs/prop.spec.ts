@@ -64,6 +64,7 @@ describe('prop', () => {
     }
 
     try {
+      // @ts-ignore
       pathResult = path(['name'], undefined)
     } catch (e) {
       pathException = e

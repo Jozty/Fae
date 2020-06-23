@@ -25,6 +25,7 @@ describe('aperture', () => {
 
   it('should act as a transducer', () => {
     const t1 = pipe(
+      // @ts-ignore
       aperture(2)
     )
 
