@@ -1,6 +1,5 @@
-import { isNumber } from './utils/is.ts'
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 import { equals } from './equals.ts'
 
 function _indexOf<T>(value: T, list: T[]) {
@@ -53,4 +52,4 @@ function _indexOf<T>(value: T, list: T[]) {
  *      Fae.indexOf(-0, [1, 2, 3, 0, -0, NaN]); //=> 4
  *      Fae.indexOf(NaN, [1, 2, 3, 0, -0, NaN]); //=> 5
  */
-export const indexOf: Curry2<any, any[], number> = curryN(2, _indexOf)
+export const indexOf: Curry<typeof _indexOf> = curryN(2, _indexOf)

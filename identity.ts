@@ -1,11 +1,11 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry1 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
-function _identity<T = any>(x: T) {
+function _identity<T>(x: T) {
   return x
 }
 
 /**
  * Returns the supplied parameter
  */
-export const identity: Curry1<any> = curryN(1, _identity)
+export const identity: Curry<typeof _identity> = curryN(1, _identity)

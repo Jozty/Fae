@@ -1,4 +1,4 @@
-import { Predicate2, Curry2 } from "./utils/types.ts"
+import { Predicate2, Curry } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { slice } from "./slice.ts"
 
@@ -15,4 +15,4 @@ function _groupWith<T>(predicate: Predicate2<T | string>, functor: T[] | string)
   return result
 }
 
-export const groupWith: Curry2<Predicate2, any[] | string, any[][] | string[]> = curryN(2, _groupWith)
+export const groupWith: Curry<typeof _groupWith> = curryN(2, _groupWith)

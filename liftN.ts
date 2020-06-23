@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2, Func } from "./utils/types.ts"
+import { Curry, Func } from "./utils/types.ts"
 import { reduce } from './reduce.ts'
 import { ap } from './ap.ts'
 import { map } from './map.ts'
@@ -24,4 +24,4 @@ function _liftN(arity: number, fn: Func) {
  *      const add2 = Fae.liftN(3, (...args: number[]) => R.sum(args))
  *      add2([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
  */
-export const liftN: Curry2<number, Func, Func> = curryN(2, _liftN)
+export const liftN: Curry<typeof _liftN> = curryN(2, _liftN)

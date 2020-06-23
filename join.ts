@@ -1,6 +1,6 @@
 import { reduce } from './reduce.ts'
 
-import { Curry2, FunctorWithArLk } from './utils/types.ts'
+import { Curry, FunctorWithArLk } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import { isArray, isIterable, isIterator, isArrayLike, isNotUndefinedOrNull } from './utils/is.ts'
 import { throwFunctorError } from './utils/throw.ts'
@@ -32,4 +32,4 @@ function _join<T extends Object>(separator: string | number, functor: FunctorWit
  * concatenating all the elements into a single string.
  * The functor may be array-like/iterable/iterator.
  */
-export const join: Curry2<string | number, FunctorWithArLk, string> = curryN(2, _join)
+export const join: Curry<typeof _join> = curryN(2, _join)
