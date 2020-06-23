@@ -1,6 +1,7 @@
 import { describe, it } from "./_describe.ts"
 import { zipWith, add, multiply, _ } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
+import { Func } from "../utils/types.ts";
 
 
 describe('zipWith', () => {
@@ -10,13 +11,13 @@ describe('zipWith', () => {
   const s = (a: any, b: any) => a + ' cow ' + b
   it('should return an array created by applying its passed-in function pair-wise on its passed in arrays', () => {
     const z = zipWith(_, a, b)
-    eq(z(add), [101, 202, 303])
-    eq(z(multiply), [100, 400, 900])
+    eq(z(add as Func), [101, 202, 303])
+    eq(z(multiply as Func), [100, 400, 900])
     eq(z(s), ['1 cow 100', '2 cow 200', '3 cow 300'])
   })
 
   it('should return an array whose length is equal to the shorter of its input arrays', () => {
-    eq(zipWith(add, a, c).length, a.length)
+    eq(zipWith(add as Func, a, c).length, a.length)
   })
 
 })

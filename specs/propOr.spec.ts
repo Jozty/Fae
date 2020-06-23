@@ -20,7 +20,9 @@ describe('propOr', () => {
   })
 
   it('should return the default value when the object is nil', () => {
+    // @ts-ignore
     eq(num(null), 'Unknown')
+    // @ts-ignore
     eq(num(void 0), 'Unknown')
   })
 

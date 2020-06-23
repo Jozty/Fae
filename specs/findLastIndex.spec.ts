@@ -2,6 +2,7 @@ import { describe, it } from "./_describe.ts"
 import {
   findLastIndex,
   pipe,
+  Predicate1,
   transduce,
 } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
@@ -11,8 +12,8 @@ describe('findLastIndex', () => {
   var obj1 = {x: 100}
   var obj2 = {x: 200}
   var a = [11, 10, 9, 'cow', obj1, 8, 7, 100, 200, 300, obj2, 4, 3, 2, 1, 0]
-  const even = (x: number) => x % 2 === 0
-  const gt100 = (x: number) => x > 100
+  const even: Predicate1 = (x: number) => x % 2 === 0
+  const gt100: Predicate1 = (x: number) => x > 100
   const isStr = (x: any) => typeof x === 'string'
   const xGt100 = (o: any) => o && o.x > 100
   // var intoArray = R.into([])
@@ -57,7 +58,7 @@ describe('findLastIndex', () => {
     eq(transduce(t1, (a: number, b: number) => b, undefined, a), 15)
 
     const t2 = pipe(
-      findLastIndex((x: number) => x > 1000)
+      findLastIndex(((x: number) => x > 1000) as Predicate1)
     )
     eq(t2(a), -1)
     eq(transduce(t2, (a: number, b: number) => b, undefined, a), -1)
