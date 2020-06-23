@@ -5,6 +5,7 @@ import { Curry1 } from './utils/types.ts'
 import { assoc } from './assoc.ts'
 
 function _lensProp(prop: string | number): Lens {
+  // @ts-ignore
   return lens(prp(prop), assoc(prop))
 }
 

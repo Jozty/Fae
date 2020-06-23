@@ -4,9 +4,9 @@ import { assoc } from "./assoc.ts"
 import has from "./utils/has.ts"
 import { isNotUndefinedOrNull, isInteger, isArray } from "./utils/is.ts"
 import curryN from "./utils/curry_n.ts"
-import { Curry3 } from "./utils/types.ts"
+import {Curry, ObjRec} from "./utils/types.ts"
 
-function _assocPath(path: Path, val: any, obj: any) {
+function _assocPath<T>(path: Path, val: T, obj: ObjRec): ObjRec {
   if(path.length === 0) return val
   const p = getPath(path)
 
@@ -19,7 +19,7 @@ function _assocPath(path: Path, val: any, obj: any) {
         ? []
         : {}
 
-    val = assocPath(tail(p) as Path, val, child)
+    val = _assocPath(tail(p) as Path, val, child) as T
   }
 
   if(isInteger(prop) && isArray(obj)) {
@@ -43,4 +43,4 @@ function _assocPath(path: Path, val: any, obj: any) {
  *      Fae.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
  *
  */ 
-export const assocPath: Curry3<Path, any, any, any> = curryN(3, _assocPath)
+export const assocPath: Curry<typeof _assocPath> = curryN(3, _assocPath)

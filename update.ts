@@ -4,6 +4,7 @@ import curryN from "./utils/curry_n.ts"
 import { Curry3 } from "./utils/types.ts"
 
 function _update<T>(index: number, value: T, list: T[]) {
+  // @ts-ignore
   return adjust(index, always(value), list)
 }
 

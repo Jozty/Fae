@@ -5,6 +5,7 @@ import { eq } from "./utils/utils.ts"
 
 describe('adjust', () => {
   it('should apply the given function to the value at the given index of the supplied array', () => {
+    // @ts-ignore
     eq(adjust(2, add(1), [0, 1, 2, 3]), [0, 1, 3, 3])
   })
 

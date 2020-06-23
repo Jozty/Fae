@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Func, Curry2 } from "./utils/types.ts"
+import { Func, Curry } from "./utils/types.ts"
 import { isFunction } from "./utils/is.ts"
 import { lift } from "./lift.ts"
 import { and } from "./and.ts"
@@ -22,4 +22,4 @@ function _both(f: Func, g: Func) {
  * false value.
  *
  */
-export const both: Curry2<Func> = curryN(2, _both)
+export const both: Curry<typeof _both> = curryN(2, _both)

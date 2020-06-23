@@ -1,4 +1,4 @@
-import { Func, Curry3 } from "./utils/types.ts"
+import { Func, Curry } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 
 function _adjust<T>(index: number, fn: Func, list: T[]) {
@@ -18,4 +18,4 @@ function _adjust<T>(index: number, fn: Func, list: T[]) {
  *      Fae.adjust(2, Fae.add(1), [0, 1, 2, 3]) // [0, 1, 3, 3]
  *      Fae.adjust(-3, Fae.add(1), [0, 1, 2, 3]) // [0, 2, 2, 3]
  */
-export const adjust: Curry3<number, Func, any[], any[]> =  curryN(3, _adjust)
+export const adjust: Curry<typeof _adjust> =  curryN(3, _adjust)

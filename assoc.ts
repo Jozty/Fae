@@ -1,4 +1,4 @@
-import { ObjRec, Curry3 } from "./utils/types.ts"
+import { ObjRec, Curry } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 
 function _assoc(prop: string | number, val: any, obj: ObjRec) {
@@ -17,4 +17,4 @@ function _assoc(prop: string | number, val: any, obj: ObjRec) {
  * 
  *      Fae.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
  */
-export const assoc: Curry3<string | number, any, ObjRec, ObjRec> = curryN(3, _assoc)
+export const assoc: Curry<typeof _assoc> = curryN(3, _assoc)

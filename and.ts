@@ -1,7 +1,7 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
-function _and(a: any, b: any) {
+function _and<T1, T2>(a: T1, b: T2) {
   return a && b
 }
 
@@ -13,4 +13,4 @@ function _and(a: any, b: any) {
  *      Fae.and(false, true)  //=> false
  *      Fae.and(false, false) //=> false
  */
-export const and: Curry2<any> = curryN(2, _and)
+export const and: Curry<typeof _and> = curryN(2, _and)

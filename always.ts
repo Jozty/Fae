@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry1 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
 function _always<T>(value: T) {
   return function() {
@@ -13,4 +13,4 @@ function _always<T>(value: T) {
  *      const f = Fae.always('Fae')
  *      f() // 'Fae'
  */
-export const always: Curry1<any, () => any> = curryN(1, _always)
+export const always: Curry<typeof _always> = curryN(1, _always)

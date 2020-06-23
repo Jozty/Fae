@@ -1,4 +1,4 @@
-import { Predicate1, Curry2 } from "./utils/types.ts"
+import { Predicate1, Curry } from "./utils/types.ts"
 import { dispatch } from './utils/dispatch.ts'
 import AnyTransformer from "./utils/Transformers/any.ts"
 import curryN from './utils/curry_n.ts'
@@ -18,4 +18,4 @@ const dispatched = dispatch(AnyTransformer, _any)
  * 
  * Acts as a transducer if a transformer is passed in place of `functor`
  */
-export const any: Curry2<Predicate1, any[]> = curryN(2, dispatched)
+export const any: Curry<typeof _any> = curryN(2, dispatched)

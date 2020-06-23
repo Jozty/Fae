@@ -6,6 +6,7 @@ import { Path } from './paths.ts'
 import { path as pth } from './path.ts'
 
 function _lensPath(path: Path): Lens {
+  // @ts-ignore
   return lens(pth(path), assocPath(path))
 }
 

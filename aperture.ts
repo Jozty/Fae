@@ -1,7 +1,7 @@
 import { dispatch } from "./utils/dispatch.ts"
 import ApertureTransformer from "./utils/Transformers/aperture.ts"
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
 function _aperture<T>(n: number, list: T[]) {
   const len = list.length - n + 1
@@ -22,4 +22,4 @@ const dispatched = dispatch(ApertureTransformer as any, _aperture)
  *
  * Acts as a transducer if a transformer is passed in place of `list`
  */
-export const aperture: Curry2<number, any[]> = curryN(2, dispatched)
+export const aperture: Curry<typeof _aperture> = curryN(2, dispatched)
