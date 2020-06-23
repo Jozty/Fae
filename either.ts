@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Func, Curry2 } from "./utils/types.ts"
+import { Func, Curry } from "./utils/types.ts"
 import { isFunction } from "./utils/is.ts"
 import { lift } from "./lift.ts"
 import { or } from "./or.ts"
@@ -10,9 +10,7 @@ function _either(f: Func, g: Func) {
       return f.apply(this, [...arguments]) || g.apply(this, [...arguments])
     }
   }
-  else{
-    lift(or)(f, g)
-  }
+  return lift(or)(f, g)
 }
 
 /**
@@ -28,4 +26,4 @@ function _either(f: Func, g: Func) {
  *      f(8) //=> true
  *
  */
-export const either: Curry2<Func> = curryN(2, _either)
+export const either: Curry<typeof _either> = curryN(2, _either)

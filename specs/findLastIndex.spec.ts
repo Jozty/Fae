@@ -50,6 +50,7 @@ describe('findLastIndex', () => {
 
   it('should act as transducer', () => {
     const t1 = pipe(
+      // @ts-ignore
       findLastIndex(even)
     )
     eq(t1(a), 15)

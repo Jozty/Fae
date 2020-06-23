@@ -1,4 +1,4 @@
-import { Curry1 } from './utils/types.ts'
+import { Curry } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import { isArray, isString, isObject, isArguments } from './utils/is.ts'
 
@@ -25,4 +25,4 @@ function _empty(x: any) {
  *      Fae.empty('unicorns')    //=> ''
  *      Fae.empty({x: 1, y: 2})  //=> {}
  */
-export const empty: Curry1<any> = curryN(1, _empty)
+export const empty: Curry<typeof _empty> = curryN(1, _empty)

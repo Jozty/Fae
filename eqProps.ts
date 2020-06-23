@@ -1,4 +1,4 @@
-import { Curry3, Obj } from "./utils/types.ts"
+import { Curry, Obj } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { equals } from "./equals.ts"
 
@@ -15,4 +15,4 @@ function _eqProps(prop: string, obj1: Obj, obj2: Obj) {
  *      Fae.eqProps('a', obj1, obj2) //=> false
  *      Fae.eqProps('c', obj1, obj2) //=> true
  */
-export const eqProps: Curry3<string, Obj, Obj, boolean> = curryN(3, _eqProps)
+export const eqProps: Curry<typeof _eqProps> = curryN(3, _eqProps)

@@ -1,4 +1,4 @@
-import { Predicate1, Curry2 } from "./utils/types.ts"
+import { Predicate1, Curry } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { dispatch } from "./utils/dispatch.ts"
 import FindTransformer from "./utils/Transformers/find.ts"
@@ -21,4 +21,4 @@ const dispatched = dispatch(FindTransformer, _find)
  *      Fae.find(Fae.propEq('a', 2))(xs) //=> {a: 2}
  *      Fae.find(Fae.propEq('a', 4))(xs) //=> undefined
  */
-export const find: Curry2<Predicate1, any[], any> = curryN(2, dispatched)
+export const find: Curry<typeof _find> = curryN(2, dispatched)

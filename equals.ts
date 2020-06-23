@@ -1,7 +1,7 @@
 // TODO: make it more readable
 
 import curryN from './utils/curry_n.ts'
-import { Curry2, Obj } from './utils/types.ts'
+import { Curry, Obj } from './utils/types.ts'
 import { isFunction } from './utils/is.ts'
 import { typ } from './typ.ts'
 import { getFunctionName } from './utils/get.ts'
@@ -104,4 +104,4 @@ function _equals(a: any, b: any, stk1: any[] = [], stk2: any[] = []) {
   return true
 }
 
-export const equals: Curry2<any, any, boolean> = curryN(2, _equals)
+export const equals: Curry<typeof _equals> = curryN(2, _equals)

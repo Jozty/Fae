@@ -1,7 +1,7 @@
 import { equals } from "./equals.ts"
 import { takeLast } from "./takeLast.ts"
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
 function _endsWith<T>(suffix: T[] | string, functor: T[] | string) {
   const suffixF = takeLast(suffix.length, functor)
@@ -17,4 +17,4 @@ function _endsWith<T>(suffix: T[] | string, functor: T[] | string) {
  *      Fae.endsWith(['b'], ['a', 'b', 'c'])    //=> false
  * 
  */
-export const endsWith: Curry2<any[] | string, any[] | string, boolean> = curryN(2, _endsWith)
+export const endsWith: Curry<typeof _endsWith> = curryN(2, _endsWith)

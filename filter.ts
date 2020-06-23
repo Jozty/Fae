@@ -1,4 +1,4 @@
-import { FunctorWithArLk, Curry2, Obj } from './utils/types.ts'
+import { FunctorWithArLk, Curry, Obj } from './utils/types.ts'
 import { isArrayLike, isArray, isIterable, isIterator, isObject } from './utils/is.ts'
 import { reduce } from './reduce.ts'
 import { throwFunctorError } from './utils/throw.ts'
@@ -50,5 +50,5 @@ const dispatchedFilter = dispatch(FilterTransformer, _filter)
  * 
  * Acts as a transducer if a transformer is passed in place of `functor` 
  */
-export const filter: Curry2<Predicate<any>, FunctorWithArLk | Obj,  Array<any> | Object> = curryN(2, dispatchedFilter)
+export const filter: Curry<typeof _filter> = curryN(2, dispatchedFilter)
 
