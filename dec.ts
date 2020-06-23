@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry1 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
 function _dec(element: number){
     return --element
@@ -8,4 +8,4 @@ function _dec(element: number){
 /**
  * Decreases its argument by 1.
  */
-export const dec: Curry1<number> = curryN(1, _dec)
+export const dec: Curry<typeof _dec> = curryN(1, _dec)

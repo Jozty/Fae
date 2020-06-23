@@ -1,6 +1,6 @@
 import { dispatch } from "./utils/dispatch.ts"
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 import { take } from "./take.ts"
 import DropLastTransformer from "./utils/Transformers/dropLast.ts"
 
@@ -25,4 +25,4 @@ const dispatchedDropLast = dispatch(DropLastTransformer as any, _dropLast)
  *      Fae.dropLast(4, ['foo', 'bar', 'baz']); //=> []
  *      Fae.dropLast(3, 'foobar');               //=> 'foo'
  */
-export const dropLast: Curry2<number, any[] | string, any[] | string> = curryN(2, dispatchedDropLast)
+export const dropLast: Curry<typeof _dropLast> = curryN(2, dispatchedDropLast)

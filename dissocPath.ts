@@ -5,7 +5,7 @@ import { tail } from "./tail.ts"
 import { update } from "./update.ts"
 import { assoc } from "./assoc.ts"
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
 // TODO: move to mod
 function _remove(index: number, arr: any[]) {
@@ -43,4 +43,4 @@ function _dissocPath(path: Path, obj: any): typeof obj {
  *      Fae.dissocPath(['a', 'b', 'c'], {a: {b: {c: 42}}}); //=> {a: {b: {}}}
  *
  */ 
-export const dissocPath: Curry2<Path, any, any> = curryN(2, _dissocPath)
+export const dissocPath: Curry<typeof _dissocPath> = curryN(2, _dissocPath)

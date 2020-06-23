@@ -1,4 +1,4 @@
-import { Predicate1, Curry2 } from "./utils/types.ts"
+import { Predicate1, Curry } from "./utils/types.ts"
 import { slice } from "./slice.ts"
 import { dispatch } from "./utils/dispatch.ts"
 import DropLastWhileTransformer from "./utils/Transformers/dropLastWhile.ts"
@@ -25,4 +25,4 @@ const dispatched = dispatch(DropLastWhileTransformer, _dropLastWhile)
  *      Fae.dropLastWhile(lteThree, [1, 2, 3, 4, 3, 2, 1]); //=> [1, 2, 3, 4]
  *      Fae.dropLastWhile(x => x !== 't' , 'dispatch'); //=> 'dispat'
  */
-export const dropLastWhile: Curry2<Predicate1, any[] | string, any[] | string> = curryN(2, dispatched)
+export const dropLastWhile: Curry<typeof _dropLastWhile> = curryN(2, dispatched)

@@ -1,5 +1,5 @@
 import curryN from './utils/curry_n.ts'
-import { Predicate2, Curry2 } from './utils/types.ts'
+import { Predicate2, Curry } from './utils/types.ts'
 import { dispatch } from './utils/dispatch.ts'
 import DropRepeatsWithTransformer from './utils/Transformers/dropRepeatsWith.ts'
 
@@ -27,4 +27,4 @@ const dispatched = dispatch(DropRepeatsWithTransformer, _dropRepeatsWith)
  * 
  * 
  */
-export const dropRepeatsWith: Curry2<Predicate2, any[], any[]> = curryN(2, dispatched)
+export const dropRepeatsWith: Curry<typeof _dropRepeatsWith> = curryN(2, dispatched)

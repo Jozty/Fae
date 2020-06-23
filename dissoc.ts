@@ -1,4 +1,4 @@
-import { ObjRec, Curry2 } from "./utils/types.ts"
+import { ObjRec, Curry } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 
 function _dissoc(prop: string | number, obj: ObjRec) {
@@ -16,4 +16,4 @@ function _dissoc(prop: string | number, obj: ObjRec) {
  * 
  *      Fae.dissoc('b', {a: 1, b: 2, c: 3}); //=> {a: 1, c: 3}
  */
-export const dissoc: Curry2<string | number, ObjRec, ObjRec> = curryN(2, _dissoc)
+export const dissoc: Curry<typeof _dissoc> = curryN(2, _dissoc)
