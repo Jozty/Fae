@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry3 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
 function _clamp(min: string | number, max: string | number, value: string | number){
   if(min > max) throw new Error("Minimum value must be smaller than Maximum value") 
@@ -19,4 +19,4 @@ function _clamp(min: string | number, max: string | number, value: string | numb
  *      Fae.clamp(1, 10, 15) // => 10
  *      Fae.clamp(1, 10, 4)  // => 4
  */
-export const clamp: Curry3<string | number> = curryN(3, _clamp)
+export const clamp: Curry<typeof _clamp> = curryN(3, _clamp)

@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
 // TODO: write transformer
 
@@ -15,4 +15,4 @@ function _contains<T>(element: T, list: ArrayLike<T>){
 /**
  * Returns `true` or `false` based on the element found or not. 
  */
-export const contains: Curry2<any, ArrayLike<any>, boolean> = curryN(2, _contains)
+export const contains: Curry<typeof _contains> = curryN(2, _contains)

@@ -4,6 +4,7 @@ import { complement } from './complement.ts'
 import { filter } from './filter.ts'
 
 function _reject<T>(pred: Predicate1, filterable: Array<T> | Obj) {
+  // @ts-ignore
   return filter(complement(pred), filterable)
 }
 

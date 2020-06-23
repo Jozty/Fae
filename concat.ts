@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 import { isArray, isString } from "./utils/is.ts"
 
 function _concat<T = any>(a: Array<T> | string, b: Array<T> | string) {
@@ -12,4 +12,4 @@ function _concat<T = any>(a: Array<T> | string, b: Array<T> | string) {
  * Concat two arrays or strings.
  * Both the arguments passed must be of same type.
  */
-export const concat: Curry2<Array<any> | string, Array<any> | string, Array<any> | string> = curryN(2,_concat)
+export const concat: Curry<typeof _concat> = curryN(2,_concat)

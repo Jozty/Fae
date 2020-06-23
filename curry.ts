@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2, Func } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
 /**
  * Returns the curried function
@@ -16,4 +16,4 @@ import { Curry2, Func } from "./utils/types.ts"
  *      g(_, 2, 3)(1) // [1, 2, 3]
  *      g(_, _, 3)(1, 2) // [1, 2, 3]
  *      g(_, _, 3)(1, 2, 4, 5, 6) // 11 - rest arguments are ignored */
-export const curry: Curry2<number, Func, Func> = curryN(2, curryN)
+export const curry: Curry<typeof curryN> = curryN(2, curryN)
