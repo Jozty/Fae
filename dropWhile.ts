@@ -1,4 +1,4 @@
-import { Predicate1, Curry2 } from "./utils/types.ts"
+import { Predicate1, Curry } from "./utils/types.ts"
 import { slice } from "./slice.ts"
 import { dispatch } from "./utils/dispatch.ts"
 import curryN from "./utils/curry_n.ts"
@@ -25,4 +25,4 @@ const dispatchedDropWhile = dispatch(DropWhileTransformer, _dropWhile)
  *      Fae.dropWhile(lteTwo, [1, 2, 3, 4, 3, 2, 1]); //=> [3, 4, 3, 2, 1]
  *      Fae.dropWhile(x => x !== 't' , 'dispatch'); //=> 'tch'
  */
-export const dropWhile: Curry2<Predicate1, any[] | string, any[] | string> = curryN(2, dispatchedDropWhile)
+export const dropWhile: Curry<typeof _dropWhile> = curryN(2, dispatchedDropWhile)

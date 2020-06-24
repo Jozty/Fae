@@ -72,14 +72,14 @@ async function run() {
   const args = Deno.args
   if(args.length) {
     for(let i = 0; i < args.length; i++) {
-      await runScript(`../${args[i]}`)
-      // await import(`../${args[i]}`)
+      // await runScript(`../${args[i]}`)
+      await import(`../${args[i]}`)
     }
   }
   else {
     for(let i = 0; i < files.length; i++) {
-      await runScript(`./${files[i].name}`)
-      // await import(`./${files[i].name}`)
+      // await runScript(`./${files[i].name}`)
+      await import(`./${files[i].name}`)
     }
   }
   showResults(start, Date.now())

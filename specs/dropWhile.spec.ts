@@ -14,7 +14,8 @@ import { eq } from "./utils/utils.ts"
 
 describe('dropWhile', () => {
   it('should skip elements while the function reports `true`', () => {
-    eq(dropWhile((x: number) => x < 5, [1, 3, 5, 7, 9]), [5, 7, 9])
+    const f: Predicate1 = (x: number) => x < 5
+    eq(dropWhile(f, [1, 3, 5, 7, 9]), [5, 7, 9])
   })
 
   it('should return an empty list for an empty list', () => {
@@ -23,7 +24,8 @@ describe('dropWhile', () => {
   })
 
   it('should starts at the right arg and acknowledges undefined', () => {
-    const list = dropWhile((x: number) => x !== void 0, [1, 3, void 0, 5, 7])
+    const f: Predicate1 = (x: number) => x !== void 0
+    const list = dropWhile(f, [1, 3, void 0, 5, 7])
     eq(list.length, 3)
     eq(list[0], void 0)
     eq(list[1], 5)
@@ -31,7 +33,8 @@ describe('dropWhile', () => {
   })
 
   it('can operate on strings', () => {
-    eq(dropWhile((x: string) => x !== 'n', 'acknowledges'), 'nowledges')
+    const f:Predicate1 = (x: string) => x !== 'n'
+    eq(dropWhile(f, 'acknowledges'), 'nowledges')
   })
 
 
@@ -39,14 +42,15 @@ describe('dropWhile', () => {
     const inc = (x: number) => x + 1
     const even: Predicate1 = (x: number) => (x & 1) === 0
     const arr = range(1, 20)
-    const less7 = (x: number) => x < 7
-    const less20 = (x: number) => x < 20
+    const less7: Predicate1 = (x: number) => x < 7
+    const less20: Predicate1 = (x: number) => x < 20
 
     const t1 = pipe(
       // @ts-ignore
       map(inc),
       // @ts-ignore
       filter(even),
+      // @ts-ignore
       dropWhile(less7)
     )
 

@@ -1,5 +1,5 @@
 import curryN from './utils/curry_n.ts'
-import { Curry1 } from './utils/types.ts'
+import { Curry } from './utils/types.ts'
 
 export type Pair<T = any> = [string | number, T]
 
@@ -19,4 +19,4 @@ function _fromPairs<T>(pairs: Pair<T>[]) {
  *
  *      Fae.fromPairs([['a', 1], ['b', 2], ['c', 3]]); //=> {a: 1, b: 2, c: 3}
  */
-export const fromPairs: Curry1<Pair[], ReturnType<typeof _fromPairs>> = curryN(1, _fromPairs)
+export const fromPairs: Curry<typeof _fromPairs> = curryN(1, _fromPairs)
