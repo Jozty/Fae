@@ -1,9 +1,9 @@
 import { adjust } from "./adjust.ts"
 import { always } from "./always.ts"
 import curryN from "./utils/curry_n.ts"
-import { Curry3 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
-function _update<T>(index: number, value: T, list: T[]) {
+function _update<T>(index: number, value: T, list: T[]): T[] {
   // @ts-ignore
   return adjust(index, always(value), list)
 }
@@ -16,4 +16,4 @@ function _update<T>(index: number, value: T, list: T[]) {
  *      Fae.adjust(2, Fae.add(1), [0, 1, 2, 3]) // [0, 1, 3, 3]
  *      Fae.adjust(-3, Fae.add(1), [0, 1, 2, 3]) // [0, 2, 2, 3]
  */
-export const update: Curry3<number, any, any[], any[]> = curryN(3, _update)
+export const update: Curry<typeof _update> = curryN(3, _update)

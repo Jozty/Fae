@@ -7,7 +7,7 @@ describe('update', () => {
     eq(update(2, 4, [0, 1, 2, 3]), [0, 1, 4, 3])
   })
 
-  it('should offset negative indexes from the end of the array', () => {
+  it('should offset negative indexes rom the end of the array', () => {
     eq(update(-3, 4, [0, 1, 2, 3]), [0, 4, 2, 3])
   })
 
@@ -24,7 +24,7 @@ describe('update', () => {
   })
 
   it('should curry the arguments', () => {
-    eq(update(2)(4)([0, 1, 2, 3]), [0, 1, 4, 3])
+    eq(update(2, 4)([0, 1, 2, 3]), [0, 1, 4, 3])
   })
 
   it('should accept an array-like object', () => {
