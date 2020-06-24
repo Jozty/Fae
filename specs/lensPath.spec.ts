@@ -9,6 +9,7 @@ import {
   identity,
 } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
+import {Obj, ObjRec} from "../utils/types.ts";
 
 
 const testObj = {
@@ -22,6 +23,7 @@ const testObj = {
 
 describe('lensPath: view', () => {
   it('should focus the specified object property', () => {
+    // @ts-ignore
     eq(view(lensPath(['d']), testObj), 3)
     eq(view(lensPath(['a', 1, 'b']), testObj), 2)
     eq(view(lensPath([]), testObj), testObj)
@@ -43,6 +45,7 @@ describe('lensPath: set', () => {
 
 describe('lensPath: over', () => {
   it('should apply function to the value of the specified object property', () => {
+    // @ts-ignore
     eq(over(lensPath(['d']), inc, testObj), {a: [{b: 1}, {b: 2}], d: 4})
     eq(over(lensPath(['a', 1, 'b']), inc, testObj), {a: [{b: 1}, {b: 3}], d: 3})
     // TODO:
@@ -50,6 +53,7 @@ describe('lensPath: over', () => {
   })
 
   it('should apply function to undefined and adds the property if it doesn\'t exist', () => {
+    // @ts-ignore
     eq(over(lensPath(['X']), identity, testObj), {a: [{b: 1}, {b: 2}], d: 3, X: undefined})
     eq(over(lensPath(['a', 0, 'X']), identity, testObj), {a: [{b: 1, X: undefined}, {b: 2}], d: 3})
   })
@@ -69,14 +73,14 @@ describe('lensPath: well behaved lens', () => {
   })
 
   it('should get (set s v) === v', () => {
-    eq(view(lensPath(['d']), set(lensPath(['d']), 0, testObj)), 0)
-    eq(view(lensPath(['a', 0, 'b']), set(lensPath(['a', 0, 'b']), 0, testObj)), 0)
+    eq(view(lensPath(['d']), set(lensPath(['d']), 0, testObj) as Obj), 0)
+    eq(view(lensPath(['a', 0, 'b']), set(lensPath(['a', 0, 'b']), 0, testObj) as Obj), 0)
   })
 
   it('should get (set(set s v1) v2) === v2', () => {
     const p = ['d']
     const q = ['a', 0, 'b']
-    eq(view(lensPath(p), set(lensPath(p), 11, set(lensPath(p), 10, testObj))), 11)
-    eq(view(lensPath(q), set(lensPath(q), 11, set(lensPath(q), 10, testObj))), 11)
+    eq(view(lensPath(p), set(lensPath(p), 11, set(lensPath(p), 10, testObj) as ObjRec) as ObjRec), 11)
+    eq(view(lensPath(q), set(lensPath(q), 11, set(lensPath(q), 10, testObj) as ObjRec) as ObjRec), 11)
   })
 })

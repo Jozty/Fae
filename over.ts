@@ -1,19 +1,19 @@
-import { Lens, LensTransformer } from "./lens.ts"
+import {Lens, LensTarget, LensTransformer} from "./lens.ts"
 import curryN from "./utils/curry_n.ts"
-import { FuncArr1, Curry3 } from "./utils/types.ts"
+import { FuncArr1, Curry } from "./utils/types.ts"
 
-function _overTransformer(focus: any): LensTransformer {
+function _overTransformer<F, R>(focus: F): LensTransformer<F, R> {
   return {
     value: focus,
-    func: function(setter: (focus: any) => any) {
+    func: function(setter: (focus: F) => R) {
       return _overTransformer(setter(focus))
     }
   }
 }
 
-function _over(lens: Lens, fn: FuncArr1, target: any) {
+function _over<F, R>(lens: Lens<F>, fn: FuncArr1, target: LensTarget<F>): R {
   return lens(
-    (focus: any) => _overTransformer(fn(focus))
+    (focus: F) => _overTransformer<F, R>(fn(focus))
   )(target).value
 }
 
@@ -25,4 +25,4 @@ function _over(lens: Lens, fn: FuncArr1, target: any) {
  *      const headLens = Fae.lensIndex(0)
  *      R.over(headLens, (x: string) => x.toUpperCase(), ['foo', 'bar', 'baz']) //=> ['FOO', 'bar', 'baz']
  */
-export const over: Curry3<Lens, FuncArr1, any, any> = curryN(3, _over)
+export const over: Curry<typeof _over> = curryN(3, _over)

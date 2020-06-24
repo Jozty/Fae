@@ -2,9 +2,10 @@ import { lens, Lens } from './lens.ts'
 import { nth } from './nth.ts'
 import { update } from './update.ts'
 import curryN from './utils/curry_n.ts'
-import { Curry1 } from './utils/types.ts'
+import { Curry } from './utils/types.ts'
 
-function _lensIndex(index: number): Lens {
+function _lensIndex<F>(index: number): Lens<F> {
+  // @ts-ignore
   return lens(nth(index), update(index))
 }
 
@@ -16,4 +17,4 @@ function _lensIndex(index: number): Lens {
  *      Fae.set(headLens, 'x', ['a', 'b', 'c'])        //=> ['x', 'b', 'c']
  *      Fae.over(headLens, (x: string) => x.toUpperCase(), ['a', 'b', 'c']) //=> ['A', 'b', 'c']
  */
-export const lensIndex: Curry1<number, Lens> = curryN(1, _lensIndex)
+export const lensIndex: Curry<typeof _lensIndex> = curryN(1, _lensIndex)

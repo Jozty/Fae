@@ -12,6 +12,7 @@ const testList = [{a: 1}, {b: 2}, {c: 3}]
 
 describe('lensIndex: view', () => {
   it('should focus list element at the specified index', () => {
+    // @ts-ignore
     eq(view(lensIndex(0), testList), {a: 1})
   })
 
@@ -47,12 +48,12 @@ describe('lensIndex: well behaved lens', () => {
   })
 
   it('should get (set s v) === v', () => {
-    eq(view(lensIndex(0), set(lensIndex(0), 0, testList)), 0)
+    eq(view(lensIndex(0), set(lensIndex(0), 0, testList) as number[]), 0)
   })
 
   it('should get (set(set s v1) v2) === v2', () => {
     eq(
-      view(lensIndex(0), set(lensIndex(0), 11, set(lensIndex(0), 10, testList))),
+      view(lensIndex(0), set(lensIndex(0), 11, set(lensIndex(0), 10, testList) as number[]) as number[]),
       11
     )
   })

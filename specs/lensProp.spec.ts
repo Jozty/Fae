@@ -9,6 +9,7 @@ import {
   identity,
 } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
+import {ObjRec} from "../utils/types.ts";
 
 
 const testObj = {
@@ -19,6 +20,7 @@ const testObj = {
 
 describe('lensProp: view', () => {
   it('should focus object the specified object property', () => {
+    // @ts-ignore
     eq(view(lensProp('a'), testObj), 1)
   })
 
@@ -39,10 +41,12 @@ describe('lensProp: set', () => {
 
 describe('lensProp: over', () => {
   it('should apply function to the value of the specified object property', () => {
+    // @ts-ignore
     eq(over(lensProp('a'), inc, testObj), {a:2, b:2, c:3})
   })
 
   it('should apply function to undefined and adds the property if it doesn\'t exist', () => {
+    // @ts-ignore
     eq(over(lensProp('X'), identity, testObj), {a:1, b:2, c:3, X:undefined})
   })
 })
@@ -62,12 +66,12 @@ describe('lensProp: well behaved lens', () => {
   })
 
   it('should get (set s v) === v', () => {
-    eq(view(lensProp('a'), set(lensProp('a'), 0, testObj)), 0)
+    eq(view(lensProp('a'), set(lensProp('a'), 0, testObj) as ObjRec), 0)
   })
 
   it('should get (set(set s v1) v2) === v2', () => {
     eq(
-      view(lensProp('a'), set(lensProp('a'), 11, set(lensProp('a'), 10, testObj))),
+      view(lensProp('a'), set(lensProp('a'), 11, set(lensProp('a'), 10, testObj) as ObjRec) as ObjRec),
       11
     )
   })

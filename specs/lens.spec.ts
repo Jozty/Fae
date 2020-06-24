@@ -67,6 +67,7 @@ describe('view, over, and set', () => {
 
   they('may be applied to composed lenses', () => {
     const streetLens = compose(addressLens, headLens)
+    // @ts-ignore
     const dogLens = compose(lensPath(['pets']), lensPath(['dog']))
 
     eq(view(dogLens, alice), view(lensPath(['pets', 'dog']), alice))

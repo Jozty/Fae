@@ -1,14 +1,16 @@
-import { Lens, GetTransformer } from "./lens.ts"
+import {Lens, LensTransformer, LensTarget, GetTransformer} from "./lens.ts"
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { Curry } from "./utils/types.ts"
 
-const _viewTransformer: GetTransformer = (focus: any) => ({
-  value: focus,
-  func: function(this: any) { return this },
-})
-
-function _view(lens: Lens, target: any) {
-  return lens(_viewTransformer)(target).value
+function _viewTransformer<F>(focus: F): LensTransformer<F, F> {
+  return {
+    value: focus,
+    func: function(this: any) { return this },
+  }
 }
 
-export const view: Curry2<Lens, any, any> = curryN(2, _view)
+function _view<F>(lens: Lens<F>, target: LensTarget<F>): F {
+  return lens(_viewTransformer as GetTransformer<F, F>)(target).value
+}
+
+export const view: Curry<typeof _view> = curryN(2, _view)
