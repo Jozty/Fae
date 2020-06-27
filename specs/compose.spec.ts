@@ -31,7 +31,7 @@ describe('compose', () => {
     )
     eq(c2(inc)(arr), [2, 4, 6])
 
-    let y: number[]
+    let y: number[] = []
     const c3 = compose(
       take(3),
       filter(even),
