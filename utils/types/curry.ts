@@ -30,10 +30,9 @@ export type CleanedGaps<T extends any[]> = {
 
 export type Gaps<T extends any[]> = CleanedGaps<PartialGaps<T>>
 
-
 export type Curry<F extends ((...args: any) => any)> = 
   <T extends any[]>(...args: Cast<Cast<T, Gaps<Parameters<F>>>, any[]>) =>
-    GapsOf<T, Parameters<F>> extends [any]
+    GapsOf<T, Parameters<F>> extends [any] | [any, any] | [any, any, any] | [any, any, any, any]
     //@ts-ignore
       ? Curry<(...args: Cast<GapsOf<T, Parameters<F>>, any[]>) => ReturnType<F>>
       : ReturnType<F>
