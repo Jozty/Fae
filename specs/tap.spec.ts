@@ -22,9 +22,9 @@ describe('tap', () => {
   })
 
   it("may take a function as the first argument that executes with tap's argument", () => {
-    let sideEffect: any = 0
+    let sideEffect: string | number = 0
     eq(sideEffect, 0)
-    const rv = tap((x: any) => sideEffect = 'string ' + x , 200)
+    const rv = tap((x: number) => sideEffect = 'string ' + x , 200)
     eq(rv, 200)
     eq(sideEffect, 'string 200')
   })

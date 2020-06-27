@@ -1,9 +1,10 @@
-import { Curry } from "./utils/types.ts"
+import {Curry, ObjRec} from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { defaultTo } from './defaultTo.ts'
 import { path } from './path.ts'
+import { Path } from "./paths.ts"
 
-function _pathOr(d: any, p: Array<any>, obj: any) {
+function _pathOr(d: unknown, p: Path, obj: ObjRec) {
   return defaultTo(d, path(p, obj))
 }
 

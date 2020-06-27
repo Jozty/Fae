@@ -3,7 +3,7 @@ import { where, curry } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 describe('where', () => {
-  const equals = curry(2, (x: any, y: any) => x === y)
+  const equals = curry(2, (x: string, y: string) => x === y)
 
   it('should be properly declared.', function() {
     let spec = {x: equals('foo'), y: equals(7)}

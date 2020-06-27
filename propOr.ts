@@ -1,9 +1,8 @@
 import curryN from "./utils/curry_n.ts"
 import { Curry, ObjRec } from "./utils/types.ts"
 import { pathOr } from "./pathOr.ts"
-import { Path } from "./paths.ts"
 
-function _propOr(val: any, p: Path, obj: ObjRec | null) {
+function _propOr(val: any, p: string | number, obj: ObjRec) {
   return pathOr(val, [p], obj)
 }
 

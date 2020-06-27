@@ -31,12 +31,12 @@ describe('compose', () => {
     )
     eq(c2(inc)(arr), [2, 4, 6])
 
-    let y: any
+    let y: number[]
     const c3 = compose(
       take(3),
       filter(even),
       // @ts-ignore
-      tap((x: any) => y = x),
+      tap((x: number[]) => y = x),
       map
     )
     eq(c3(dec)(arr), [0, 2, 4])

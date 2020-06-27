@@ -3,7 +3,7 @@ import { dispatch } from "./utils/dispatch.ts"
 import curryN from "./utils/curry_n.ts"
 import TapTransformer from "./utils/Transformers/tap.ts"
 
-function _tap<T>(func: (obj : T) => void, obj: T) {
+function _tap(func: (obj : any) => any, obj: any) {
   func(obj)
   return obj
 }

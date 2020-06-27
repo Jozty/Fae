@@ -1,7 +1,7 @@
 import curryN from "./utils/curry_n.ts"
 import { Curry } from "./utils/types.ts"
 
-function _insert<T>(index: number, element: any, list: T[]) {
+function _insert<T>(index: number, element: T, list: T[]) {
   index = index < list.length && index >= 0 ? index : list.length
   let result = Array.from(list)
   result.splice(index, 0, element)

@@ -3,9 +3,9 @@ import { chain, _ } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
 describe('chain', () => {
-  let add1 = (x: any) => { return [x + 1]; }
-  let dec = (x: any) => { return [x - 1]; }
-  let times2 = (x: any) => { return [x * 2]; }
+  let add1 = (x: number) => { return [x + 1]; }
+  let dec = (x: number) => { return [x - 1]; }
+  let times2 = (x: number) => { return [x * 2]; }
 
   const list = [10, undefined, 35, Infinity]
   let c = chain(_, list)

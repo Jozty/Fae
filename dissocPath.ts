@@ -5,7 +5,7 @@ import { tail } from "./tail.ts"
 import { update } from "./update.ts"
 import { assoc } from "./assoc.ts"
 import curryN from "./utils/curry_n.ts"
-import { Curry } from "./utils/types.ts"
+import {Curry, ObjRec} from "./utils/types.ts"
 
 // TODO: move to mod
 function _remove(index: number, arr: any[]) {
@@ -14,7 +14,7 @@ function _remove(index: number, arr: any[]) {
   return result
 }
 
-function _dissocPath(path: Path, obj: any): typeof obj {
+function _dissocPath(path: Path, obj: ObjRec): ObjRec {
   const p = getPath(path)
   const prop = p[0]
   if(p.length === 0) return obj

@@ -25,7 +25,7 @@ const obj2 = {
 }
 
 const path1 = path(_, obj1)
-const path2 = path(_, obj2 as any)
+const path2 = path(_, obj2)
 
 describe('path', () => {
   it('should work on objects', () => {

@@ -44,7 +44,7 @@ describe('take', () => {
   })
 
   it('should work with transformers', () => {
-    const inc: any = (x: number) => x + 1
+    const inc = (x: number) => x + 1
     const even: Predicate1 = (x: number) => (x & 1) === 0
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
