@@ -5,15 +5,15 @@ import AllTransformer from "./utils/Transformers/all.ts"
 
 // @types
 type All_2<T> = ((functor: ArrayLike<T>) => boolean)
-  & ((b?: PH) => All_2<T>)
+  & ((functor?: PH) => All_2<T>)
 
 type All_1<T> = ((predicate: Predicate1<T>) => boolean)
-  & ((a?: PH) => All_1<T>)
+  & ((predicate?: PH) => All_1<T>)
 
 type All = (<T>(predicate: Predicate1<T>, functor: ArrayLike<T>) => boolean)
-  & (<T>(predicate: Predicate1<T>, b?: PH) => All_2<T>)
+  & (<T>(predicate: Predicate1<T>, functor?: PH) => All_2<T>)
   & (<T>(predicate: PH, functor: ArrayLike<T>) => All_1<T>)
-  & ((a?: PH, b?: PH) => All)
+  & ((predicate?: PH, functor?: PH) => All)
 
 function _all<T>(predicate: Predicate1<T> , functor: ArrayLike <T> ) {
   let index = 0

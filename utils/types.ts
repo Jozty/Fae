@@ -51,7 +51,7 @@ export type ObjArr<T = any> = {
   [key: string]: T | T[]
 }
 
-export type ObjRec<T = number> = {
+export type ObjRec<T = any> = {
   [key: string]: ObjRec | ObjArr | string | number | null | undefined | T
 }
 
