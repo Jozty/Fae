@@ -1,17 +1,30 @@
 import curryN from "./utils/curry_n.ts"
-import { Func, Curry2 } from "./utils/types.ts"
+import { Func, PH } from "./utils/types.ts"
 import { isFunction } from "./utils/is.ts"
 import { lift } from "./lift.ts"
 import { and } from "./and.ts"
 
-function _both(f: Func, g: Func) {
+// @types
+type Both_2<T> = ((g: T) => T)
+  & ((g?: PH) => Both_2<T>)
+
+type Both_1<T> = ((f: T) => T)
+  & ((f?: PH) => Both_1<T>)
+
+type Both = (<T>(f: T, g: T) => T)
+  & (<T>(f: T, g?: PH) => Both_2<T>)
+  & (<T>(f: PH, g: T) => Both_1<T>)
+  & ((f?: PH, g?: PH) => Both)
+
+function _both<T extends Func>(f: T, g: T): T {
   if(isFunction(f)){
-    return function __both(this: any) {
-      return f.apply(this, [...arguments]) && g.apply(this, [...arguments])
+    const __both = function (this: any, ...args: any[]) {
+      return f.apply(this, args) && g.apply(this, args)
     }
+    return __both as T
   }
   else{
-    lift(and)(f, g)
+    return lift(and)(f, g)
   }
 }
 /**
@@ -22,4 +35,4 @@ function _both(f: Func, g: Func) {
  * false value.
  *
  */
-export const both: Curry2<Func> = curryN(2, _both)
+export const both: Both = curryN(2, _both)

@@ -17,7 +17,9 @@ describe('concat', () => {
 
   it('should throw error with incompatible types', () => {
     const message = 'Types are not compatible. Both the arguments passed must be of same type.'
+    // @ts-expect-error
     thr(() => concat('bar', ['a', 'foo']), message)
+    // @ts-expect-error
     thr(() => concat(['a', 'foo'], 'bar'), message)
   })
 })

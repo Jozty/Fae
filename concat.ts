@@ -1,10 +1,22 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { PH } from "./utils/types.ts"
 import { isArray, isString } from "./utils/is.ts"
 
-function _concat<T = any>(a: Array<T> | string, b: Array<T> | string) {
-  if(isArray(a) && isArray(b)) return a.concat(b)
-  if(isString(a) && isString(b)) return a + b
+// @types
+type Concat_2<L extends T[] | string, T> = ((b: L) => L)
+  & ((b?: PH) => Concat_2<L, T>)
+
+type Concat_1<L extends T[] | string, T> = ((a: L) => L)
+  & ((a?: PH) => Concat_1<L, T>)
+
+type Concat = (<L extends T[] | string, T>(a: L, b: L) => L)
+  & (<L extends T[] | string, T>(a: L, b?: PH) => Concat_2<L, T>)
+  & (<L extends T[] | string, T>(a: PH, b: L) => Concat_1<L, T>)
+  & ((a?: PH, b?: PH) => Concat)
+
+function _concat<L extends T[] | string, T>(a: L, b: L): L {
+  if(isArray<T>(a) && isArray<T>(b)) return a.concat(b) as L
+  if(isString(a) && isString(b)) return a + b as L
   throw new TypeError('Types are not compatible. Both the arguments passed must be of same type.')
 }
 
@@ -12,4 +24,4 @@ function _concat<T = any>(a: Array<T> | string, b: Array<T> | string) {
  * Concat two arrays or strings.
  * Both the arguments passed must be of same type.
  */
-export const concat: Curry2<Array<any> | string, Array<any> | string, Array<any> | string> = curryN(2,_concat)
+export const concat: Concat = curryN(2,_concat)
