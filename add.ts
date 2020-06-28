@@ -3,7 +3,7 @@ import { PH } from "./utils/types.ts"
 
 // @types
 type Add_2 = ((b: number) => number)
-  & ((c?: PH) => Add_2)
+  & ((b?: PH) => Add_2)
 
 type Add_1 = ((a: number) => number)
   & ((a?: PH) => Add_1)

@@ -1,21 +1,28 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry1, Func } from "./utils/types.ts"
-import { max } from './max.ts'
-import { pluck } from './pluck.ts'
-import { reduce } from './reduce.ts'
+import { Func, Predicate, PH } from "./utils/types.ts"
+import { getFunctionsLengths } from "./utils/get.ts"
 
+// @types
+type AllPass = (<T>(predicates: Predicate<T>[]) => Func)
+  & ((predicates?: PH) => AllPass)
 
-function _allPass(preds: Array<any>) {
-  let len = preds.length
-  let fn = function(this: any) {
+function _allPass<T = any>(predicates: Predicate<T>[]) {
+  const len = predicates.length
+  const fn = function(this: any, ...args: T[]) {
     for(let idx = 0; idx < len; idx++){
-      if (!preds[idx].apply(this, arguments)) {
+      if (!predicates[idx].apply(this, args)) {
         return false
       }
     }
     return true
   }
-  return curryN(reduce(max, 0, pluck('length', preds)), fn)
+
+  const noOfParams = getFunctionsLengths(predicates)
+
+  return curryN(
+    Math.max(...noOfParams, 0),
+    fn
+  )
 }
 
 /**
@@ -24,4 +31,4 @@ function _allPass(preds: Array<any>) {
  * by those arguments.
  *
  */
-export const allPass: Curry1<Array<any>, Func> = curryN(1, _allPass)
+export const allPass: AllPass = curryN(1, _allPass)
