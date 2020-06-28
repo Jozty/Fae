@@ -1,17 +1,30 @@
 import curryN from "./utils/curry_n.ts"
-import { Func, Curry2 } from "./utils/types.ts"
+import { Func, PH } from "./utils/types.ts"
 import { isFunction } from "./utils/is.ts"
 import { lift } from "./lift.ts"
 import { or } from "./or.ts"
 
-function _either(f: Func, g: Func) {
+// @types
+type Either_2<T> = ((g: T) => T)
+  & ((g?: PH) => Either_2<T>)
+
+type Either_1<T> = ((f: T) => T)
+  & ((f?: PH) => Either_1<T>)
+
+type Either = (<T>(f: T, g: T) => T)
+  & (<T>(f: T, g?: PH) => Either_2<T>)
+  & (<T>(f: PH, g: T) => Either_1<T>)
+  & ((f?: PH, g?: PH) => Either)
+
+function _either<T extends Func>(f: T, g: T): T {
   if(isFunction(f)){
-    return function __either(this: any) {
-      return f.apply(this, [...arguments]) || g.apply(this, [...arguments])
+    const __either = function (this: any, ...args: any[]) {
+      return f.apply(this, args) || g.apply(this, args)
     }
+    return __either as T
   }
   else{
-    lift(or)(f, g)
+    return lift(or)(f, g)
   }
 }
 
@@ -28,4 +41,4 @@ function _either(f: Func, g: Func) {
  *      f(8) //=> true
  *
  */
-export const either: Curry2<Func> = curryN(2, _either)
+export const either: Either = curryN(2, _either)

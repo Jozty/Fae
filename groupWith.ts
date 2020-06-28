@@ -1,8 +1,20 @@
-import { Predicate2, Curry2 } from "./utils/types.ts"
+import { Predicate2, PH } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { slice } from "./slice.ts"
 
-function _groupWith<T>(predicate: Predicate2<T | string>, functor: T[] | string) {
+// @types
+type GroupWith_2<L extends T[] | string, T> = ((functor: L) => L[])
+  & ((functor?: PH) => GroupWith_2<L, T>)
+
+type GroupWith_1<L extends T[] | string, T> = ((predicate: Predicate2<T>) => L[])
+  & ((predicate?: PH) => GroupWith_1<L, T>)
+
+type GroupWith = (<L extends T[] | string, T>(predicate: Predicate2<T>, functor: L) => L[])
+  & (<L extends T[] | string, T>(predicate: Predicate2<T>, functor?: PH) => GroupWith_2<L, T>)
+  & (<L extends T[] | string, T>(predicate: PH, functor: L) => GroupWith_1<L, T>)
+  & ((predicate?: PH, functor?: PH) => GroupWith)
+
+function _groupWith<L extends T[] | string, T>(predicate: Predicate2<T | string>, functor: L) {
   const result: T[][] | string[] = []
   const len = functor.length
   let i = 0
@@ -15,4 +27,4 @@ function _groupWith<T>(predicate: Predicate2<T | string>, functor: T[] | string)
   return result
 }
 
-export const groupWith: Curry2<Predicate2, any[] | string, any[][] | string[]> = curryN(2, _groupWith)
+export const groupWith: GroupWith = curryN(2, _groupWith)
