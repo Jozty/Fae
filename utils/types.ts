@@ -2,6 +2,7 @@ import { _, FUNCTION_LENGTH } from "./constants.ts";
 
 /** Type of placeholder for curried functions */
 export type PlaceHolder = typeof _
+export type PH = PlaceHolder
 
 /** Function type for curried function of arity 1 */
 export interface Curry1<T, R = T> {

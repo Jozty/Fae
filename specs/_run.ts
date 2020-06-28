@@ -66,6 +66,7 @@ async function run() {
     }
   }
   else {
+    files.sort((a, b) => a.name.localeCompare(b.name))
     for(let i = 0; i < files.length; i++) {
       await import(`./${files[i].name}`)
     }
