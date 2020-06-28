@@ -1,5 +1,17 @@
-import { ObjRec, Curry2 } from "./utils/types.ts"
+import { ObjRec, PH } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
+
+// @types
+type Dissoc_2 = ((obj: ObjRec) => ObjRec)
+  & ((obj?: PH) => Dissoc_2)
+
+type Dissoc_1 = ((prop: string | number) => ObjRec)
+  & ((prop?: PH) => Dissoc_1)
+
+type Dissoc = ((prop: string | number, obj: ObjRec) => ObjRec)
+  & ((prop: string | number, obj?: PH) => Dissoc_2)
+  & ((prop: PH, obj: ObjRec) => Dissoc_1)
+  & ((prop?: PH, obj?: PH) => Dissoc)
 
 function _dissoc(prop: string | number, obj: ObjRec) {
   const result: ObjRec = {}
@@ -16,4 +28,4 @@ function _dissoc(prop: string | number, obj: ObjRec) {
  * 
  *      Fae.dissoc('b', {a: 1, b: 2, c: 3}); //=> {a: 1, c: 3}
  */
-export const dissoc: Curry2<string | number, ObjRec, ObjRec> = curryN(2, _dissoc)
+export const dissoc: Dissoc = curryN(2, _dissoc)

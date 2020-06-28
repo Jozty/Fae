@@ -23,7 +23,7 @@ describe('dropWhile', () => {
   })
 
   it('should starts at the right arg and acknowledges undefined', () => {
-    const list = dropWhile((x: number) => x !== void 0, [1, 3, void 0, 5, 7])
+    const list = dropWhile((x: number | undefined) => x !== void 0, [1, 3, void 0, 5, 7])
     eq(list.length, 3)
     eq(list[0], void 0)
     eq(list[1], 5)

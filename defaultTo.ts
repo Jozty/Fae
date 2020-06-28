@@ -1,8 +1,20 @@
-import { Curry2 } from "./utils/types.ts"
+import { PH } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 
-function _defaultTo(defaultV: any, value: any) {
-  return value == null || value !== value ? defaultV : value;
+// @types
+type DefaultTo_2<T1> = (<T2>(value: T2) => T1 | T2)
+  & ((value?: PH) => DefaultTo_2<T1>)
+
+type DefaultTo_1<T2> = (<T1>(defaultV: T1) => T1 | T2)
+  & ((defaultV?: PH) => DefaultTo_1<T2>)
+
+type DefaultTo = (<T1, T2>(defaultV: T1, value: T2) => T1 | T2)
+  & (<T1>(defaultV: T1, value?: PH) => DefaultTo_2<T1>)
+  & (<T2>(defaultV: PH, value: T2) => DefaultTo_1<T2>)
+  & ((defaultV?: PH, value?: PH) => DefaultTo)
+
+function _defaultTo<T1, T2>(defaultV: T1, value: T2) {
+  return value == null || value !== value ? defaultV : value
 }
 
 /**
@@ -17,4 +29,4 @@ function _defaultTo(defaultV: any, value: any) {
  *      defaultTo125(false)  //=> false
  *      defaultTo125('Fae')  //=> 'Fae'
  */
-export const defaultTo: Curry2<any, any, any> = curryN(2, _defaultTo)
+export const defaultTo: DefaultTo = curryN(2, _defaultTo)
