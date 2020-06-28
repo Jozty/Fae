@@ -33,8 +33,8 @@ type Slice = (<L extends ArrayLike<T> | string, T = any>(fromIndex: number, toIn
   & ((fromIndex: PH, toIndex: number, list?: PH) => Slice_1_3)
   & (<L extends ArrayLike<T> | string, T = any>(fromIndex: PH, toIndex: PH, list: L) => Slice_1_2<L, T>)
   & ((fromIndex: number, toIndex: number, list?: PH) => Slice_3)
-  & (<L extends ArrayLike<T> | string, T = any>(fromIndex: number, toIndex: PH, list?: T) => Slice_2<L, T>)
-  & (<L extends ArrayLike<T> | string, T = any>(fromIndex: PH, toIndex: number, list?: T) => Slice_1<L, T>)
+  & (<L extends ArrayLike<T> | string, T = any>(fromIndex: number, toIndex: PH, list: L) => Slice_2<L, T>)
+  & (<L extends ArrayLike<T> | string, T = any>(fromIndex: PH, toIndex: number, list: L) => Slice_1<L, T>)
 
 function _slice<L extends ArrayLike<T> | string, T = any>(fromIndex: number, toIndex: number, list: L) {
   if(isString(list)) return list.slice(fromIndex, toIndex)
