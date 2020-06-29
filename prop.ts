@@ -15,7 +15,7 @@ type Prop = (<T>(p: string | number, obj: Obj<T> | ArrayLike<T>) => T | undefine
   & (<T>(p: PH, obj: Obj<T> | ArrayLike<T>) => Prop_1<T>)
   & ((p?: PH, obj?: PH) => Prop)
 
-function _prop<T>(p: string | number, obj: Obj<T> | ArrayLike<T>): T | undefined{
+function _prop<T>(p: string | number, obj: Obj<T> | ArrayLike<T>): T | undefined {
   if(isUndefinedOrNull(obj)) return
   // @ts-ignore
   return isInteger(p) && isArrayLike(obj) ? nth(p, obj) : obj[p]
