@@ -1,7 +1,19 @@
 import { isNumber } from './utils/is.ts'
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { PH } from "./utils/types.ts"
 import { equals } from './equals.ts'
+
+// @types
+type IndexOf_2<T> = ((list: T[]) => number)
+  & ((list?: PH) => IndexOf_2<T>)
+
+type IndexOf_1<T> = ((value: T) => number)
+  & ((value?: PH) => IndexOf_1<T>)
+
+type IndexOf = (<T>(value: T, list: T[]) => number)
+  & (<T>(value: T, list?: PH) => IndexOf_2<T>)
+  & (<T>(value: PH, list: T[]) => IndexOf_1<T>)
+  & ((value?: PH, list?: PH) => IndexOf)
 
 function _indexOf<T>(value: T, list: T[]) {
   switch(typeof value) {
@@ -53,4 +65,4 @@ function _indexOf<T>(value: T, list: T[]) {
  *      Fae.indexOf(-0, [1, 2, 3, 0, -0, NaN]); //=> 4
  *      Fae.indexOf(NaN, [1, 2, 3, 0, -0, NaN]); //=> 5
  */
-export const indexOf: Curry2<any, any[], number> = curryN(2, _indexOf)
+export const indexOf: IndexOf = curryN(2, _indexOf)

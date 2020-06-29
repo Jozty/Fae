@@ -5,6 +5,7 @@ import { map } from "./map.ts"
 import { equals } from './equals.ts'
 
 function _whereEq(spec: ObjRec, testObj: ObjRec) {
+  // @ts-ignore
   return where(map(equals, spec), testObj)
 }
 

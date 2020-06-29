@@ -1,5 +1,9 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry1 } from "./utils/types.ts"
+import { PH } from "./utils/types.ts"
+
+// @types
+type Inc = ((element: number) => number)
+  & ((fnelement?: PH) => Inc)
 
 function _inc(element: number){
     return ++element
@@ -8,4 +12,4 @@ function _inc(element: number){
 /**
  * Increases its argument by 1.
  */
-export const inc: Curry1<number> = curryN(1, _inc)
+export const inc: Inc = curryN(1, _inc)
