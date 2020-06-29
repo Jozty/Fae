@@ -80,7 +80,7 @@ describe('map', () => {
 
   it('composes', function() {
     const mdouble = map(times2 as (a: number) => number)
-    const mdec = map(dec)
+    const mdec = map(dec as (a: number) => number)
     eq(mdec(mdouble([10, 20, 30])), [19, 39, 59])
   });
 })
