@@ -1,9 +1,13 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry1 } from "./utils/types.ts"
+import { PH } from "./utils/types.ts"
 
-function _sum(list: Array<number>){
+// @types
+type Sum = ((list: number[]) => number)
+  & ((list?: PH) => Sum)
+
+function _sum(list: number[]): number {
     return list.reduce((a, b) => a + b, 0)
 }
 
 /** Adds together all the elements of a list. */
-export const sum: Curry1<number[], number> = curryN(1, _sum)
+export const sum: Sum = curryN(1, _sum)
