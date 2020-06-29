@@ -1,13 +1,25 @@
-import { ObjRec, Curry2, Tests } from "./utils/types.ts"
+import { Obj, PH, Tests } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import has from "./utils/has.ts"
 
-function _whereAll(specs: Tests, obj: ObjRec) {
+// @types
+type WhereAll_2<T> = ((testObj: Obj<T>) => boolean)
+  & ((testObj?: PH) => WhereAll_2<T>)
+
+type WhereAll_1<T> = ((specs: Tests<T>) => boolean)
+  & ((specs?: PH) => WhereAll_1<T>)
+
+type WhereAll = (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
+  & (<T>(specs: Tests<T>, testObj?: PH) => WhereAll_2<T>)
+  & (<T>(specs: PH, testObj: Obj<T>) => WhereAll_1<T>)
+  & ((specs?: PH, testObj?: PH) => WhereAll)
+
+function _whereAll<T>(specs: Tests<T> , testObj: Obj<T>) {
   let count = 0
   for(const key in specs) {
     count++
     const pred = specs[key]
-    const value = obj[key]
+    const value = testObj[key]
     if(
       has(specs, key)
       && !pred(value)
@@ -30,4 +42,4 @@ function _whereAll(specs: Tests, obj: ObjRec) {
  *      Fae.whereAll(spec, {x: 0, y: 2}) // true
  *      Fae.whereAll(spec, {x: 1, y: 2}) // false
  */
-export const whereAll: Curry2<Tests, ObjRec, boolean> = curryN(2, _whereAll)
+export const whereAll: WhereAll = curryN(2, _whereAll)

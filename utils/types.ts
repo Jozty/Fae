@@ -74,7 +74,7 @@ export type Predicate1<T = any> = (v: T) => boolean
 export type Predicate2<T1 = any, T2 = T1> = (a: T1, b: T2) => boolean
 
 /** Type for spec object which contains predicate functions of type {Predicate1} */
-export type Tests<T = any> = {
+export type Tests<T> = {
   [key: string]: Predicate1<T>
 }
 

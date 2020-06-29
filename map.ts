@@ -45,7 +45,7 @@ function _map<F extends Obj<T> | Func | T[], T, R>(fn: FuncArr1<T, R>, functor: 
   if(isFunction(functor)) return _functionMap(fn, functor)
   if(isArray(functor)) return _arrayMap(fn, functor)
   if(isObject(functor)) return _objectMap(fn, functor as any)
-  throw new TypeError('Functor can be only array, object or fn transformer')
+  throw new TypeError('Functor can be only array, object or a transformer')
 }
 
 const dispatchedMap = dispatch(MapTransformer, _map)

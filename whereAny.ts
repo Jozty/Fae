@@ -1,10 +1,22 @@
-import { ObjRec, Curry2, Tests } from "./utils/types.ts"
+import { Obj, PH, Tests } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 
-function _whereAny(specs: Tests, obj: ObjRec) {
+// @types
+type WhereAny_2<T> = ((testObj: Obj<T>) => boolean)
+  & ((testObj?: PH) => WhereAny_2<T>)
+
+type WhereAny_1<T> = ((specs: Tests<T>) => boolean)
+  & ((specs?: PH) => WhereAny_1<T>)
+
+type WhereAny = (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
+  & (<T>(specs: Tests<T>, testObj?: PH) => WhereAny_2<T>)
+  & (<T>(specs: PH, testObj: Obj<T>) => WhereAny_1<T>)
+  & ((specs?: PH, testObj?: PH) => WhereAny)
+
+function _whereAny<T>(specs: Tests<T> , testObj: Obj<T>) {
   for(const key in specs) {
     const pred = specs[key]
-    const value = obj[key]
+    const value = testObj[key]
     if(
       Object.prototype.hasOwnProperty.call(specs, key)
       && pred(value)
@@ -28,4 +40,4 @@ function _whereAny(specs: Tests, obj: ObjRec) {
  *      Fae.whereAny(spec, {x: 1, y: 101}) // false
  *      Fae.whereAny(spec, {x: 1, y: 2}) // true
  */
-export const whereAny: Curry2<Tests, ObjRec, boolean> = curryN(2, _whereAny)
+export const whereAny: WhereAny = curryN(2, _whereAny)
