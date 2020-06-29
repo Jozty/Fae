@@ -1,10 +1,22 @@
 import curryN from "./utils/curry_n.ts"
-import { Functor, Curry2 } from "./utils/types.ts"
+import { Functor, PH, Obj, FuncArr1 } from "./utils/types.ts"
 import { map } from './map.ts'
 import { prop } from './prop.ts'
 
-function _pluck(p: number | string, list: Array<any>) {
-  return map(prop(p), list)
+// @types
+type Pluck_2 = (<T>(list: Obj<T>[]) => T[])
+  & ((list?: PH) => Pluck_2)
+
+type Pluck_1<T> = ((p: number | string) => T[])
+  & ((p?: PH) => Pluck_1<T>)
+
+type Pluck = (<T>(p: number | string, list: Obj<T>[]) => T[])
+  & ((p: number | string, list?: PH) => Pluck_2)
+  & (<T>(p: PH, list: Obj<T>[]) => Pluck_1<T>)
+  & ((p?: PH, list?: PH) => Pluck)
+
+function _pluck<T>(p: number | string, list: Obj<T>[]): T[] {
+  return map(prop(p) as FuncArr1<Obj<T>, T>, list) as T[]
 }
 
 /**
@@ -17,4 +29,4 @@ function _pluck(p: number | string, list: Array<any>) {
  *      Fae.pluck(0, [[1, 2], [3, 4]])               //=> [1, 3]
  *      Fae.pluck('val', {a: {val: 3}, b: {val: 5}}) //=> {a: 3, b: 5}
  */
-export const pluck: Curry2<number | string, Array<any>, Array<any>> = curryN(2, _pluck)
+export const pluck: Pluck = curryN(2, _pluck)

@@ -1,10 +1,43 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry3, Obj, ObjRec } from "./utils/types.ts"
+import { PH, ObjRec } from "./utils/types.ts"
 import { pathOr } from "./pathOr.ts"
-import { Path } from "./paths.ts"
 
-function _propOr(val: any, p: Path, obj: ObjRec | null) {
-  return pathOr(val, [p], obj)
+// @types
+type PropOr_1<T> = (<R>(d: R) => R)
+  & ((d?: PH) => PropOr_1<T>)
+
+type PropOr_2<T, R> = ((p: string | number) => R)
+  & ((p?: PH) => PropOr_2<T, R>)
+
+type PropOr_3<R> = (<T>(obj: ObjRec<T> | null) => R)
+  & ((obj?: PH) => PropOr_3<R>)
+
+type PropOr_2_3<R> = (<T>(p: string | number, obj: ObjRec<T> | null) => R)
+  & ((p: string | number, obj?: PH) => PropOr_3<R>)
+  & (<T>(p: PH, obj: ObjRec<T> | null) => PropOr_2<T, R>)
+  & ((p?: PH, obj?: PH) => PropOr_2_3<R>)
+
+type PropOr_1_3 = (<T, R>(d: R, obj: ObjRec<T> | null) => R)
+  & (<R>(d: R, obj?: PH) => PropOr_3<R>)
+  & (<T>(d: PH, obj: ObjRec<T> | null) => PropOr_1<T>)
+  & ((d?: PH, obj?: PH) => PropOr_1_3)
+
+type PropOr_1_2<T> = (<R>(d: R, p: string | number) => R)
+  & (<R>(d: R, p?: PH) => PropOr_2<T, R>)
+  & ((d: PH, p: string | number) => PropOr_1<T>)
+  & ((d?: PH, p?: PH) => PropOr_1_2<T>)
+
+type PropOr = (<T, R>(d: R, p: string | number, obj: ObjRec<T> | null) => R)
+  & ((d?: PH, p?: PH, obj?: PH) => PropOr)
+  & (<R>(d: R, p?: PH, obj?: PH) => PropOr_2_3<R>)
+  & ((d: PH, p: string | number, obj?: PH) => PropOr_1_3)
+  & (<T>(d: PH, p: PH, obj: ObjRec<T> | null) => PropOr_1_2<T>)
+  & (<R>(d: R, p: string | number, obj?: PH) => PropOr_3<R>)
+  & (<T, R>(d: R, p: PH, obj: ObjRec<T> | null) => PropOr_2<T, R>)
+  & (<T>(d: PH, p: string | number, obj: ObjRec<T> | null) => PropOr_1<T>)
+
+function _propOr<T, R>(d: R, p: string | number, obj: ObjRec<T> | null) {
+  return pathOr(d, [p], obj)
 }
 
 /**
@@ -21,4 +54,4 @@ function _propOr(val: any, p: Path, obj: ObjRec | null) {
  *      Great(Fae);  //=> undefined
  *      GreatWithDefault(Fae);  //=> 'FaeModule'
  */
-export const propOr: Curry3<any, Path, ObjRec | null, any> = curryN(3, _propOr)
+export const propOr: PropOr = curryN(3, _propOr)

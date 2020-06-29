@@ -1,7 +1,19 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { PH } from "./utils/types.ts"
 
-function _max(a: number | string | Date, b: number | string | Date) {
+// @types
+type Max_2<T extends number | string | Date> = ((b: T) => T)
+  & ((b?: PH) => Max_2<T>)
+
+type Max_1<T extends number | string | Date> = ((a: T) => T)
+  & ((a?: PH) => Max_1<T>)
+
+type Max = (<T extends number | string | Date>(a: T, b: T) => T)
+  & (<T extends number | string | Date>(a: T, b?: PH) => Max_2<T>)
+  & (<T extends number | string | Date>(a: PH, b: T) => Max_1<T>)
+  & ((a?: PH, b?: PH) => Max)
+
+function _max<T extends number | string | Date>(a: T, b: T) {
     return a > b ? a : b
 }
 
@@ -14,4 +26,4 @@ function _max(a: number | string | Date, b: number | string | Date) {
  *      Fae.max('abd', 'abc')  // => 'abd'
  *      Fae.max(1000, NaN)  // => 1000
 */
-export const max: Curry2<number | string | Date, number | string | Date, number | string | Date> = curryN(2, _max)
+export const max: Max = curryN(2, _max)

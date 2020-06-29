@@ -1,4 +1,4 @@
-import { ObjRec, Curry2 } from "./utils/types.ts"
+import { ObjRec, PH } from "./utils/types.ts"
 import { isString, isInteger, isArrayLike, isUndefinedOrNull } from "./utils/is.ts"
 import { nth } from "./nth.ts"
 import curryN from "./utils/curry_n.ts"
@@ -6,6 +6,18 @@ import { trim } from "./trim.ts"
 
 
 export type Path = string | Array<string | number>
+
+// @types
+type Paths_2 = (<T, R>(obj: ObjRec<T> | null) => R[])
+  & ((obj?: PH) => Paths_2)
+
+type Paths_1<T, R> = ((pathsArr: Path[]) => R[])
+  & ((pathsArr?: PH) => Paths_1<T, R>)
+
+type Paths = (<T, R>(pathsArr: Path[], obj: ObjRec<T> | null) => R[])
+  & ((pathsArr: Path[], obj?: PH) => Paths_2)
+  & (<T, R>(pathsArr: PH, obj: ObjRec<T> | null) => Paths_1<T, R>)
+  & ((pathsArr?: PH, obj?: PH) => Paths)
 
 export function getPath(path: Path): Array<string | number> {
   if(isString(path)) {
@@ -16,10 +28,10 @@ export function getPath(path: Path): Array<string | number> {
   return path as Array<string | number>
 }
 
-function _paths(pathsArr: Path[], obj: ObjRec) {
+function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {
   return pathsArr.map((p) => {
     const path = getPath(p)
-    let val = obj
+    let val: any = obj
     for(let i = 0; i < path.length; i++) {
       if(isUndefinedOrNull(val)) return
       const p = path[i]
@@ -43,4 +55,4 @@ function _paths(pathsArr: Path[], obj: ObjRec) {
  *      Fae.path(['a/b/0'], {a: {b: [1, 2, 3]}}); // 1
  *      Fae.path(['a.b.0'], {a: {b: [1, 2, 3]}}); // 2
  */
-export const paths: Curry2<Path[], ObjRec> = curryN(2, _paths)
+export const paths: Paths = curryN(2, _paths)

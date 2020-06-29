@@ -46,6 +46,7 @@ describe('pathOr', () => {
   })
 
   it('should work with falsy items', () => {
+    // @ts-ignore
     eq(pathOr('Unknown', ['toString'], false), Boolean.prototype.toString)
   })
   

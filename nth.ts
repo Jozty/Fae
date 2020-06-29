@@ -1,10 +1,22 @@
-import { FunctorWithArLk, Curry2 } from "./utils/types.ts"
+import { FunctorWithArLk, PH } from "./utils/types.ts"
 import { isArrayLike, isIterable, isIterator, isString } from "./utils/is.ts"
 import { getIterable } from "./utils/get.ts"
 import { throwFunctorError } from "./utils/throw.ts"
 import curryN from "./utils/curry_n.ts"
 
-function _nth<T>(index: number, functor: FunctorWithArLk<T> | string) {
+// @types
+type Nth_2 = (<F extends FunctorWithArLk<T> | string, T>(functor: F) => T)
+  & ((functor?: PH) => Nth_2)
+
+type Nth_1<F extends FunctorWithArLk<T> | string, T> = ((index: number) => T)
+  & ((index?: PH) => Nth_1<F, T>)
+
+type Nth = (<F extends FunctorWithArLk<T> | string, T>(index: number, functor: F) => T)
+  & ((index: number, functor?: PH) => Nth_2)
+  & (<F extends FunctorWithArLk<T> | string, T>(index: PH, functor: F) => Nth_1<F, T>)
+  & ((index?: PH, functor?: PH) => Nth)
+
+function _nth<F extends FunctorWithArLk<T> | string, T>(index: number, functor: F) {
   let f: ArrayLike<T> | string = ''
   if(isArrayLike(functor)) f = functor
   else if(isIterable(functor)) f = [...functor]
@@ -27,4 +39,4 @@ function _nth<T>(index: number, functor: FunctorWithArLk<T> | string) {
  * Returns element counting from right end if `index` is -ve.
  * Works in array-like/string/iterable/iterator
  */
-export const nth: Curry2<number, FunctorWithArLk | string, any> = curryN(2, _nth)
+export const nth: Nth = curryN(2, _nth)

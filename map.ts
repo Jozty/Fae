@@ -6,6 +6,7 @@ import { dispatch } from "./utils/dispatch.ts"
 import MapTransformer from "./utils/Transformers/map.ts"
 import { getFunctionLength } from "./utils/get.ts"
 
+// TODO: more refine
 // @types
 type Map_2<F extends Obj<T> | Func | T[], T, R> = ((functor: F) => Func | R[] | Obj<R>)
   & ((functor?: PH) => Map_2<F, T, R>)
