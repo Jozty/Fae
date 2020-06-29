@@ -1,4 +1,4 @@
-import { FunctorWithArLk, Curry2, Obj } from './utils/types.ts'
+import { FunctorWithArLk, PH, Obj, Predicate1 } from './utils/types.ts'
 import { isArrayLike, isArray, isIterable, isIterator, isObject } from './utils/is.ts'
 import { reduce } from './reduce.ts'
 import { throwFunctorError } from './utils/throw.ts'
@@ -6,9 +6,19 @@ import { dispatch } from './utils/dispatch.ts'
 import FilterTransformer from './utils/Transformers/filter.ts'
 import curryN from './utils/curry_n.ts'
 
-type Predicate<T> = (a: T) => boolean
+// @types
+type Filter_2<T> = ((functor: FunctorWithArLk<T> | Obj<T>) => T[])
+  & ((functor?: PH) => Filter_2<T>)
 
-function _objectFilter<T>(predicate: Predicate<T>, functor: Obj<T>) {
+type Filter_1<T> = ((predicate: Predicate1<T>) => T[])
+  & ((predicate?: PH) => Filter_1<T>)
+
+type Filter = (<T>(predicate: Predicate1<T>, functor: FunctorWithArLk<T> | Obj<T>) => T[])
+  & (<T>(predicate: Predicate1<T>, functor?: PH) => Filter_2<T>)
+  & (<T>(predicate: PH, functor: FunctorWithArLk<T> | Obj<T>) => Filter_1<T>)
+  & ((predicate?: PH, functor?: PH) => Filter)
+
+function _objectFilter<T>(predicate: Predicate1<T>, functor: Obj<T>) {
   return reduce(
     (acc, key) => {
       if(predicate(functor[key])) acc[key] = functor[key]
@@ -19,7 +29,7 @@ function _objectFilter<T>(predicate: Predicate<T>, functor: Obj<T>) {
   )
 }
 
-function _functorFilter<T>(predicate: Predicate<T>, functor: FunctorWithArLk<T>) {
+function _functorFilter<T>(predicate: Predicate1<T>, functor: FunctorWithArLk<T>) {
   return reduce(
     (acc, value) => {
       if(predicate(value)) acc.push(value)
@@ -30,7 +40,7 @@ function _functorFilter<T>(predicate: Predicate<T>, functor: FunctorWithArLk<T>)
   )
 }
 
-function _filter<T = any>(predicate: Predicate<T>, functor: FunctorWithArLk<T> | Obj<T>): Array<T> {
+function _filter<T = any>(predicate: Predicate1<T>, functor: FunctorWithArLk<T> | Obj<T>): Array<T> {
   if(isArray(functor)) return functor.filter(predicate)
   if(
     isArrayLike(functor)
@@ -48,7 +58,6 @@ const dispatchedFilter = dispatch(FilterTransformer, _filter)
  * Filters the those elements from `functor` that satisfies `predicate`.
  * The `functor` may be an array/object/iterable/iterator.
  * 
- * Acts as a transducer if a transformer is passed in place of `functor` 
+ * Acts as a transducer if a transformer is passed in place of `functor`
  */
-export const filter: Curry2<Predicate<any>, FunctorWithArLk | Obj,  Array<any> | Object> = curryN(2, dispatchedFilter)
-
+export const filter: Filter = curryN(2, dispatchedFilter)

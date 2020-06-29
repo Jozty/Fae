@@ -1,9 +1,21 @@
-import { Predicate1, Curry2 } from "./utils/types.ts"
+import { Predicate1, PH } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { dispatch } from "./utils/dispatch.ts"
 import FindLastIdxTransformer from "./utils/Transformers/findLastIndex.ts"
 
-function _findLastIndex<T>(predicate: Predicate1, list: T[] | string ) {
+// @types
+type FindLastIndex_2<T> = ((list: T[]) => T[] | undefined)
+  & ((list?: PH) => FindLastIndex_2<T>)
+
+type FindLastIndex_1<T> = ((predicate: Predicate1<T>) => T[] | undefined)
+  & ((predicate?: PH) => FindLastIndex_1<T>)
+
+type FindLastIndex = (<T>(predicate: Predicate1<T>, list: T[]) => T[] | undefined)
+  & (<T>(predicate: Predicate1<T>, list?: PH) => FindLastIndex_2<T>)
+  & (<T>(predicate: PH, list: T[]) => FindLastIndex_1<T>)
+  & ((predicate?: PH, list?: PH) => FindLastIndex)
+
+function _findLastIndex<T>(predicate: Predicate1<T>, list: T[]) {
   for(let i = list.length - 1; i >= 0; i--) {
     if(predicate(list[i])) return i
   }
@@ -22,4 +34,4 @@ const dispatched = dispatch(FindLastIdxTransformer, _findLastIndex)
  *      Fae.find(Fae.propEq('a', 2))(xs) //=> {a: 2}
  *      Fae.find(Fae.propEq('a', 4))(xs) //=> undefined
  */
-export const findLastIndex: Curry2<Predicate1, any[], number> = curryN(2, dispatched)
+export const findLastIndex: FindLastIndex = curryN(2, dispatched)
