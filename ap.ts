@@ -30,6 +30,7 @@ function _ap<T, R>(
   }
 
   return reduce(
+    // @ts-ignore
     (acc: T[], f: Func) => concat(acc, map(f, applyX) as T[]),
     [],
     applyF

@@ -10,7 +10,7 @@ function _overTransformer(focus: any): LensTransformer {
     }
   }
 }
-
+// @ts-ignore
 function _over(lens: Lens, fn: FuncArr1, target: any) {
   return lens(
     (focus: any) => _overTransformer(fn(focus))
@@ -25,4 +25,5 @@ function _over(lens: Lens, fn: FuncArr1, target: any) {
  *      const headLens = Fae.lensIndex(0)
  *      R.over(headLens, (x: string) => x.toUpperCase(), ['foo', 'bar', 'baz']) //=> ['FOO', 'bar', 'baz']
  */
+// @ts-ignore
 export const over: Curry3<Lens, FuncArr1, any, any> = curryN(3, _over)
