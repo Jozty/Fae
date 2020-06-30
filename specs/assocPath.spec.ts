@@ -27,7 +27,7 @@ describe('assocPath', () => {
   })
 
   it('should replace the whole object if path is empty', () => {
-    eq(assocPath([], 3, {a: 1, b: 2}), 3)
+    eq(assocPath([], 3, {a: 1, b: 2}), 3 as any)
   })
 
   it('should replace `undefined` with a new object', () => {

@@ -3,7 +3,7 @@ import curryN from './utils/curry_n.ts'
 import { isArray, isString, isObject, isArguments } from './utils/is.ts'
 
 // @types
-type Empty = ((x: any) => boolean)
+type Empty = (<T>(x: T) => T | Partial<T>)
   & ((fn?: PH) => Empty)
 
 function _empty(x: any) {

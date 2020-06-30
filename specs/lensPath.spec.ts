@@ -34,11 +34,11 @@ describe('lensPath: set', () => {
   it('should set the value of the object property specified', () => {
     eq(set(lensPath(['d']), 0, testObj), {a: [{b: 1}, {b: 2}], d: 0})
     eq(set(lensPath(['a', 0, 'b']), 0, testObj), {a: [{b: 0}, {b: 2}], d: 3})
-    eq(set(lensPath([]), 0, testObj), 0)
+    eq(set(lensPath([]), 0, testObj as typeof testObj | number), 0)
   })
 
   it('should add the property to the object if it doesn\'t exist', () => {
-    eq(set(lensPath(['X']), 0, testObj), {a: [{b: 1}, {b: 2}], d: 3, X: 0})
+    eq(set(lensPath(['X']), 0, testObj), {a: [{b: 1}, {b: 2}], d: 3, X: 0} as any)
     eq(set(lensPath(['a', 0, 'X']), 0, testObj), {a: [{b: 1, X: 0}, {b: 2}], d: 3})
   })
 })
@@ -52,7 +52,7 @@ describe('lensPath: over', () => {
   })
 
   it('should apply function to undefined and adds the property if it doesn\'t exist', () => {
-    eq(over(lensPath(['X']), identity, testObj), {a: [{b: 1}, {b: 2}], d: 3, X: undefined})
+    eq(over(lensPath(['X']), identity, testObj), {a: [{b: 1}, {b: 2}], d: 3, X: undefined} as any)
     eq(over(lensPath(['a', 0, 'X']), identity, testObj), {a: [{b: 1, X: undefined}, {b: 2}], d: 3})
   })
 })

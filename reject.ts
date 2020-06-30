@@ -4,18 +4,18 @@ import { complement } from './complement.ts'
 import { filter } from './filter.ts'
 
 // @types
-type Reject_2<T> = ((filterable: T[] | Obj<T> | Obj<T>) => T[])
+type Reject_2<T> = (<F extends T[] | Obj<T>>(filterable: F) => F)
   & ((filterable?: PH) => Reject_2<T>)
 
-type Reject_1<T> = ((predicate: Predicate1<T>) => T[])
-  & ((predicate?: PH) => Reject_1<T>)
+type Reject_1<F extends T[] | Obj<T>, T> = ((predicate: Predicate1<T>) => F)
+  & ((predicate?: PH) => Reject_1<F, T>)
 
-type Reject = (<T>(predicate: Predicate1<T>, filterable: T[] | Obj<T> | Obj<T>) => T[])
+type Reject = (<F extends T[] | Obj<T>, T>(predicate: Predicate1<T>, filterable: F) => F)
   & (<T>(predicate: Predicate1<T>, filterable?: PH) => Reject_2<T>)
-  & (<T>(predicate: PH, filterable: T[] | Obj<T> | Obj<T>) => Reject_1<T>)
+  & (<F extends T[] | Obj<T>, T>(predicate: PH, filterable: F) => Reject_1<F, T>)
   & ((predicate?: PH, filterable?: PH) => Reject)
 
-function _reject<T>(predicate: Predicate1<T>, filterable: T[] | Obj<T>) {
+function _reject<F extends T[] | Obj<T>, T>(predicate: Predicate1<T>, filterable: F) {
   return filter(complement(predicate), filterable)
 }
 

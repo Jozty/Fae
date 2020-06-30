@@ -2,6 +2,7 @@ import { describe, it } from "./_describe.ts"
 import { when, add } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 import { isNumber } from "../utils/is.ts"
+import { Func } from "../utils/types.ts"
 
 
 
@@ -12,7 +13,7 @@ describe('when', () => {
   })
 
   it('should return the argument unmodified if the validator returns a falsy value', () => {
-    eq(when(isNumber, add1)('hello' as any), 'hello')
+    eq(when(isNumber, add1 as Func)('hello'), 'hello')
   })
 
   it('should return a curried function', () => {

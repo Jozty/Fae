@@ -2,6 +2,8 @@ import * as colors from 'https://deno.land/std@v0.50.0/fmt/colors.ts'
 
 import { Tests } from "./_describe.ts"
 
+const failedCompile: any[] = []
+
 function write(...args: any[]) {
   console.log(...args)
 }
@@ -56,18 +58,28 @@ function readSpecFiles(dir: string): any[] {
   return files
 }
 
+async function runScript(script: string) {
+  try {
+    await import(script)
+  } catch (e) {
+    failedCompile.push(e)
+  }
+}
+
 async function run() {
   let start = Date.now()
   const files = readSpecFiles('./specs')
   const args = Deno.args
   if(args.length) {
     for(let i = 0; i < args.length; i++) {
+      // await runScript(`../${args[i]}`)
       await import(`../${args[i]}`)
     }
   }
   else {
     files.sort((a, b) => a.name.localeCompare(b.name))
     for(let i = 0; i < files.length; i++) {
+      // await runScript(`./${files[i].name}`)
       await import(`./${files[i].name}`)
     }
   }
@@ -78,6 +90,9 @@ async function run() {
   })
   
   await p.status()
+
+  write(failedCompile.join('\n\n\n'))
+
 }
 
 await run()

@@ -8,7 +8,14 @@ import {
 } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
-const testList = [{a: 1}, {b: 2}, {c: 3}]
+type O = {
+  a?: number
+  b?: number
+  c?: number
+}
+
+const testList1: (O | number | string[])[] = [{a: 1}, {b: 2}, {c: 3}, ['']]
+const testList = testList1
 
 describe('lensIndex: view', () => {
   it('should focus list element at the specified index', () => {

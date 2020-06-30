@@ -7,13 +7,13 @@ import FilterTransformer from './utils/Transformers/filter.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type Filter_2<T> = ((functor: FunctorWithArLk<T> | Obj<T>) => T[])
+type Filter_2<T> = ((functor: FunctorWithArLk<T> | Obj<T>) => T[] | Partial<Obj<T>>)
   & ((functor?: PH) => Filter_2<T>)
 
-type Filter_1<T> = ((predicate: Predicate1<T>) => T[])
+type Filter_1<T> = ((predicate: Predicate1<T>) => T[] | Partial<Obj<T>>)
   & ((predicate?: PH) => Filter_1<T>)
 
-type Filter = (<T>(predicate: Predicate1<T>, functor: FunctorWithArLk<T> | Obj<T>) => T[])
+type Filter = (<T>(predicate: Predicate1<T>, functor: FunctorWithArLk<T> | Obj<T>) => T[] | Partial<Obj<T>>)
   & (<T>(predicate: Predicate1<T>, functor?: PH) => Filter_2<T>)
   & (<T>(predicate: PH, functor: FunctorWithArLk<T> | Obj<T>) => Filter_1<T>)
   & ((predicate?: PH, functor?: PH) => Filter)
@@ -40,7 +40,7 @@ function _functorFilter<T>(predicate: Predicate1<T>, functor: FunctorWithArLk<T>
   )
 }
 
-function _filter<T = any>(predicate: Predicate1<T>, functor: FunctorWithArLk<T> | Obj<T>): Array<T> | Obj<T> {
+function _filter<T = any>(predicate: Predicate1<T>, functor: FunctorWithArLk<T> | Obj<T>): T[] | Partial<Obj<T>> {
   if(isArray(functor)) return functor.filter(predicate)
   if(
     isArrayLike(functor)

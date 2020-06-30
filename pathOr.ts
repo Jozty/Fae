@@ -5,41 +5,41 @@ import { path } from './path.ts'
 import { Path } from "./paths.ts"
 
 // @types
-type PathOr_1<T> = (<R>(d: R) => R)
+type PathOr_1<T> = (<D, P>(d: D) => D | P)
   & ((d?: PH) => PathOr_1<T>)
 
-type PathOr_2<T, R> = ((p: Path) => R)
-  & ((p?: PH) => PathOr_2<T, R>)
+type PathOr_2<T, D> = (<P>(p: Path) => D | P)
+  & ((p?: PH) => PathOr_2<T, D>)
 
-type PathOr_3<R> = (<T>(obj: ObjRec<T> | null) => R)
-  & ((obj?: PH) => PathOr_3<R>)
+type PathOr_3<D> = (<T, P>(obj: ObjRec<T> | null) => D | P)
+  & ((obj?: PH) => PathOr_3<D>)
 
-type PathOr_2_3<R> = (<T>(p: Path, obj: ObjRec<T> | null) => R)
-  & ((p: Path, obj?: PH) => PathOr_3<R>)
-  & (<T>(p: PH, obj: ObjRec<T> | null) => PathOr_2<T, R>)
-  & ((p?: PH, obj?: PH) => PathOr_2_3<R>)
+type PathOr_2_3<D> = (<T, P>(p: Path, obj: ObjRec<T> | null) => D | P)
+  & ((p: Path, obj?: PH) => PathOr_3<D>)
+  & (<T>(p: PH, obj: ObjRec<T> | null) => PathOr_2<T, D>)
+  & ((p?: PH, obj?: PH) => PathOr_2_3<D>)
 
-type PathOr_1_3 = (<T, R>(d: R, obj: ObjRec<T> | null) => R)
-  & (<R>(d: R, obj?: PH) => PathOr_3<R>)
+type PathOr_1_3 = (<T, D, P>(d: D, obj: ObjRec<T> | null) => D | P)
+  & (<D>(d: D, obj?: PH) => PathOr_3<D>)
   & (<T>(d: PH, obj: ObjRec<T> | null) => PathOr_1<T>)
   & ((d?: PH, obj?: PH) => PathOr_1_3)
 
-type PathOr_1_2<T> = (<R>(d: R, p: Path) => R)
-  & (<R>(d: R, p?: PH) => PathOr_2<T, R>)
+type PathOr_1_2<T> = (<D, P>(d: D, p: Path) => D | P)
+  & (<D>(d: D, p?: PH) => PathOr_2<T, D>)
   & ((d: PH, p: Path) => PathOr_1<T>)
   & ((d?: PH, p?: PH) => PathOr_1_2<T>)
 
-type PathOr = (<T, R>(d: R, p: Path, obj: ObjRec<T> | null) => R)
+type PathOr = (<T, D, P>(d: D, p: Path, obj: ObjRec<T> | null) => D | P)
   & ((d?: PH, p?: PH, obj?: PH) => PathOr)
-  & (<R>(d: R, p?: PH, obj?: PH) => PathOr_2_3<R>)
+  & (<D>(d: D, p?: PH, obj?: PH) => PathOr_2_3<D>)
   & ((d: PH, p: Path, obj?: PH) => PathOr_1_3)
   & (<T>(d: PH, p: PH, obj: ObjRec<T> | null) => PathOr_1_2<T>)
-  & (<R>(d: R, p: Path, obj?: PH) => PathOr_3<R>)
-  & (<T, R>(d: R, p: PH, obj: ObjRec<T> | null) => PathOr_2<T, R>)
+  & (<D>(d: D, p: Path, obj?: PH) => PathOr_3<D>)
+  & (<T, D>(d: D, p: PH, obj: ObjRec<T> | null) => PathOr_2<T, D>)
   & (<T>(d: PH, p: Path, obj: ObjRec<T> | null) => PathOr_1<T>)
 
-function _pathOr<T, R>(d: R, p: Path, obj: ObjRec<T> | null) {
-  return defaultTo(d, path<T, R>(p, obj))
+function _pathOr<T, D, P>(d: D, p: Path, obj: ObjRec<T> | null) {
+  return defaultTo(d, path<T, P>(p, obj))
 }
 
 /**
