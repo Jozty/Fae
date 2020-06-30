@@ -20,6 +20,8 @@ const testObj = {
   d: 3
 }
 
+type Inc = (a: number) => number
+
 describe('lensPath: view', () => {
   it('should focus the specified object property', () => {
     eq(view(lensPath(['d']), testObj), 3)
@@ -43,8 +45,8 @@ describe('lensPath: set', () => {
 
 describe('lensPath: over', () => {
   it('should apply function to the value of the specified object property', () => {
-    eq(over(lensPath(['d']), inc, testObj), {a: [{b: 1}, {b: 2}], d: 4})
-    eq(over(lensPath(['a', 1, 'b']), inc, testObj), {a: [{b: 1}, {b: 3}], d: 3})
+    eq(over(lensPath(['d']), inc as Inc, testObj), {a: [{b: 1}, {b: 2}], d: 4})
+    eq(over(lensPath(['a', 1, 'b']), inc as Inc, testObj), {a: [{b: 1}, {b: 3}], d: 3})
     // TODO:
     // eq(over(lensPath([]), toPairs, testObj), [['a', [{b: 1}, {b: 2}]], ['d', 3]])
   })
