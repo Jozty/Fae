@@ -2,6 +2,7 @@ import { _, FUNCTION_LENGTH } from "./constants.ts";
 
 /** Type of placeholder for curried functions */
 export type PlaceHolder = typeof _
+export type PH = PlaceHolder
 
 /** Function type for curried function of arity 1 */
 export interface Curry1<T, R = T> {
@@ -37,8 +38,8 @@ export interface Curry3<T1, T2 = T1, T3 = T1, R = T1> {
   (t1: T1, t2: T2, t3: T3): R
 }
 
-export type Functor<T = any> = Iterable<T> | Iterator<T>
-export type FunctorWithArLk<T = any> = Functor<T> | ArrayLike<T>
+export type Functor<T> = Iterable<T> | Iterator<T>
+export type FunctorWithArLk<T> = Functor<T> | ArrayLike<T>
 
 export type Func = ((...args: any[]) => any) & {[FUNCTION_LENGTH]?: number}
 
@@ -50,7 +51,7 @@ export type ObjArr<T = any> = {
   [key: string]: T | T[]
 }
 
-export type ObjRec<T = number> = {
+export type ObjRec<T = any> = {
   [key: string]: ObjRec | ObjArr | string | number | null | undefined | T
 }
 
@@ -64,18 +65,21 @@ export type ArrEl<T extends any[]> = T[number]
 
 export type Pr<T extends Func> = Parameters<T>
 
+export type Predicate<T = any> = (...args: T[]) => boolean
+
 /** Predicate function type which checks one value `v` */
 export type Predicate1<T = any> = (v: T) => boolean
 
 /** Predicate function type which applies on two values `a` and `b` */
-export type Predicate2<T1 = any, T2 = T1> = (a: T1, b: T2) => boolean
+export type Predicate2<T1, T2 = T1> = (a: T1, b: T2) => boolean
 
 /** Type for spec object which contains predicate functions of type {Predicate1} */
-export type Tests<T = any> = {
+export type Tests<T> = {
   [key: string]: Predicate1<T>
 }
 
-export type FuncArr1<T = any, R = any> = (a: T) => R
+export type FuncArr1<T, R> = (a: T) => R
+export type FuncArr2<T1, T2, R> = (a: T1, b: T2) => R
 
 /** All the types which are returned by function `typ` */
 export type AllTypes = 'Null'

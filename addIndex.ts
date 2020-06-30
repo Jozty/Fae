@@ -1,8 +1,12 @@
 import { concat } from './concat.ts'
-import { Curry1 } from "./utils/types.ts"
+import { PH } from "./utils/types.ts"
 import curryN from './utils/curry_n.ts'
 import { Func } from './utils/types.ts'
 import { getFunctionLength } from "./utils/get.ts"
+
+// @types
+type AddIndex = ((fn: Func) => Func)
+  & ((fn?: PH) => AddIndex)
 
 function _addIndex(fn: Func) {
   return curryN(getFunctionLength(fn), function(this: any) {
@@ -21,7 +25,6 @@ function _addIndex(fn: Func) {
   })
 }
 
-
 /**
  * Returns a new iteration function from the passed function
  * by adding two more parameters to its callback function
@@ -35,4 +38,4 @@ function _addIndex(fn: Func) {
  *      indexedMap((val, idx) => idx + '-' + val, ['f', 'o', 'o', 'b', 'a', 'r'])
  *      // ['0-f', '1-o', '2-o', '3-b', '4-a', '5-r']
  */
-export const addIndex: Curry1<Func, ReturnType<Parameters<typeof _addIndex>[0]>> = curryN(1, _addIndex)
+export const addIndex: AddIndex = curryN(1, _addIndex)

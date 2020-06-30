@@ -1,12 +1,16 @@
-import { lens, Lens } from './lens.ts'
+import { lens, Lens, Getter, Setter } from './lens.ts'
 import { assocPath } from './assocPath.ts'
 import curryN from './utils/curry_n.ts'
-import { Curry1 } from './utils/types.ts'
+import { PH } from './utils/types.ts'
 import { Path } from './paths.ts'
 import { path as pth } from './path.ts'
 
-function _lensPath(path: Path): Lens {
-  return lens(pth(path), assocPath(path))
+// @types
+type LensPath = (<T, F>(path: Path) => Lens<T, F>)
+  & ((path?: PH) => LensPath)
+
+function _lensPath<T, F>(path: Path): Lens<T, F> {
+  return lens(pth(path) as Getter<T, F>, assocPath(path) as any as Setter<T, F>)
 }
 
 /**
@@ -15,4 +19,4 @@ function _lensPath(path: Path): Lens {
  *      const xHeadYLens = Fae.lensPath(['x', 0, 'y'])
  *      Fae.view(xHeadYLens, {x: [{y: 2, z: 3}, {y: 4, z: 5}]}) // {x: [{y: 1, z: 3}, {y: 4, z: 5}]}
  */
-export const lensPath: Curry1<Path, Lens> = curryN(1, _lensPath)
+export const lensPath: LensPath = curryN(1, _lensPath)

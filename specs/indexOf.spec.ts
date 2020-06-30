@@ -39,7 +39,7 @@ describe('indexOf', () => {
   })
 
   it('should not consider "1" equal to 1', () => {
-    eq(indexOf('1', list), -1)
+    eq(indexOf('1', list as (string | number)[]), -1)
   })
 
   it('should return -1 for an empty array', () => {

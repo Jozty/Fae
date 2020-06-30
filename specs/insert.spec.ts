@@ -9,7 +9,7 @@ describe('insert', () => {
   })
 
   it('should insert another list as an element', () => {
-    const list = ['a', 'b', 'c', 'd', 'e']
+    const list: (string | string[])[] = ['a', 'b', 'c', 'd', 'e']
     eq(insert(2, ['s', 't'], list), ['a', 'b', ['s', 't'], 'c', 'd', 'e'])
   })
 

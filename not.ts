@@ -1,8 +1,12 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry1 } from "./utils/types.ts"
+import { PH } from "./utils/types.ts"
 
-function _not(a: any){
+// @types
+type Not = (<T>(fn: T) => boolean)
+  & ((fn?: PH) => Not)
+
+function _not<T>(a: T){
   return !a;
 }
 
-export const not: Curry1<any, boolean> = curryN(1, _not)
+export const not: Not = curryN(1, _not)

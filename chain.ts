@@ -6,6 +6,7 @@ import { map } from "./map.ts"
 
 // TODO(ch-shubham) write documentation and test it
 function _chain(fun: Func, list: ArrayLike<any>) {
+    // @ts-ignore
     return reduce(concat, [], map(fun, list))
 }
 

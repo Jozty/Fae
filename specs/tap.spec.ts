@@ -14,7 +14,7 @@ describe('tap', () => {
   const pushToList = curry(2, (a: number[], b: number[]) => a.push(...b))
 
   it('should return a function that always returns its argument', () => {
-    const f = tap(identity)
+    const f = tap(identity as <T>(a: T) => T)
     eq(typeof f, 'function')
     eq(f(100), 100)
     eq(f(undefined), undefined)

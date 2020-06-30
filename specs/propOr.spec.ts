@@ -21,7 +21,7 @@ describe('propOr', () => {
 
   it('should return the default value when the object is nil', () => {
     eq(num(null), 'Unknown')
-    eq(num(void 0), 'Unknown')
+    eq(num(void 0), 'Unknown' as any)
   })
 
   it('should use the default when supplied an object with a nil value', () => {

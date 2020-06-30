@@ -1,7 +1,19 @@
-import { Predicate1, Curry2 } from "./utils/types.ts"
+import { Predicate1, PH } from "./utils/types.ts"
 import { dispatch } from './utils/dispatch.ts'
 import AnyTransformer from "./utils/Transformers/any.ts"
 import curryN from './utils/curry_n.ts'
+
+// @types
+type Any_2<T> = ((list: T[]) => boolean)
+  & ((list?: PH) => Any_2<T>)
+
+type Any_1<T> = ((predicate: Predicate1<T>) => boolean)
+  & ((predicate?: PH) => Any_1<T>)
+
+type Any = (<T>(predicate: Predicate1<T>, list: T[]) => boolean)
+  & (<T>(predicate: Predicate1<T>, list?: PH) => Any_2<T>)
+  & (<T>(predicate: PH, list: T[]) => Any_1<T>)
+  & ((predicate?: PH, list?: PH) => Any)
 
 function _any<T>(predicate: Predicate1<T>, list: T[]) {
   for(let i = 0; i < list.length; i++) {
@@ -13,9 +25,9 @@ function _any<T>(predicate: Predicate1<T>, list: T[]) {
 const dispatched = dispatch(AnyTransformer, _any)
 
 /**
- * Return `true` if any the elements of the functor match `predicate`
+ * Return `true` if any the elements of the list match `predicate`
  * `false` otherwise
  * 
- * Acts as a transducer if a transformer is passed in place of `functor`
+ * Acts as a transducer if a transformer is passed in place of `list`
  */
-export const any: Curry2<Predicate1, any[]> = curryN(2, dispatched)
+export const any: Any = curryN(2, dispatched)

@@ -5,7 +5,19 @@ import { tail } from "./tail.ts"
 import { update } from "./update.ts"
 import { assoc } from "./assoc.ts"
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { PH, ObjRec } from "./utils/types.ts"
+
+// @types
+type DissocPath_2 = ((obj: ObjRec) => ObjRec)
+  & ((obj?: PH) => DissocPath_2)
+
+type DissocPath_1 = ((path: Path) => ObjRec)
+  & ((path?: PH) => DissocPath_1)
+
+type DissocPathPath = ((path: Path, obj: ObjRec) => ObjRec)
+  & ((path: Path, obj?: PH) => DissocPath_2)
+  & ((path: PH, obj: ObjRec) => DissocPath_1)
+  & ((path?: PH, obj?: PH) => DissocPathPath)
 
 // TODO: move to mod
 function _remove(index: number, arr: any[]) {
@@ -14,7 +26,7 @@ function _remove(index: number, arr: any[]) {
   return result
 }
 
-function _dissocPath(path: Path, obj: any): typeof obj {
+function _dissocPath(path: Path, obj: ObjRec): ObjRec {
   const p = getPath(path)
   const prop = p[0]
   if(p.length === 0) return obj
@@ -43,4 +55,4 @@ function _dissocPath(path: Path, obj: any): typeof obj {
  *      Fae.dissocPath(['a', 'b', 'c'], {a: {b: {c: 42}}}); //=> {a: {b: {}}}
  *
  */ 
-export const dissocPath: Curry2<Path, any, any> = curryN(2, _dissocPath)
+export const dissocPath: DissocPathPath = curryN(2, _dissocPath)

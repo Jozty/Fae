@@ -42,10 +42,11 @@ describe('pathOr', () => {
 
   it('should return the default value for null/undefined', () => {
     eq(pathOr('Unknown', ['toString'], null), 'Unknown')
-    eq(pathOr('Unknown', ['toString'], undefined), 'Unknown')
+    eq(pathOr('Unknown', ['toString'], undefined) as any, 'Unknown')
   })
 
   it('should work with falsy items', () => {
+    // @ts-ignore
     eq(pathOr('Unknown', ['toString'], false), Boolean.prototype.toString)
   })
   

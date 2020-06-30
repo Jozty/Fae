@@ -9,7 +9,9 @@ import {
   view,
   set,
   over,
-  compose
+  compose,
+  Getter,
+  Setter
 } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 
@@ -22,10 +24,12 @@ const alice = {
   pets: {dog: 'joker', cat: 'batman'}
 }
 
-const nameLens = lens(prop('name'), assoc('name'))
-const addressLens = lensProp('address')
-const headLens = lensIndex(0)
-const dogLens = lensPath(['pets', 'dog'])
+type Alice = typeof alice
+
+const nameLens = lens(prop('name') as Getter<Alice, string>, assoc('name') as any as Setter<Alice, string> )
+const addressLens = lensProp<Alice, string[]>('address')
+const headLens = lensIndex<string[], string>(0)
+const dogLens = lensPath<Alice, string>(['pets', 'dog'])
 
 const toUpper = (x: string) => x.toUpperCase()
 

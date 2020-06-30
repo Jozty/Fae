@@ -22,7 +22,7 @@ describe('findIndex', () => {
   })
 
   it('should return -1 when no element satisfies the predicate', function() {
-    eq(findIndex(['Bar'], 15), -1);
+    eq(findIndex(['Bar'] as (string | number)[], 15), -1);
     eq(findIndex(a, 125), -1);
   })
 })

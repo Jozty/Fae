@@ -1,7 +1,19 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { PH } from "./utils/types.ts"
 
-function _or(a: any, b: any){
+// @types
+type Or_2<T1> = (<T2>(b: T2) => T1 | T2)
+  & ((b?: PH) => Or_2<T1>)
+
+type Or_1<T2> = (<T1>(a: T1) => T1 | T2)
+  & ((a?: PH) => Or_1<T2>)
+
+type Or = (<T1, T2>(a: T1, b: T2) => T1 | T2)
+  & (<T1>(a: T1, b?: PH) => Or_2<T1>)
+  & (<T2>(a: PH, b: T2) => Or_1<T2>)
+  & ((a?: PH, b?: PH) => Or)
+
+function _or<T1, T2>(a: T1, b: T2): T2 | T1 {
   return a || b
 }
 
@@ -14,4 +26,4 @@ function _or(a: any, b: any){
  *      Fae.or(false, true)   //=> true
  *      Fae.or(false, false)  //=> false
  */
-export const or: Curry2<any> = curryN(2, _or)
+export const or: Or = curryN(2, _or)

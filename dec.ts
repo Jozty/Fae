@@ -1,5 +1,9 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry1 } from "./utils/types.ts"
+import { PH } from "./utils/types.ts"
+
+// @types
+type Dec = ((element: number) => number)
+  & ((fnelement?: PH) => Dec)
 
 function _dec(element: number){
     return --element
@@ -8,4 +12,4 @@ function _dec(element: number){
 /**
  * Decreases its argument by 1.
  */
-export const dec: Curry1<number> = curryN(1, _dec)
+export const dec: Dec = curryN(1, _dec)

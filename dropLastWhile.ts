@@ -1,12 +1,24 @@
-import { Predicate1, Curry2 } from "./utils/types.ts"
+import { Predicate1, PH } from "./utils/types.ts"
 import { slice } from "./slice.ts"
 import { dispatch } from "./utils/dispatch.ts"
 import DropLastWhileTransformer from "./utils/Transformers/dropLastWhile.ts"
 import curryN from "./utils/curry_n.ts"
 
-function _dropLastWhile<T>(predicate: Predicate1<T | string>, list: T[] | string) {
+// @types
+type DropLastWhile_2<L extends T[] | string, T> = ((list: L) => L)
+  & ((list?: PH) => DropLastWhile_2<L, T>)
+
+type DropLastWhile_1<L extends T[] | string, T> = ((predicate: Predicate1<T>) => L)
+  & ((predicate?: PH) => DropLastWhile_1<L, T>)
+
+type DropLastWhile = (<L extends T[] | string, T>(predicate: Predicate1<T>, list: L) => L)
+  & (<L extends T[] | string, T>(predicate: Predicate1<T>, list?: PH) => DropLastWhile_2<L, T>)
+  & (<L extends T[] | string, T>(predicate: PH, list: L) => DropLastWhile_1<L, T>)
+  & ((predicate?: PH, list?: PH) => DropLastWhile)
+
+function _dropLastWhile<L extends T[] | string, T>(predicate: Predicate1<T>, list: L): L {
   let i = list.length - 1
-  while(i >= 0 && predicate(list[i])) i--
+  while(i >= 0 && predicate(list[i] as any)) i--
 
   return slice(0, i + 1, list)
 }
@@ -25,4 +37,4 @@ const dispatched = dispatch(DropLastWhileTransformer, _dropLastWhile)
  *      Fae.dropLastWhile(lteThree, [1, 2, 3, 4, 3, 2, 1]); //=> [1, 2, 3, 4]
  *      Fae.dropLastWhile(x => x !== 't' , 'dispatch'); //=> 'dispat'
  */
-export const dropLastWhile: Curry2<Predicate1, any[] | string, any[] | string> = curryN(2, dispatched)
+export const dropLastWhile: DropLastWhile = curryN(2, dispatched)

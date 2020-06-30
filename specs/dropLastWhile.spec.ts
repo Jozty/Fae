@@ -5,11 +5,9 @@ import {
   append,
   flip,
   transduce,
-  map,
-  filter,
-  range,
 } from '../mod.ts'
-import { eq, strictNotEq } from "./utils/utils.ts"
+import { eq } from "./utils/utils.ts"
+import { Predicate1 } from "../utils/types.ts";
 
 describe('dropLastWhile', () => {
   it('should skip elements while the function reports `true`', () => {
@@ -22,7 +20,8 @@ describe('dropLastWhile', () => {
   })
 
   it('should start at the right arg and acknowledges undefined', () => {
-    const sublist = dropLastWhile((x: number) => x !== void 0, [1, 3, void 0, 5, 7])
+    const f: Predicate1<number | undefined> = (x: number | undefined) => x !== void 0
+    const sublist = dropLastWhile(f, [1, 3, void 0, 5, 7])
     eq(sublist.length, 3)
     eq(sublist[0], 1)
     eq(sublist[1], 3)
@@ -30,11 +29,14 @@ describe('dropLastWhile', () => {
   })
 
   it('can operate on strings', () => {
-    eq(dropLastWhile((x: string) => x !== 'd', 'transducer'), 'transd')
+    const f = (x: string) => x !== 'd'
+    const d = dropLastWhile(f)
+    eq(d('transducer'), 'transd')
   })
 
   it('can act as a transducer', () => {
-    const dropLt7 = dropLastWhile((x: number) => x < 7)
+    const f: Predicate1<number> = (x: number) => x < 7
+    const dropLt7 = dropLastWhile(f)
     const t1 = pipe(
       dropLt7
     )

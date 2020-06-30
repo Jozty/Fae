@@ -1,8 +1,20 @@
 import { zipWith } from "./zipWith.ts"
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { PH } from "./utils/types.ts"
 
-function _zip<T1 = any, T2 = any>(list1: T1[], list2: T2[]) {
+// @types
+type Zip_2<T1> = (<T2>(list2: T2[]) => [T1, T2][])
+  & ((list2?: PH) => Zip_2<T1>)
+
+type Zip_1<T2> = (<T1>(list1: T1[]) => [T1, T2][])
+  & ((list1?: PH) => Zip_1<T2>)
+
+type Zip = (<T1, T2>(list1: T1[], list2: T2[]) => [T1, T2][])
+  & (<T1>(list1: T1[], list2?: PH) => Zip_2<T1>)
+  & (<T2>(list1: PH, list2: T2[]) => Zip_1<T2>)
+  & ((list1?: PH, list2?: PH) => Zip)
+
+function _zip<T1, T2>(list1: T1[], list2: T2[]): [T1, T2][] {
   return zipWith((a, b) => [a, b], list1, list2)
 }
 
@@ -14,4 +26,4 @@ function _zip<T1 = any, T2 = any>(list1: T1[], list2: T2[]) {
  * 
  *      Fae.zip([100, 200, 300], [1, 2, 3]) // [[1, 100], [2, 200], [3, 300]]
  */
-export const zip: Curry2<any[], any[], any[]> = curryN(2, _zip)
+export const zip: Zip = curryN(2, _zip)

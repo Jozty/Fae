@@ -10,7 +10,7 @@ export function isNumber(x: any): x is Number | number {
   return is(x, 'Number')
 }
 
-export function isString(x: any): x is String {
+export function isString(x: any): x is string {
   return is(x, 'String')
 }
 

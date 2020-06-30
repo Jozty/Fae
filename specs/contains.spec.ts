@@ -1,18 +1,19 @@
 import { describe, it } from "./_describe.ts"
-import { contains , _ } from '../mod.ts'
+import { contains , _, } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
+import { Obj } from "../utils/types.ts"
 
 describe('contains', () => {
-  const list: ArrayLike<any> = [
+  const list = [
     10,
     20,
     undefined,
     NaN,
-    {a: 20, b: NaN, c: undefined},
+    {a: 20, b: NaN, c: undefined} as Obj<number | undefined>,
     Infinity,
   ]
 
-  const c = (contains(_, list))
+  const c = contains(_, list)
 
   it('should be declared correctly', () => {
     eq(c(10), true)

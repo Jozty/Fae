@@ -2,9 +2,22 @@ import { slice } from "./slice.ts"
 import { dispatch } from "./utils/dispatch.ts"
 import DropTransformer from "./utils/Transformers/drop.ts"
 import curryN from "./utils/curry_n.ts"
-import { Curry2 } from "./utils/types.ts"
+import { PH } from "./utils/types.ts"
 
-function _drop<T>(n: number, list: T[] | string) {
+// @types
+type Drop_2 = (<L extends T[] | string, T>(list: L) => L)
+  & ((list?: PH) => Drop_2)
+
+type Drop_1<L extends T[] | string, T> = ((n: number) => L)
+  & ((n?: PH) => Drop_1<L, T>)
+
+type Drop = (<L extends T[] | string, T>(n: number, list: L) => L)
+  & ((n: number, list?: PH) => Drop_2)
+  & (<L extends T[] | string, T>(n: PH, list: L) => Drop_1<L, T>)
+  & ((n?: PH, list?: PH) => Drop)
+
+
+function _drop<L extends T[] | string, T>(n: number, list: L) {
   return slice(Math.max(0, n), Infinity, list)
 }
 
@@ -22,4 +35,4 @@ const dispatchedDrop = dispatch(DropTransformer as any, _drop)
  *      Fae.drop(4, ['foo', 'bar', 'baz']); //=> []
  *      Fae.drop(3, 'foobar');               //=> 'bar'
  */
-export const drop: Curry2<number, any[] | string, any[] | string> = curryN(2, dispatchedDrop)
+export const drop: Drop = curryN(2, dispatchedDrop)

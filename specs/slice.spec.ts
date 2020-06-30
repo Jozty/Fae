@@ -9,8 +9,8 @@ describe('slice', () => {
   })
 
   it('should handle array-like object', function() {
-    const args = (function(...args: any[]) { return arguments; }(1, 2, 3, 4, 5))
-    eq(slice(1, 4, args), [2, 3, 4]);
+    const args = (function(...args: number[]) { return args }(1, 2, 3, 4, 5))
+    eq(slice(1, 4, args), [2, 3, 4])
   })
 
   it('can operate on strings', () => {

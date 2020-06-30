@@ -6,15 +6,16 @@ import reduced from "../utils/reduced.ts"
 
 // TODO: write more tests
 describe('reduce', () => {
+  type f = (a: number, b: number) => number
   it('should fold simple functions over arrays with the supplied accumulator', () => {
-    eq(reduce(add, 0, [1, 2, 3, 4]), 10)
-    eq(reduce(multiply, 1, [1, 2, 3, 4]), 24)
+    eq(reduce(add as f, 0, [1, 2, 3, 4]), 10)
+    eq(reduce(multiply as f, 1, [1, 2, 3, 4]), 24)
   })
 
   it('should return the accumulator for an empty array', () => {
-    eq(reduce(add, 0, []), 0)
-    eq(reduce(multiply, 1, []), 1)
-    eq(reduce(concat, [], []), [])
+    eq(reduce(add as f, 0, []), 0)
+    eq(reduce(multiply as f, 1, []), 1)
+    eq(reduce(concat as (a: [], b: []) => [], [], []), [])
   })
 
 

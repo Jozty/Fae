@@ -11,8 +11,11 @@ describe('chain', () => {
   let c = chain(_, list)
 
   it('maps a function over a nested list and returns the result', function() {
+    // @ts-ignore
     eq(c(times2), [20, NaN, 70, Infinity]);
+    // @ts-ignore
     eq(c(add1), [11, NaN, 36, Infinity]);
+    // @ts-ignore
     eq(c(dec), [9, NaN, 34, Infinity]);
   });
 })

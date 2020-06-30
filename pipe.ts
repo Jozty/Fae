@@ -16,7 +16,7 @@ function _pipe(f: Func, g: Func) {
  * **Note:** The returned function is automatically curried.
  * 
  */
-export function pipe(func: Func, ...functions: FuncArr1[]) {
+export function pipe<F2 extends FuncArr1<any, any>[]>(func: Func, ...functions: F2) {
   return curryN(
     getFunctionLength(func),
     reduce(_pipe, func, functions)

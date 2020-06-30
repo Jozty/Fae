@@ -5,7 +5,7 @@ import { eq } from "./utils/utils.ts"
 describe('prepend', () => {
   it('should add the element to the beginning of the list', () => {
     eq(prepend('x', ['y', 'z']), ['x', 'y', 'z'])
-    eq(prepend(['a', 'z'], ['x', 'y']), [['a', 'z'], 'x', 'y'])
+    eq(prepend(['a', 'z'], ['x', 'y'] as (string | string[])[]), [['a', 'z'], 'x', 'y'])
   })
 
   it('should work on empty list', () => {

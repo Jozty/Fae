@@ -1,8 +1,42 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry3, Obj } from "./utils/types.ts"
+import { PH, Obj } from "./utils/types.ts"
 import { is } from "./utils/is.ts";
 
-function _propIs(type: string, name: string, obj: Obj) {
+// @types
+type PropIs_1<T> = ((type: string) => boolean)
+  & ((type?: PH) => PropIs_1<T>)
+
+type PropIs_2<T> = ((name: string) => boolean)
+  & ((name?: PH) => PropIs_2<T>)
+
+type PropIs_3 = (<T>(obj: Obj<T>) => boolean)
+  & ((obj?: PH) => PropIs_3)
+
+type PropIs_2_3 = (<T>(name: string, obj: Obj<T>) => boolean)
+  & ((name: string, obj?: PH) => PropIs_3)
+  & (<T>(name: PH, obj: Obj<T>) => PropIs_2<T>)
+  & ((name?: PH, obj?: PH) => PropIs_2_3)
+
+type PropIs_1_3 = (<T>(type: string, obj: Obj<T>) => boolean)
+  & ((type: string, obj?: PH) => PropIs_3)
+  & (<T>(type: PH, obj: Obj<T>) => PropIs_1<T>)
+  & ((type?: PH, obj?: PH) => PropIs_1_3)
+
+type PropIs_1_2<T> = ((type: string, name: string) => boolean)
+  & ((type: string, name?: PH) => PropIs_2<T>)
+  & ((type: PH, name: string) => PropIs_1<T>)
+  & ((type?: PH, name?: PH) => PropIs_1_2<T>)
+
+type PropIs = (<T>(type: string, name: string, obj: Obj<T>) => boolean)
+  & ((type?: PH, name?: PH, obj?: PH) => PropIs)
+  & ((type: string, name?: PH, obj?: PH) => PropIs_2_3)
+  & ((type: PH, name: string, obj?: PH) => PropIs_1_3)
+  & (<T>(type: PH, name: PH, obj: Obj<T>) => PropIs_1_2<T>)
+  & ((type: string, name: string, obj?: PH) => PropIs_3)
+  & (<T>(type: string, name: PH, obj: Obj<T>) => PropIs_2<T>)
+  & (<T>(type: PH,  name: string, obj: Obj<T>) => PropIs_1<T>)
+
+function _propIs<T>(type: string, name: string, obj: Obj<T>) {
   return is(obj[name], type)
 }
 
@@ -14,4 +48,4 @@ function _propIs(type: string, name: string, obj: Obj) {
  *      Fae.propIs('String', 'a', {a: 'foo'});    //=> true
  *      Fae.propIs('Number', 'a', {});            //=> false
  */
-export const propIs: Curry3<string, string, Obj, boolean> = curryN(3, _propIs)
+export const propIs: PropIs = curryN(3, _propIs)

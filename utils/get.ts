@@ -17,6 +17,10 @@ export function getFunctionLength(func: Func): number {
   return func.length || func[FUNCTION_LENGTH] || 0
 }
 
+export function getFunctionsLengths(functions: Func[]): number[] {
+  return functions.map(getFunctionLength)
+}
+
 export function getTransformer(func: Func | Transformer): Transformer {
   return isTransformer(func) ? func : new Transformer(func)
 }

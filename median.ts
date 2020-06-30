@@ -1,10 +1,14 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry1 } from "./utils/types.ts"
+import { PH } from "./utils/types.ts"
 import { add } from './add.ts'
 import { sort } from "./sort.ts"
 import { comparator } from "./comparator.ts"
 
-function _median(list: Array<number>){
+// @types
+type Median = ((list: number[]) => number)
+  & ((list?: PH) => Median)
+
+function _median(list: number[]){
     let lCheck = list.length % 2 
     if(list.length === 0) return NaN
     let sList: number[] = sort(comparator((a, b) => a < b), list) 
@@ -15,4 +19,4 @@ function _median(list: Array<number>){
 /**
  * Returns the median of the given list of numbers.
  *  */
-export const median: Curry1<Array<number>, number> = curryN(1, _median)
+export const median: Median = curryN(1, _median)

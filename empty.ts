@@ -1,6 +1,10 @@
-import { Curry1 } from './utils/types.ts'
+import { PH } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import { isArray, isString, isObject, isArguments } from './utils/is.ts'
+
+// @types
+type Empty = (<T>(x: T) => T | Partial<T>)
+  & ((fn?: PH) => Empty)
 
 function _empty(x: any) {
   if(x != null && typeof x.empty === 'function')  return x.empty()
@@ -25,4 +29,4 @@ function _empty(x: any) {
  *      Fae.empty('unicorns')    //=> ''
  *      Fae.empty({x: 1, y: 2})  //=> {}
  */
-export const empty: Curry1<any> = curryN(1, _empty)
+export const empty: Empty = curryN(1, _empty)

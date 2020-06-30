@@ -43,6 +43,6 @@ describe('all', () => {
     )
 
     thr(() => t2([1, 2, 3, 4, 5]), 'Functor can be only array, object or a transformer')
-    eq(transduce(t2, flip((a, b) => a), 11, arr), false)
+    eq(transduce(t2, flip((a, b) => a), 11, arr) as any, false)
   })
 })
