@@ -1,4 +1,4 @@
-import { PH, Obj, ObjRec } from "./utils/types.ts"
+import { PH, ObjRec } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { defaultTo } from './defaultTo.ts'
 import { path } from './path.ts'

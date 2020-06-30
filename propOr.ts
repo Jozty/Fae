@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { PH, Obj, Obj } from "./utils/types.ts"
+import { PH, Obj } from "./utils/types.ts"
 import { pathOr } from "./pathOr.ts"
 
 // @types
