@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - uses: denolib/setup-deno@master
+    - uses: denolib/setup-deno@v2
       with:
         deno-version: 1.0.0-rc1
     - run: deno run --allow-read --allow-run --allow-net specs/_run.ts
