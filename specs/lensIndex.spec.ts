@@ -29,13 +29,14 @@ describe('lensIndex: view', () => {
 
 describe('lensIndex: set', () => {
   it('should set the list value at the specified index', () => {
-    eq(set(lensIndex(0), 0, testList), [0, {b: 2}, {c: 3}])
+    eq(set(lensIndex(0), 0, testList), [0, {b: 2}, {c: 3}, ['']])
   })
 })
 
 describe('lensIndex: over', () => {
   it('should apply function to the value at the specified list index', () => {
-    eq(over(lensIndex(2), Object.keys, testList), [{a: 1}, {b: 2}, ['c']])
+    eq(over(lensIndex(2), Object.keys, testList), [{a: 1}, {b: 2}, ['c'], ['']])
+    eq(testList, [{a: 1}, {b: 2}, {c: 3}, ['']])
   })
 })
 

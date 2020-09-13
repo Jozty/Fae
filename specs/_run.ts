@@ -1,4 +1,4 @@
-import * as colors from 'https://deno.land/std@v0.50.0/fmt/colors.ts'
+import * as colors from 'https://deno.land/std@v0.69.0/fmt/colors.ts'
 
 import { Tests } from "./_describe.ts"
 
