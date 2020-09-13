@@ -1,4 +1,4 @@
-import { FunctorWithArLk, PH } from "./utils/types.ts"
+import type { FunctorWithArLk, PH } from "./utils/types.ts"
 import { isArrayLike, isIterable, isIterator, isString } from "./utils/is.ts"
 import { getIterable } from "./utils/get.ts"
 import { throwFunctorError } from "./utils/throw.ts"

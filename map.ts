@@ -1,5 +1,5 @@
 import { isFunction, isObject, isArray } from "./utils/is.ts"
-import {  Func, PH, Obj, FuncArr1 } from "./utils/types.ts"
+import type {  Func, PH, Obj, FuncArr1 } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { reduce } from "./reduce.ts"
 import { dispatch } from "./utils/dispatch.ts"

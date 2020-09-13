@@ -1,5 +1,5 @@
 import Transformer from "./transformers.ts"
-import { Func } from "../types.ts"
+import type { Func } from "../types.ts"
 import reduced from "../reduced.ts"
 
 export default class AllTransformer extends Transformer {

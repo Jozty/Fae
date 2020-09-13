@@ -1,4 +1,4 @@
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 
 // @types

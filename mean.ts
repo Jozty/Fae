@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 import { sum } from "./sum.ts"
 
 // @types
@@ -7,7 +7,7 @@ type Mean = ((list: number[]) => number)
   & ((list?: PH) => Mean)
 
 function _mean(list: number[]) {
-    return sum(list) / list.length
+  return sum(list) / list.length
 }
 
 /**

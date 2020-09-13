@@ -1,5 +1,5 @@
 export { _ } from './utils/constants.ts'
-export {
+export type {
   PlaceHolder,
   Curry1,
   Curry2,
@@ -61,7 +61,8 @@ export { findIndex } from './findIndex.ts'
 export { findLast } from './findLast.ts'
 export { findLastIndex } from './findLastIndex.ts'
 export { flip } from './flip.ts'
-export { Pair, fromPairs } from './fromPairs.ts'
+export type { Pair } from './fromPairs.ts'
+export { fromPairs } from './fromPairs.ts'
 export { groupWith } from './groupWith.ts'
 export { head } from './head.ts'
 export { identity } from './identity.ts'
@@ -70,8 +71,8 @@ export { indexOf } from './indexOf.ts'
 export { insert } from './insert.ts'
 export { isEmpty } from './isEmpty.ts'
 export { join } from './join.ts'
-export {
-  lens,
+export { lens } from './lens.ts'
+export type {
   Getter,
   Setter,
   LensTransformer,
@@ -96,7 +97,8 @@ export { or } from './or.ts'
 export { over } from './over.ts'
 export { path } from './path.ts'
 export { pathOr } from './pathOr.ts'
-export { paths, Path } from './paths.ts'
+export { paths } from './paths.ts'
+export type { Path } from './paths.ts'
 export { pipe } from './pipe.ts'
 export { pluck } from './pluck.ts'
 export { prepend } from './prepend.ts'

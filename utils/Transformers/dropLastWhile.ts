@@ -1,5 +1,5 @@
 import Transformer from "./transformers.ts"
-import { Func } from "../types.ts"
+import type { Func } from "../types.ts"
 import { reduce } from '../../reduce.ts'
 
 export default class DropLastWhileTransformer<T = any> extends Transformer {

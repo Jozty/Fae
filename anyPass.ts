@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { PH, Func, Predicate } from "./utils/types.ts"
+import type { PH, Func, Predicate } from "./utils/types.ts"
 import { getFunctionsLengths } from "./utils/get.ts"
 
 // @types

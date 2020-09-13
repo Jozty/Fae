@@ -1,4 +1,4 @@
-import { ObjRec, PH } from "./utils/types.ts"
+import type { ObjRec, PH } from "./utils/types.ts"
 import { isString, isInteger, isArrayLike, isUndefinedOrNull } from "./utils/is.ts"
 import { nth } from "./nth.ts"
 import curryN from "./utils/curry_n.ts"

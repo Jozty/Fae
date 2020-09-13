@@ -2,7 +2,7 @@ import { slice } from './slice.ts'
 import { dispatch } from './utils/dispatch.ts'
 import TakeTransformer from './utils/Transformers/take.ts'
 import curryN from './utils/curry_n.ts'
-import { PH } from './utils/types.ts'
+import type { PH } from './utils/types.ts'
 
 // @types
 type Take_2 = (<L extends ArrayLike<T> | string, T>(list: L) => L)

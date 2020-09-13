@@ -5,7 +5,7 @@ import { tail } from "./tail.ts"
 import { update } from "./update.ts"
 import { assoc } from "./assoc.ts"
 import curryN from "./utils/curry_n.ts"
-import { PH, ObjRec } from "./utils/types.ts"
+import type { PH, ObjRec } from "./utils/types.ts"
 
 // @types
 type DissocPath_2 = ((obj: ObjRec) => ObjRec)

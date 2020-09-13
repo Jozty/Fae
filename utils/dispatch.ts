@@ -1,5 +1,5 @@
-import Transformer from "./Transformers/transformers.ts"
-import { Func } from "./types.ts"
+import type Transformer from "./Transformers/transformers.ts"
+import type { Func } from "./types.ts"
 import { isArray, isTransformer } from './is.ts'
 
 export function dispatch(TR: typeof Transformer, func: Func) {

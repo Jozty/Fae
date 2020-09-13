@@ -1,6 +1,6 @@
 
 import curryN from "./utils/curry_n.ts"
-import { PH, Obj, Tests } from "./utils/types.ts"
+import type { PH, Obj, Tests } from "./utils/types.ts"
 import has from "./utils/has.ts"
 
 // TODO: (ch-shubham) add docs

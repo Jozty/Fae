@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 
 // @types
 type And_2<T1> = (<T2>(b: T2) => T1 | T2)

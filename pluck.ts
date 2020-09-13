@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Functor, PH, Obj, FuncArr1 } from "./utils/types.ts"
+import type { PH, Obj, FuncArr1 } from "./utils/types.ts"
 import { map } from './map.ts'
 import { prop } from './prop.ts'
 

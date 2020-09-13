@@ -1,8 +1,8 @@
-import { PH, ObjRec } from "./utils/types.ts"
+import type { PH, ObjRec } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { defaultTo } from './defaultTo.ts'
 import { path } from './path.ts'
-import { Path } from "./paths.ts"
+import type { Path } from "./paths.ts"
 
 // @types
 type PathOr_1<T> = (<D, P>(d: D) => D | P)

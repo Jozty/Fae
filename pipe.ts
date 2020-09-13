@@ -1,4 +1,4 @@
-import { Func, FuncArr1 } from "./utils/types.ts"
+import type { Func, FuncArr1 } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { reduce } from "./reduce.ts"
 import { getFunctionLength } from "./utils/get.ts"

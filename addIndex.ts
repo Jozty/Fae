@@ -1,7 +1,7 @@
 import { concat } from './concat.ts'
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 import curryN from './utils/curry_n.ts'
-import { Func } from './utils/types.ts'
+import type { Func } from './utils/types.ts'
 import { getFunctionLength } from "./utils/get.ts"
 
 // @types

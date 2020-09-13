@@ -1,4 +1,4 @@
-import { Func } from "./types.ts"
+import type { Func } from "./types.ts"
 import { FUNCTION_LENGTH } from "./constants.ts"
 import { isTransformer, isUndefinedOrNull } from "./is.ts"
 import Transformer from "./Transformers/transformers.ts"

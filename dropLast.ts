@@ -1,6 +1,6 @@
 import { dispatch } from "./utils/dispatch.ts"
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 import { take } from "./take.ts"
 import DropLastTransformer from "./utils/Transformers/dropLast.ts"
 

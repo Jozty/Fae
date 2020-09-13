@@ -1,12 +1,12 @@
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 
 // @types
 type Dec = ((element: number) => number)
   & ((fnelement?: PH) => Dec)
 
-function _dec(element: number){
-    return --element
+function _dec(element: number) {
+  return --element
 }
 
 /**

@@ -1,7 +1,7 @@
 import { equals } from "./equals.ts"
 import { takeLast } from "./takeLast.ts"
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 
 // @types
 type EndsWith_2<L extends T[] | string, T> = ((functor: L) => boolean)

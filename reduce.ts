@@ -1,7 +1,7 @@
 import { isArrayLike, isIterable, isIterator } from "./utils/is.ts"
 import { getIterator, getTransformer } from "./utils/get.ts"
 import curryN from "./utils/curry_n.ts"
-import { PH, FunctorWithArLk, FuncArr2 } from "./utils/types.ts"
+import type { PH, FunctorWithArLk, FuncArr2 } from "./utils/types.ts"
 import Transformer, { ReducedTransformer } from "./utils/Transformers/transformers.ts"
 import { throwFunctorError } from "./utils/throw.ts"
 

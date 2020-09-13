@@ -1,4 +1,4 @@
-import { Obj, PH } from "./utils/types.ts"
+import type { Obj, PH } from "./utils/types.ts"
 import { prop } from './prop.ts'
 import curryN from "./utils/curry_n.ts"
 

@@ -1,7 +1,7 @@
 import { dispatch } from "./utils/dispatch.ts"
 import ApertureTransformer from "./utils/Transformers/aperture.ts"
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 
 // @types
 type Aperture_2 = (<T>(list: T[]) => T[][])

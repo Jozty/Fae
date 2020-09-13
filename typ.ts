@@ -1,5 +1,5 @@
 import { slice } from "./slice.ts"
-import { AllTypes } from "./utils/types.ts"
+import type { AllTypes } from "./utils/types.ts"
 
 /**
  * Gives a single-word string description of the (native) type of a value.

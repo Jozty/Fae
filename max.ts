@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 
 // @types
 type Max_2<T extends number | string | Date> = ((b: T) => T)
@@ -14,7 +14,7 @@ type Max = (<T extends number | string | Date>(a: T, b: T) => T)
   & ((a?: PH, b?: PH) => Max)
 
 function _max<T extends number | string | Date>(a: T, b: T) {
-    return a > b ? a : b
+  return a > b ? a : b
 }
 
 /**

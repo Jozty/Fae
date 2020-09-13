@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { PH, Obj, Tests, Func } from "./utils/types.ts"
+import type { PH, Obj, Tests, Func } from "./utils/types.ts"
 import { where } from "./where.ts"
 import { map } from "./map.ts"
 import { equals } from './equals.ts'

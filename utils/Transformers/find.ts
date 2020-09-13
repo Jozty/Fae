@@ -1,5 +1,5 @@
 import Transformer from "./transformers.ts"
-import { Func } from "../types.ts"
+import type { Func } from "../types.ts"
 import reduced from "../reduced.ts"
 
 export default class FindTransformer extends Transformer {
@@ -17,7 +17,7 @@ export default class FindTransformer extends Transformer {
   }
 
   result(result: any) {
-    if(!this.found) result = this.transformer!.step(result, void 0)
+    if (!this.found) result = this.transformer!.step(result, void 0)
     return this.transformer!.result(result)
   }
 }

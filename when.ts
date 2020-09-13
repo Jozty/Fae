@@ -1,4 +1,4 @@
-import { PH, Predicate1, FuncArr1 } from './utils/types.ts'
+import type { PH, Predicate1, FuncArr1 } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types

@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { PH, Obj, Predicate1 } from "./utils/types.ts"
+import type { PH, Obj, Predicate1 } from "./utils/types.ts"
 import { complement } from './complement.ts'
 import { filter } from './filter.ts'
 

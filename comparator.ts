@@ -1,4 +1,4 @@
-import { Comparator, Predicate2 } from "./utils/types.ts"
+import type { Comparator, Predicate2 } from "./utils/types.ts"
 
 /**
  * Returns a comparator out of `predicate` which returns `true` when

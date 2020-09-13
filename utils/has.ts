@@ -1,4 +1,4 @@
-import { Obj, Curry2 } from "./types.ts";
+import type { Obj, Curry2 } from "./types.ts";
 import curryN from "./curry_n.ts";
 
 function has(obj: Obj, prop: number | string) {

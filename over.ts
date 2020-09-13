@@ -1,6 +1,6 @@
-import { Lens, LensTransformer } from "./lens.ts"
+import type { Lens, LensTransformer } from "./lens.ts"
 import curryN from "./utils/curry_n.ts"
-import { FuncArr1, PH } from "./utils/types.ts"
+import type { FuncArr1, PH } from "./utils/types.ts"
 
 // @types
 type Over_1<T, R> = ((lens: Lens<T, R>) => T)

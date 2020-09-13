@@ -1,4 +1,4 @@
-import { PH, Obj } from "./utils/types.ts"
+import type { PH, Obj } from "./utils/types.ts"
 import { isUndefinedOrNull, isInteger, isArrayLike } from "./utils/is.ts"
 import { nth } from './nth.ts'
 import curryN from "./utils/curry_n.ts"
@@ -16,7 +16,7 @@ type Prop = (<T>(p: string | number, obj: Obj<T> | ArrayLike<T>) => T | undefine
   & ((p?: PH, obj?: PH) => Prop)
 
 function _prop<T>(p: string | number, obj: Obj<T> | ArrayLike<T>): T | undefined {
-  if(isUndefinedOrNull(obj)) return
+  if (isUndefinedOrNull(obj)) return
   // @ts-ignore
   return isInteger(p) && isArrayLike(obj) ? nth(p, obj) : obj[p]
 }

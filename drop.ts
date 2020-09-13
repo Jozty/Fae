@@ -2,7 +2,7 @@ import { slice } from "./slice.ts"
 import { dispatch } from "./utils/dispatch.ts"
 import DropTransformer from "./utils/Transformers/drop.ts"
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 
 // @types
 type Drop_2 = (<L extends T[] | string, T>(list: L) => L)

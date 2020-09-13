@@ -1,12 +1,12 @@
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 
 // @types
 type Sum = ((list: number[]) => number)
   & ((list?: PH) => Sum)
 
 function _sum(list: number[]): number {
-    return list.reduce((a, b) => a + b, 0)
+  return list.reduce((a, b) => a + b, 0)
 }
 
 /** Adds together all the elements of a list. */

@@ -1,5 +1,5 @@
 import curryN from './utils/curry_n.ts'
-import { PH, Comparator } from "./utils/types.ts"
+import type { PH, Comparator } from "./utils/types.ts"
 
 // @types
 type Sort_2<T> = ((list: T[]) => T[])

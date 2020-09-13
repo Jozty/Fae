@@ -1,4 +1,4 @@
-import { PH } from './utils/types.ts'
+import type { PH } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
@@ -50,7 +50,7 @@ function _lens<T, F>(getter: Getter<T, F>, setter: Setter<T, F>): Lens<T, F> {
       const transformer = getTransformer(focusedObj)
 
       const setterFunc = (focus: F) => setter(focus, target)
-      return transformer.func(setterFunc) 
+      return transformer.func(setterFunc)
     }
   }
 }

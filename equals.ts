@@ -1,7 +1,7 @@
 // TODO: make it more readable
 
 import curryN from './utils/curry_n.ts'
-import { Curry2, Obj } from './utils/types.ts'
+import type { Curry2, Obj } from './utils/types.ts'
 import { isFunction } from './utils/is.ts'
 import { typ } from './typ.ts'
 import { getFunctionName } from './utils/get.ts'

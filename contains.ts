@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 
 // TODO: write transformer
 
@@ -15,10 +15,10 @@ type Contains = (<T>(element: T, list: ArrayLike<T>) => boolean)
   & (<T>(element: PH, list: ArrayLike<T>) => Contains_1<T>)
   & ((element?: PH, list?: PH) => Contains)
 
-function _contains<T>(element: T, list: ArrayLike<T>){
+function _contains<T>(element: T, list: ArrayLike<T>) {
   let index = 0
-  while(index != list.length){
-    if(list[index] === element) return true
+  while (index != list.length) {
+    if (list[index] === element) return true
     index++
   }
   return false

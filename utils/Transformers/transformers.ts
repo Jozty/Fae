@@ -1,4 +1,4 @@
-import { Func } from "../types.ts"
+import type { Func } from "../types.ts"
 
 export default class Transformer {
   protected transformer?: Transformer

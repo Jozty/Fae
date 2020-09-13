@@ -1,5 +1,5 @@
-import { Lens } from "./lens.ts"
-import { PH } from "./utils/types.ts"
+import type { Lens } from "./lens.ts"
+import type { PH } from "./utils/types.ts"
 import { over } from "./over.ts"
 import { always } from "./always.ts"
 import curryN from "./utils/curry_n.ts"

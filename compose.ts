@@ -1,5 +1,5 @@
 import { pipe } from "./pipe.ts"
-import { Func } from "./utils/types.ts"
+import type { Func } from "./utils/types.ts"
 import { reverse } from "./reverse.ts"
 
 /**

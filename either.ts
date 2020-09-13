@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Func, PH } from "./utils/types.ts"
+import type { Func, PH } from "./utils/types.ts"
 import { isFunction } from "./utils/is.ts"
 import { lift } from "./lift.ts"
 import { or } from "./or.ts"

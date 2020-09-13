@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 
 // @types
 type Range_2 = ((to: number) => number[])
@@ -16,9 +16,9 @@ type Range = ((from: number, to: number) => number[])
 function _range(from: number, to: number) {
   const result = []
   const l = to - from + 1
-  if(l <= 0) return []
+  if (l <= 0) return []
   result.length = l
-  for(let i = 0; i < l; i++) {
+  for (let i = 0; i < l; i++) {
     result[i] = from++
   }
   return result

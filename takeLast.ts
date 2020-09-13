@@ -1,6 +1,6 @@
 import { drop } from "./drop.ts"
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 
 // TODO: write transformer
 

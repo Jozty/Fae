@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2, Func } from "./utils/types.ts"
+import type { Curry2, Func } from "./utils/types.ts"
 import { reduce } from "./reduce.ts"
 import { concat } from "./concat.ts"
 import { map } from "./map.ts"

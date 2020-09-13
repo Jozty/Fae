@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 
 // @types
 type Min_2<T extends number | string | Date> = ((b: T) => T)
@@ -13,8 +13,8 @@ type Min = (<T extends number | string | Date>(a: T, b: T) => T)
   & (<T extends number | string | Date>(a: PH, b: T) => Min_1<T>)
   & ((a?: PH, b?: PH) => Min)
 
-function _min(a: number | string, b: number | string){
-    return a < b ? a : b
+function _min(a: number | string, b: number | string) {
+  return a < b ? a : b
 }
 
 /**

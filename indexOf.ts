@@ -1,6 +1,6 @@
 import { isNumber } from './utils/is.ts'
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 import { equals } from './equals.ts'
 
 // @types
@@ -16,22 +16,22 @@ type IndexOf = (<T>(value: T, list: T[]) => number)
   & ((value?: PH, list?: PH) => IndexOf)
 
 function _indexOf<T>(value: T, list: T[]) {
-  switch(typeof value) {
+  switch (typeof value) {
     case 'number': {
-      if(value === 0) {
+      if (value === 0) {
         // handles +0 and -0
         const inf = 1 / value
         for (let i = 0; i < list.length; i++) {
           const x: any = list[i]
-          if(x === 0 && 1 / x === inf) return i
+          if (x === 0 && 1 / x === inf) return i
         }
         return -1
       }
-      else if(value !== value) {
+      else if (value !== value) {
         // handles NaN
         for (let i = 0; i < list.length; i++) {
           const x: any = list[i]
-          if(isNaN(x)) return i
+          if (isNaN(x)) return i
         }
         return -1
       }

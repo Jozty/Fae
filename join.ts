@@ -1,6 +1,6 @@
 import { reduce } from './reduce.ts'
 
-import { PH, FunctorWithArLk } from './utils/types.ts'
+import type { PH, FunctorWithArLk } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import { isArray, isIterable, isIterator, isArrayLike, isNotUndefinedOrNull } from './utils/is.ts'
 import { throwFunctorError } from './utils/throw.ts'

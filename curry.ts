@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Curry2, Func } from "./utils/types.ts"
+import type { Curry2, Func } from "./utils/types.ts"
 
 /**
  * Returns the curried function

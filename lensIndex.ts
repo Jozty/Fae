@@ -2,7 +2,7 @@ import { lens, Lens, Setter, Getter } from './lens.ts'
 import { nth } from './nth.ts'
 import { update } from './update.ts'
 import curryN from './utils/curry_n.ts'
-import { PH } from './utils/types.ts'
+import type { PH } from './utils/types.ts'
 
 // @types
 type LensIndex = (<T, F>(index: number) => Lens<T, F>)

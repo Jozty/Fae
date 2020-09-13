@@ -1,6 +1,6 @@
 import { isString } from "./utils/is.ts"
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 
 // @types
 type Reverse = (<F extends T[] | string, T>(functor: F) => F)

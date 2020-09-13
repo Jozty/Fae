@@ -1,4 +1,4 @@
-import { Predicate2, PH } from "./utils/types.ts"
+import type { Predicate2, PH } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { slice } from "./slice.ts"
 

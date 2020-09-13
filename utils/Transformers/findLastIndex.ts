@@ -1,5 +1,5 @@
 import Transformer from "./transformers.ts"
-import { Func } from "../types.ts"
+import type { Func } from "../types.ts"
 
 export default class FindLastIdxTransformer extends Transformer {
   private last = -1

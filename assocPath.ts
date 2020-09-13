@@ -4,7 +4,7 @@ import { assoc } from "./assoc.ts"
 import has from "./utils/has.ts"
 import { isNotUndefinedOrNull, isInteger, isArray } from "./utils/is.ts"
 import curryN from "./utils/curry_n.ts"
-import { PH, ObjRec } from "./utils/types.ts"
+import type { PH, ObjRec } from "./utils/types.ts"
 
 // @types
 type AssocPath_1 = ((path: Path) => ObjRec)

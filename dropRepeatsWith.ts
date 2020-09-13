@@ -1,5 +1,5 @@
 import curryN from './utils/curry_n.ts'
-import { Predicate2, PH } from './utils/types.ts'
+import type { Predicate2, PH } from './utils/types.ts'
 import { dispatch } from './utils/dispatch.ts'
 import DropRepeatsWithTransformer from './utils/Transformers/dropRepeatsWith.ts'
 

@@ -1,4 +1,4 @@
-import { PH } from './utils/types.ts'
+import type { PH } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import { isArray, isString, isObject, isArguments } from './utils/is.ts'
 
@@ -7,17 +7,17 @@ type Empty = (<T>(x: T) => T | Partial<T>)
   & ((fn?: PH) => Empty)
 
 function _empty(x: any) {
-  if(x != null && typeof x.empty === 'function')  return x.empty()
-  
-  if(x != null && x.constructor != null && typeof x.constructor.empty === 'function') return  x.constructor.empty()
-  
-  if(isArray(x))  return []
-  
-  if(isString(x)) return ''
-  
-  if(isObject(x)) return {}
-  
-  if(isArguments(x))  return (function() { return arguments }())  
+  if (x != null && typeof x.empty === 'function') return x.empty()
+
+  if (x != null && x.constructor != null && typeof x.constructor.empty === 'function') return x.constructor.empty()
+
+  if (isArray(x)) return []
+
+  if (isString(x)) return ''
+
+  if (isObject(x)) return {}
+
+  if (isArguments(x)) return (function () { return arguments }())
 }
 
 

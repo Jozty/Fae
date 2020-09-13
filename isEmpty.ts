@@ -1,4 +1,4 @@
-import { PH } from './utils/types.ts'
+import type { PH } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import { empty } from './empty.ts'
 import { equals } from './equals.ts'

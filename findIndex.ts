@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { PH } from "./utils/types.ts"
+import type { PH } from "./utils/types.ts"
 
 // @types
 type FindIndex_2<T> = ((element: T) => number)
@@ -16,11 +16,11 @@ type FindIndex = (<T>(arr: T[], element: T) => number)
 // TODO: (singla-shivam) Add transformer
 // TODO: (ch-shubham) Add Support for Predicates
 
-function _findIndex(arr: Array<any>, element: any){
-    for(let i = 0; i <= arr.length; i++){
-        if(element === arr[i]) return i
-    }
-    return -1
+function _findIndex(arr: Array<any>, element: any) {
+  for (let i = 0; i <= arr.length; i++) {
+    if (element === arr[i]) return i
+  }
+  return -1
 }
 
 /**

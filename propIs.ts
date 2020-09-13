@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { PH, Obj } from "./utils/types.ts"
+import type { PH, Obj } from "./utils/types.ts"
 import { is } from "./utils/is.ts";
 
 // @types
@@ -34,7 +34,7 @@ type PropIs = (<T>(type: string, name: string, obj: Obj<T>) => boolean)
   & (<T>(type: PH, name: PH, obj: Obj<T>) => PropIs_1_2<T>)
   & ((type: string, name: string, obj?: PH) => PropIs_3)
   & (<T>(type: string, name: PH, obj: Obj<T>) => PropIs_2<T>)
-  & (<T>(type: PH,  name: string, obj: Obj<T>) => PropIs_1<T>)
+  & (<T>(type: PH, name: string, obj: Obj<T>) => PropIs_1<T>)
 
 function _propIs<T>(type: string, name: string, obj: Obj<T>) {
   return is(obj[name], type)

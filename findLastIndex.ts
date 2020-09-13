@@ -1,4 +1,4 @@
-import { Predicate1, PH } from "./utils/types.ts"
+import type { Predicate1, PH } from "./utils/types.ts"
 import curryN from "./utils/curry_n.ts"
 import { dispatch } from "./utils/dispatch.ts"
 import FindLastIdxTransformer from "./utils/Transformers/findLastIndex.ts"
@@ -16,8 +16,8 @@ type FindLastIndex = (<T>(predicate: Predicate1<T>, list: T[]) => number)
   & ((predicate?: PH, list?: PH) => FindLastIndex)
 
 function _findLastIndex<T>(predicate: Predicate1<T>, list: T[]) {
-  for(let i = list.length - 1; i >= 0; i--) {
-    if(predicate(list[i])) return i
+  for (let i = list.length - 1; i >= 0; i--) {
+    if (predicate(list[i])) return i
   }
   return -1
 }

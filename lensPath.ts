@@ -1,8 +1,8 @@
 import { lens, Lens, Getter, Setter } from './lens.ts'
 import { assocPath } from './assocPath.ts'
 import curryN from './utils/curry_n.ts'
-import { PH } from './utils/types.ts'
-import { Path } from './paths.ts'
+import type { PH } from './utils/types.ts'
+import type { Path } from './paths.ts'
 import { path as pth } from './path.ts'
 
 // @types

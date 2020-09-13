@@ -1,4 +1,4 @@
-import { FunctorWithArLk, PH, Obj, Predicate1 } from './utils/types.ts'
+import type { FunctorWithArLk, PH, Obj, Predicate1 } from './utils/types.ts'
 import { isArrayLike, isArray, isIterable, isIterator, isObject } from './utils/is.ts'
 import { reduce } from './reduce.ts'
 import { throwFunctorError } from './utils/throw.ts'

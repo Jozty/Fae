@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { PH, Predicate1 } from "./utils/types.ts"
+import type { PH, Predicate1 } from "./utils/types.ts"
 import { dispatch } from './utils/dispatch.ts'
 import AllTransformer from "./utils/Transformers/all.ts"
 

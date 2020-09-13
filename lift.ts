@@ -1,5 +1,5 @@
 import curryN from "./utils/curry_n.ts"
-import { Func, PH } from "./utils/types.ts"
+import type { Func, PH } from "./utils/types.ts"
 import { liftN }  from "./liftN.ts"
 import { getFunctionLength } from "./utils/get.ts"
 
