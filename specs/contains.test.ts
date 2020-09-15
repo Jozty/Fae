@@ -1,7 +1,7 @@
 import { describe, it } from "./_describe.ts"
 import { contains , _, } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
-import { Obj } from "../utils/types.ts"
+import type { Obj } from "../utils/types.ts"
 
 describe('contains', () => {
   const list = [

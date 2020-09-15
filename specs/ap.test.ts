@@ -1,7 +1,7 @@
 import { describe, it } from "./_describe.ts"
 import { ap, multiply, add } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
-import { Func } from "../utils/types.ts"
+import type { Func } from "../utils/types.ts"
 
 describe('ap', () => {
   const mul2 = multiply(2)

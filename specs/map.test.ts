@@ -1,7 +1,7 @@
 import { describe, it, expect } from "./_describe.ts"
 import { map, add, multiply, subtract, _ } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
-import { Func } from "../utils/types.ts"
+import type { Func } from "../utils/types.ts"
 
 function add3(a: number) {
   return 3 + a

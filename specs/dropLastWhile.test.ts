@@ -7,7 +7,7 @@ import {
   transduce,
 } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
-import { Predicate1 } from "../utils/types.ts";
+import type { Predicate1 } from "../utils/types.ts";
 
 describe('dropLastWhile', () => {
   it('should skip elements while the function reports `true`', () => {

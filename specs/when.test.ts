@@ -2,7 +2,7 @@ import { describe, it } from "./_describe.ts"
 import { when, add } from '../mod.ts'
 import { eq } from "./utils/utils.ts"
 import { isNumber } from "../utils/is.ts"
-import { Func } from "../utils/types.ts"
+import type { Func } from "../utils/types.ts"
 
 
 
