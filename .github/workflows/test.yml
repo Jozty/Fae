@@ -12,4 +12,4 @@ jobs:
     - uses: denolib/setup-deno@v2
       with:
         deno-version: v1.x
-    - run: deno run --allow-read --allow-run --allow-net specs/_run.ts
+    - run: deno test
