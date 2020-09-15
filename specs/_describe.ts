@@ -10,8 +10,12 @@ export function describe(name: string, func: F) {
 }
 
 export function it(name: string, func: F) {
-  tests.push([
-    name,
+  Deno.test(
+    name, 
     func,
-  ])
+  )
+  // tests.push([
+  //   name,
+  //   func,
+  // ])
 }
