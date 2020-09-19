@@ -1,7 +1,7 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { ap, multiply, add } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-import type { Func } from "../utils/types.ts"
+import { eq } from './utils/utils.ts'
+import type { Func } from '../utils/types.ts'
 
 describe('ap', () => {
   const mul2 = multiply(2)
@@ -12,21 +12,20 @@ describe('ap', () => {
   })
 
   it('should interpret ((->) r) as an applicative', () => {
-    const f = function(r: any) {
-      return function(a: any) {
+    const f = function (r: any) {
+      return function (a: any) {
         return r + a
       }
     }
     const h = ap(f, mul2) as Func
 
-    eq(h(10), 10 + (10 * 2))
+    eq(h(10), 10 + 10 * 2)
 
-    eq((ap(add)(mul2) as Func)(10), 10 + (10 * 2))
+    eq((ap(add)(mul2) as Func)(10), 10 + 10 * 2)
   })
 
-  it('should dispatch to the passed object\'s ap method when values is a non-Array object', () => {
-    const obj = {ap: (n: number) => 'called ap with ' + n}
+  it("should dispatch to the passed object's ap method when values is a non-Array object", () => {
+    const obj = { ap: (n: number) => 'called ap with ' + n }
     eq(ap(obj, 10), obj.ap(10))
   })
-
 })

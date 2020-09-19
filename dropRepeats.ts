@@ -6,17 +6,20 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type DropRepeats = (<T>(list: T[]) => T[])
-  & ((list?: PH) => DropRepeats)
+type DropRepeats = (<T>(list: T[]) => T[]) &
+  ((list?: PH) => DropRepeats)
 
 const _dropRepeats = dropRepeatsWith(equals)
 
-const dispatched = dispatch(DropRepeatsTransformer as any, _dropRepeats)
+const dispatched = dispatch(
+  DropRepeatsTransformer as any,
+  _dropRepeats,
+)
 
 /**
  * Returns a new list without any consecutively repeating elements.
  * Fae.equals is used for comparison
- * 
+ *
  *      Fae.dropRepeats([1, 1, 1, 2, 3, 4, 4, 2, 2]); //=> [1, 2, 3, 4, 2]
  */
 export const dropRepeats: DropRepeats = curryN(1, dispatched)

@@ -1,12 +1,6 @@
-import { describe, it } from "./_describe.ts"
-import {
-  lensIndex,
-  view,
-  set,
-  over,
-  compose
-} from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { describe, it } from './_describe.ts'
+import { lensIndex, view, set, over, compose } from '../mod.ts'
+import { eq } from './utils/utils.ts'
 
 type O = {
   a?: number
@@ -14,12 +8,17 @@ type O = {
   c?: number
 }
 
-const testList1: (O | number | string[])[] = [{a: 1}, {b: 2}, {c: 3}, ['']]
+const testList1: (O | number | string[])[] = [
+  { a: 1 },
+  { b: 2 },
+  { c: 3 },
+  [''],
+]
 const testList = testList1
 
 describe('lensIndex: view', () => {
   it('should focus list element at the specified index', () => {
-    eq(view(lensIndex(0), testList), {a: 1})
+    eq(view(lensIndex(0), testList), { a: 1 })
   })
 
   it('should return undefined if the specified index does not exist', () => {
@@ -29,14 +28,19 @@ describe('lensIndex: view', () => {
 
 describe('lensIndex: set', () => {
   it('should set the list value at the specified index', () => {
-    eq(set(lensIndex(0), 0, testList), [0, {b: 2}, {c: 3}, ['']])
+    eq(set(lensIndex(0), 0, testList), [0, { b: 2 }, { c: 3 }, ['']])
   })
 })
 
 describe('lensIndex: over', () => {
   it('should apply function to the value at the specified list index', () => {
-    eq(over(lensIndex(2), Object.keys, testList), [{a: 1}, {b: 2}, ['c'], ['']])
-    eq(testList, [{a: 1}, {b: 2}, {c: 3}, ['']])
+    eq(over(lensIndex(2), Object.keys, testList), [
+      { a: 1 },
+      { b: 2 },
+      ['c'],
+      [''],
+    ])
+    eq(testList, [{ a: 1 }, { b: 2 }, { c: 3 }, ['']])
   })
 })
 
@@ -51,7 +55,10 @@ describe('lensIndex: composability', () => {
 
 describe('lensIndex: well behaved lens', () => {
   it('should set s (get s) === s', () => {
-    eq(set(lensIndex(0), view(lensIndex(0), testList), testList), testList)
+    eq(
+      set(lensIndex(0), view(lensIndex(0), testList), testList),
+      testList,
+    )
   })
 
   it('should get (set s v) === v', () => {
@@ -60,8 +67,11 @@ describe('lensIndex: well behaved lens', () => {
 
   it('should get (set(set s v1) v2) === v2', () => {
     eq(
-      view(lensIndex(0), set(lensIndex(0), 11, set(lensIndex(0), 10, testList))),
-      11
+      view(
+        lensIndex(0),
+        set(lensIndex(0), 11, set(lensIndex(0), 10, testList)),
+      ),
+      11,
     )
   })
 })

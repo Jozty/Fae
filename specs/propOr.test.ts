@@ -1,12 +1,10 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { propOr } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-
+import { eq } from './utils/utils.ts'
 
 describe('propOr', () => {
-  
-  let shubham = {name: 'shubham', age: 23}
-  let shivam = {age: 99}
+  let shubham = { name: 'shubham', age: 23 }
+  let shivam = { age: 99 }
 
   let num = propOr('Unknown', 'name')
 
@@ -25,8 +23,7 @@ describe('propOr', () => {
   })
 
   it('should use the default when supplied an object with a nil value', () => {
-    eq(propOr('foo', 'x', {x: null}), 'foo')
-    eq(propOr('foo', 'x', {x: undefined}), 'foo')
+    eq(propOr('foo', 'x', { x: null }), 'foo')
+    eq(propOr('foo', 'x', { x: undefined }), 'foo')
   })
-
 })

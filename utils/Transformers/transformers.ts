@@ -1,4 +1,4 @@
-import type { Func } from "../types.ts"
+import type { Func } from '../types.ts'
 
 export default class Transformer {
   protected transformer?: Transformer
@@ -19,7 +19,8 @@ export default class Transformer {
     return this.transformer ? this.transformer.result(acc) : acc
   }
   step(result: any, input: any): any {
-    if(this.transformer) return this.transformer.step(result, this.f(input))
+    if (this.transformer)
+      return this.transformer.step(result, this.f(input))
     return this.f(result, input)
   }
 }

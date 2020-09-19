@@ -1,10 +1,8 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { when, add } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-import { isNumber } from "../utils/is.ts"
-import type { Func } from "../utils/types.ts"
-
-
+import { eq } from './utils/utils.ts'
+import { isNumber } from '../utils/is.ts'
+import type { Func } from '../utils/types.ts'
 
 describe('when', () => {
   const add1 = add(1) as (a: number) => number

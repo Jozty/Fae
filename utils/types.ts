@@ -1,4 +1,4 @@
-import { _, FUNCTION_LENGTH } from "./constants.ts";
+import { _, FUNCTION_LENGTH } from './constants.ts'
 
 /** Type of placeholder for curried functions */
 export type PlaceHolder = typeof _
@@ -28,7 +28,12 @@ export interface Curry3<T1, T2 = T1, T3 = T1, R = T1> {
   (t1: T1, t2?: PlaceHolder): Curry2<T2, T3, R>
   (t1: PlaceHolder, t2: T2): Curry2<T1, T3, R>
   (t1: T1, t2: T2): Curry1<T3, R>
-  (t1?: PlaceHolder, t2?: PlaceHolder, t3?: PlaceHolder): Curry3<T1, T2, T3, R>
+  (t1?: PlaceHolder, t2?: PlaceHolder, t3?: PlaceHolder): Curry3<
+    T1,
+    T2,
+    T3,
+    R
+  >
   (t1: T1, t2?: PlaceHolder, t3?: PlaceHolder): Curry2<T2, T3, R>
   (t1: PlaceHolder, t2: T2, t3?: PlaceHolder): Curry2<T1, T3, R>
   (t1: PlaceHolder, t2: PlaceHolder, t3: T3): Curry2<T1, T2, R>
@@ -41,7 +46,9 @@ export interface Curry3<T1, T2 = T1, T3 = T1, R = T1> {
 export type Functor<T> = Iterable<T> | Iterator<T>
 export type FunctorWithArLk<T> = Functor<T> | ArrayLike<T>
 
-export type Func = ((...args: any[]) => any) & {[FUNCTION_LENGTH]?: number}
+export type Func = ((...args: any[]) => any) & {
+  [FUNCTION_LENGTH]?: number
+}
 
 export type Obj<T = any> = {
   [key: string]: T
@@ -52,7 +59,14 @@ export type ObjArr<T = any> = {
 }
 
 export type ObjRec<T = any> = {
-  [key: string]: ObjRec | ObjArr | string | number | null | undefined | T
+  [key: string]:
+    | ObjRec
+    | ObjArr
+    | string
+    | number
+    | null
+    | undefined
+    | T
 }
 
 /** Comparator for functions like `sort` */
@@ -82,7 +96,8 @@ export type FuncArr1<T, R> = (a: T) => R
 export type FuncArr2<T1, T2, R> = (a: T1, b: T2) => R
 
 /** All the types which are returned by function `typ` */
-export type AllTypes = 'Null'
+export type AllTypes =
+  | 'Null'
   | 'Undefined'
   | 'Object'
   | 'Number'

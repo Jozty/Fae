@@ -1,19 +1,19 @@
 import { isNumber } from './utils/is.ts'
-import curryN from "./utils/curry_n.ts"
-import type { PH } from "./utils/types.ts"
+import curryN from './utils/curry_n.ts'
+import type { PH } from './utils/types.ts'
 import { equals } from './equals.ts'
 
 // @types
-type IndexOf_2<T> = ((list: T[]) => number)
-  & ((list?: PH) => IndexOf_2<T>)
+type IndexOf_2<T> = ((list: T[]) => number) &
+  ((list?: PH) => IndexOf_2<T>)
 
-type IndexOf_1<T> = ((value: T) => number)
-  & ((value?: PH) => IndexOf_1<T>)
+type IndexOf_1<T> = ((value: T) => number) &
+  ((value?: PH) => IndexOf_1<T>)
 
-type IndexOf = (<T>(value: T, list: T[]) => number)
-  & (<T>(value: T, list?: PH) => IndexOf_2<T>)
-  & (<T>(value: PH, list: T[]) => IndexOf_1<T>)
-  & ((value?: PH, list?: PH) => IndexOf)
+type IndexOf = (<T>(value: T, list: T[]) => number) &
+  (<T>(value: T, list?: PH) => IndexOf_2<T>) &
+  (<T>(value: PH, list: T[]) => IndexOf_1<T>) &
+  ((value?: PH, list?: PH) => IndexOf)
 
 function _indexOf<T>(value: T, list: T[]) {
   switch (typeof value) {
@@ -26,8 +26,7 @@ function _indexOf<T>(value: T, list: T[]) {
           if (x === 0 && 1 / x === inf) return i
         }
         return -1
-      }
-      else if (value !== value) {
+      } else if (value !== value) {
         // handles NaN
         for (let i = 0; i < list.length; i++) {
           const x: any = list[i]
@@ -48,9 +47,8 @@ function _indexOf<T>(value: T, list: T[]) {
       }
   }
 
-
   let idx = -1
-  list.forEach((a, i) => idx = equals(value, a) ? i : idx)
+  list.forEach((a, i) => (idx = equals(value, a) ? i : idx))
   return idx
 }
 

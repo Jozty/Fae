@@ -6,16 +6,19 @@ import type { Path } from './paths.ts'
 import { path as pth } from './path.ts'
 
 // @types
-type LensPath = (<T, F>(path: Path) => Lens<T, F>)
-  & ((path?: PH) => LensPath)
+type LensPath = (<T, F>(path: Path) => Lens<T, F>) &
+  ((path?: PH) => LensPath)
 
 function _lensPath<T, F>(path: Path): Lens<T, F> {
-  return lens(pth(path) as Getter<T, F>, assocPath(path) as any as Setter<T, F>)
+  return lens(
+    pth(path) as Getter<T, F>,
+    (assocPath(path) as any) as Setter<T, F>,
+  )
 }
 
 /**
- * Returns a lens whose focus is the specified path. 
- * 
+ * Returns a lens whose focus is the specified path.
+ *
  *      const xHeadYLens = Fae.lensPath(['x', 0, 'y'])
  *      Fae.view(xHeadYLens, {x: [{y: 2, z: 3}, {y: 4, z: 5}]}) // {x: [{y: 1, z: 3}, {y: 4, z: 5}]}
  */

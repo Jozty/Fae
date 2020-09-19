@@ -1,19 +1,18 @@
-import curryN from "./utils/curry_n.ts"
-import type { PH } from "./utils/types.ts"
+import curryN from './utils/curry_n.ts'
+import type { PH } from './utils/types.ts'
 
 // @types
-type Always = (<T>(value: T) => () => T)
-  & ((value?: PH) => Always)
+type Always = (<T>(value: T) => () => T) & ((value?: PH) => Always)
 
 function _always<T>(value: T) {
-  return function() {
+  return function () {
     return value
   }
 }
 
 /**
  * Returns a function which that always returns `value`
- * 
+ *
  *      const f = Fae.always('Fae')
  *      f() // 'Fae'
  */

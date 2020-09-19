@@ -1,6 +1,6 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { slice, _ } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 describe('slice', () => {
   it('should retrieve the proper sub list of a list', () => {
@@ -8,8 +8,10 @@ describe('slice', () => {
     eq(slice(2, 5, list), [7, 5, 3])
   })
 
-  it('should handle array-like object', function() {
-    const args = (function(...args: number[]) { return args }(1, 2, 3, 4, 5))
+  it('should handle array-like object', function () {
+    const args = (function (...args: number[]) {
+      return args
+    })(1, 2, 3, 4, 5)
     eq(slice(1, 4, args), [2, 3, 4])
   })
 

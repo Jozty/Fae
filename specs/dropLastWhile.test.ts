@@ -1,4 +1,4 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import {
   dropLastWhile,
   pipe,
@@ -6,21 +6,32 @@ import {
   flip,
   transduce,
 } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-import type { Predicate1 } from "../utils/types.ts";
+import { eq } from './utils/utils.ts'
+import type { Predicate1 } from '../utils/types.ts'
 
 describe('dropLastWhile', () => {
   it('should skip elements while the function reports `true`', () => {
-    eq(dropLastWhile((x: number) => x >= 5, [1, 3, 5, 7, 9]), [1, 3])
+    eq(
+      dropLastWhile((x: number) => x >= 5, [1, 3, 5, 7, 9]),
+      [1, 3],
+    )
   })
 
   it('should return an empty list for an empty list', () => {
-    eq(dropLastWhile(() => false, []), [])
-    eq(dropLastWhile(() => true, []), [])
+    eq(
+      dropLastWhile(() => false, []),
+      [],
+    )
+    eq(
+      dropLastWhile(() => true, []),
+      [],
+    )
   })
 
   it('should start at the right arg and acknowledges undefined', () => {
-    const f: Predicate1<number | undefined> = (x: number | undefined) => x !== void 0
+    const f: Predicate1<number | undefined> = (
+      x: number | undefined,
+    ) => x !== void 0
     const sublist = dropLastWhile(f, [1, 3, void 0, 5, 7])
     eq(sublist.length, 3)
     eq(sublist[0], 1)
@@ -37,11 +48,14 @@ describe('dropLastWhile', () => {
   it('can act as a transducer', () => {
     const f: Predicate1<number> = (x: number) => x < 7
     const dropLt7 = dropLastWhile(f)
-    const t1 = pipe(
-      dropLt7
-    )
-    eq(transduce(t1, flip(append), [], [1, 3, 5, 7, 9, 1, 2]), [1, 3, 5, 7, 9])
+    const t1 = pipe(dropLt7)
+    eq(transduce(t1, flip(append), [], [1, 3, 5, 7, 9, 1, 2]), [
+      1,
+      3,
+      5,
+      7,
+      9,
+    ])
     eq(transduce(t1, flip(append), [], [1, 3, 5]), [])
   })
-
-});
+})

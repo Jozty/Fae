@@ -1,5 +1,5 @@
-import { describe, it } from "./_describe.ts"
-import { eq, thr } from "./utils/utils.ts"
+import { describe, it } from './_describe.ts'
+import { eq, thr } from './utils/utils.ts'
 import { concat } from '../mod.ts'
 
 describe('concat', () => {
@@ -16,7 +16,8 @@ describe('concat', () => {
   })
 
   it('should throw error with incompatible types', () => {
-    const message = 'Types are not compatible. Both the arguments passed must be of same type.'
+    const message =
+      'Types are not compatible. Both the arguments passed must be of same type.'
     //// @ts-expect-error
     // @ts-ignore
     thr(() => concat('bar', ['a', 'foo']), message)

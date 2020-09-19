@@ -1,7 +1,6 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { crossProduct } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-
+import { eq } from './utils/utils.ts'
 
 describe('crossProduct', () => {
   let a = [1, 2, null]
@@ -13,6 +12,16 @@ describe('crossProduct', () => {
   })
 
   it('should create the collection of all cross-product pairs of its parameters', () => {
-    eq(crossProduct(a, b), [[1, 'a'], [1, 'b'], [1, 'c'], [2, 'a'], [2, 'b'], [2, 'c'], [null, 'a'], [null, 'b'], [null, 'c']])
+    eq(crossProduct(a, b), [
+      [1, 'a'],
+      [1, 'b'],
+      [1, 'c'],
+      [2, 'a'],
+      [2, 'b'],
+      [2, 'c'],
+      [null, 'a'],
+      [null, 'b'],
+      [null, 'c'],
+    ])
   })
 })

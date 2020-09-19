@@ -1,13 +1,13 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { allPass } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 describe('allPass', () => {
-
   let odd = (n: number) => (n & 1) == 1
-  let lt20 = (n: number) => n < 20 
+  let lt20 = (n: number) => n < 20
   let gt5 = (n: number) => n > 5
-  let plusEq = (w: number, x: number, y: number, z: number) => w + x === y + z 
+  let plusEq = (w: number, x: number, y: number, z: number) =>
+    w + x === y + z
 
   it('should report whether all predicates are satisfied by a given value', () => {
     let ok = allPass([odd, lt20, gt5])
@@ -23,5 +23,4 @@ describe('allPass', () => {
   it('should return true on empty predicate list', () => {
     eq(allPass([])(3), true)
   })
-
 })

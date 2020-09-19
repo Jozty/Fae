@@ -1,5 +1,5 @@
-import Transformer from "./transformers.ts"
-import type { Func } from "../types.ts"
+import Transformer from './transformers.ts'
+import type { Func } from '../types.ts'
 
 export default class TapTransformer extends Transformer {
   constructor(f: Func, transformer: Transformer) {
@@ -8,6 +8,8 @@ export default class TapTransformer extends Transformer {
 
   step(result: any, input: any) {
     this.f(input)
-    return this.transformer ? this.transformer.step(result, input) : result
+    return this.transformer
+      ? this.transformer.step(result, input)
+      : result
   }
 }

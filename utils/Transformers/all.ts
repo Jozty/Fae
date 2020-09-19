@@ -1,6 +1,6 @@
-import Transformer from "./transformers.ts"
-import type { Func } from "../types.ts"
-import reduced from "../reduced.ts"
+import Transformer from './transformers.ts'
+import type { Func } from '../types.ts'
+import reduced from '../reduced.ts'
 
 export default class AllTransformer extends Transformer {
   private all = true
@@ -9,18 +9,16 @@ export default class AllTransformer extends Transformer {
   }
 
   result(acc: any): any {
-    if(this.all) {
+    if (this.all) {
       acc = this.transformer!.step(acc, true)
     }
     return this.transformer!.result(acc)
   }
 
   step(result: any, input: any) {
-    if(!this.f(input)) {
+    if (!this.f(input)) {
       this.all = false
-      result = reduced(
-        this.transformer!.step(result, false)
-      )
+      result = reduced(this.transformer!.step(result, false))
     }
     return result
   }

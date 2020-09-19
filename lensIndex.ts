@@ -5,15 +5,18 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type LensIndex = (<T, F>(index: number) => Lens<T, F>)
-  & ((index?: PH) => LensIndex)
+type LensIndex = (<T, F>(index: number) => Lens<T, F>) &
+  ((index?: PH) => LensIndex)
 
 function _lensIndex<T, F>(index: number): Lens<T, F> {
-  return lens(nth(index) as Getter<T, F>, update(index) as any as Setter<T, F>)
+  return lens(
+    nth(index) as Getter<T, F>,
+    (update(index) as any) as Setter<T, F>,
+  )
 }
 
 /**
- * Returns a lens whose focus is the specified index. 
+ * Returns a lens whose focus is the specified index.
  *
  *      const headLens = Fae.lensIndex(0)
  *      Fae.view(headLens, ['a', 'b', 'c'])            //=> 'a'

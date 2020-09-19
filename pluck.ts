@@ -1,19 +1,18 @@
-import curryN from "./utils/curry_n.ts"
-import type { PH, Obj, FuncArr1 } from "./utils/types.ts"
+import curryN from './utils/curry_n.ts'
+import type { PH, Obj, FuncArr1 } from './utils/types.ts'
 import { map } from './map.ts'
 import { prop } from './prop.ts'
 
 // @types
-type Pluck_2 = (<T>(list: Obj<T>[]) => T[])
-  & ((list?: PH) => Pluck_2)
+type Pluck_2 = (<T>(list: Obj<T>[]) => T[]) & ((list?: PH) => Pluck_2)
 
-type Pluck_1<T> = ((p: number | string) => T[])
-  & ((p?: PH) => Pluck_1<T>)
+type Pluck_1<T> = ((p: number | string) => T[]) &
+  ((p?: PH) => Pluck_1<T>)
 
-type Pluck = (<T>(p: number | string, list: Obj<T>[]) => T[])
-  & ((p: number | string, list?: PH) => Pluck_2)
-  & (<T>(p: PH, list: Obj<T>[]) => Pluck_1<T>)
-  & ((p?: PH, list?: PH) => Pluck)
+type Pluck = (<T>(p: number | string, list: Obj<T>[]) => T[]) &
+  ((p: number | string, list?: PH) => Pluck_2) &
+  (<T>(p: PH, list: Obj<T>[]) => Pluck_1<T>) &
+  ((p?: PH, list?: PH) => Pluck)
 
 function _pluck<T>(p: number | string, list: Obj<T>[]): T[] {
   return map(prop(p) as FuncArr1<Obj<T>, T>, list) as T[]

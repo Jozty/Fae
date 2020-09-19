@@ -1,8 +1,7 @@
-
 export function it(fun: Function) {
-  return async function() {
+  return async function () {
     let done: Function = () => void 0
-    const p = new Promise(resolve => {
+    const p = new Promise((resolve) => {
       let d = () => resolve()
       done = d
     })

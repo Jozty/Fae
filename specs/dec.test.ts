@@ -1,6 +1,6 @@
-import { describe, it, expect } from "./_describe.ts"
+import { describe, it, expect } from './_describe.ts'
 import { dec } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 describe('dec', () => {
   it('should decrements its argument', () => {
@@ -11,5 +11,5 @@ describe('dec', () => {
     eq(dec(-Infinity), -Infinity)
     eq(dec(Infinity), Infinity)
     eq(dec(NaN), NaN)
-  });
+  })
 })

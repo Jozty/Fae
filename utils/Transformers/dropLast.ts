@@ -1,4 +1,4 @@
-import Transformer from "./transformers.ts"
+import Transformer from './transformers.ts'
 
 export default class DropLastTransformer extends Transformer {
   private n: number
@@ -16,7 +16,7 @@ export default class DropLastTransformer extends Transformer {
   }
 
   step(result: any, input: any) {
-    if(this.full) {
+    if (this.full) {
       result = this.transformer!.step(result, this.unTracked[this.i])
     }
     this.store(input)
@@ -25,7 +25,7 @@ export default class DropLastTransformer extends Transformer {
 
   private store(input: any) {
     this.unTracked[this.i++] = input
-    if(this.i === this.unTracked.length) {
+    if (this.i === this.unTracked.length) {
       this.i = 0
       this.full = true
     }

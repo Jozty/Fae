@@ -1,6 +1,15 @@
-import { describe, it } from "./_describe.ts"
-import { take, _, pipe, map, filter, transduce, append, flip } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { describe, it } from './_describe.ts'
+import {
+  take,
+  _,
+  pipe,
+  map,
+  filter,
+  transduce,
+  append,
+  flip,
+} from '../mod.ts'
+import { eq } from './utils/utils.ts'
 
 describe('take', () => {
   it('should take only the first `n` elements from a list', () => {
@@ -38,30 +47,17 @@ describe('take', () => {
     const even = (x: number) => (x & 1) === 0
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-    const t1 = pipe(
-      map(inc),
-      filter(even),
-      take(2)
-    )
+    const t1 = pipe(map(inc), filter(even), take(2))
 
     eq(t1(arr), [2, 4])
     eq(transduce(t1, flip(append), [], arr), [3])
 
-
-    const t2 = pipe(
-      filter(even),
-      take(2),
-      map(inc)
-    )
+    const t2 = pipe(filter(even), take(2), map(inc))
 
     eq(t2(arr), [3, 5])
     eq(transduce(t2, flip(append), [], arr), [2])
 
-    const t3 = pipe(
-      filter(even),
-      take(0),
-      map(inc)
-    )
+    const t3 = pipe(filter(even), take(0), map(inc))
 
     eq(t3(arr), [])
     eq(transduce(t3, flip(append), [], arr), [])

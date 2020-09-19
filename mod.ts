@@ -12,7 +12,6 @@ export type {
   AllTypes,
 } from './utils/types.ts'
 
-
 // functions
 export { add } from './add.ts'
 export { addIndex } from './addIndex.ts'
@@ -30,7 +29,7 @@ export { append } from './append.ts'
 export { assoc } from './assoc.ts'
 export { assocPath } from './assocPath.ts'
 export { both } from './both.ts'
-export { chain  } from './chain.ts'
+export { chain } from './chain.ts'
 export { clamp } from './clamp.ts'
 export { comparator } from './comparator.ts'
 export { complement } from './complement.ts'
@@ -78,7 +77,7 @@ export type {
   LensTransformer,
   GetTransformer,
   SeenGetTransformer,
-  Lens
+  Lens,
 } from './lens.ts'
 export { lensIndex } from './lensIndex.ts'
 export { lensPath } from './lensPath.ts'

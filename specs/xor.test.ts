@@ -1,10 +1,8 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { xor } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-
+import { eq } from './utils/utils.ts'
 
 describe('xor', () => {
-  
   it('should compare two values with exclusive or', () => {
     eq(xor(true, true), false)
     eq(xor(true, false), true)
@@ -55,5 +53,4 @@ describe('xor', () => {
     eq(xor()(false)(true), true)
     eq(xor()(false)(false), false)
   })
-
 })

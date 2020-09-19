@@ -1,8 +1,10 @@
-import Transformer from "./transformers.ts"
-import type { Func } from "../types.ts"
+import Transformer from './transformers.ts'
+import type { Func } from '../types.ts'
 import { reduce } from '../../reduce.ts'
 
-export default class DropLastWhileTransformer<T = any> extends Transformer {
+export default class DropLastWhileTransformer<
+  T = any
+> extends Transformer {
   private buffer: T[] = []
   constructor(f: Func, transformer: Transformer) {
     super(f, transformer)
@@ -13,7 +15,7 @@ export default class DropLastWhileTransformer<T = any> extends Transformer {
   }
 
   step(result: any, input: any) {
-    if(this.f(input)) return this.push(result, input)
+    if (this.f(input)) return this.push(result, input)
     return this.flush(result, input)
   }
 

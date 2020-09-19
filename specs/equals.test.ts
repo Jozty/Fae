@@ -1,7 +1,6 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { equals } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-
+import { eq } from './utils/utils.ts'
 
 describe('equals', () => {
   const a: any[] = []
@@ -78,19 +77,27 @@ describe('equals', () => {
 
   it('should handle objects', () => {
     eq(equals({}, {}), true)
-    eq(equals({a:1, b:2}, {a:1, b:2}), true)
-    eq(equals({a:2, b:3}, {b:3, a:2}), true)
-    eq(equals({a:2, b:3}, {a:3, b:3}), false)
-    eq(equals({a:2, b:3, c:1}, {a:2, b:3}), false)
+    eq(equals({ a: 1, b: 2 }, { a: 1, b: 2 }), true)
+    eq(equals({ a: 2, b: 3 }, { b: 3, a: 2 }), true)
+    eq(equals({ a: 2, b: 3 }, { a: 3, b: 3 }), false)
+    eq(equals({ a: 2, b: 3, c: 1 }, { a: 2, b: 3 }), false)
   })
 
   it('should considers equivalent Arguments objects equal', () => {
-    const a = (function() { return arguments; }())
-    const b = (function() { return arguments; }())
-    // @ts-ignore
-    const c = (function() { return arguments; }(1, 2, 3))
-    // @ts-ignore
-    const d = (function() { return arguments; }(1, 2, 3))
+    const a = (function () {
+      return arguments
+    })()
+    const b = (function () {
+      return arguments
+    })()
+    const c = (function () {
+      return arguments
+      // @ts-ignore
+    })(1, 2, 3)
+    const d = (function () {
+      return arguments
+      // @ts-ignore
+    })(1, 2, 3)
 
     eq(equals(a, b), true)
     eq(equals(b, a), true)
@@ -108,26 +115,32 @@ describe('equals', () => {
   })
 
   let supportsSticky = false
-  try { RegExp('', 'y'); supportsSticky = true; } catch (e) {}
+  try {
+    RegExp('', 'y')
+    supportsSticky = true
+  } catch (e) {}
 
   let supportsUnicode = false
-  try { RegExp('', 'u'); supportsUnicode = true; } catch (e) {}
+  try {
+    RegExp('', 'u')
+    supportsUnicode = true
+  } catch (e) {}
 
   it('should handle regex', () => {
     eq(equals(/\s/, /\s/), true)
     eq(equals(/\s/, /\d/), false)
-    eq(equals(/a/gi, /a/ig), true)
-    eq(equals(/a/mgi, /a/img), true)
+    eq(equals(/a/gi, /a/gi), true)
+    eq(equals(/a/gim, /a/gim), true)
     eq(equals(/a/gi, /a/i), false)
 
     if (supportsSticky) {
       eq(equals(/\s/y, /\s/y), true)
-      eq(equals(/a/mygi, /a/imgy), true)
+      eq(equals(/a/gimy, /a/gimy), true)
     }
 
     if (supportsUnicode) {
       eq(equals(/\s/u, /\s/u), true)
-      eq(equals(/a/mugi, /a/imgu), true)
+      eq(equals(/a/gimu, /a/gimu), true)
     }
   })
 
@@ -139,13 +152,17 @@ describe('equals', () => {
     eq(equals(listA, listB), false)
   })
 
-  const c: any = {}; c.v = c
-  const d: any = {}; d.v = d
-  const e: any = []; e.push(e)
-  const f: any = []; f.push(f)
-  const nestA = {a:[1, 2, {c:1}], b:1}
-  const nestB = {a:[1, 2, {c:1}], b:1}
-  const nestC = {a:[1, 2, {c:2}], b:1}
+  const c: any = {}
+  c.v = c
+  const d: any = {}
+  d.v = d
+  const e: any = []
+  e.push(e)
+  const f: any = []
+  f.push(f)
+  const nestA = { a: [1, 2, { c: 1 }], b: 1 }
+  const nestB = { a: [1, 2, { c: 1 }], b: 1 }
+  const nestC = { a: [1, 2, { c: 2 }], b: 1 }
 
   it('should handle recursive data structures', () => {
     eq(equals(c, d), true)
@@ -194,7 +211,7 @@ describe('equals', () => {
     eq(equals(r1, r2), false)
     eq(equals(s1, s2), false)
   })*/
-  
+
   const typArr1 = new ArrayBuffer(10)
   // @ts-ignore
   typArr1[0] = 1
@@ -313,8 +330,8 @@ describe('equals', () => {
 
     eq(equals(new Left([42]), new Left([42])), true)
     eq(equals(new Left([42]), new Left([43])), false)
-    eq(equals(new Left(42), {value: 42}), false)
-    eq(equals({value: 42}, new Left(42)), false)
+    eq(equals(new Left(42), { value: 42 }), false)
+    eq(equals({ value: 42 }, new Left(42)), false)
     eq(equals(new Left(42), new Right(42)), false)
     eq(equals(new Right(42), new Left(42)), false)
 
@@ -334,7 +351,11 @@ describe('equals', () => {
       }
 
       equals(point: any) {
-        return point instanceof Point && this.x === point.x && this.y === point.y
+        return (
+          point instanceof Point &&
+          this.x === point.x &&
+          this.y === point.y
+        )
       }
     }
 
@@ -346,14 +367,16 @@ describe('equals', () => {
       }
 
       equals(point: any) {
-        return point instanceof ColorPoint &&
-              this.x === point.x && this.y === point.y &&
-              this.color === point.color
+        return (
+          point instanceof ColorPoint &&
+          this.x === point.x &&
+          this.y === point.y &&
+          this.color === point.color
+        )
       }
     }
 
     eq(equals(new Point(2, 2), new ColorPoint(2, 2, 'red')), false)
     eq(equals(new ColorPoint(2, 2, 'red'), new Point(2, 2)), false)
   })
-
 })

@@ -1,7 +1,9 @@
-import Transformer from "./transformers.ts"
-import type { Func } from "../types.ts"
+import Transformer from './transformers.ts'
+import type { Func } from '../types.ts'
 
-export default class FindLastTransformer<T = any> extends Transformer {
+export default class FindLastTransformer<
+  T = any
+> extends Transformer {
   private last: T
   constructor(f: Func, transformer: Transformer) {
     super(f, transformer)
@@ -9,7 +11,7 @@ export default class FindLastTransformer<T = any> extends Transformer {
   }
 
   step(result: any, input: any) {
-    if(this.f(input)) {
+    if (this.f(input)) {
       this.last = input
     }
     return result
@@ -17,7 +19,7 @@ export default class FindLastTransformer<T = any> extends Transformer {
 
   result(result: any) {
     return this.transformer!.result(
-      this.transformer!.step(result, this.last)
+      this.transformer!.step(result, this.last),
     )
   }
 }

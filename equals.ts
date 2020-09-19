@@ -23,26 +23,25 @@ function _last(arr: any[]) {
   return nth(-1, arr)
 }
 
-
 function _equals(a: any, b: any, stk1: any[] = [], stk2: any[] = []) {
-  if(Object.is(a, b)) return true
+  if (Object.is(a, b)) return true
   const typeA = typ(a)
-  if(typeA !== typ(b)) return false
-  if(isFunction(a.equals) || isFunction(b.equals)) {
-    return(
-         isFunction(a.equals)
-      && isFunction(b.equals)
-      && a.equals(b)
-      && b.equals(a)
+  if (typeA !== typ(b)) return false
+  if (isFunction(a.equals) || isFunction(b.equals)) {
+    return (
+      isFunction(a.equals) &&
+      isFunction(b.equals) &&
+      a.equals(b) &&
+      b.equals(a)
     )
   }
 
-  switch(typeA) {
+  switch (typeA) {
     case 'Arguments':
     case 'Array':
     case 'Object': {
       const c = a.constructor
-      if(isFunction(c) && getFunctionName(c) === 'Promise') {
+      if (isFunction(c) && getFunctionName(c) === 'Promise') {
         return a === b
       }
       break
@@ -51,54 +50,61 @@ function _equals(a: any, b: any, stk1: any[] = [], stk2: any[] = []) {
     case 'Boolean':
     case 'Number':
     case 'String': {
-      if (!(typeof a === typeof b && Object.is(a.valueOf(), b.valueOf()))) {
+      if (
+        !(
+          typeof a === typeof b && Object.is(a.valueOf(), b.valueOf())
+        )
+      ) {
         return false
       }
       break
     }
 
     case 'Date': {
-      if(!Object.is(a.valueOf(), b.valueOf())) return false
+      if (!Object.is(a.valueOf(), b.valueOf())) return false
       break
     }
 
     case 'RegExp': {
-      if (!(
-        a.source === b.source
-        && a.global === b.global
-        && a.ignoreCase === b.ignoreCase
-        && a.multiline === b.multiline
-        && a.sticky === b.sticky
-        && a.unicode === b.unicode
-      )) {
+      if (
+        !(
+          a.source === b.source &&
+          a.global === b.global &&
+          a.ignoreCase === b.ignoreCase &&
+          a.multiline === b.multiline &&
+          a.sticky === b.sticky &&
+          a.unicode === b.unicode
+        )
+      ) {
         return false
       }
     }
 
     case 'Error':
       return a.name === b.name && a.message === b.message
-    
+
     case 'Map': {
-      if(a.size !== b.size) return false
+      if (a.size !== b.size) return false
     }
   }
 
-  for(let i = stk1.length - 1; i >= 0; i--) {
-    if(stk1[i] === a) {
+  for (let i = stk1.length - 1; i >= 0; i--) {
+    if (stk1[i] === a) {
       return stk2[i] === b
     }
   }
 
   const keysA = _keys(a)
   const keysB = _keys(b)
-  if(keysA.length != keysB.length) return false
+  if (keysA.length != keysB.length) return false
 
   const s1 = concat(stk1, [a]) as any[]
   const s2 = concat(stk2, [b]) as any[]
 
-  for(let i = 0; i < keysA.length; i++) {
+  for (let i = 0; i < keysA.length; i++) {
     const key = keysA[i]
-    if(!(_has(key, b) && _equals(a[key], b[key], s1, s2))) return false
+    if (!(_has(key, b) && _equals(a[key], b[key], s1, s2)))
+      return false
   }
 
   return true

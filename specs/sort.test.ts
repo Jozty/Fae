@@ -1,6 +1,6 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { sort, comparator } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 describe('sort', () => {
   it('should sort the elements of a list without affecting original', () => {

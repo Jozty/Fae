@@ -1,8 +1,6 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { complement } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-
-
+import { eq } from './utils/utils.ts'
 
 describe('complement', () => {
   it('should create boolean-returning function that reverses another', () => {
@@ -13,7 +11,8 @@ describe('complement', () => {
   })
 
   it('should accept a function that take multiple parameters', () => {
-    const between = (a: number, b: number, c: number) => a < b && b < c
+    const between = (a: number, b: number, c: number) =>
+      a < b && b < c
     const f = complement(between)
     eq(f(4, 5, 11), false)
     eq(f(12, 2, 6), true)
@@ -27,5 +26,4 @@ describe('complement', () => {
   //   eq(complement(Just(false)), Just(true))
   //   eq(complement(Nothing()), Nothing())
   // })
-
 })

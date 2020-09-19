@@ -1,6 +1,6 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { trim, _ } from '../mod.ts'
-import { eq, thr } from "./utils/utils.ts"
+import { eq, thr } from './utils/utils.ts'
 
 describe('trim', () => {
   const str1 = `       

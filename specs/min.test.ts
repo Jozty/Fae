@@ -1,6 +1,6 @@
-import { describe, it, expect } from "./_describe.ts"
+import { describe, it, expect } from './_describe.ts'
 import { min } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 describe('min', () => {
   it('should returns the larger of its two arguments', () => {

@@ -1,6 +1,6 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { path, _ } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 const obj1 = {
   a: {
@@ -8,7 +8,7 @@ const obj1 = {
   },
   c: {
     d: 2,
-  }
+  },
 }
 
 const obj2 = {
@@ -19,9 +19,9 @@ const obj2 = {
       ab: 5,
       de: [12, 23, 25],
     },
-    '234'
+    '234',
   ],
-  4: 'sdf'
+  4: 'sdf',
 }
 
 const path1 = path(_, obj1)

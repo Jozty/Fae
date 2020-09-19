@@ -1,17 +1,15 @@
-import curryN from "./utils/curry_n.ts"
-import type { PH } from "./utils/types.ts"
+import curryN from './utils/curry_n.ts'
+import type { PH } from './utils/types.ts'
 
 // @types
-type Range_2 = ((to: number) => number[])
-  & ((to?: PH) => Range_2)
+type Range_2 = ((to: number) => number[]) & ((to?: PH) => Range_2)
 
-type Range_1 = ((from: number) => number[])
-  & ((from?: PH) => Range_1)
+type Range_1 = ((from: number) => number[]) & ((from?: PH) => Range_1)
 
-type Range = ((from: number, to: number) => number[])
-  & ((from: number, to?: PH) => Range_2)
-  & ((from: PH, to: number) => Range_1)
-  & ((from?: PH, to?: PH) => Range)
+type Range = ((from: number, to: number) => number[]) &
+  ((from: number, to?: PH) => Range_2) &
+  ((from: PH, to: number) => Range_1) &
+  ((from?: PH, to?: PH) => Range)
 
 function _range(from: number, to: number) {
   const result = []

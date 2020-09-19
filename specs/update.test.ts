@@ -1,6 +1,6 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { update } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 describe('update', () => {
   it('should update the value at the given index of the supplied array', () => {
@@ -34,6 +34,4 @@ describe('update', () => {
     // @ts-ignore
     eq(update(2, 4, args(0, 1, 2, 3)), [0, 1, 4, 3])
   })
-
 })
-

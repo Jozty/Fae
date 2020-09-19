@@ -1,17 +1,17 @@
-import type { PH } from "./utils/types.ts"
-import curryN from "./utils/curry_n.ts"
+import type { PH } from './utils/types.ts'
+import curryN from './utils/curry_n.ts'
 
 // @types
-type DefaultTo_2<T1> = (<T2>(value: T2) => T1 | T2)
-  & ((value?: PH) => DefaultTo_2<T1>)
+type DefaultTo_2<T1> = (<T2>(value: T2) => T1 | T2) &
+  ((value?: PH) => DefaultTo_2<T1>)
 
-type DefaultTo_1<T2> = (<T1>(defaultV: T1) => T1 | T2)
-  & ((defaultV?: PH) => DefaultTo_1<T2>)
+type DefaultTo_1<T2> = (<T1>(defaultV: T1) => T1 | T2) &
+  ((defaultV?: PH) => DefaultTo_1<T2>)
 
-type DefaultTo = (<T1, T2>(defaultV: T1, value: T2) => T1 | T2)
-  & (<T1>(defaultV: T1, value?: PH) => DefaultTo_2<T1>)
-  & (<T2>(defaultV: PH, value: T2) => DefaultTo_1<T2>)
-  & ((defaultV?: PH, value?: PH) => DefaultTo)
+type DefaultTo = (<T1, T2>(defaultV: T1, value: T2) => T1 | T2) &
+  (<T1>(defaultV: T1, value?: PH) => DefaultTo_2<T1>) &
+  (<T2>(defaultV: PH, value: T2) => DefaultTo_1<T2>) &
+  ((defaultV?: PH, value?: PH) => DefaultTo)
 
 function _defaultTo<T1, T2>(defaultV: T1, value: T2) {
   return value == null || value !== value ? defaultV : value
@@ -20,8 +20,8 @@ function _defaultTo<T1, T2>(defaultV: T1, value: T2) {
 /**
  * Returns the second argument if it is not `null`, `undefined` or `NaN`;
  * otherwise the first argument is returned.
- * 
- * 
+ *
+ *
  *      const defaultTo125 = Fae.defaultTo(125)
  *
  *      defaultTo125(null)  //=> 125

@@ -1,31 +1,31 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { nth, _ } from '../mod.ts'
-import { eq, thr } from "./utils/utils.ts"
+import { eq, thr } from './utils/utils.ts'
 
 const iterable: any = {
   limit: 70,
   current: 65,
-  [Symbol.iterator]: function() {
+  [Symbol.iterator]: function () {
     return {
       l: this.limit,
       i: this.current,
       next() {
-        if(this.i < this.l) {
+        if (this.i < this.l) {
           return {
             value: String.fromCharCode(this.i++),
-            done: false
+            done: false,
           }
         }
-        return {done: true}
-      }
+        return { done: true }
+      },
     }
-  }
+  },
 }
 
 function* gen() {
   const limit = 5
   let i = 0
-  while(i < limit) {
+  while (i < limit) {
     yield i++
   }
 }
@@ -102,8 +102,17 @@ describe('nth', () => {
     }
     const n = nth(_, ob as any)
 
-    thr(() => n(1), 'The functor should be an array like or iterable/iterator')
-    thr(() => n(-1), 'The functor should be an array like or iterable/iterator')
-    thr(() => n(8), 'The functor should be an array like or iterable/iterator')
+    thr(
+      () => n(1),
+      'The functor should be an array like or iterable/iterator',
+    )
+    thr(
+      () => n(-1),
+      'The functor should be an array like or iterable/iterator',
+    )
+    thr(
+      () => n(8),
+      'The functor should be an array like or iterable/iterator',
+    )
   })
 })

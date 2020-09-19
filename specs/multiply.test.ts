@@ -1,7 +1,6 @@
-import { describe, it, expect } from "./_describe.ts"
-
-import { eq } from "./utils/utils.ts"
-import {multiply,_} from '../mod.ts'
+import { describe, it, expect } from './_describe.ts'
+import { multiply } from '../mod.ts'
+import { eq } from './utils/utils.ts'
 
 describe('multiply', () => {
   it('should multiply two numbers', () => {
