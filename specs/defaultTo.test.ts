@@ -1,9 +1,8 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { defaultTo } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 describe('defaultTo', () => {
-  
   let defaultTo125 = defaultTo(125)
 
   it('should return the default value if input is null, undefined or NaN', () => {
@@ -27,5 +26,4 @@ describe('defaultTo', () => {
     eq(125, defaultTo(125, null))
     eq('a real value', defaultTo(125, 'a real value'))
   })
-  
 })

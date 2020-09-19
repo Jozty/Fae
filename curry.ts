@@ -1,12 +1,12 @@
-import curryN from "./utils/curry_n.ts"
-import type { Curry2, Func } from "./utils/types.ts"
+import curryN from './utils/curry_n.ts'
+import type { Curry2, Func } from './utils/types.ts'
 
 /**
  * Returns the curried function
  * **NOTE** The passed function will be called as soon as expected number
  * of arguments are received. Rest will be ignored.
- * 
- * 
+ *
+ *
  *      const f = (a, b, c) => [a, b, c]
  *      const g = curry(f.length, f)
  *      g(1, 2, 3) // [1, 2, 3]

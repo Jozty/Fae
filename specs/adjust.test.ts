@@ -1,7 +1,6 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { adjust, add } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-
+import { eq } from './utils/utils.ts'
 
 describe('adjust', () => {
   it('should apply the given function to the value at the given index of the supplied array', () => {
@@ -31,5 +30,4 @@ describe('adjust', () => {
     // @ts-ignore
     eq(adjust(2, add(1), args(0, 1, 2, 3)), [0, 1, 3, 3])
   })
-
-});
+})

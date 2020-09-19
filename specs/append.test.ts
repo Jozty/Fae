@@ -1,5 +1,5 @@
-import { describe, it } from "./_describe.ts"
-import { eq } from "./utils/utils.ts"
+import { describe, it } from './_describe.ts'
+import { eq } from './utils/utils.ts'
 import { append } from '../mod.ts'
 
 describe('append', () => {
@@ -14,20 +14,17 @@ describe('append', () => {
     eq(append(['abc'], []), [['abc']])
     eq(append(1, [1, 1, 1]), [1, 1, 1, 1])
     eq(
-      append(
-        {a: 1, b: 2},
-        [
-          {a: 1, b: 2},
-          {a: 1, b: 2},
-          {a: 1, b: 2},
-        ]
-      ),
+      append({ a: 1, b: 2 }, [
+        { a: 1, b: 2 },
+        { a: 1, b: 2 },
+        { a: 1, b: 2 },
+      ]),
       [
-        {a: 1, b: 2},
-        {a: 1, b: 2},
-        {a: 1, b: 2},
-        {a: 1, b: 2},
-      ]
+        { a: 1, b: 2 },
+        { a: 1, b: 2 },
+        { a: 1, b: 2 },
+        { a: 1, b: 2 },
+      ],
     )
   })
 })

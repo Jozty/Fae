@@ -1,11 +1,14 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { takeLast } from '../mod.ts'
-import { eq, strictNotEq } from "./utils/utils.ts"
+import { eq, strictNotEq } from './utils/utils.ts'
 
 describe('takeLast', () => {
-
   it('should take only the last `n` elements from a list', () => {
-    eq(takeLast(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['e', 'f', 'g'])
+    eq(takeLast(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), [
+      'e',
+      'f',
+      'g',
+    ])
   })
 
   it('should return only as many as the array can provide', () => {
@@ -33,5 +36,4 @@ describe('takeLast', () => {
   it('should handle zero correctly', () => {
     eq(takeLast(0, [1, 2, 3]), [])
   })
-
 })

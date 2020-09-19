@@ -1,31 +1,31 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { join } from '../mod.ts'
-import { eq, thr } from "./utils/utils.ts"
+import { eq, thr } from './utils/utils.ts'
 
 const iterable: any = {
   limit: 70,
   current: 65,
-  [Symbol.iterator]: function() {
+  [Symbol.iterator]: function () {
     return {
       l: this.limit,
       i: this.current,
       next() {
-        if(this.i < this.l) {
+        if (this.i < this.l) {
           return {
             value: String.fromCharCode(this.i++),
-            done: false
+            done: false,
           }
         }
-        return {done: true}
-      }
+        return { done: true }
+      },
     }
-  }
+  },
 }
 
 function* gen() {
   const limit = 5
   let i = 0
-  while(i++ < limit) {
+  while (i++ < limit) {
     yield i
   }
 }
@@ -37,18 +37,18 @@ describe('join', () => {
   const joinUnderScore = join('_')
   const join99 = join(99)
   const tS = {
-    toString: () => 'THE_OBJECT_WITH_TO_STRING'
+    toString: () => 'THE_OBJECT_WITH_TO_STRING',
   }
   const arrayLike1 = {
     0: '#',
     1: '!',
     2: '@',
-    length: 3
+    length: 3,
   }
   const arrayLike2 = {
     0: '%%',
     4: '**',
-    length: 5
+    length: 5,
   }
   it('should join arrays', () => {
     const x = [1, 2, 3, 4, 5]
@@ -56,7 +56,7 @@ describe('join', () => {
     eq(joinUnderScore(x), '1_2_3_4_5')
     eq(join99(x), '1992993994995')
     eq(x, y)
-    
+
     const z = [1, 2, 3, undefined, 2, 5]
     eq(joinUnderScore(z), '1_2_3_2_5')
   })
@@ -85,8 +85,17 @@ describe('join', () => {
       b: 2,
     }
     const y = new XYZ()
-    thr(() => joinUnderScore(x as any), 'The functor should be an array like or iterable/iterator')
-    thr(() => joinUnderScore(y as any), 'The functor should be an array like or iterable/iterator')
-    thr(() => joinUnderScore(/regex/ as any), 'The functor should be an array like or iterable/iterator')
+    thr(
+      () => joinUnderScore(x as any),
+      'The functor should be an array like or iterable/iterator',
+    )
+    thr(
+      () => joinUnderScore(y as any),
+      'The functor should be an array like or iterable/iterator',
+    )
+    thr(
+      () => joinUnderScore(/regex/ as any),
+      'The functor should be an array like or iterable/iterator',
+    )
   })
 })

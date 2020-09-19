@@ -1,9 +1,9 @@
-import { describe, it, expect } from "./_describe.ts"
+import { describe, it, expect } from './_describe.ts'
 import { not } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 describe('not', () => {
-  it('should be properly declared',() => {
+  it('should be properly declared', () => {
     eq(not(true), false)
     eq(not(''), true)
     eq(not(1), false)

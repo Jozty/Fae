@@ -1,7 +1,6 @@
-import { describe, it, expect } from "./_describe.ts"
+import { describe, it, expect } from './_describe.ts'
 import { subtract } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-
+import { eq } from './utils/utils.ts'
 
 describe('subtract', () => {
   it('should be declared correctly', () => {

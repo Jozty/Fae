@@ -1,29 +1,26 @@
-import curryN from "./utils/curry_n.ts"
-import type { Func, PH } from "./utils/types.ts"
-import { isFunction } from "./utils/is.ts"
-import { lift } from "./lift.ts"
-import { or } from "./or.ts"
+import curryN from './utils/curry_n.ts'
+import type { Func, PH } from './utils/types.ts'
+import { isFunction } from './utils/is.ts'
+import { lift } from './lift.ts'
+import { or } from './or.ts'
 
 // @types
-type Either_2<T> = ((g: T) => T)
-  & ((g?: PH) => Either_2<T>)
+type Either_2<T> = ((g: T) => T) & ((g?: PH) => Either_2<T>)
 
-type Either_1<T> = ((f: T) => T)
-  & ((f?: PH) => Either_1<T>)
+type Either_1<T> = ((f: T) => T) & ((f?: PH) => Either_1<T>)
 
-type Either = (<T>(f: T, g: T) => T)
-  & (<T>(f: T, g?: PH) => Either_2<T>)
-  & (<T>(f: PH, g: T) => Either_1<T>)
-  & ((f?: PH, g?: PH) => Either)
+type Either = (<T>(f: T, g: T) => T) &
+  (<T>(f: T, g?: PH) => Either_2<T>) &
+  (<T>(f: PH, g: T) => Either_1<T>) &
+  ((f?: PH, g?: PH) => Either)
 
 function _either<T extends Func>(f: T, g: T): T {
-  if(isFunction(f)){
+  if (isFunction(f)) {
     const __either = function (this: any, ...args: any[]) {
       return f.apply(this, args) || g.apply(this, args)
     }
     return __either as T
-  }
-  else{
+  } else {
     return lift(or)(f, g)
   }
 }

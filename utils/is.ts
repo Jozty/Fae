@@ -1,5 +1,5 @@
-import type { Func } from "./types.ts"
-import Transformer from "./Transformers/transformers.ts"
+import type { Func } from './types.ts'
+import Transformer from './Transformers/transformers.ts'
 
 export function is(x: any, type: string) {
   return Object.prototype.toString.call(x) === `[object ${type}]`
@@ -30,11 +30,16 @@ export function isArray<T = any>(x: any): x is Array<T> {
 }
 
 export function isArrayLike<T = any>(x: any): x is ArrayLike<T> {
-  if(!x) return false
-  if(isArray(x)) return true
-  if(x.length){
-    if(x.length === 0) return true
-    if(x.length > 0 && x.hasOwnProperty(0) && x.hasOwnProperty(x.length - 1)) return true
+  if (!x) return false
+  if (isArray(x)) return true
+  if (x.length) {
+    if (x.length === 0) return true
+    if (
+      x.length > 0 &&
+      x.hasOwnProperty(0) &&
+      x.hasOwnProperty(x.length - 1)
+    )
+      return true
   }
   return false
 }
@@ -59,5 +64,5 @@ export function isNotUndefinedOrNull(x: any) {
 }
 
 export function isArguments(x: any) {
-  return is(x,'Arguments')
+  return is(x, 'Arguments')
 }

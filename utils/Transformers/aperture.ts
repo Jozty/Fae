@@ -1,6 +1,8 @@
-import Transformer from "./transformers.ts"
+import Transformer from './transformers.ts'
 
-export default class ApertureTransformer<T = any> extends Transformer {
+export default class ApertureTransformer<
+  T = any
+> extends Transformer {
   private n: number
   private i: number = 0
   private buffer: T[]
@@ -13,18 +15,22 @@ export default class ApertureTransformer<T = any> extends Transformer {
 
   step(result: any, input: any) {
     this.store(input)
-    return this.full ? this.transformer!.step(result, this.copy) : result
+    return this.full
+      ? this.transformer!.step(result, this.copy)
+      : result
   }
 
   store(input: any) {
     this.buffer[this.i++] = input
-    if(this.i === this.n) {
+    if (this.i === this.n) {
       this.i = 0
       this.full = true
     }
   }
 
   get copy() {
-    return this.buffer.slice(this.i).concat(this.buffer.slice(0, this.i))
+    return this.buffer
+      .slice(this.i)
+      .concat(this.buffer.slice(0, this.i))
   }
 }

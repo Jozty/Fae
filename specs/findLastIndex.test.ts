@@ -1,16 +1,28 @@
-import { describe, it } from "./_describe.ts"
-import {
-  findLastIndex,
-  pipe,
-  transduce,
-} from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-
+import { describe, it } from './_describe.ts'
+import { findLastIndex, pipe, transduce } from '../mod.ts'
+import { eq } from './utils/utils.ts'
 
 describe('findLastIndex', () => {
-  var obj1 = {x: 100}
-  var obj2 = {x: 200}
-  var a = [11, 10, 9, 'cow', obj1, 8, 7, 100, 200, 300, obj2, 4, 3, 2, 1, 0]
+  var obj1 = { x: 100 }
+  var obj2 = { x: 200 }
+  var a = [
+    11,
+    10,
+    9,
+    'cow',
+    obj1,
+    8,
+    7,
+    100,
+    200,
+    300,
+    obj2,
+    4,
+    3,
+    2,
+    1,
+    0,
+  ]
   const even = (x: any) => typeof x === 'number' && x % 2 === 0
   const gt100 = (x: any) => typeof x === 'number' && x > 100
   const isStr = (x: any) => typeof x === 'string'
@@ -49,16 +61,18 @@ describe('findLastIndex', () => {
   })
 
   it('should act as transducer', () => {
-    const t1 = pipe(
-      findLastIndex(even)
-    )
+    const t1 = pipe(findLastIndex(even))
     eq(t1(a), 15)
-    eq(transduce(t1, (a: number, b: number) => b, undefined, a), 15)
-
-    const t2 = pipe(
-      findLastIndex((x: number) => x > 1000)
+    eq(
+      transduce(t1, (a: number, b: number) => b, undefined, a),
+      15,
     )
+
+    const t2 = pipe(findLastIndex((x: number) => x > 1000))
     eq(t2(a), -1)
-    eq(transduce(t2, (a: number, b: number) => b, undefined, a), -1)
+    eq(
+      transduce(t2, (a: number, b: number) => b, undefined, a),
+      -1,
+    )
   })
 })

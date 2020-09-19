@@ -1,9 +1,9 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { prop, path, _ } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 describe('prop', () => {
-  const obj = {name: 'John', age: 23}
+  const obj = { name: 'John', age: 23 }
 
   it('should return a function that fetches the appropriate property', () => {
     const nm = prop('name')
@@ -72,5 +72,5 @@ describe('prop', () => {
 
     eq(propResult, pathResult)
     eq(propException, pathException)
-  });
+  })
 })

@@ -1,4 +1,4 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import {
   dropRepeats,
   pipe,
@@ -7,8 +7,7 @@ import {
   transduce,
   equals,
 } from '../mod.ts'
-import { eq, strictNotEq } from "./utils/utils.ts"
-
+import { eq, strictNotEq } from './utils/utils.ts'
 
 describe('dropRepeats', () => {
   const obj = [1, 2, 3, 4, 5, 3, 2]
@@ -24,9 +23,7 @@ describe('dropRepeats', () => {
   })
 
   it('can act as a transducer', () => {
-    const t1 = pipe(
-      dropRepeats
-    )
+    const t1 = pipe(dropRepeats)
     eq(transduce(t1, flip(append), [], obj2), obj)
   })
 

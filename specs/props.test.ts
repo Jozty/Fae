@@ -1,9 +1,9 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { props } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 describe('props', () => {
-  const obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6}
+  const obj = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6 }
 
   it('should return empty array if no properties requested', () => {
     eq(props([], obj), [])
@@ -22,5 +22,5 @@ describe('props', () => {
     eq(ps.length, 2)
     eq(ps[0], 1)
     eq(ps[1], void 0)
-  });
+  })
 })

@@ -1,15 +1,15 @@
 name: Tests
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: denolib/setup-deno@v2
-      with:
-        deno-version: v1.x
-    - run: deno test
+      - uses: actions/checkout@master
+      - uses: denolib/setup-deno@v2
+        with:
+          deno-version: v1.x
+      - run: deno test

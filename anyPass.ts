@@ -1,15 +1,15 @@
-import curryN from "./utils/curry_n.ts"
-import type { PH, Func, Predicate } from "./utils/types.ts"
-import { getFunctionsLengths } from "./utils/get.ts"
+import curryN from './utils/curry_n.ts'
+import type { PH, Func, Predicate } from './utils/types.ts'
+import { getFunctionsLengths } from './utils/get.ts'
 
 // @types
-type AnyPass = (<T>(predicates: Predicate<T>[]) => Func)
-  & ((predicates?: PH) => AnyPass)
+type AnyPass = (<T>(predicates: Predicate<T>[]) => Func) &
+  ((predicates?: PH) => AnyPass)
 
 function _anyPass<T>(predicates: Predicate<T>[]) {
   const len = predicates.length
-  const fn = function(this: any, ...args: T[]) {
-    for(let idx = 0; idx < len; idx++){
+  const fn = function (this: any, ...args: T[]) {
+    for (let idx = 0; idx < len; idx++) {
       if (predicates[idx].apply(this, args)) {
         return true
       }
@@ -19,10 +19,7 @@ function _anyPass<T>(predicates: Predicate<T>[]) {
 
   const noOfParams = getFunctionsLengths(predicates)
 
-  return curryN(
-    Math.max(...noOfParams, 0),
-    fn
-  )
+  return curryN(Math.max(...noOfParams, 0), fn)
 }
 
 /**

@@ -1,7 +1,7 @@
-import { describe, it } from "./_describe.ts"
-import { contains , _, } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-import type { Obj } from "../utils/types.ts"
+import { describe, it } from './_describe.ts'
+import { contains, _ } from '../mod.ts'
+import { eq } from './utils/utils.ts'
+import type { Obj } from '../utils/types.ts'
 
 describe('contains', () => {
   const list = [
@@ -9,7 +9,7 @@ describe('contains', () => {
     20,
     undefined,
     NaN,
-    {a: 20, b: NaN, c: undefined} as Obj<number | undefined>,
+    { a: 20, b: NaN, c: undefined } as Obj<number | undefined>,
     Infinity,
   ]
 
@@ -20,8 +20,7 @@ describe('contains', () => {
     eq(c(undefined), true)
     eq(c(NaN), false)
     eq(c(Infinity), true)
-    eq(c({b: NaN}), false)    
+    eq(c({ b: NaN }), false)
     eq(c(200), false)
   })
-  
 })

@@ -1,26 +1,31 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { pathOr } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 describe('pathOr', () => {
-
-  let deepObject = {a: {b: {c: 'c'}}, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: ['arr']}
+  let deepObject = {
+    a: { b: { c: 'c' } },
+    falseVal: false,
+    nullVal: null,
+    undefinedVal: undefined,
+    arrayVal: ['arr'],
+  }
 
   it('should take a path and an object and returns the value at the path or the default value', () => {
     let obj = {
       a: {
         b: {
           c: 100,
-          d: 200
+          d: 200,
         },
         e: {
           f: [100, 101, 102],
-          g: 'G'
+          g: 'G',
         },
-        h: 'H'
+        h: 'H',
       },
       i: 'I',
-      j: ['J']
+      j: ['J'],
     }
     eq(pathOr('Unknown', ['a', 'b', 'c'], obj), 100)
     eq(pathOr('Unknown', [], obj), obj)
@@ -46,8 +51,10 @@ describe('pathOr', () => {
   })
 
   it('should work with falsy items', () => {
-    // @ts-ignore
-    eq(pathOr('Unknown', ['toString'], false), Boolean.prototype.toString)
+    eq(
+      // @ts-ignore
+      pathOr('Unknown', ['toString'], false),
+      Boolean.prototype.toString,
+    )
   })
-  
 })

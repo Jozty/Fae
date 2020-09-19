@@ -2,14 +2,14 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type FromPairs = (<T>(pairs: Pair<T>[]) => Record<string, T>)
-  & ((pairs?: PH) => FromPairs)
+type FromPairs = (<T>(pairs: Pair<T>[]) => Record<string, T>) &
+  ((pairs?: PH) => FromPairs)
 
 export type Pair<T = any> = [string | number, T]
 
 function _fromPairs<T>(pairs: Pair<T>[]) {
   const result: Record<string, T> = {}
-  pairs.forEach(p => {
+  pairs.forEach((p) => {
     result[p[0]] = p[1]
   })
 

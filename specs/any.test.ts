@@ -1,14 +1,6 @@
-import { describe, it } from "./_describe.ts"
-import {
-  any,
-  pipe,
-  map,
-  transduce,
-  flip,
-  inc,
-} from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-
+import { describe, it } from './_describe.ts'
+import { any, pipe, map, transduce, flip, inc } from '../mod.ts'
+import { eq } from './utils/utils.ts'
 
 describe('any', () => {
   const odd = (a: number) => (a & 1) === 1
@@ -33,24 +25,26 @@ describe('any', () => {
 
   it('should work with more complex objects', () => {
     const people = [
-      {first: 'Paul', last: 'Grenier'},
-      {first:'Mike', last: 'Hurley'},
-      {first: 'Will', last: 'Klein'}
+      { first: 'Paul', last: 'Grenier' },
+      { first: 'Mike', last: 'Hurley' },
+      { first: 'Will', last: 'Klein' },
     ]
-    const alliterative = (person: typeof people[number]) => person.first.charAt(0) === person.last.charAt(0)
+    const alliterative = (person: typeof people[number]) =>
+      person.first.charAt(0) === person.last.charAt(0)
 
     eq(any(alliterative, people), false)
-    people.push({first: 'Scott', last: 'Sauyet'})
+    people.push({ first: 'Scott', last: 'Sauyet' })
     eq(any(alliterative, people), true)
   })
 
   it('can use a configurable function', () => {
     const teens = [
-      {name: 'Alice', age: 14},
-      {name: 'Betty', age: 18},
-      {name: 'Cindy', age: 17}
+      { name: 'Alice', age: 14 },
+      { name: 'Betty', age: 18 },
+      { name: 'Cindy', age: 17 },
     ]
-    const atLeast = (age: number)  => (person: typeof teens[number]) => person.age >= age
+    const atLeast = (age: number) => (person: typeof teens[number]) =>
+      person.age >= age
 
     eq(any(atLeast(16), teens), true)
     eq(any(atLeast(21), teens), false)
@@ -67,14 +61,17 @@ describe('any', () => {
   it('should work with transformers too', () => {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8]
     const less2 = (a: number) => a < 2
-    const t1 = pipe(
-      map(inc),
-      any(less2)
-    )
+    const t1 = pipe(map(inc), any(less2))
 
     eq(t1(arr), false)
-    eq(transduce(t1, flip((a: number, b: number) => a), 11, arr), 2)
-
+    eq(
+      transduce(
+        t1,
+        flip((a: number, b: number) => a),
+        11,
+        arr,
+      ),
+      2,
+    )
   })
-
 })

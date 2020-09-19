@@ -1,4 +1,4 @@
-import Transformer from "./transformers.ts"
+import Transformer from './transformers.ts'
 
 export default class DropTransformer extends Transformer {
   private n: number
@@ -8,7 +8,7 @@ export default class DropTransformer extends Transformer {
   }
 
   step(result: any, input: any) {
-    if(this.n > 0) {
+    if (this.n > 0) {
       this.n--
       return result
     }

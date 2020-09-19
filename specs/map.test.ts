@@ -1,7 +1,7 @@
-import { describe, it, expect } from "./_describe.ts"
+import { describe, it, expect } from './_describe.ts'
 import { map, add, multiply, subtract, _ } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-import type { Func } from "../utils/types.ts"
+import { eq } from './utils/utils.ts'
+import type { Func } from '../utils/types.ts'
 
 function add3(a: number) {
   return 3 + a
@@ -16,9 +16,9 @@ describe('map', () => {
     e: 5,
     5: 6,
     12: 3,
-    'abc': 13,
+    abc: 13,
   }
-  const obj2 = {...obj}
+  const obj2 = { ...obj }
   const add1 = add(1)
   const times2 = multiply(2)
   const dec = subtract(_, 1)
@@ -42,7 +42,7 @@ describe('map', () => {
       e: 8,
       5: 9,
       12: 6,
-      'abc': 16,
+      abc: 16,
     }
     expect(map(add3)(obj)).toEqual(expected)
     expect(obj).toEqual(obj2)
@@ -52,7 +52,7 @@ describe('map', () => {
 
   it('should add 3 to result of function1', () => {
     function function1(a: number, b: number) {
-      return a * b + a % b
+      return a * b + (a % b)
     }
     let a = 11
     let b = 3
@@ -71,16 +71,20 @@ describe('map', () => {
     expect(m2(a)(b)).toBe(result)
   })
 
-  it('interprets ((->) r) as a functor', function() {
-    const f = function(a: number) { return a - 1; }
-    const g = function(b: number) { return b * 2; }
+  it('interprets ((->) r) as a functor', function () {
+    const f = function (a: number) {
+      return a - 1
+    }
+    const g = function (b: number) {
+      return b * 2
+    }
     const h = map(f, g) as (a: number) => number
-    eq(h(10), (10 * 2) - 1)
+    eq(h(10), 10 * 2 - 1)
   })
 
-  it('composes', function() {
+  it('composes', function () {
     const mdouble = map(times2 as (a: number) => number)
     const mdec = map(dec as (a: number) => number)
     eq(mdec(mdouble([10, 20, 30])), [19, 39, 59])
-  });
+  })
 })

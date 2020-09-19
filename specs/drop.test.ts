@@ -1,11 +1,15 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { drop } from '../mod.ts'
-import { eq, strictNotEq } from "./utils/utils.ts"
+import { eq, strictNotEq } from './utils/utils.ts'
 
 describe('drop', () => {
-
   it('should skip the first `n` elements from a list, returning the remainder', () => {
-    eq(drop(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['d', 'e', 'f', 'g'])
+    eq(drop(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), [
+      'd',
+      'e',
+      'f',
+      'g',
+    ])
   })
 
   it('should return an empty array if `n` is too large', () => {
@@ -34,5 +38,4 @@ describe('drop', () => {
     eq(drop(8, 'operate'), '')
     eq(drop(-1, 'operate'), 'operate')
   })
-
 })

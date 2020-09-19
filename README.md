@@ -1,5 +1,7 @@
 ![](./assets/logo-160x160-2.png)
+
 # Fae
+
 A functional library for Deno inspired from [Ramda](https://ramdajs.com).
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/jozty/fae)
@@ -7,9 +9,11 @@ A functional library for Deno inspired from [Ramda](https://ramdajs.com).
 ![GitHub](https://img.shields.io/github/license/jozty/fae)
 
 ## Installing
-*Deno allows you to directly import modules from URLs!*
+
+_Deno allows you to directly import modules from URLs!_
 
 To import and use the client in your file, add the following import statement:
+
 ```typescript
 import * as Fae from 'https://deno.land/x/fae/mod.ts'
 ```
@@ -17,10 +21,13 @@ import * as Fae from 'https://deno.land/x/fae/mod.ts'
 Function usage and documentation can be found [here](https://doc.deno.land/https/deno.land/x/fae/mod.ts)
 
 ### Running tests
+
 ```typescript
 deno run --allow-read --allow-net specs/_run.ts
 ```
+
 ### Usage
+
 ```typescript
 import * as Fae from 'https://deno.land/x/fae/mod.ts'
 Fae.add(10, 20) // => 30
@@ -34,7 +41,7 @@ const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const transformer = Fae.pipe(
   Fae.map(inc),
   Fae.filter(even),
-  Fae.take(3)
+  Fae.take(3),
 )
 transformer(array) // [2, 4, 6]
 ```

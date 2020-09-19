@@ -1,7 +1,6 @@
-import { describe, it, expect } from "./_describe.ts"
+import { describe, it, expect } from './_describe.ts'
 import { indexOf, equals } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
-
+import { eq } from './utils/utils.ts'
 
 describe('indexOf', () => {
   it("should return a number indicating an object's position in a list", () => {
@@ -49,7 +48,9 @@ describe('indexOf', () => {
   it('should have equals semantics', () => {
     class Just {
       private value: any
-      constructor(x: any) { this.value = x }
+      constructor(x: any) {
+        this.value = x
+      }
       equals(x: any) {
         return x instanceof Just && equals(x.value, this.value)
       }
@@ -108,5 +109,4 @@ describe('indexOf', () => {
     const list = [g, f]
     eq(indexOf(h, list), -1)
   })
-
 })

@@ -4,18 +4,16 @@ import { empty } from './empty.ts'
 import { equals } from './equals.ts'
 
 // @types
-type IsEmpty = ((x: any) => boolean)
-  & ((x?: PH) => IsEmpty)
+type IsEmpty = ((x: any) => boolean) & ((x?: PH) => IsEmpty)
 
 function _isEmpty(x: any) {
   return x != null && equals(x, empty(x))
 }
 
-
 /**
  * Returns `true` if the given value is its type's empty value, `false`
  * otherwise.
- * 
+ *
  *      Fae.isEmpty([1, 2, 3])   //=> false
  *      Fae.isEmpty([])          //=> true
  *      Fae.isEmpty('')          //=> true

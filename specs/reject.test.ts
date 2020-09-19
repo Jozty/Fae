@@ -1,6 +1,6 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import { reject, curry } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 type O = {
   x?: number
@@ -19,16 +19,22 @@ describe('reject', () => {
   })
 
   it('should return an empty array if no element matches', () => {
-    eq(reject((x: number) => x < 100, [1, 9, 99]), [])
+    eq(
+      reject((x: number) => x < 100, [1, 9, 99]),
+      [],
+    )
     eq(reject(odd, []), [])
   })
 
   it('should filter objects', () => {
     eq(reject(equals(0), {}), {})
-    eq(reject(equals(0), {x: 0, y: 0, z: 0} as O), {})
-    eq(reject(equals(0), {x: 1, y: 0, z: 0} as O), {x: 1})
-    eq(reject(equals(0), {x: 1, y: 2, z: 0} as O), {x: 1, y: 2})
-    eq(reject(equals(0), {x: 1, y: 2, z: 3} as O), {x: 1, y: 2, z: 3})
+    eq(reject(equals(0), { x: 0, y: 0, z: 0 } as O), {})
+    eq(reject(equals(0), { x: 1, y: 0, z: 0 } as O), { x: 1 })
+    eq(reject(equals(0), { x: 1, y: 2, z: 0 } as O), { x: 1, y: 2 })
+    eq(reject(equals(0), { x: 1, y: 2, z: 3 } as O), {
+      x: 1,
+      y: 2,
+      z: 3,
+    })
   })
-  
 })

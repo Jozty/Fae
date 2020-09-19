@@ -1,19 +1,19 @@
-import { dispatch } from "./utils/dispatch.ts"
-import ApertureTransformer from "./utils/Transformers/aperture.ts"
-import curryN from "./utils/curry_n.ts"
-import type { PH } from "./utils/types.ts"
+import { dispatch } from './utils/dispatch.ts'
+import ApertureTransformer from './utils/Transformers/aperture.ts'
+import curryN from './utils/curry_n.ts'
+import type { PH } from './utils/types.ts'
 
 // @types
-type Aperture_2 = (<T>(list: T[]) => T[][])
-  & ((list?: PH) => Aperture_2)
+type Aperture_2 = (<T>(list: T[]) => T[][]) &
+  ((list?: PH) => Aperture_2)
 
-type Aperture_1<T> = ((n: number) => T[][])
-  & ((n?: PH) => Aperture_1<T>)
+type Aperture_1<T> = ((n: number) => T[][]) &
+  ((n?: PH) => Aperture_1<T>)
 
-type Aperture = (<T>(n: number, list: T[]) => T[][])
-  & ((n: number, list?: PH) => Aperture_2)
-  & (<T>(n: PH, list: T[]) => Aperture_1<T>)
-  & ((n?: PH, list?: PH) => Aperture)
+type Aperture = (<T>(n: number, list: T[]) => T[][]) &
+  ((n: number, list?: PH) => Aperture_2) &
+  (<T>(n: PH, list: T[]) => Aperture_1<T>) &
+  ((n?: PH, list?: PH) => Aperture)
 
 function _aperture<T>(n: number, list: T[]) {
   const len = list.length - n + 1
@@ -22,7 +22,7 @@ function _aperture<T>(n: number, list: T[]) {
   for (let i = 0; i < len; i++) {
     result[i] = list.slice(i, i + n)
   }
-  
+
   return result
 }
 

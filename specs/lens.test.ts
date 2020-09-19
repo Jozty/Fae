@@ -1,4 +1,4 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import {
   lens,
   prop,
@@ -11,31 +11,31 @@ import {
   over,
   compose,
   Getter,
-  Setter
+  Setter,
 } from '../mod.ts'
-import { eq } from "./utils/utils.ts"
+import { eq } from './utils/utils.ts'
 
 const they = it
-
 
 const alice = {
   name: 'Alice Jones',
   address: ['22 Walnut St', 'San Francisco', 'CA'],
-  pets: {dog: 'joker', cat: 'batman'}
+  pets: { dog: 'joker', cat: 'batman' },
 }
 
 type Alice = typeof alice
 
-const nameLens = lens(prop('name') as Getter<Alice, string>, assoc('name') as any as Setter<Alice, string> )
+const nameLens = lens(
+  prop('name') as Getter<Alice, string>,
+  (assoc('name') as any) as Setter<Alice, string>,
+)
 const addressLens = lensProp<Alice, string[]>('address')
 const headLens = lensIndex<string[], string>(0)
 const dogLens = lensPath<Alice, string>(['pets', 'dog'])
 
 const toUpper = (x: string) => x.toUpperCase()
 
-
 describe('view, over, and set', () => {
-
   they('may be applied to a lens created by `lensPath`', () => {
     eq(view(dogLens, alice), 'joker')
   })
@@ -46,26 +46,30 @@ describe('view, over, and set', () => {
     eq(over(nameLens, toUpper, alice), {
       name: 'ALICE JONES',
       address: ['22 Walnut St', 'San Francisco', 'CA'],
-      pets: {dog: 'joker', cat: 'batman'}
+      pets: { dog: 'joker', cat: 'batman' },
     })
 
     eq(set(nameLens, 'Alice Smith', alice), {
       name: 'Alice Smith',
       address: ['22 Walnut St', 'San Francisco', 'CA'],
-      pets: {dog: 'joker', cat: 'batman'}
+      pets: { dog: 'joker', cat: 'batman' },
     })
   })
 
   they('may be applied to a lens created by `lensIndex`', () => {
     eq(view(headLens, alice.address), '22 Walnut St')
 
-    eq(over(headLens, toUpper, alice.address),
-      ['22 WALNUT ST', 'San Francisco', 'CA']
-    )
+    eq(over(headLens, toUpper, alice.address), [
+      '22 WALNUT ST',
+      'San Francisco',
+      'CA',
+    ])
 
-    eq(set(headLens, '52 Crane Ave', alice.address),
-      ['52 Crane Ave', 'San Francisco', 'CA']
-    )
+    eq(set(headLens, '52 Crane Ave', alice.address), [
+      '52 Crane Ave',
+      'San Francisco',
+      'CA',
+    ])
   })
 
   they('may be applied to composed lenses', () => {
@@ -79,14 +83,13 @@ describe('view, over, and set', () => {
     eq(over(streetLens, toUpper, alice), {
       name: 'Alice Jones',
       address: ['22 WALNUT ST', 'San Francisco', 'CA'],
-      pets: {dog: 'joker', cat: 'batman'}
+      pets: { dog: 'joker', cat: 'batman' },
     })
 
     eq(set(streetLens, '52 Crane Ave', alice), {
       name: 'Alice Jones',
       address: ['52 Crane Ave', 'San Francisco', 'CA'],
-      pets: {dog: 'joker', cat: 'batman'}
+      pets: { dog: 'joker', cat: 'batman' },
     })
   })
-
 })

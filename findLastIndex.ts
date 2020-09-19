@@ -1,19 +1,22 @@
-import type { Predicate1, PH } from "./utils/types.ts"
-import curryN from "./utils/curry_n.ts"
-import { dispatch } from "./utils/dispatch.ts"
-import FindLastIdxTransformer from "./utils/Transformers/findLastIndex.ts"
+import type { Predicate1, PH } from './utils/types.ts'
+import curryN from './utils/curry_n.ts'
+import { dispatch } from './utils/dispatch.ts'
+import FindLastIdxTransformer from './utils/Transformers/findLastIndex.ts'
 
 // @types
-type FindLastIndex_2<T> = ((list: T[]) => number)
-  & ((list?: PH) => FindLastIndex_2<T>)
+type FindLastIndex_2<T> = ((list: T[]) => number) &
+  ((list?: PH) => FindLastIndex_2<T>)
 
-type FindLastIndex_1<T> = ((predicate: Predicate1<T>) => number)
-  & ((predicate?: PH) => FindLastIndex_1<T>)
+type FindLastIndex_1<T> = ((predicate: Predicate1<T>) => number) &
+  ((predicate?: PH) => FindLastIndex_1<T>)
 
-type FindLastIndex = (<T>(predicate: Predicate1<T>, list: T[]) => number)
-  & (<T>(predicate: Predicate1<T>, list?: PH) => FindLastIndex_2<T>)
-  & (<T>(predicate: PH, list: T[]) => FindLastIndex_1<T>)
-  & ((predicate?: PH, list?: PH) => FindLastIndex)
+type FindLastIndex = (<T>(
+  predicate: Predicate1<T>,
+  list: T[],
+) => number) &
+  (<T>(predicate: Predicate1<T>, list?: PH) => FindLastIndex_2<T>) &
+  (<T>(predicate: PH, list: T[]) => FindLastIndex_1<T>) &
+  ((predicate?: PH, list?: PH) => FindLastIndex)
 
 function _findLastIndex<T>(predicate: Predicate1<T>, list: T[]) {
   for (let i = list.length - 1; i >= 0; i--) {
@@ -29,7 +32,7 @@ const dispatched = dispatch(FindLastIdxTransformer, _findLastIndex)
  * `-1` if no element matches.
  *
  * Acts as a transducer if a transformer is passed in place of `list`
- * 
+ *
  *      const xs = [{a: 1}, {a: 2}, {a: 3}]
  *      Fae.find(Fae.propEq('a', 2))(xs) //=> {a: 2}
  *      Fae.find(Fae.propEq('a', 4))(xs) //=> undefined

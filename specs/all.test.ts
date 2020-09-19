@@ -1,4 +1,4 @@
-import { describe, it } from "./_describe.ts"
+import { describe, it } from './_describe.ts'
 import {
   all,
   pipe,
@@ -8,7 +8,7 @@ import {
   flip,
   compose,
 } from '../mod.ts'
-import { eq, thr } from "./utils/utils.ts"
+import { eq, thr } from './utils/utils.ts'
 
 describe('all', () => {
   const arr = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -29,20 +29,33 @@ describe('all', () => {
   })
 
   it('should work with transformers too', () => {
-    const t1 = pipe(
-      map(inc),
-      all(greater0)
-    )
+    const t1 = pipe(map(inc), all(greater0))
 
     eq(t1(arr), true)
-    eq(transduce(t1, flip((a, b) => a), 11, arr), 2)
-
-    const t2 = compose(
-      map(inc),
-      all(mod3)
+    eq(
+      transduce(
+        t1,
+        flip((a, b) => a),
+        11,
+        arr,
+      ),
+      2,
     )
 
-    thr(() => t2([1, 2, 3, 4, 5]), 'Functor can be only array, object or a transformer')
-    eq(transduce(t2, flip((a, b) => a), 11, arr) as any, false)
+    const t2 = compose(map(inc), all(mod3))
+
+    thr(
+      () => t2([1, 2, 3, 4, 5]),
+      'Functor can be only array, object or a transformer',
+    )
+    eq(
+      transduce(
+        t2,
+        flip((a, b) => a),
+        11,
+        arr,
+      ) as any,
+      false,
+    )
   })
 })
