@@ -13,7 +13,7 @@ describe('multiply', () => {
     eq(multiply(0, 0), 0)
     eq(multiply(25, 0), 0)
   })
-  
+
   it('should test curried versions too', () => {
     eq(multiply(25)(5), 125)
     eq(multiply(_, 4)(25), 100)
