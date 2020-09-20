@@ -7,7 +7,7 @@ describe('zip', () => {
     const a = [1, 2, 3]
     const b = [100, 200, 300]
     function multiply3(x: number) {
-      return 3 + x
+      return 3 * x
     }
 
     eq(zip(a, b), [
@@ -36,6 +36,7 @@ describe('zip', () => {
       [1, 100],
       [2, 200],
       [3, 300],
+      [4, 400],
     ])
     eq(zip(b, c), [
       [100, 10],
