@@ -1,5 +1,5 @@
 import { describe, it, expect } from './_describe.ts'
-import { divide } from '../mod.ts'
+import { divide, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('divide', () => {
@@ -13,5 +13,12 @@ describe('divide', () => {
     eq(divide(0, 0), NaN)
     eq(divide(25, 0), Infinity)
     eq(divide(25)(10), 2.5)
+  })
+
+  it('should test curried versions too', () => {
+    eq(divide(25)(5), 5)
+    eq(divide(_, 5)(25), 5)
+    eq(divide(5, _)(25), 0.2)
+    eq(divide(_, _)(25)(5), 5)
   })
 })
