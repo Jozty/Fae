@@ -5,9 +5,11 @@ import type { PH } from './utils/types.ts'
 // prettier-ignore
 type Or_2 = ((b: any) => boolean) 
   & ((b?: PH) => Or_2)
+
 // prettier-ignore
 type Or_1 = ((a: any) => boolean) 
   & ((a?: PH) => Or_1)
+
 // prettier-ignore
 type Or = ((a: any, b: any) => boolean) 
   & ((a: any, b?: PH) => Or_2) 
