@@ -13,5 +13,23 @@ describe('or', () => {
     eq(or('Fae', 'Best'), true)
     eq(or(a, 3), true)
     eq(or([1, 2, 3], [2, 10]), true)
+    eq(or(0, true), true)
+    eq(or('', false), false)
+    eq(or('', false), false)
+    eq(or(null, false), false)
+    eq(or(NaN, false), false)
+    eq(or('a', false), true)
+    eq(or('a', false), true)
+    eq(or([], false), true)
+    eq(or({}, false), true)
+    eq(or({ 1: 2 }, false), true)
+    eq(or([1, 2, 3], false), true)
+    //prettier-ignore
+    eq(or(function () {}, false),true,)
+    eq(or([], {}), true)
+    //prettier-ignore
+    eq(or(function () {}, ''),true,)
+    //prettier-ignore
+    eq(or('', ""), false)
   })
 })

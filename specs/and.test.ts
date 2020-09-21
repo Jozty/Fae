@@ -1,6 +1,7 @@
 import { describe, it } from './_describe.ts'
 import { and } from '../mod.ts'
 import { eq } from './utils/utils.ts'
+import { getFunctionName } from '../utils/get.ts'
 
 describe('and', () => {
   it('should compare two values properly', () => {
@@ -17,5 +18,23 @@ describe('and', () => {
     eq(and(undefined, undefined), false)
     eq(and(true, undefined), false)
     eq(and(2, 1), true)
+    eq(and(0, true), false)
+    eq(and('', true), false)
+    eq(and('', true), false)
+    eq(and(null, true), false)
+    eq(and(NaN, true), false)
+    eq(and('a', true), true)
+    eq(and('a', true), true)
+    eq(and([], true), true)
+    eq(and({}, true), true)
+    eq(and({ 1: 2 }, true), true)
+    eq(and([1, 2, 3], true), true)
+    //prettier-ignore
+    eq(and(function () {}, true),true)
+    eq(and([], {}), true)
+    //prettier-ignore
+    eq(and(function () {}, ''),false)
+    //prettier-ignore
+    eq(and('', ""), false)
   })
 })
