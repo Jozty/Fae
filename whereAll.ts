@@ -3,18 +3,15 @@ import curryN from './utils/curry_n.ts'
 
 // @types
 // prettier-ignore
-type WhereAll_2<T> =
-  & ((testObj: Obj<T>) => boolean)
+type WhereAll_2<T> = ((testObj: Obj<T>) => boolean)
   & ((testObj?: PH) => WhereAll_2<T>)
 
 // prettier-ignore
-type WhereAll_1<T> =
-  & ((specs: Tests<T>) => boolean)
+type WhereAll_1<T> = ((specs: Tests<T>) => boolean)
   & ((specs?: PH) => WhereAll_1<T>)
 
 // prettier-ignore
-type WhereAll =
-  & (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
+type WhereAll = (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
   & (<T>(specs: Tests<T>, testObj?: PH) => WhereAll_2<T>)
   & (<T>(specs: PH, testObj: Obj<T>) => WhereAll_1<T>)
   & ((specs?: PH, testObj?: PH) => WhereAll)
@@ -31,7 +28,7 @@ function _whereAll<T>(specs: Tests<T>, testObj: Obj<T>) {
 }
 
 /**
- * Takes a specs objects whose property is a predicate function
+ * Takes a specs objects whose properties are predicate functions
  * Each predicate is applied to the value of the corresponding property of the
  * test object. Returns `true` if all the predicates are satisfied, `false` otherwise.
  * **NOTE** returns `false` if there is no predicated functions

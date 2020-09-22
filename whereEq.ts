@@ -1,23 +1,20 @@
-import curryN from "./utils/curry_n.ts"
-import type { PH, Obj, Tests, Func } from "./utils/types.ts"
-import { whereAll } from "./whereAll.ts"
-import { map } from "./map.ts"
-import { equals } from "./equals.ts"
+import curryN from './utils/curry_n.ts'
+import type { PH, Obj, Tests, Func } from './utils/types.ts'
+import { whereAll } from './whereAll.ts'
+import { map } from './map.ts'
+import { equals } from './equals.ts'
 
 // @types
 // prettier-ignore
-type WhereEq_2<T> =
-  & ((testObj: Obj<T>) => boolean)
+type WhereEq_2<T> = ((testObj: Obj<T>) => boolean)
   & ((testObj?: PH) => WhereEq_2<T>)
 
 // prettier-ignore
-type WhereEq_1<T> =
-  & ((spec: Obj<T>) => boolean)
+  type WhereEq_1<T> = ((spec: Obj<T>) => boolean)
   & ((spec?: PH) => WhereEq_1<T>)
 
 // prettier-ignore
-type WhereEq =
-  & (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)
+  type WhereEq = (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)
   & (<T>(spec: Obj<T>, testObj?: PH) => WhereEq_2<T>)
   & (<T>(spec: PH, testObj: Obj<T>) => WhereEq_1<T>)
   & ((spec?: PH, testObj?: PH) => WhereEq)
