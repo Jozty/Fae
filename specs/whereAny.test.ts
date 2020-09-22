@@ -32,9 +32,7 @@ describe('whereAny', () => {
     const test3 = { x: undefined }
     const test4 = { x: 1 }
     eq(whereAny(spec, test1), true)
-    // @ts-ignore
     eq(whereAny(spec, test2), false)
-    // @ts-ignore
     eq(whereAny(spec, test3), true)
     eq(whereAny(spec, test4), false)
   })
@@ -49,18 +47,5 @@ describe('whereAny', () => {
       valueOf: equals(null),
     }
     eq(whereAny(spec, {}), true)
-  })
-
-  it('should not match inherited spec', () => {
-    function Spec() {
-      // @ts-ignore
-      this.y = equals(6)
-    }
-    Spec.prototype.x = equals(5)
-    // @ts-ignore
-    const spec = new Spec()
-
-    eq(whereAny(spec, { y: 6 }), true)
-    eq(whereAny(spec, { x: 5 }), false)
   })
 })

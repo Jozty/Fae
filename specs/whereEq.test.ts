@@ -17,13 +17,16 @@ describe('whereEq', () => {
 
   it('should work if interfaces are different', () => {
     let spec = { x: 100 }
+    let spec2 = { w: 1, x: 100, y: 200 }
     let test1 = { x: 20, y: 100, z: 100 }
     let test2 = { w: 1, x: 100, y: 100, z: 100 }
     let test3 = {}
+    let test4 = { w: 1, x: 100 }
 
     eq(whereEq(spec, test1), false)
     eq(whereEq(spec, test2), true)
     eq(whereEq(spec, test3), false)
+    eq(whereEq(spec2, test4), false)
   })
 
   it('should match specs that have undefined properties', () => {
