@@ -1,6 +1,6 @@
 import curryN from "./utils/curry_n.ts"
 import type { PH, Obj, Tests, Func } from "./utils/types.ts"
-import { where } from "./where.ts"
+import { whereAll } from "./whereAll.ts"
 import { map } from "./map.ts"
 import { equals } from "./equals.ts"
 
@@ -23,7 +23,7 @@ type WhereEq =
   & ((spec?: PH, testObj?: PH) => WhereEq)
 
 function _whereEq<T>(spec: Obj<T>, testObj: Obj<T>) {
-  return where(
+  return whereAll(
     (map(equals as Func, spec) as unknown) as Tests<T>,
     testObj,
   )

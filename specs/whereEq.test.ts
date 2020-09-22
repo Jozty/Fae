@@ -37,7 +37,7 @@ describe('whereEq', () => {
     eq(whereEq(spec, test2), false)
   })
 
-  it('should return true for an empty spec', () => {
-    eq(whereEq({}, { a: 1 }), true)
+  it('should return false for an empty spec', () => {
+    eq(whereEq({}, { a: 1 }), false)
   })
 })

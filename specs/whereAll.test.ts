@@ -23,7 +23,7 @@ describe('whereAll', () => {
     eq(whereAll(spec2, test4), false)
     eq(whereAll(spec2, test5), true)
     eq(whereAll(spec2, test6), false)
-    eq(whereAll({}, { x: 1 }), true)
+    eq(whereAll({}, { x: 1 }), false)
   })
 
   it('should return true if the test object satisfies the spec', () => {
