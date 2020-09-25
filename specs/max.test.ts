@@ -1,14 +1,21 @@
 import { describe, it, expect } from './_describe.ts'
 import { max } from '../mod.ts'
 import { eq } from './utils/utils.ts'
+//TODO singla-shivam
 
 describe('max', () => {
   it('should return the larger of its two arguments', () => {
     eq(max(-10, 8), 8)
     eq(max(10, -8), 10)
+    eq(max(-10, -8), -8)
+    eq(max(10, 8), 10)
     eq(max(NaN, 1000), 1000)
     eq(max(0, NaN), NaN)
     eq(max(Infinity, NaN), NaN)
+    eq(max(NaN, 0), 0)
+    eq(max(0, NaN), NaN)
+    eq(max(Infinity, NaN), NaN)
+    eq(max(NaN, Infinity), Infinity)
   })
 
   it('should work for any orderable type', () => {
