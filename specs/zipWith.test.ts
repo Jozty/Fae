@@ -7,9 +7,9 @@ describe('zipWith', () => {
   const a = [1, 2, 3]
   const b = [100, 200, 300]
   const c = [10, 20, 30, 40, 50, 60]
-  const s = (a: any, b: any) => a + ' cow ' + b
+  const s = (a: number, b: number) => a + ' cow ' + b
   const y = ['Cow', 'Horse', 'Dog']
-  const f = zipWith((a: any, b: String) => a + ' ' + b)
+  const f = zipWith((a: number, b: String) => a + ' ' + b)
 
   it('should return an array created by applying its passed-in function pair-wise on its passed in arrays', () => {
     const z = zipWith(_, a, b)
@@ -30,4 +30,6 @@ describe('zipWith', () => {
     )
     eq(f(c)(y), ['10 Cow', '20 Horse', '30 Dog'])
   })
-})
+
+}) 
+
