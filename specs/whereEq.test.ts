@@ -3,7 +3,19 @@ import { whereEq } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('whereEq', () => {
-  it('should return true if the test object satisfies the spec', () => {
+  const person1 = {
+    name: { firstName: 'Bob', lastname: 'Hanks' },
+    address: { city: 'LA', state: 'California' },
+  }
+  const person2 = {
+    name: { firstName: 'Bob', lastname: 'South' },
+    address: { city: 'LA', state: 'California' },
+  }
+  const person3 = {
+    name: { firstName: 'Tom', lastname: 'Hanks' },
+    address: { city: 'New York City', state: 'New York' },
+  }
+  it('should return true if the test object satisfies the spec otherwise false', () => {
     let spec = { x: 1, y: 2 }
     let test1 = { x: 0, y: 200 }
     let test2 = { x: 0, y: 10 }
@@ -13,6 +25,9 @@ describe('whereEq', () => {
     eq(whereEq(spec, test2), false)
     eq(whereEq(spec, test3), false)
     eq(whereEq(spec, test4), true)
+    eq(whereEq(person1.address, person3.address), false)
+    eq(whereEq(person1, person3), false)
+    eq(whereEq(person1.address, person2.address), true)
   })
 
   it('should work if interfaces are different', () => {

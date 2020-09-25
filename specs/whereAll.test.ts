@@ -2,12 +2,20 @@ import { describe, it } from './_describe.ts'
 import { whereAll, curry } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
-//TODO: (shivam-singla) check this (undefined ones)
-
 describe('whereAll', () => {
   const equals = curry(2, (x: number, y: number) => x === y)
-
-  // @ts-ignore
+  const specP = {
+    name: { firstName: equals('Bob'), lastname: equals('Hanks') },
+    address: { city: equals('LA'), state: equals('California') },
+  }
+  const person1 = {
+    name: { firstName: 'Bob', lastname: 'South' },
+    address: { city: 'LA', state: 'California' },
+  }
+  const person2 = {
+    name: { firstName: 'Tom', lastname: 'Hanks' },
+    address: { city: 'New York City', state: 'New York' },
+  }
 
   it('should be properly declared.', function () {
     let spec = { x: equals('foo'), y: equals(7) }
@@ -24,6 +32,8 @@ describe('whereAll', () => {
     eq(whereAll(spec2, test5), true)
     eq(whereAll(spec2, test6), false)
     eq(whereAll({}, { x: 1 }), false)
+    eq(whereAll(specP.address, person1.address), true);
+    eq(whereAll(specP.address, person2.address), false);
   })
 
   it('should return true if the test object satisfies the spec', () => {
@@ -52,8 +62,6 @@ describe('whereAll', () => {
     eq(whereAll(spec2, test4), false)
   })
 
-  // @ts-ignore
-  
   it('should match specs that have undefined properties', () => {
     const spec = { x: equals(undefined) }
     const test1 = {}

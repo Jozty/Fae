@@ -4,6 +4,18 @@ import { eq } from './utils/utils.ts'
 
 describe('whereAny', () => {
   const equals = curry(2, (x: number, y: number) => x === y)
+  const specP = {
+    name: { firstName: equals('Bob'), lastname: equals('Hanks') },
+    address: { city: equals('LA'), state: equals('California') },
+  }
+  const person1 = {
+    name: { firstName: 'Bob', lastname: 'South' },
+    address: { city: 'LA', state: 'California' },
+  }
+  const person2 = {
+    name: { firstName: 'Tom', lastname: 'Root' },
+    address: { city: 'New York City', state: 'New York' },
+  }
   it('should return true if the test object satisfies the spec', () => {
     const spec = { x: equals(0), y: equals(2) }
     const test1 = { x: 0, y: 200 }
@@ -14,6 +26,8 @@ describe('whereAny', () => {
     eq(whereAny(spec, test2), true)
     eq(whereAny(spec, test3), false)
     eq(whereAny(spec, test4), true)
+    eq(whereAny(specP.name, person1.name), true);
+    eq(whereAny(specP.name, person2.name), false);
   })
 
   it('should not need the spec and the test object to have the same interface (the test object will have a superset of the specs properties)', () => {
