@@ -26,8 +26,8 @@ describe('whereAny', () => {
     eq(whereAny(spec, test2), true)
     eq(whereAny(spec, test3), false)
     eq(whereAny(spec, test4), true)
-    eq(whereAny(specP.name, person1.name), true);
-    eq(whereAny(specP.name, person2.name), false);
+    eq(whereAny(specP.name, person1.name), true)
+    eq(whereAny(specP.name, person2.name), false)
   })
 
   it('should not need the spec and the test object to have the same interface (the test object will have a superset of the specs properties)', () => {

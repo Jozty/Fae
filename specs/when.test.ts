@@ -23,12 +23,11 @@ describe('when', () => {
   const invoke = function (obj: { firstname: string; lastname: string }) {
     return obj.firstname
   }
-  const isEven = (n:number) => n % 2 === 0;
+  const isEven = (n:number) => n % 2 === 0
     
   it('should call the whenTrue function if the validator returns a truthy value', () => {
     eq(when(isNumber, add1)(10), 11)
     eq(when(equals(_, 5), g)(5), 15) 
-    eq(when(equals(_, 5), g)(5), 15)
     eq(when(equals(person1), invoke)(person1), 'Bob')
     eq(when(equals([1,2,4,5,6]))(filter(isEven))([1,2,4,5,6]), [2, 4, 6])  
   })
