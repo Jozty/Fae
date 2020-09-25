@@ -8,20 +8,24 @@ describe('whereAny', () => {
     name: { firstName: equals('Bob'), lastname: equals('Hanks') },
     address: { city: equals('LA'), state: equals('California') },
   }
+
   const person1 = {
     name: { firstName: 'Bob', lastname: 'South' },
     address: { city: 'LA', state: 'California' },
   }
+
   const person2 = {
     name: { firstName: 'Tom', lastname: 'Root' },
     address: { city: 'New York City', state: 'New York' },
   }
+
   it('should return true if the test object satisfies the spec', () => {
     const spec = { x: equals(0), y: equals(2) }
     const test1 = { x: 0, y: 200 }
     const test2 = { x: 0, y: 10 }
     const test3 = { x: 1, y: 101 }
     const test4 = { x: 1, y: 2 }
+
     eq(whereAny(spec, test1), true)
     eq(whereAny(spec, test2), true)
     eq(whereAny(spec, test3), false)
@@ -45,6 +49,7 @@ describe('whereAny', () => {
     const test2 = { x: null }
     const test3 = { x: undefined }
     const test4 = { x: 1 }
+
     eq(whereAny(spec, test1), true)
     eq(whereAny(spec, test2), false)
     eq(whereAny(spec, test3), true)
@@ -60,6 +65,7 @@ describe('whereAny', () => {
       toString: equals(Object.prototype.toString),
       valueOf: equals(null),
     }
+    
     eq(whereAny(spec, {}), true)
   })
 })

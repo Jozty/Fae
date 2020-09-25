@@ -8,10 +8,12 @@ describe('whereAll', () => {
     name: { firstName: equals('Bob'), lastname: equals('Hanks') },
     address: { city: equals('LA'), state: equals('California') },
   }
+
   const person1 = {
     name: { firstName: 'Bob', lastname: 'South' },
     address: { city: 'LA', state: 'California' },
   }
+
   const person2 = {
     name: { firstName: 'Tom', lastname: 'Hanks' },
     address: { city: 'New York City', state: 'New York' },
@@ -42,6 +44,7 @@ describe('whereAll', () => {
     const test2 = { x: 0, y: 10 }
     const test3 = { x: 0, y: 2 }
     const test4 = { x: 1, y: 2 }
+
     eq(whereAll(spec, test1), false)
     eq(whereAll(spec, test2), false)
     eq(whereAll(spec, test3), true)
@@ -68,6 +71,7 @@ describe('whereAll', () => {
     const test2 = { x: null }
     const test3 = { x: undefined }
     const test4 = { x: 1 }
+
     eq(whereAll(spec, test1), true)    
     eq(whereAll(spec, test2), false)    
     eq(whereAll(spec, test3), true)
@@ -83,6 +87,7 @@ describe('whereAll', () => {
       toString: equals(Object.prototype.toString),
       valueOf: equals(null),
     }
+    
     eq(whereAll(spec, {}), false)
   })
 })

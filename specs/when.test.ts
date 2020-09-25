@@ -9,6 +9,7 @@ describe('when', () => {
   function g(x: number) {
     return multiply(3)(x)
   }
+  
   let spec = { x: equals('foo'), y: equals(7) }
   let test1 = { x: 12, y: 200 }
   let test2 = { x: 'foo', y: 7 }
@@ -16,13 +17,16 @@ describe('when', () => {
     firstname: 'Bob',
     lastname: 'Hanks'
   }
+
   const person2 = {
     firstname: 'Michael',
     lastname: 'Jordan',
   }
+
   const invoke = function (obj: { firstname: string; lastname: string }) {
     return obj.firstname
   }
+
   const isEven = (n:number) => n % 2 === 0
     
   it('should call the whenTrue function if the validator returns a truthy value', () => {
@@ -40,6 +44,7 @@ describe('when', () => {
 
   it('should return a curried function', () => {
     const ifIsNumber = when(isNumber)
+
     eq(ifIsNumber(add(1))(15), 16)
     eq(ifIsNumber(add(1))('hello'), 'hello')
     eq(when(equals(_, 5))(g)(5), 15)
