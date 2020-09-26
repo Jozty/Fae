@@ -3,5 +3,16 @@
   "editor.formatOnSave": true,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#461F16",
+    "activityBar.background": "#461F16",
+    "activityBar.foreground": "#FEF7F6",
+    "activityBar.inactiveForeground": "#F7C2B6",
+    "activityBarBadge.background": "#D35D41",
+    "activityBarBadge.foreground": "#FEF7F6",
+    "activityBar.activeBackground": "#692E20",
+    "statusBar.background": "#461F16",
+  },
+  "window.titleBarStyle": "custom"
 }
