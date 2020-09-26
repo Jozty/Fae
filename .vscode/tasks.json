@@ -7,6 +7,18 @@
       "label": "test",
       "type": "shell",
       "command": "deno test"
+    },
+    {
+      "label": "debug _test.ts",
+      "type": "shell",
+      "command": "deno run --inspect-brk -A _test.ts",
+      "isBackground": true,
+      "problemMatcher": {
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Debugger listening"
+        }
+      },
     }
   ]
 }
