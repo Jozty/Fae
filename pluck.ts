@@ -4,18 +4,22 @@ import { map } from './map.ts'
 import { prop } from './prop.ts'
 
 // @types
-type Pluck_2 = (<T>(list: Obj<T>[]) => T[]) & ((list?: PH) => Pluck_2)
+// prettier-ignore
+type Pluck_2 = (<T>(list: Obj<T>[]) => T[])
+  & ((list?: PH) => Pluck_2)
 
-type Pluck_1<T> = ((p: number | string) => T[]) &
-  ((p?: PH) => Pluck_1<T>)
+// prettier-ignore
+type Pluck_1<T> = ((p: number | string) => T[])
+  & ((p?: PH) => Pluck_1<T>)
 
-type Pluck = (<T>(p: number | string, list: Obj<T>[]) => T[]) &
-  ((p: number | string, list?: PH) => Pluck_2) &
-  (<T>(p: PH, list: Obj<T>[]) => Pluck_1<T>) &
-  ((p?: PH, list?: PH) => Pluck)
+// prettier-ignore
+type Pluck = (<T>(p: number | string, list: Obj<T>[]) => T[])
+  & ((p: number | string, list?: PH) => Pluck_2)
+  & (<T>(p: PH, list: Obj<T>[]) => Pluck_1<T>)
+  & ((p?: PH, list?: PH) => Pluck)
 
 function _pluck<T>(p: number | string, list: Obj<T>[]): T[] {
-  return map(prop(p) as FuncArr1<Obj<T>, T>, list) as T[]
+  return map(prop(p) as FuncArr1<Obj<T>, T>, list)
 }
 
 /**
