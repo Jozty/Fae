@@ -6,31 +6,27 @@ import { dispatch } from './utils/dispatch.ts'
 import MapTransformer from './utils/Transformers/map.ts'
 import { getFunctionLength } from './utils/get.ts'
 
-// TODO: more refine
 // @types
-type Map_2<F extends Obj<T> | Func | T[], T, R> = ((
-  functor: F,
-) => Func | R[] | Obj<R>) &
-  ((functor?: PH) => Map_2<F, T, R>)
+// prettier-ignore
+type MapReturnType<F, T, R> = F extends T[]
+  ? R[]
+  : F extends Obj<T>
+    ? Obj<R>
+    : Func
 
-type Map_1<F extends Obj<T> | Func | T[], T, R> = ((
-  fn: FuncArr1<T, R>,
-) => Func | R[] | Obj<R>) &
-  ((fn?: PH) => Map_1<F, T, R>)
+// prettier-ignore
+type Map_2<T, R> = (<F extends Obj<T> | Func | T[]>(functor: F) => MapReturnType<F, T, R>)
+  & ((functor?: PH) => Map_2<T, R>)
 
-type Map = (<F extends Obj<T> | Func | T[], T, R>(
-  fn: FuncArr1<T, R>,
-  functor: F,
-) => Func | R[] | Obj<R>) &
-  (<F extends Obj<T> | Func | T[], T, R>(
-    fn: FuncArr1<T, R>,
-    functor?: PH,
-  ) => Map_2<F, T, R>) &
-  (<F extends Obj<T> | Func | T[], T, R>(
-    fn: PH,
-    functor: F,
-  ) => Map_1<F, T, R>) &
-  ((fn?: PH, functor?: PH) => Map)
+// prettier-ignore
+type Map_1<F extends Obj<T> | Func | T[], T, R> = ((fn: FuncArr1<T, R>) => MapReturnType<F, T, R>)
+  & ((fn?: PH) => Map_1<F, T, R>)
+
+// prettier-ignore
+type Map = (<F extends Obj<T> | Func | T[], T, R>(fn: FuncArr1<T, R>, functor: F) => MapReturnType<F, T, R>)
+  & (<T, R>(fn: FuncArr1<T, R>, functor?: PH) => Map_2<T, R>)
+  & (<F extends Obj<T> | Func | T[], T, R>(fn: PH, functor: F) => Map_1<F, T, R>)
+  & ((fn?: PH, functor?: PH) => Map)
 
 function _functionMap<T, R>(fn: FuncArr1<T, R>, functor: Func): Func {
   return curryN(getFunctionLength(functor), function (
@@ -67,10 +63,10 @@ function _arrayMap<T, R>(func: FuncArr1<T, R>, functor: T[]) {
 function _map<F extends Obj<T> | Func | T[], T, R>(
   fn: FuncArr1<T, R>,
   functor: F,
-) {
-  if (isFunction(functor)) return _functionMap(fn, functor)
-  if (isArray(functor)) return _arrayMap(fn, functor)
-  if (isObject(functor)) return _objectMap(fn, functor as any)
+): MapReturnType<F, T, R> {
+  if (isFunction(functor)) return _functionMap(fn, functor) as any
+  if (isArray(functor)) return _arrayMap(fn, functor) as any
+  if (isObject(functor)) return _objectMap(fn, functor as any) as any
   throw new TypeError(
     'Functor can be only array, object or a transformer',
   )
