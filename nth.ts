@@ -10,26 +10,25 @@ import { throwFunctorError } from './utils/throw.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type Nth_2 = (<F extends FunctorWithArLk<T> | string, T>(
-  functor: F,
-) => T) &
-  ((functor?: PH) => Nth_2)
+// prettier-ignore
+type NthReturnType<F, T> = F extends string
+  ? string
+  : T
 
-type Nth_1<F extends FunctorWithArLk<T> | string, T> = ((
-  index: number,
-) => T) &
-  ((index?: PH) => Nth_1<F, T>)
+// prettier-ignore
+type Nth_2 = (<F extends FunctorWithArLk<T> | string, T>(functor: F) => NthReturnType<F, T>)
+  & ((functor?: PH) => Nth_2)
 
-type Nth = (<F extends FunctorWithArLk<T> | string, T>(
-  index: number,
-  functor: F,
-) => T) &
-  ((index: number, functor?: PH) => Nth_2) &
-  (<F extends FunctorWithArLk<T> | string, T>(
-    index: PH,
-    functor: F,
-  ) => Nth_1<F, T>) &
-  ((index?: PH, functor?: PH) => Nth)
+// prettier-ignore
+type Nth_1<F extends FunctorWithArLk<T> | string, T> = ((index: number) => T)
+  & ((index?: PH) => Nth_1<F, T>)
+
+// prettier-ignore
+type Nth = (<F extends FunctorWithArLk<T> | string, T>(index: number, functor: F) => NthReturnType<F, T>)
+  & ((index: number, functor?: PH) => Nth_2)
+  & (<F extends FunctorWithArLk<T> | string, T>(index: PH, functor: F) => Nth_1<F, T>)
+  & ((index?: PH, functor?: PH) => Nth)
+
 
 function _nth<F extends FunctorWithArLk<T> | string, T>(
   index: number,
