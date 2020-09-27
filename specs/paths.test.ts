@@ -32,7 +32,7 @@ const obj2 = {
 }
 
 const paths1 = paths(_, obj1)
-const paths2 = paths(_, obj2 as any)
+const paths2 = paths(_, obj2)
 
 describe('paths', () => {
   it('should work on objects', () => {
@@ -61,6 +61,18 @@ describe('paths', () => {
       1,
       undefined,
     ])
+    eq(
+      paths(["", ["p", 0, "q"]], { a: { b: 2 }, p: [{ q: 3 }] }),
+      [{ a: { b: 2 }, p: [{ q: 3 }] }, 3],
+    )
+    eq(
+      paths([[], ["p", 0, "q"]], { a: { b: 2 }, p: [{ q: 3 }] }),
+      [{ a: { b: 2 }, p: [{ q: 3 }] }, 3],
+    )
+    eq(
+      paths([["a", ""], ["p", 0, "q"]], { a: { b: 2 }, p: [{ q: 3 }] }),
+      [undefined, 3],
+    )
   })
 
   it('should work with object with mixed type props', () => {
@@ -68,6 +80,12 @@ describe('paths', () => {
     eq(paths2([['a', 0], ['a', 2, 'de', 0], ['a', 2, 'de'], [4]]), [
       1,
       12,
+      [12, 23, 25],
+      'sdf',
+    ])
+    eq(paths2([['a', -4], ['a', -2, 'de', -4], ['a', -2, 'de'], [4]]), [
+      1,
+      undefined,
       [12, 23, 25],
       'sdf',
     ])

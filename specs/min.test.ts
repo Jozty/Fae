@@ -1,7 +1,7 @@
-import { describe, it, expect } from './_describe.ts'
+import { describe, it } from './_describe.ts'
 import { min } from '../mod.ts'
 import { eq } from './utils/utils.ts'
-//TODO singla-shivam
+//TODO singla-shivam (Returns the second argument if one of the arguments is NaN)
 
 describe('min', () => {
   it('should returns the smaller of its two arguments', () => {
