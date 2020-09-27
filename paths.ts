@@ -12,25 +12,25 @@ import { trim } from './trim.ts'
 export type Path = string | Array<string | number>
 
 // @types
-type Paths_2 = (<T, R>(obj: ObjRec<T> | null) => R[]) &
-  ((obj?: PH) => Paths_2)
+// prettier-ignore
+type Paths_2 = (<T, R>(obj: ObjRec<T> | null) => R[])
+  & ((obj?: PH) => Paths_2)
 
-type Paths_1<T, R> = ((pathsArr: Path[]) => R[]) &
-  ((pathsArr?: PH) => Paths_1<T, R>)
+// prettier-ignore
+type Paths_1<T, R> = ((pathsArr: Path[]) => R[])
+  & ((pathsArr?: PH) => Paths_1<T, R>)
 
-type Paths = (<T, R>(
-  pathsArr: Path[],
-  obj: ObjRec<T> | null,
-) => R[]) &
-  ((pathsArr: Path[], obj?: PH) => Paths_2) &
-  (<T, R>(pathsArr: PH, obj: ObjRec<T> | null) => Paths_1<T, R>) &
-  ((pathsArr?: PH, obj?: PH) => Paths)
+// prettier-ignore
+type Paths = (<T, R>(pathsArr: Path[], obj: ObjRec<T> | null) => R[])
+  & ((pathsArr: Path[], obj?: PH) => Paths_2)
+  & (<T, R>(pathsArr: PH, obj: ObjRec<T> | null) => Paths_1<T, R>)
+  & ((pathsArr?: PH, obj?: PH) => Paths)
 
 export function getPath(path: Path): Array<string | number> {
   if (isString(path)) {
     if (path.includes('/')) return trim(path, '/').split('/')
     if (path.includes('.')) return trim(path, '.').split('.')
-    return [path]
+    return path ? [path] : []
   }
   return path as Array<string | number>
 }
@@ -42,10 +42,9 @@ function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {
     for (let i = 0; i < path.length; i++) {
       if (isUndefinedOrNull(val)) return
       const p = path[i]
+      const pInt = parseInt(p as string, 10)
       val =
-        isInteger(p as number) && isArrayLike(val)
-          ? nth(p as number, val)
-          : val[p]
+        isInteger(pInt) && isArrayLike(val) ? nth(pInt, val) : val[p]
     }
     return val
   })
@@ -59,8 +58,7 @@ function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {
  *
  *      Fae.paths([['a', 'b'], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); // [2, 3]
  *      Fae.paths([['a', 'b'], ['p', 'r']], {a: {b: 2}, p: [{q: 3}]}); // [2, undefined]
- *      Fae.path([['a', 'b']], {a: {b: 2}}); 2
- *      Fae.path(['a/b/0'], {a: {b: [1, 2, 3]}}); // 1
- *      Fae.path(['a.b.0'], {a: {b: [1, 2, 3]}}); // 2
+ *      Fae.paths([[], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); // [ { a: { b: 2 }, p: [ { q: 3 } ] }, 3 ]
+ *      Fae.paths([['a', ''], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); // [ undefined, 3 ]
  */
 export const paths: Paths = curryN(2, _paths)

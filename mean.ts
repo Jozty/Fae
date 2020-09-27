@@ -3,7 +3,9 @@ import type { PH } from './utils/types.ts'
 import { sum } from './sum.ts'
 
 // @types
-type Mean = ((list: number[]) => number) & ((list?: PH) => Mean)
+// prettier-ignore
+type Mean = ((list: number[]) => number)
+  & ((list?: PH) => Mean)
 
 function _mean(list: number[]) {
   return sum(list) / list.length

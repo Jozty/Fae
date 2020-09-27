@@ -1,7 +1,6 @@
 import { describe, it } from './_describe.ts'
 import { zipWith, add, multiply, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
-import { filter } from '../filter.ts'
 
 describe('zipWith', () => {
   const a = [1, 2, 3]
@@ -13,6 +12,7 @@ describe('zipWith', () => {
 
   it('should return an array created by applying its passed-in function pair-wise on its passed in arrays', () => {
     const z = zipWith(_, a, b)
+
     eq(z(add as (a: number, b: number) => number), [101, 202, 303])
     eq(z(multiply as (a: number, b: number) => number), [
       100,
@@ -30,6 +30,4 @@ describe('zipWith', () => {
     )
     eq(f(c)(y), ['10 Cow', '20 Horse', '30 Dog'])
   })
-
-}) 
-
+})

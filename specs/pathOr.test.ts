@@ -29,7 +29,10 @@ describe('pathOr', () => {
     }
     eq(pathOr('Unknown', ['a', 'b', 'c'], obj), 100)
     eq(pathOr('Unknown', [], obj), obj)
+    eq(pathOr('Unknown', '', obj), obj)
+    eq(pathOr('Unknown', ['a', ''], obj), 'Unknown')
     eq(pathOr('Unknown', ['a', 'e', 'f', 1], obj), 101)
+    eq(pathOr('Unknown', ['a', 'e', 'f', -2], obj), 101)
     eq(pathOr('Unknown', ['j', 0], obj), 'J')
     eq(pathOr('Unknown', ['j', 1], obj), 'Unknown')
     eq(pathOr('Unknown', ['a', 'b', 'c'], null), 'Unknown')
@@ -47,11 +50,14 @@ describe('pathOr', () => {
 
   it('should return the default value for null/undefined', () => {
     eq(pathOr('Unknown', ['toString'], null), 'Unknown')
+    eq(pathOr('Unknown', [], null), 'Unknown')
+    // fae-no-check
     eq(pathOr('Unknown', ['toString'], undefined) as any, 'Unknown')
   })
 
   it('should work with falsy items', () => {
     eq(
+      // fae-no-check
       // @ts-ignore
       pathOr('Unknown', ['toString'], false),
       Boolean.prototype.toString,

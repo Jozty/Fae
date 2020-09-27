@@ -7,16 +7,16 @@ type WhereAny_2<T> = ((testObj: Obj<T>) => boolean)
   & ((testObj?: PH) => WhereAny_2<T>)
 
 // prettier-ignore
-  type WhereAny_1<T> = ((specs: Tests<T>) => boolean)
+type WhereAny_1<T> = ((specs: Tests<T>) => boolean)
   & ((specs?: PH) => WhereAny_1<T>)
 
 // prettier-ignore
-  type WhereAny = (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
+type WhereAny = (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
   & (<T>(specs: Tests<T>, testObj?: PH) => WhereAny_2<T>)
   & (<T>(specs: PH, testObj: Obj<T>) => WhereAny_1<T>)
   & ((specs?: PH, testObj?: PH) => WhereAny)
 
-function _whereAny<T>(specs: Tests<T> , testObj: Obj<T>) {
+function _whereAny<T>(specs: Tests<T>, testObj: Obj<T>) {
   for (const key in specs) {
     const pred = specs[key]
     const value = testObj[key]

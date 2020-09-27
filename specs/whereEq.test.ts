@@ -7,20 +7,24 @@ describe('whereEq', () => {
     name: { firstName: 'Bob', lastname: 'Hanks' },
     address: { city: 'LA', state: 'California' },
   }
+
   const person2 = {
     name: { firstName: 'Bob', lastname: 'South' },
     address: { city: 'LA', state: 'California' },
   }
+
   const person3 = {
     name: { firstName: 'Tom', lastname: 'Hanks' },
     address: { city: 'New York City', state: 'New York' },
   }
+
   it('should return true if the test object satisfies the spec otherwise false', () => {
     let spec = { x: 1, y: 2 }
     let test1 = { x: 0, y: 200 }
     let test2 = { x: 0, y: 10 }
     let test3 = { x: 1, y: 101 }
     let test4 = { x: 1, y: 2 }
+
     eq(whereEq(spec, test1), false)
     eq(whereEq(spec, test2), false)
     eq(whereEq(spec, test3), false)
@@ -48,6 +52,7 @@ describe('whereEq', () => {
     let spec = { x: undefined }
     let test1 = {}
     let test2 = { x: 1 }
+
     eq(whereEq(spec, test1), true)
     eq(whereEq(spec, test2), false)
   })
