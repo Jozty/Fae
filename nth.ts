@@ -11,22 +11,22 @@ import curryN from './utils/curry_n.ts'
 
 // @types
 // prettier-ignore
-type NthReturnType<F, T> = F extends string
-  ? string
-  : T
+type NthReturnType<F> = F extends FunctorWithArLk<infer U>
+  ? U
+  : string
 
 // prettier-ignore
-type Nth_2 = (<F extends FunctorWithArLk<T> | string, T>(functor: F) => NthReturnType<F, T>)
+type Nth_2 = (<F extends FunctorWithArLk<any> | string>(functor: F) => NthReturnType<F>)
   & ((functor?: PH) => Nth_2)
 
 // prettier-ignore
-type Nth_1<F extends FunctorWithArLk<T> | string, T> = ((index: number) => T)
-  & ((index?: PH) => Nth_1<F, T>)
+type Nth_1<F extends FunctorWithArLk<any> | string> = ((index: number) => NthReturnType<F>)
+  & ((index?: PH) => Nth_1<F>)
 
 // prettier-ignore
-type Nth = (<F extends FunctorWithArLk<T> | string, T>(index: number, functor: F) => NthReturnType<F, T>)
+type Nth = (<F extends FunctorWithArLk<any> | string>(index: number, functor: F) => NthReturnType<F>)
   & ((index: number, functor?: PH) => Nth_2)
-  & (<F extends FunctorWithArLk<T> | string, T>(index: PH, functor: F) => Nth_1<F, T>)
+  & (<F extends FunctorWithArLk<any> | string>(index: PH, functor: F) => Nth_1<F>)
   & ((index?: PH, functor?: PH) => Nth)
 
 
