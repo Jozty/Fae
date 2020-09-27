@@ -3,17 +3,17 @@ import type { PH } from './utils/types.ts'
 
 // @types
 // prettier-ignore
-type Xor_2 = ((b: any) => boolean) 
+type Xor_2 = ((b: any) => boolean)
   & ((b?: PH) => Xor_2)
 
 // prettier-ignore
-type Xor_1 = ((a: any) => boolean) 
+type Xor_1 = ((a: any) => boolean)
   & ((a?: PH) => Xor_1)
 
 // prettier-ignore
-type Xor = ((a: any, b: any) => boolean) 
-  & ((a: any, b?: PH) => Xor_2) 
-  & ((a: PH, b: any) => Xor_1) 
+type Xor = ((a: any, b: any) => boolean)
+  & ((a: any, b?: PH) => Xor_2)
+  & ((a: PH, b: any) => Xor_1)
   & ((a?: PH, b?: PH) => Xor)
 
 function _xor(a: any, b: any) {
