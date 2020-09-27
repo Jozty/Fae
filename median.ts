@@ -7,7 +7,7 @@ import { comparator } from './comparator.ts'
 
 // @types
 // prettier-ignore
-type Median = ((list: number[]) => number) 
+type Median = ((list: number[]) => number)
   & ((list?: PH) => Median)
 
 function _median(list: number[]) {
