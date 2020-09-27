@@ -61,4 +61,4 @@ function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {
  *      Fae.paths([[], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); // [ { a: { b: 2 }, p: [ { q: 3 } ] }, 3 ]
  *      Fae.paths([['a', ''], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); // [ undefined, 3 ]
  */
-export const paths: Paths = curryN(2, _paths);
+export const paths: Paths = curryN(2, _paths)
