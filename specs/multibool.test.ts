@@ -6,27 +6,20 @@ import { xor } from '../mod.ts'
 
 describe('mutlibool', () => {
   it(' Should solve (a + b) . (c + d. e + (f + g)) ', () => {
-    eq(
-      and(
-        or([], ''),
-        or(or(' ', and(false, { a: 31 })), or(true, NaN)),
-      ),
-      true,
-    )
-    eq(and(or([], ''), or(or('', and(true, {})), or(false, 0))), true)
+    const orOpr1 = or([], 1)
+    const orOpr2 = or({ 1: 3 }, 'A')
+    const andOp1 = and(false, 4)
+    const orMulti = or(or(orOpr2, andOp1), NaN)
+    const total = and(orOpr1, orMulti)
+    eq(total, true)
   })
 
   it(' Should solve (a + b) ^ (c + d ^ e + (f + g)) ', () => {
-    eq(
-      xor(
-        or([], ''),
-        or(or(' ', xor(false, { a: 31 })), or(true, NaN)),
-      ),
-      false,
-    )
-    eq(
-      xor(or([], ''), or(or('', xor(false, {})), or(false, 0))),
-      false,
-    )
+    const orOpr1 = or([], 1)
+    const orOpr2 = or({ 1: 3 }, 'A')
+    const xorOp1 = xor(false, 4)
+    const orMulti = or(or(orOpr2, xorOp1), undefined)
+    const total = xor(orOpr1, orMulti)
+    eq(total, false)
   })
 })
