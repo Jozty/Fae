@@ -25,6 +25,7 @@ const obj2 = {
 }
 
 const obj3 = {}
+const obj4 = null
 
 const path1 = path(_, obj1)
 const path2 = path(_, obj2)
@@ -38,6 +39,8 @@ describe('path', () => {
     eq(path1(''), obj1)
     eq(path1('c.e'), undefined)
     eq(path([], obj3), obj3)
+    eq(path([], obj4), null)
+    eq(path(['a'], obj4), undefined)
     eq(path('', obj3), obj3)
     eq(path1(['a', '']), undefined)
   })

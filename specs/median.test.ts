@@ -6,6 +6,8 @@ describe('median', () => {
   it('should return middle value of an odd-length list', () => {
     eq(median([2]), 2)
     eq(median([2, 9, 7]), 7)
+    eq(median([-2, -9, 7]), -2)
+    eq(median([-2.5, -8.9, 7.1]), -2.5)
     eq(median([Infinity, 3, 5]), 5)
     eq(median([Infinity, Infinity, Infinity]), Infinity)
     eq(median([Infinity, -Infinity, 5]), 5)
@@ -18,6 +20,9 @@ describe('median', () => {
   it('should return mean of two middle values of a nonempty even-length list', () => {
     eq(median([10, 20]), 15)
     eq(median([7, 2, 10, 9]), 8)
+    eq(median([10.4, 10.4]), 10.4)
+    eq(median([7.5, 2.8, -10.6, 9]), 5.15)
+    eq(median([1000000, 100000, 0.23492, 999999]), 549999.5)
     eq(median([Infinity, 3, 8, 5]), 6.5)
     eq(median([Infinity, Infinity]), Infinity)
     eq(median([Infinity, -Infinity]), NaN)

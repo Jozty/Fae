@@ -22,11 +22,8 @@ function _max<T extends number | string | Date>(a: T, b: T) {
 
 /**
  * Returns the larger of its two arguments.
- *
- * NaN > 1000  // false
- *
  *      Fae.max(1, 2)  // => 2
  *      Fae.max('abd', 'abc')  // => 'abd'
- *      Fae.max(1000, NaN)  // => 1000
+ *      Fae.max(1000, NaN)  // => NaN
  */
 export const max: Max = curryN(2, _max)

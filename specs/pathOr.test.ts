@@ -50,6 +50,7 @@ describe('pathOr', () => {
 
   it('should return the default value for null/undefined', () => {
     eq(pathOr('Unknown', ['toString'], null), 'Unknown')
+    eq(pathOr('Unknown', [], null), 'Unknown')
     // fae-no-check
     eq(pathOr('Unknown', ['toString'], undefined) as any, 'Unknown')
   })

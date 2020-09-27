@@ -42,7 +42,7 @@ function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {
     for (let i = 0; i < path.length; i++) {
       if (isUndefinedOrNull(val)) return
       const p = path[i]
-      const pInt = parseInt(p as string)
+      const pInt = parseInt(p as string, 10)
       val =
         isInteger(pInt) && isArrayLike(val) ? nth(pInt, val) : val[p]
     }
