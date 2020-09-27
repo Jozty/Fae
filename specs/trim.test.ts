@@ -3,8 +3,8 @@ import { trim, _ } from '../mod.ts'
 import { eq, thr } from './utils/utils.ts'
 
 describe('trim', () => {
-  const str1 = `       
-  sdfdsfd d      sdfdsfds sdfsdf      
+  const str1 = `
+  sdfdsfd d      sdfdsfds sdfsdf
   
   
   `

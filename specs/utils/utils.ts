@@ -24,5 +24,5 @@ export function thr(func: Function, expected: any) {
   } catch (e) {
     eq(e.message, expected)
   }
-  if (!f) throw 'No Error Throw'
+  if (!f) throw new Error('No Error Throw')
 }
