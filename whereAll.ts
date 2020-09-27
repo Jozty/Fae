@@ -1,18 +1,20 @@
 import type { Obj, PH, Tests } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
-import has from './utils/has.ts'
 
 // @types
-type WhereAll_2<T> = ((testObj: Obj<T>) => boolean) &
-  ((testObj?: PH) => WhereAll_2<T>)
+// prettier-ignore
+type WhereAll_2<T> = ((testObj: Obj<T>) => boolean)
+  & ((testObj?: PH) => WhereAll_2<T>)
 
-type WhereAll_1<T> = ((specs: Tests<T>) => boolean) &
-  ((specs?: PH) => WhereAll_1<T>)
+// prettier-ignore
+type WhereAll_1<T> = ((specs: Tests<T>) => boolean)
+  & ((specs?: PH) => WhereAll_1<T>)
 
-type WhereAll = (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean) &
-  (<T>(specs: Tests<T>, testObj?: PH) => WhereAll_2<T>) &
-  (<T>(specs: PH, testObj: Obj<T>) => WhereAll_1<T>) &
-  ((specs?: PH, testObj?: PH) => WhereAll)
+// prettier-ignore
+type WhereAll = (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
+  & (<T>(specs: Tests<T>, testObj?: PH) => WhereAll_2<T>)
+  & (<T>(specs: PH, testObj: Obj<T>) => WhereAll_1<T>)
+  & ((specs?: PH, testObj?: PH) => WhereAll)
 
 function _whereAll<T>(specs: Tests<T>, testObj: Obj<T>) {
   let count = 0
@@ -20,13 +22,13 @@ function _whereAll<T>(specs: Tests<T>, testObj: Obj<T>) {
     count++
     const pred = specs[key]
     const value = testObj[key]
-    if (has(specs, key) && !pred(value)) return false
+    if (!pred(value)) return false
   }
   return count !== 0
 }
 
 /**
- * Takes a specs objects whose each of the spec's own properties is a predicate function
+ * Takes a specs objects whose properties are predicate functions
  * Each predicate is applied to the value of the corresponding property of the
  * test object. Returns `true` if all the predicates are satisfied, `false` otherwise.
  * **NOTE** returns `false` if there is no predicated functions

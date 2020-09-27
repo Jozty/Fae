@@ -1,7 +1,7 @@
 import { describe, it, expect } from './_describe.ts'
 import { map, add, multiply, subtract, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
-import type { Func } from '../utils/types.ts'
+import type { Curry2 } from '../utils/types.ts'
 
 function add3(a: number) {
   return 3 + a
@@ -27,10 +27,10 @@ describe('map', () => {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8]
     const arr2 = [...arr]
     const expected = [4, 5, 6, 7, 8, 9, 10, 11]
-    expect(map(add3)(arr)).toEqual(expected)
-    expect(arr).toEqual(arr2)
-    expect(map(add3, arr)).toEqual(expected)
-    expect(arr).toEqual(arr2)
+    eq(map(add3)(arr), expected)
+    eq(arr, arr2)
+    eq(map(add3, arr), expected)
+    eq(arr, arr2)
   })
 
   it('should add 3 to all elements of object', () => {
@@ -44,10 +44,10 @@ describe('map', () => {
       12: 6,
       abc: 16,
     }
-    expect(map(add3)(obj)).toEqual(expected)
-    expect(obj).toEqual(obj2)
-    expect(map(add3, obj)).toEqual(expected)
-    expect(obj).toEqual(obj2)
+    eq(map(add3)(obj), expected)
+    eq(obj, obj2)
+    eq(map(add3, obj), expected)
+    eq(obj, obj2)
   })
 
   it('should add 3 to result of function1', () => {
@@ -57,18 +57,18 @@ describe('map', () => {
     let a = 11
     let b = 3
     let result = add3(function1(a, b))
-    const m1 = map(add3)(function1) as Func
-    const m2 = map(add3, function1) as Func
-    expect(m1(a, b)).toBe(result)
-    expect(m2(a, b)).toBe(result)
-    expect(m2(a)(b)).toBe(result)
+    const m1 = map(add3)(function1) as typeof function1
+    const m2 = map(add3, function1) as Curry2<number>
+    eq(m1(a, b), result)
+    eq(m2(a, b), result)
+    eq(m2(a)(b), result)
 
     a = 0
     b = 1
     result = add3(function1(a, b))
-    expect(m1(a, b)).toBe(result)
-    expect(m2(a, b)).toBe(result)
-    expect(m2(a)(b)).toBe(result)
+    eq(m1(a, b), result)
+    eq(m2(a, b), result)
+    eq(m2(a)(b), result)
   })
 
   it('interprets ((->) r) as a functor', function () {
