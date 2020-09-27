@@ -13,11 +13,11 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Prettier check
-        uses: creyD/prettier_action@v2.2
-        with:
-          dry: true
-          prettier_options: --check **/*.ts
+      # - name: Prettier check
+      #   uses: creyD/prettier_action@v2.2
+      #   with:
+      #     dry: true
+      #     prettier_options: --check **/*.ts
 
       - name: Use deno
         uses: denolib/setup-deno@v2
