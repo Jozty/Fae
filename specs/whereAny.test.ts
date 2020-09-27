@@ -65,7 +65,7 @@ describe('whereAny', () => {
       toString: equals(Object.prototype.toString),
       valueOf: equals(null),
     }
-    
+
     eq(whereAny(spec, {}), true)
   })
 })

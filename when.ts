@@ -42,7 +42,11 @@ type When = (<T, R>(predicate: Predicate1<T>, func: FuncArr1<T, R>, value: T) =>
   & (<T>(predicate: Predicate1<T>, func: PH, value: T) => When_2<T>)
   & (<T, R>(predicate: PH, func: FuncArr1<T, R>, value: T) => When_1<T, R>)
 
-function _when<T, R>(predicate: Predicate1<T>, func: FuncArr1<T, R>, value: T): T | R {
+function _when<T, R>(
+  predicate: Predicate1<T>,
+  func: FuncArr1<T, R>,
+  value: T,
+): T | R {
   return predicate(value) ? func(value) : value
 }
 

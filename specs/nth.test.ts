@@ -35,7 +35,7 @@ describe('nth', () => {
   const arr1 = [1, 2, 3, 4, 5]
   const arr2 = ['as', 'df', 'ef', 'qw']
   const arr3 = [1, 2, undefined, undefined, 4]
-  const arr4 = [ , ]
+  const arr4 = [,]
   const string1 = 'hello'
   const string2 = ''
   const nthArr1 = nth(_, arr1)
@@ -50,7 +50,7 @@ describe('nth', () => {
     eq(nthArr1(1), 2)
     eq(nthArr1(3), 4)
     eq(nthArr1(6), undefined)
-    
+
     eq(nthArr2(0), 'as')
     eq(nthArr2(2), 'ef')
     eq(nthArr2(5), undefined)

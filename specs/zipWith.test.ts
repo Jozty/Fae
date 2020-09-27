@@ -30,6 +30,4 @@ describe('zipWith', () => {
     )
     eq(f(c)(y), ['10 Cow', '20 Horse', '30 Dog'])
   })
-
-}) 
-
+})

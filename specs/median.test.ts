@@ -9,7 +9,7 @@ describe('median', () => {
     eq(median([Infinity, 3, 5]), 5)
     eq(median([Infinity, Infinity, Infinity]), Infinity)
     eq(median([Infinity, -Infinity, 5]), 5)
-    eq(median([Infinity, NaN, - Infinity]), NaN)
+    eq(median([Infinity, NaN, -Infinity]), NaN)
     eq(median([Infinity, Infinity, 5]), Infinity)
     eq(median([-Infinity, -Infinity, 5]), -Infinity)
     eq(median([Infinity, Infinity, NaN]), Infinity)

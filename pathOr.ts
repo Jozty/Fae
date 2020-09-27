@@ -29,13 +29,13 @@ type PathOr_1_3 = (<T, D, P>(d: D, obj: ObjRec<T> | null) => D | P)
   & (<T>(d: PH, obj: ObjRec<T> | null) => PathOr_1<T>)
   & ((d?: PH, obj?: PH) => PathOr_1_3)
 
-// prettier-ignore  
+// prettier-ignore
 type PathOr_1_2<T> = (<D, P>(d: D, p: Path) => D | P)
   & (<D>(d: D, p?: PH) => PathOr_2<T, D>)
   & ((d: PH, p: Path) => PathOr_1<T>)
   & ((d?: PH, p?: PH) => PathOr_1_2<T>)
 
-// prettier-ignore  
+// prettier-ignore
 type PathOr = (<T, D, P>(d: D, p: Path, obj: ObjRec<T> | null) => D | P)
   & ((d?: PH, p?: PH, obj?: PH) => PathOr)
   & (<D>(d: D, p?: PH, obj?: PH) => PathOr_2_3<D>)

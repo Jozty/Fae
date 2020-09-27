@@ -30,7 +30,7 @@ describe('pathOr', () => {
     eq(pathOr('Unknown', ['a', 'b', 'c'], obj), 100)
     eq(pathOr('Unknown', [], obj), obj)
     eq(pathOr('Unknown', '', obj), obj)
-    eq(pathOr('Unknown', ['a',''], obj), 'Unknown')
+    eq(pathOr('Unknown', ['a', ''], obj), 'Unknown')
     eq(pathOr('Unknown', ['a', 'e', 'f', 1], obj), 101)
     eq(pathOr('Unknown', ['a', 'e', 'f', -2], obj), 101)
     eq(pathOr('Unknown', ['j', 0], obj), 'J')

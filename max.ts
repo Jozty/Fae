@@ -10,7 +10,7 @@ type Max_2<T extends number | string | Date> = ((b: T) => T)
 type Max_1<T extends number | string | Date> = ((a: T) => T)
   & ((a?: PH) => Max_1<T>)
 
-// prettier-ignore  
+// prettier-ignore
 type Max = (<T extends number | string | Date>(a: T, b: T) => T)
   & (<T extends number | string | Date>(a: T, b?: PH) => Max_2<T>)
   & (<T extends number | string | Date>(a: PH, b: T) => Max_1<T>)

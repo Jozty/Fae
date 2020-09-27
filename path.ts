@@ -7,12 +7,12 @@ import curryN from './utils/curry_n.ts'
 type PathF_2 = (<T, R>(obj: ObjRec<T> | null) => R)
   & ((obj?: PH) => PathF_2)
 
-// prettier-ignore  
+// prettier-ignore
 type PathF_1<T, R> = ((ps: Path) => R)
   & ((ps?: PH) => PathF_1<T, R>)
 
 // prettier-ignore
-  type PathF = (<T, R>(ps: Path, obj: ObjRec<T> | null) => R)
+type PathF = (<T, R>(ps: Path, obj: ObjRec<T> | null) => R)
   & ((ps: Path, obj?: PH) => PathF_2)
   & (<T, R>(ps: PH, obj: ObjRec<T> | null) => PathF_1<T, R>)
   & ((ps?: PH, obj?: PH) => PathF)
@@ -32,7 +32,7 @@ function _path<R, T = any>(ps: Path, obj: ObjRec<T> | null): R {
  *      Fae.path('a/b/0', {a: {b: [1, 2, 3]}}); // 1
  *      Fae.path('a.b.0', {a: {b: [1, 2, 3]}}); // 1
  *      Fae.path('', {a: [1, 2, {ab: 5, de: [12, 23, 25]}, "234"], 4: "sdf"}); // {a: [1, 2, {ab: 5, de: [12, 23, 25]}, "234"], 4: "sdf"}
- *      Fae.path([], {a: [1, 2, {ab: 5, de: [12, 23, 25]}, "234"], 4: "sdf"}); // {a: [1, 2, {ab: 5, de: [12, 23, 25]}, "234"], 4: "sdf"} 
- *      Fae.path(['a', ''], {a: {b: 2}}); // undefined 
+ *      Fae.path([], {a: [1, 2, {ab: 5, de: [12, 23, 25]}, "234"], 4: "sdf"}); // {a: [1, 2, {ab: 5, de: [12, 23, 25]}, "234"], 4: "sdf"}
+ *      Fae.path(['a', ''], {a: {b: 2}}); // undefined
  */
 export const path: PathF = curryN(2, _path)

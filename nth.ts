@@ -29,7 +29,6 @@ type Nth = (<F extends FunctorWithArLk<any> | string>(index: number, functor: F)
   & (<F extends FunctorWithArLk<any> | string>(index: PH, functor: F) => Nth_1<F>)
   & ((index?: PH, functor?: PH) => Nth)
 
-
 function _nth<F extends FunctorWithArLk<T> | string, T>(
   index: number,
   functor: F,

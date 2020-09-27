@@ -52,7 +52,7 @@ describe('whereEq', () => {
     let spec = { x: undefined }
     let test1 = {}
     let test2 = { x: 1 }
-    
+
     eq(whereEq(spec, test1), true)
     eq(whereEq(spec, test2), false)
   })

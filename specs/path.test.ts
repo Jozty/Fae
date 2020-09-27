@@ -24,7 +24,7 @@ const obj2 = {
   4: 'sdf',
 }
 
-const obj3 = {};
+const obj3 = {}
 
 const path1 = path(_, obj1)
 const path2 = path(_, obj2)
@@ -40,7 +40,6 @@ describe('path', () => {
     eq(path([], obj3), obj3)
     eq(path('', obj3), obj3)
     eq(path1(['a', '']), undefined)
-    
   })
 
   it('should work with object with mixed type props', () => {
@@ -54,6 +53,6 @@ describe('path', () => {
     eq(path2('/a/-2/de/2'), 25)
     eq(path2('/a/-2/de/2/'), 25)
     eq(path2('a.-2.de.2'), 25)
-    eq(path2(['a',-2,'de',2]), 25)
+    eq(path2(['a', -2, 'de', 2]), 25)
   })
 })

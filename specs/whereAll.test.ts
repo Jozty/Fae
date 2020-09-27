@@ -34,8 +34,8 @@ describe('whereAll', () => {
     eq(whereAll(spec2, test5), true)
     eq(whereAll(spec2, test6), false)
     eq(whereAll({}, { x: 1 }), false)
-    eq(whereAll(specP.address, person1.address), true);
-    eq(whereAll(specP.address, person2.address), false);
+    eq(whereAll(specP.address, person1.address), true)
+    eq(whereAll(specP.address, person2.address), false)
   })
 
   it('should return true if the test object satisfies the spec', () => {
@@ -72,8 +72,8 @@ describe('whereAll', () => {
     const test3 = { x: undefined }
     const test4 = { x: 1 }
 
-    eq(whereAll(spec, test1), true)    
-    eq(whereAll(spec, test2), false)    
+    eq(whereAll(spec, test1), true)
+    eq(whereAll(spec, test2), false)
     eq(whereAll(spec, test3), true)
     eq(whereAll(spec, test4), false)
   })
@@ -87,7 +87,7 @@ describe('whereAll', () => {
       toString: equals(Object.prototype.toString),
       valueOf: equals(null),
     }
-    
+
     eq(whereAll(spec, {}), false)
   })
 })

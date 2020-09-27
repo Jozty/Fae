@@ -16,16 +16,15 @@ export type Path = string | Array<string | number>
 type Paths_2 = (<T, R>(obj: ObjRec<T> | null) => R[])
   & ((obj?: PH) => Paths_2)
 
-// prettier-ignore  
+// prettier-ignore
 type Paths_1<T, R> = ((pathsArr: Path[]) => R[])
   & ((pathsArr?: PH) => Paths_1<T, R>)
 
-// prettier-ignore  
+// prettier-ignore
 type Paths = (<T, R>(pathsArr: Path[], obj: ObjRec<T> | null) => R[])
   & ((pathsArr: Path[], obj?: PH) => Paths_2)
   & (<T, R>(pathsArr: PH, obj: ObjRec<T> | null) => Paths_1<T, R>)
   & ((pathsArr?: PH, obj?: PH) => Paths)
-
 
 export function getPath(path: Path): Array<string | number> {
   if (isString(path)) {
@@ -45,9 +44,7 @@ function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {
       const p = path[i]
       const pInt = parseInt(p as string)
       val =
-        isInteger(pInt) && isArrayLike(val)
-          ? nth(pInt, val)
-          : val[p]
+        isInteger(pInt) && isArrayLike(val) ? nth(pInt, val) : val[p]
     }
     return val
   })
@@ -64,4 +61,4 @@ function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {
  *      Fae.paths([[], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); // [ { a: { b: 2 }, p: [ { q: 3 } ] }, 3 ]
  *      Fae.paths([['a', ''], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); // [ undefined, 3 ]
  */
-export const paths: Paths = curryN(2, _paths)
+export const paths: Paths = curryN(2, _paths);
