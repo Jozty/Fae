@@ -92,10 +92,12 @@ describe('equals', () => {
     })()
     const c = (function () {
       return arguments
+      // fae-no-check
       // @ts-ignore
     })(1, 2, 3)
     const d = (function () {
       return arguments
+      // fae-no-check
       // @ts-ignore
     })(1, 2, 3)
 
@@ -150,6 +152,9 @@ describe('equals', () => {
   it('should handle lists', () => {
     eq(equals([], {}), false)
     eq(equals(listA, listB), false)
+    eq(equals([1, 2, 3], [1, 2, 3]), true)
+    eq(equals([1, 2, listA], [1, 2, listA]), true)
+    eq(equals([1, 2, listA], [1, 2, listB]), false)
   })
 
   const c: any = {}
@@ -178,8 +183,7 @@ describe('equals', () => {
     eq(equals(new Date(1), new Date(0)), false)
   })
 
-  // TODO:
-  /*it('should require that both objects have the same enumerable properties with the same values', () => {
+  it('should require that both objects have the same enumerable properties with the same values', () => {
     const a1: any = []
     const a2: any = []
     a2.x = 0
@@ -210,16 +214,19 @@ describe('equals', () => {
     eq(equals(n1, n2), false)
     eq(equals(r1, r2), false)
     eq(equals(s1, s2), false)
-  })*/
+  })
 
   const typArr1 = new ArrayBuffer(10)
+  // fae-no-check
   // @ts-ignore
   typArr1[0] = 1
   const typArr2 = new ArrayBuffer(10)
+  // fae-no-check
   // @ts-ignore
   typArr2[0] = 1
   const typArr3 = new ArrayBuffer(10)
   const intTypArr = new Int8Array(typArr1)
+  // fae-no-check
   // @ts-ignore
   typArr3[0] = 0
 
@@ -229,30 +236,35 @@ describe('equals', () => {
     eq(equals(typArr1, intTypArr), false)
   })
 
-  // TODO:
-  /*it('should compare Promise objects by identity', () => {
+  it('should compare Promise objects by identity', () => {
     const p = Promise.resolve(42)
     const q = Promise.resolve(42)
     eq(equals(p, p), true)
     eq(equals(p, q), false)
-  })*/
+  })
 
-  // TODO:
-  /*it('should compare Map objects by value', () => {
+  it('should compare Map objects by value', () => {
     eq(equals(new Map([]), new Map([])), true)
     eq(equals(new Map([]), new Map([[1, 'a']])), false)
     eq(equals(new Map([[1, 'a']]), new Map([])), false)
     eq(equals(new Map([[1, 'a']]), new Map([[1, 'a']])), true)
+    // prettier-ignore
     eq(equals(new Map([[1, 'a'], [2, 'b']]), new Map([[2, 'b'], [1, 'a']])), true)
     eq(equals(new Map([[1, 'a']]), new Map([[2, 'a']])), false)
     eq(equals(new Map([[1, 'a']]), new Map([[1, 'b']])), false)
+    // fae-no-check
     // @ts-ignore
+    // prettier-ignore
     eq(equals(new Map([[1, 'a'], [2, new Map([[3, 'c']])]]), new Map([[1, 'a'], [2, new Map([[3, 'c']])]])), true)
+    // fae-no-check
     // @ts-ignore
+    // prettier-ignore
     eq(equals(new Map([[1, 'a'], [2, new Map([[3, 'c']])]]), new Map([[1, 'a'], [2, new Map([[3, 'd']])]])), false)
+    // prettier-ignore
     eq(equals(new Map([[[1, 2, 3], [4, 5, 6]]]), new Map([[[1, 2, 3], [4, 5, 6]]])), true)
+    // prettier-ignore
     eq(equals(new Map([[[1, 2, 3], [4, 5, 6]]]), new Map([[[1, 2, 3], [7, 8, 9]]])), false)
-  })*/
+  })
 
   it('should dispatch to `equals` method recursively in Map', () => {
     const a = new Map()
@@ -265,21 +277,53 @@ describe('equals', () => {
     eq(equals(a, b), true)
   })
 
-  // TODO:
-  /*
   it('should compare Set objects by value', () => {
     eq(equals(new Set([]), new Set([])), true)
     eq(equals(new Set([]), new Set([1])), false)
     eq(equals(new Set([1]), new Set([])), false)
     eq(equals(new Set([1, 2]), new Set([2, 1])), true)
-    eq(equals(new Set([1, new Set([2, new Set([3])])]), new Set([1, new Set([2, new Set([3])])])), true)
-    eq(equals(new Set([1, new Set([2, new Set([3])])]), new Set([1, new Set([2, new Set([4])])])), false)
-    eq(equals(new Set([[1, 2, 3], [4, 5, 6]]), new Set([[1, 2, 3], [4, 5, 6]])), true)
-    eq(equals(new Set([[1, 2, 3], [4, 5, 6]]), new Set([[1, 2, 3], [7, 8, 9]])), false)
-  })*/
+    eq(
+      equals(
+        new Set([1, new Set([2, new Set([3])])]),
+        new Set([1, new Set([2, new Set([3])])]),
+      ),
+      true,
+    )
+    eq(
+      equals(
+        new Set([1, new Set([2, new Set([3])])]),
+        new Set([1, new Set([2, new Set([4])])]),
+      ),
+      false,
+    )
+    eq(
+      equals(
+        new Set([
+          [1, 2, 3],
+          [4, 5, 6],
+        ]),
+        new Set([
+          [1, 2, 3],
+          [4, 5, 6],
+        ]),
+      ),
+      true,
+    )
+    eq(
+      equals(
+        new Set([
+          [1, 2, 3],
+          [4, 5, 6],
+        ]),
+        new Set([
+          [1, 2, 3],
+          [7, 8, 9],
+        ]),
+      ),
+      false,
+    )
+  })
 
-  // TODO:
-  /*
   it('should dispatch to `equals` method recursively in Set', () => {
     const a = new Set()
     const b = new Set()
@@ -289,21 +333,19 @@ describe('equals', () => {
     b.add(b)
     b.add(a)
     eq(equals(a, b), true)
-  })*/
+  })
 
-  // TODO:
-  // it('should compare WeakMap objects by identity', () => {
-  //   const m = new WeakMap([])
-  //   eq(equals(m, m), true)
-  //   eq(equals(m, new WeakMap([])), false)
-  // })
+  it('should compare WeakMap objects by identity', () => {
+    const m = new WeakMap([])
+    eq(equals(m, m), true)
+    eq(equals(m, new WeakMap([])), false)
+  })
 
-  // TODO:
-  // it('should compare WeakSet objects by identity', () => {
-  //   const s = new WeakSet([])
-  //   eq(equals(s, s), true)
-  //   eq(equals(s, new WeakSet([])), false)
-  // })
+  it('should compare WeakSet objects by identity', () => {
+    const s = new WeakSet([])
+    eq(equals(s, s), true)
+    eq(equals(s, new WeakSet([])), false)
+  })
 
   it('should dispatch to `equals` method recursively', () => {
     class Left {
