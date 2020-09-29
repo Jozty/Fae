@@ -12,19 +12,15 @@ import { trim } from './trim.ts'
 export type Path = string | Array<string | number>
 
 // @types
-// prettier-ignore
 type Paths_2 = (<T, R>(obj: ObjRec<T> | null) => R[])
-  & ((obj?: PH) => Paths_2)
 
-// prettier-ignore
 type Paths_1<T, R> = ((pathsArr: Path[]) => R[])
-  & ((pathsArr?: PH) => Paths_1<T, R>)
 
 // prettier-ignore
-type Paths = (<T, R>(pathsArr: Path[], obj: ObjRec<T> | null) => R[])
+type Paths = 
   & ((pathsArr: Path[], obj?: PH) => Paths_2)
   & (<T, R>(pathsArr: PH, obj: ObjRec<T> | null) => Paths_1<T, R>)
-  & ((pathsArr?: PH, obj?: PH) => Paths)
+  & (<T, R>(pathsArr: Path[], obj: ObjRec<T> | null) => R[])
 
 export function getPath(path: Path): Array<string | number> {
   if (isString(path)) {

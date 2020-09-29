@@ -22,7 +22,5 @@ describe('subtract', () => {
     eq(subtract(_, 50)(25), -25)
     eq(subtract(50, _)(25), 25)
     eq(subtract(25, _)(50), -25)
-    eq(subtract(_, _)(50)(25), 25)
-    eq(subtract(_, _)(25)(50), -25)
   })
 })

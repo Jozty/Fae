@@ -30,6 +30,8 @@ describe('prop', () => {
     const propResult = prop(undefined, obj)
     // @ts-ignore
     const pathResult = path([undefined], obj)
+    // fae-no-check
+    // @ts-ignore
     eq(propResult, pathResult)
   })
 
@@ -38,6 +40,8 @@ describe('prop', () => {
     const propResult = prop(null, obj)
     // @ts-ignore
     const pathResult = path([null], obj)
+    // fae-no-check
+    // @ts-ignore
     eq(propResult, pathResult)
   })
 
@@ -70,6 +74,8 @@ describe('prop', () => {
       pathException = e
     }
 
+    // fae-no-check
+    // @ts-ignore
     eq(propResult, pathResult)
     eq(propException, pathException)
   })

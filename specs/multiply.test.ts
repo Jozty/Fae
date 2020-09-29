@@ -18,6 +18,5 @@ describe('multiply', () => {
     eq(multiply(25)(5), 125)
     eq(multiply(_, 4)(25), 100)
     eq(multiply(4, _)(25), 100)
-    eq(multiply(_, _)(25)(4), 100)
   })
 })

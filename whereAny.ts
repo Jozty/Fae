@@ -2,19 +2,15 @@ import type { Obj, PH, Tests } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-// prettier-ignore
 type WhereAny_2<T> = ((testObj: Obj<T>) => boolean)
-  & ((testObj?: PH) => WhereAny_2<T>)
 
-// prettier-ignore
 type WhereAny_1<T> = ((specs: Tests<T>) => boolean)
-  & ((specs?: PH) => WhereAny_1<T>)
 
 // prettier-ignore
-type WhereAny = (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
+type WhereAny = 
   & (<T>(specs: Tests<T>, testObj?: PH) => WhereAny_2<T>)
   & (<T>(specs: PH, testObj: Obj<T>) => WhereAny_1<T>)
-  & ((specs?: PH, testObj?: PH) => WhereAny)
+  & (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
 
 function _whereAny<T>(specs: Tests<T>, testObj: Obj<T>) {
   for (const key in specs) {

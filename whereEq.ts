@@ -5,19 +5,15 @@ import { map } from './map.ts'
 import { equals } from './equals.ts'
 
 // @types
-// prettier-ignore
 type WhereEq_2<T> = ((testObj: Obj<T>) => boolean)
-  & ((testObj?: PH) => WhereEq_2<T>)
 
-// prettier-ignore
 type WhereEq_1<T> = ((spec: Obj<T>) => boolean)
-  & ((spec?: PH) => WhereEq_1<T>)
 
 // prettier-ignore
 type WhereEq = (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)
   & (<T>(spec: Obj<T>, testObj?: PH) => WhereEq_2<T>)
   & (<T>(spec: PH, testObj: Obj<T>) => WhereEq_1<T>)
-  & ((spec?: PH, testObj?: PH) => WhereEq)
+  & (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)
 
 function _whereEq<T>(spec: Obj<T>, testObj: Obj<T>) {
   return whereAll(

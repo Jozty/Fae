@@ -2,19 +2,15 @@ import type { Obj, PH, Tests } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-// prettier-ignore
 type WhereAll_2<T> = ((testObj: Obj<T>) => boolean)
-  & ((testObj?: PH) => WhereAll_2<T>)
 
-// prettier-ignore
 type WhereAll_1<T> = ((specs: Tests<T>) => boolean)
-  & ((specs?: PH) => WhereAll_1<T>)
 
 // prettier-ignore
-type WhereAll = (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
+type WhereAll = 
   & (<T>(specs: Tests<T>, testObj?: PH) => WhereAll_2<T>)
   & (<T>(specs: PH, testObj: Obj<T>) => WhereAll_1<T>)
-  & ((specs?: PH, testObj?: PH) => WhereAll)
+  & (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
 
 function _whereAll<T>(specs: Tests<T>, testObj: Obj<T>) {
   let count = 0
