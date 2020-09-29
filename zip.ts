@@ -3,9 +3,9 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type Zip_2<T1> = (<T2>(list2: T2[]) => [T1, T2][])
+type Zip_2<T1> = <T2>(list2: T2[]) => [T1, T2][]
 
-type Zip_1<T2> = (<T1>(list1: T1[]) => [T1, T2][])
+type Zip_1<T2> = <T1>(list1: T1[]) => [T1, T2][]
 
 // prettier-ignore
 type Zip = 

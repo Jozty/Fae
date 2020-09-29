@@ -5,9 +5,9 @@ import { map } from './map.ts'
 import { equals } from './equals.ts'
 
 // @types
-type WhereEq_2<T> = ((testObj: Obj<T>) => boolean)
+type WhereEq_2<T> = (testObj: Obj<T>) => boolean
 
-type WhereEq_1<T> = ((spec: Obj<T>) => boolean)
+type WhereEq_1<T> = (spec: Obj<T>) => boolean
 
 // prettier-ignore
 type WhereEq = (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)

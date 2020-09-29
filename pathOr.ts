@@ -5,12 +5,12 @@ import { path } from './path.ts'
 import type { Path } from './paths.ts'
 
 // @types
-type PathOr_1 = (<D, P>(d: D) => D | P)
-  
-type PathOr_2<D> = (<P>(p: Path) => D | P)  
+type PathOr_1 = <D, P>(d: D) => D | P
 
-type PathOr_3<D> = (<T, P>(obj: ObjRec<T> | null) => D | P)
- 
+type PathOr_2<D> = <P>(p: Path) => D | P
+
+type PathOr_3<D> = <T, P>(obj: ObjRec<T> | null) => D | P
+
 // prettier-ignore
 type PathOr_2_3<D> = 
   & ((p: Path, obj?: PH) => PathOr_3<D>)

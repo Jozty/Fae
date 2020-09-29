@@ -12,9 +12,9 @@ import { trim } from './trim.ts'
 export type Path = string | Array<string | number>
 
 // @types
-type Paths_2 = (<T, R>(obj: ObjRec<T> | null) => R[])
+type Paths_2 = <T, R>(obj: ObjRec<T> | null) => R[]
 
-type Paths_1<T, R> = ((pathsArr: Path[]) => R[])
+type Paths_1<T, R> = (pathsArr: Path[]) => R[]
 
 // prettier-ignore
 type Paths = 

@@ -47,5 +47,4 @@ describe('min', () => {
     eq(min(_, 'ab')('aaa'), 'aaa')
     eq(min('aa')('aab'), 'aa')
   })
-  
 })

@@ -23,7 +23,6 @@ describe('max', () => {
   })
 
   it('should work for any orderable type', () => {
-    
     eq(max('a', 'z'), 'z')
     eq(max('z', 'a'), 'z')
     eq(max('me', 'mi'), 'mi')
@@ -42,7 +41,5 @@ describe('max', () => {
     eq(max(25)(50), 50)
     eq(max(_, 25)(20), 25)
     eq(max(25, _)(30), 30)
-    
   })
-  
 })

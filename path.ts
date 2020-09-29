@@ -3,9 +3,9 @@ import { paths, Path } from './paths.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type PathF_2 = (<T, R>(obj: ObjRec<T> | null) => R)
+type PathF_2 = <T, R>(obj: ObjRec<T> | null) => R
 
-type PathF_1<T, R> = ((ps: Path) => R)
+type PathF_1<T, R> = (ps: Path) => R
 
 // prettier-ignore
 type PathF = 

@@ -2,9 +2,9 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type Subtract_2 = ((b: number) => number)
+type Subtract_2 = (b: number) => number
 
-type Subtract_1 = ((a: number) => number)
+type Subtract_1 = (a: number) => number
 
 // prettier-ignore
 type Subtract = 

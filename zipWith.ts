@@ -5,9 +5,9 @@ import curryN from './utils/curry_n.ts'
 // prettier-ignore
 type ZipWith_1<T1, T2> = (<R>(fn: (a: T1, b: T2) => R) => R[])
 
-type ZipWith_2<T1, T2, R> = ((list1: T1[]) => R[])
- 
-type ZipWith_3<T1, T2, R> = ((list2: T2[]) => R[])
+type ZipWith_2<T1, T2, R> = (list1: T1[]) => R[]
+
+type ZipWith_3<T1, T2, R> = (list2: T2[]) => R[]
 
 // prettier-ignore
 type ZipWith_2_3<T1, T2, R> = ((list1: T1[], list2: T2[]) => R[])

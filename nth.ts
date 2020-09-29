@@ -15,9 +15,13 @@ type NthReturnType<F> = F extends FunctorWithArLk<infer U>
   ? U
   : string
 
-type Nth_2 = (<F extends FunctorWithArLk<any> | string>(functor: F) => NthReturnType<F>)
+type Nth_2 = <F extends FunctorWithArLk<any> | string>(
+  functor: F,
+) => NthReturnType<F>
 
-type Nth_1<F extends FunctorWithArLk<any> | string> = ((index: number) => NthReturnType<F>)
+type Nth_1<F extends FunctorWithArLk<any> | string> = (
+  index: number,
+) => NthReturnType<F>
 
 // prettier-ignore
 type Nth = 

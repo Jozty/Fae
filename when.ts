@@ -2,11 +2,11 @@ import type { PH, Predicate1, FuncArr1 } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type When_1<T, R> = ((predicate: Predicate1<T>) => T | R)
+type When_1<T, R> = (predicate: Predicate1<T>) => T | R
 
-type When_2<T> = (<R>(func: FuncArr1<T, R>) => T | R)
+type When_2<T> = <R>(func: FuncArr1<T, R>) => T | R
 
-type When_3<T, R> = ((value: T) => T | R)
+type When_3<T, R> = (value: T) => T | R
 
 // prettier-ignore
 type When_2_3<T> = 

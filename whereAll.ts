@@ -2,9 +2,9 @@ import type { Obj, PH, Tests } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type WhereAll_2<T> = ((testObj: Obj<T>) => boolean)
+type WhereAll_2<T> = (testObj: Obj<T>) => boolean
 
-type WhereAll_1<T> = ((specs: Tests<T>) => boolean)
+type WhereAll_1<T> = (specs: Tests<T>) => boolean
 
 // prettier-ignore
 type WhereAll = 
