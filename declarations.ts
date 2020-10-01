@@ -1,6 +1,9 @@
 // deno run -A --unstable declarations.ts
 
-import { emptyDirSync } from 'https://deno.land/std/fs/mod.ts'
+import {
+  emptyDirSync,
+  moveSync,
+} from 'https://deno.land/std/fs/mod.ts'
 
 const start = Date.now()
 
@@ -13,7 +16,7 @@ function printDone(msg: string) {
 }
 
 function getDeclarationsPath(path: string) {
-  return './declarations/' + path.slice(2)
+  return './temp/' + path.slice(2)
 }
 
 function writeFile(path: string) {
@@ -47,47 +50,24 @@ function writeFunctions(path: string) {
   }
 }
 
-function generateDeclarations() {
-  return Deno.run({
-    cmd: [
-      'tsc',
-      '--declaration',
-      'declarations/mod.ts',
-      '--lib',
-      'esnext',
-      '-t',
-      'es5',
-      '--downlevelIteration',
-    ],
+async function generateDeclarations() {
+  await Deno.run({
+    cmd: ['dts-bundle-generator', '--config', './generator.config'],
   }).status()
 }
 
-function removeExtraFiles(path: string) {
-  for (const dirEntry of Deno.readDirSync(path)) {
-    if (dirEntry.isDirectory) {
-      removeExtraFiles(path + '/' + dirEntry.name)
-    } else if (!dirEntry.name.includes('.d.ts')) {
-      Deno.removeSync(path + '/' + dirEntry.name)
-    }
-  }
-}
+function saveBundle() {
+  const path = './declarations/mod.d.ts'
+  moveSync('./temp/mod.d.ts', path, { overwrite: true })
 
-function refactorDeclarationsFiles(path: string) {
-  for (const dirEntry of Deno.readDirSync(path)) {
-    const dirEntryPath = path + '/' + dirEntry.name
-    if (dirEntry.isDirectory) {
-      refactorDeclarationsFiles(dirEntryPath)
-    } else {
-      let text = Deno.readTextFileSync(dirEntryPath)
-      text =
-        "// This file auto-generated. Don't edit this file\n\n" + text
-      Deno.writeTextFileSync(dirEntryPath, text)
-    }
-  }
+  let text = Deno.readTextFileSync(path)
+  text =
+    "// This file auto-generated. Don't edit this file\n\n" + text
+  Deno.writeTextFileSync(path, text)
 }
 
 printInfo('copying original files')
-emptyDirSync('./declarations')
+emptyDirSync('./temp')
 writeFolder('./utils')
 writeFunctions('.')
 printDone('copied original files')
@@ -96,13 +76,15 @@ printInfo('generating declarations')
 await generateDeclarations()
 printDone('generated declarations')
 
-printInfo('removing extra files')
-removeExtraFiles('./declarations')
-printDone('removed extra files')
+saveBundle()
 
-printInfo('refactoring .d.ts files')
-refactorDeclarationsFiles('./declarations')
-printDone('refactored .d.ts files')
+printInfo('clean up')
+emptyDirSync('./temp')
+printDone('clean up')
+
+// printInfo('refactoring .d.ts files')
+// refactorDeclarationsFiles('./temp')
+// printDone('refactored .d.ts files')
 
 const time = (Date.now() - start) / 1000
 printDone(`Done in ${time}ms`)

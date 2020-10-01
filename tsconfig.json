@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "ES2016"
+    ],
+    "downlevelIteration": true,
+    "target": "ES6"
+  }
+}
