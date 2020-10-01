@@ -15,7 +15,7 @@ type When_2_3<T> =
   & (<R>(func: FuncArr1<T, R>, value: T) => T | R)
 
 // prettier-ignore
-type When_1_3<T, R> = 
+type When_1_3<T, R> =
   & ((predicate: Predicate1<T>, value?: PH) => When_3<T, R>)
   & ((predicate: PH, value: T) => When_1<T, R>)
   & ((predicate: Predicate1<T>, value: T) => T | R)
