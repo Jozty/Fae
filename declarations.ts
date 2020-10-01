@@ -67,9 +67,7 @@ async function getCurrentTags() {
   const rawOutput = await process.output()
 
   const output = new TextDecoder().decode(rawOutput)
-  const tags = output.split('\n').filter((a) => !!a)
-
-  return tags.length ? tags : ['latest']
+  return output.split('\n').filter((a) => !!a)
 }
 
 async function saveBundle() {
