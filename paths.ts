@@ -1,4 +1,3 @@
-// fae-no-check
 import type { ObjRec, PH } from './utils/types.ts'
 import {
   isString,

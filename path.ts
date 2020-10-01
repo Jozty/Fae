@@ -1,4 +1,3 @@
-// fae-no-check
 import type { ObjRec, PH } from './utils/types.ts'
 import { paths, Path } from './paths.ts'
 import curryN from './utils/curry_n.ts'

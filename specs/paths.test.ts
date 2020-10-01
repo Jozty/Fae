@@ -1,3 +1,4 @@
+// fae-no-check
 import { describe, it } from './_describe.ts'
 import { paths, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
