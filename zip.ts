@@ -3,19 +3,15 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-// prettier-ignore
-type Zip_2<T1> = (<T2>(list2: T2[]) => [T1, T2][])
-  & ((list2?: PH) => Zip_2<T1>)
+type Zip_2<T1> = <T2>(list2: T2[]) => [T1, T2][]
+
+type Zip_1<T2> = <T1>(list1: T1[]) => [T1, T2][]
 
 // prettier-ignore
-type Zip_1<T2> = (<T1>(list1: T1[]) => [T1, T2][])
-  & ((list1?: PH) => Zip_1<T2>)
-
-// prettier-ignore
-type Zip = (<T1, T2>(list1: T1[], list2: T2[]) => [T1, T2][])
+type Zip =
   & (<T1>(list1: T1[], list2?: PH) => Zip_2<T1>)
   & (<T2>(list1: PH, list2: T2[]) => Zip_1<T2>)
-  & ((list1?: PH, list2?: PH) => Zip)
+  & (<T1, T2>(list1: T1[], list2: T2[]) => [T1, T2][])
 
 function _zip<T1, T2>(list1: T1[], list2: T2[]): [T1, T2][] {
   return zipWith((a, b) => [a, b], list1, list2)

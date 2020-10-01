@@ -30,4 +30,17 @@ describe('zipWith', () => {
     )
     eq(f(c)(y), ['10 Cow', '20 Horse', '30 Dog'])
   })
+
+  it('should test curried versions too', () => {
+    const a = [1, 2, 3]
+    const b = [100, 200]
+
+    eq(zipWith(s)(a)(b), ['1 cow 100', '2 cow 200'])
+    eq(zipWith(s, _, b)(a), ['1 cow 100', '2 cow 200'])
+    eq(zipWith(_, a, [])(s), [])
+    eq(zipWith(s, a, _)(b), ['1 cow 100', '2 cow 200'])
+    eq(zipWith(s, _, _)([5, 10])(b), ['5 cow 100', '10 cow 200'])
+    eq(zipWith(_, _, b)(s)(a), ['1 cow 100', '2 cow 200'])
+    eq(zipWith(_, b, _)(s)(a), ['100 cow 1', '200 cow 2'])
+  })
 })

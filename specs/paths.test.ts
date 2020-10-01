@@ -1,3 +1,4 @@
+// fae-no-check
 import { describe, it } from './_describe.ts'
 import { paths, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
@@ -92,6 +93,20 @@ describe('paths', () => {
     eq(
       paths2([['a', -4], ['a', -2, 'de', -4], ['a', -2, 'de'], [4]]),
       [1, undefined, [12, 23, 25], 'sdf'],
+    )
+  })
+
+  it('should test curried versions too', () => {
+    eq(paths(['a', 'b'])({ a: 2, b: 3, c: { k: [1, 2, 3] } }), [2, 3])
+    eq(paths(_, { a: 2, b: 3, c: { k: [1, 2, 3] } })(['c.k']), [
+      [1, 2, 3],
+    ])
+    eq(
+      paths(
+        ['c.k.0', 'c/k/-1'],
+        _,
+      )({ a: 2, b: 3, c: { k: [1, 2, 3] } }),
+      [1, 3],
     )
   })
 })

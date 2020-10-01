@@ -1,5 +1,6 @@
+// fae-no-check
 import { describe, it } from './_describe.ts'
-import { pathOr } from '../mod.ts'
+import { pathOr, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('pathOr', () => {
@@ -61,6 +62,59 @@ describe('pathOr', () => {
       // @ts-ignore
       pathOr('Unknown', ['toString'], false),
       Boolean.prototype.toString,
+    )
+  })
+
+  it('should test curried versions too', () => {
+    eq(pathOr('Default', 'a')({ a: 2, b: 3, c: { k: [1, 2, 3] } }), 2)
+    eq(
+      pathOr('Undefined', _, { a: 2, b: 3, c: { k: [1, 2, 3] } })(
+        'c.k.e',
+      ),
+      'Undefined',
+    )
+    eq(
+      pathOr(
+        'Default',
+        'c.k.0',
+        _,
+      )({ a: 2, b: 3, c: { k: [1, 2, 3] } }),
+      1,
+    )
+    eq(
+      pathOr('Default', _, _)('c/k/-1')({
+        a: 2,
+        b: 3,
+        c: { k: [1, 2, 3] },
+      }),
+      3,
+    )
+    eq(pathOr('Default')('a')({ a: 2, b: 3, c: { k: [1, 2, 3] } }), 2)
+    eq(
+      pathOr(_, _, { a: 2, b: 3, c: { k: [1, 2, 3] } })('Undefined')(
+        'c.k.e',
+      ),
+      'Undefined',
+    )
+    eq(
+      pathOr('Default', _, { a: 2, b: 3, c: { k: [1, 2, 3] } })(
+        'c.k.0',
+      ),
+      1,
+    )
+    eq(
+      pathOr(_, 'c.k.e', { a: 2, b: 3, c: { k: [1, 2, 3] } })(
+        'Undefined',
+      ),
+      'Undefined',
+    )
+    eq(
+      pathOr(_, 'c/k/3', _)('Default')({
+        a: 2,
+        b: 3,
+        c: { k: [1, 2, 3] },
+      }),
+      'Default',
     )
   })
 })

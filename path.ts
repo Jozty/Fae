@@ -3,19 +3,15 @@ import { paths, Path } from './paths.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-// prettier-ignore
-type PathF_2 = (<T, R>(obj: ObjRec<T> | null) => R)
-  & ((obj?: PH) => PathF_2)
+type PathF_2 = <T, R>(obj: ObjRec<T> | null) => R
+
+type PathF_1<T, R> = (ps: Path) => R
 
 // prettier-ignore
-type PathF_1<T, R> = ((ps: Path) => R)
-  & ((ps?: PH) => PathF_1<T, R>)
-
-// prettier-ignore
-type PathF = (<T, R>(ps: Path, obj: ObjRec<T> | null) => R)
+type PathF =
   & ((ps: Path, obj?: PH) => PathF_2)
   & (<T, R>(ps: PH, obj: ObjRec<T> | null) => PathF_1<T, R>)
-  & ((ps?: PH, obj?: PH) => PathF)
+  & (<T, R>(ps: Path, obj: ObjRec<T> | null) => R)
 
 function _path<R, T = any>(ps: Path, obj: ObjRec<T> | null): R {
   return paths<T, R>([ps], obj)[0]

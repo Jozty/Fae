@@ -17,12 +17,13 @@ describe('head', () => {
 
   it('should throw if applied to null or undefined', () => {
     thr(
-      // @ts-ignore
+      // @ts-expect-error
       () => head(null),
       'The functor should be an array like or iterable/iterator',
     )
     // @ts-ignore
     thr(
+      // @ts-expect-error
       () => head(undefined),
       'The functor should be an array like or iterable/iterator',
     )

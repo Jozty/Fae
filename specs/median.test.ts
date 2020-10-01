@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { median } from '../mod.ts'
+import { median, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('median', () => {

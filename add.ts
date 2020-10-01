@@ -2,19 +2,15 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-// prettier-ignore
-type Add_2 = ((b: number) => number)
-  & ((b?: PH) => Add_2)
+type Add_2 = (b: number) => number
+
+type Add_1 = (a: number) => number
 
 // prettier-ignore
-type Add_1 = ((a: number) => number)
-  & ((a?: PH) => Add_1)
-
-// prettier-ignore
-type Add = ((a: number, b: number) => number)
+type Add =
   & ((a: number, b?: PH) => Add_2)
   & ((a: PH, b: number) => Add_1)
-  & ((a?: PH, b?: PH) => Add)
+  & ((a: number, b: number) => number)
 
 function _add(a: number, b: number) {
   return a + b

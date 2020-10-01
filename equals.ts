@@ -5,7 +5,7 @@ import { typ } from './typ.ts'
 import { getFunctionName } from './utils/get.ts'
 import { nth } from './nth.ts'
 import { concat } from './concat.ts'
-import has from "./utils/has.ts"
+import has from './utils/has.ts'
 
 // TODO: add to mod
 function _keys(obj: Obj) {

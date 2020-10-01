@@ -1,3 +1,4 @@
+// fae-revisit
 import { describe, it } from './_describe.ts'
 import { when, add, filter, equals, multiply, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
@@ -5,6 +6,10 @@ import { isNumber } from '../utils/is.ts'
 import type { Func } from '../utils/types.ts'
 
 describe('when', () => {
+  type T = (a: number[]) => boolean
+  type X = (a: number[]) => number[]
+  type Y = (a: string) => string
+
   const add1 = add(1) as (a: number) => number
   function g(x: number) {
     return multiply(3)(x)
@@ -37,30 +42,45 @@ describe('when', () => {
     eq(when(equals(_, 5), g)(5), 15)
     eq(when(equals(person1), invoke)(person1), 'Bob')
     eq(
-      when(equals([1, 2, 4, 5, 6]))(filter(isEven))([1, 2, 4, 5, 6]),
+      when(equals([1, 2, 4, 5, 6]) as T)(filter(isEven) as X)([
+        1,
+        2,
+        4,
+        5,
+        6,
+      ]),
       [2, 4, 6],
     )
   })
 
   it('should return the argument unmodified if the validator returns a falsy value', () => {
-    eq(when(isNumber, add1 as Func)('hello'), 'hello')
+    eq(when(isNumber, (add1 as any) as Y)('hello'), 'hello')
     eq(when(equals(person1), invoke)(person2), {
       firstname: 'Michael',
       lastname: 'Jordan',
     })
     eq(
-      when(equals([1, 2, 4, 5, 6]))(filter(isEven))([1, 2, 3, 5, 6]),
+      when(equals([1, 2, 4, 5, 6]) as T)(filter(isEven) as X)([
+        1,
+        2,
+        3,
+        5,
+        6,
+      ]),
       [1, 2, 3, 5, 6],
     )
   })
 
-  it('should return a curried function', () => {
+  it('should test curried versions too', () => {
     const ifIsNumber = when(isNumber)
 
-    eq(ifIsNumber(add(1))(15), 16)
-    eq(ifIsNumber(add(1))('hello'), 'hello')
-    eq(when(equals(_, 5))(g)(5), 15)
-    eq(when(equals(_, 5), _, 5)(g), 15)
+    eq(when(isNumber)(add(1))(15), 16)
+    eq(ifIsNumber((add(1) as any) as T)('hello'), 'hello')
+    eq(when(equals(_, 5), _, _)(g)(5), 15)
+    eq(when(_, g, _)(equals(_, 5.1))(5), 5)
+    eq(when(_, _, 10)(equals(_, 10))(g), 30)
+    eq(when(equals(_, 8), g, _)(5.2), 5.2)
+    eq(when(_, add1 as Func, 3)(equals(_, 3)), 4)
     eq(when(equals(_, 5), _, 5)(add1 as Func), 6)
   })
 })

@@ -1,7 +1,7 @@
 import { describe, it } from './_describe.ts'
-import { max } from '../mod.ts'
+import { max, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
-//TODO singla-shivam (Returns the second argument if one of the arguments is NaN)
+//TODO singla-shivam (Returns the second argument if one of the arguments is NaN & check for curried versions too)
 
 describe('max', () => {
   it('should return the larger of its two arguments', () => {
@@ -23,12 +23,23 @@ describe('max', () => {
   })
 
   it('should work for any orderable type', () => {
+    eq(max('a', 'z'), 'z')
+    eq(max('z', 'a'), 'z')
+    eq(max('me', 'mi'), 'mi')
+    eq(max('hi', 'm'), 'm')
+    eq(max('az', 'za'), 'za')
+    eq(max('aaa', 'ab'), 'ab')
+    eq(max('aa', 'aab'), 'aab')
+  })
+
+  it('should test curried versions too', () => {
     let d1: Date = new Date('2001-01-01')
     let d2: Date = new Date('2002-02-02')
 
-    eq(max(d1, d2), d2)
-    eq(max(d2, d1), d2)
-    eq(max('a', 'z'), 'z')
-    eq(max('z', 'a'), 'z')
+    eq(max(d1)(d2), d2)
+    eq(max(_, d1)(d2), d2)
+    eq(max(25)(50), 50)
+    eq(max(_, 25)(20), 25)
+    eq(max(25, _)(30), 30)
   })
 })

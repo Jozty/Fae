@@ -6,9 +6,7 @@ import { filter } from './filter.ts'
 import { comparator } from './comparator.ts'
 
 // @types
-// prettier-ignore
-type Median = ((list: number[]) => number)
-  & ((list?: PH) => Median)
+type Median = (list: number[]) => number
 
 function _median(list: number[]) {
   list = filter((x: number) => !isNaN(x), list) as number[]

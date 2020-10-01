@@ -145,4 +145,10 @@ describe('nth', () => {
       'The functor should be an array like or iterable/iterator',
     )
   })
+
+  it('should test curried versions too', () => {
+    eq(nth(2)([50, 30, 22, 21]), 22)
+    eq(nth(_, [25, 50, 22, 19])(-1), 19)
+    eq(nth(4, _)(['a', 'an', 'the']), undefined)
+  })
 })

@@ -2,19 +2,15 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-// prettier-ignore
-type Subtract_2 = ((b: number) => number)
-  & ((b?: PH) => Subtract_2)
+type Subtract_2 = (b: number) => number
+
+type Subtract_1 = (a: number) => number
 
 // prettier-ignore
-type Subtract_1 = ((a: number) => number)
-  & ((a?: PH) => Subtract_1)
-
-// prettier-ignore
-type Subtract = ((a: number, b: number) => number)
+type Subtract =
   & ((a: number, b?: PH) => Subtract_2)
   & ((a: PH, b: number) => Subtract_1)
-  & ((a?: PH, b?: PH) => Subtract)
+  & ((a: number, b: number) => number)
 
 function _subtract(a: number, b: number) {
   return a - b
