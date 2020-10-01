@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { whereAny, curry } from '../mod.ts'
+import { whereAny, curry, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('whereAny', () => {
@@ -67,5 +67,16 @@ describe('whereAny', () => {
     }
 
     eq(whereAny(spec, {}), true)
+  })
+
+  it('should test curried versions too', () => {
+    let spec = { x: equals(20), z: equals('foo') }
+    let test1 = { x: 200, y: 100, z: 100 }
+    let test2 = { x: 10, z: 'foo' }
+
+    eq(whereAny(spec)(test1), false)
+    eq(whereAny(_, test2)(spec), true)
+    eq(whereAny(spec, _)(test1), false)
+    eq(whereAny(spec, test2), true)
   })
 })

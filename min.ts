@@ -14,7 +14,7 @@ type _Min<T extends number | string | Date> =
 
 type Min = _Min<number> & _Min<string> & _Min<Date>
 
-function _min(a: number | string, b: number | string) {
+function _min<T extends number | string | Date>(a: T, b: T) {
   return a < b ? a : b
 }
 

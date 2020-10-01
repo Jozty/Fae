@@ -7,7 +7,7 @@ type Multiply_2 = (b: number) => number
 type Multiply_1 = (a: number) => number
 
 // prettier-ignore
-type Multiply = 
+type Multiply =
   & ((a: number, b?: PH) => Multiply_2)
   & ((a: PH, b: number) => Multiply_1)
   & ((a: number, b: number) => number)

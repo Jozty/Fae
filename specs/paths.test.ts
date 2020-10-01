@@ -94,4 +94,18 @@ describe('paths', () => {
       [1, undefined, [12, 23, 25], 'sdf'],
     )
   })
+
+  it('should test curried versions too', () => {
+    eq(paths(['a', 'b'])({ a: 2, b: 3, c: { k: [1, 2, 3] } }), [2, 3])
+    eq(paths(_, { a: 2, b: 3, c: { k: [1, 2, 3] } })(['c.k']), [
+      [1, 2, 3],
+    ])
+    eq(
+      paths(
+        ['c.k.0', 'c/k/-1'],
+        _,
+      )({ a: 2, b: 3, c: { k: [1, 2, 3] } }),
+      [1, 3],
+    )
+  })
 })

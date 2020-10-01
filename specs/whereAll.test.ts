@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { whereAll, curry } from '../mod.ts'
+import { whereAll, curry, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('whereAll', () => {
@@ -89,5 +89,16 @@ describe('whereAll', () => {
     }
 
     eq(whereAll(spec, {}), false)
+  })
+
+  it('should test curried versions too', () => {
+    let spec = { x: equals(20), z: equals('foo') }
+    let test1 = { x: 125, y: 100, z: 100 }
+    let test2 = { x: 20, z: 'foo' }
+
+    eq(whereAll(spec)(test1), false)
+    eq(whereAll(_, test2)(spec), true)
+    eq(whereAll(spec, _)(test1), false)
+    eq(whereAll(spec, test2), true)
   })
 })

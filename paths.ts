@@ -1,3 +1,4 @@
+// fae-no-check
 import type { ObjRec, PH } from './utils/types.ts'
 import {
   isString,
@@ -17,7 +18,7 @@ type Paths_2 = <T, R>(obj: ObjRec<T> | null) => R[]
 type Paths_1<T, R> = (pathsArr: Path[]) => R[]
 
 // prettier-ignore
-type Paths = 
+type Paths =
   & ((pathsArr: Path[], obj?: PH) => Paths_2)
   & (<T, R>(pathsArr: PH, obj: ObjRec<T> | null) => Paths_1<T, R>)
   & (<T, R>(pathsArr: Path[], obj: ObjRec<T> | null) => R[])

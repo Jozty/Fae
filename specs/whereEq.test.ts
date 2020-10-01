@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { whereEq } from '../mod.ts'
+import { whereEq, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('whereEq', () => {
@@ -59,5 +59,16 @@ describe('whereEq', () => {
 
   it('should return false for an empty spec', () => {
     eq(whereEq({}, { a: 1 }), false)
+  })
+
+  it('should test curried versions too', () => {
+    let spec = { x: 20, z: 'foo' }
+    let test1 = { x: 125, y: 100, z: 100 }
+    let test2 = { x: 20, z: 'foo' }
+
+    eq(whereEq(spec)(test1), false)
+    eq(whereEq(_, test2)(spec), true)
+    eq(whereEq(spec, _)(test1), false)
+    eq(whereEq(spec, test2), true)
   })
 })

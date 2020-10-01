@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { zip, map, filter } from '../mod.ts'
+import { zip, map, filter, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('zip', () => {
@@ -53,6 +53,28 @@ describe('zip', () => {
       [4, 200],
       [6, 300],
       [8, 400],
+    ])
+  })
+
+  it('should test curried versions too', () => {
+    const a = [1, 2, 3]
+    const b = [100, 200]
+
+    eq(zip(a)(b), [
+      [1, 100],
+      [2, 200],
+    ])
+    eq(zip(_, b)(a), [
+      [1, 100],
+      [2, 200],
+    ])
+    eq(zip(a, _)(b), [
+      [1, 100],
+      [2, 200],
+    ])
+    eq(zip(b, a), [
+      [100, 1],
+      [200, 2],
     ])
   })
 })
