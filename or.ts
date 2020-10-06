@@ -2,19 +2,15 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-// prettier-ignore
-type Or_2 = ((b: any) => boolean)
-  & ((b?: PH) => Or_2)
+type Or_2 = (b: any) => boolean
+
+type Or_1 = (a: any) => boolean
 
 // prettier-ignore
-type Or_1 = ((a: any) => boolean)
-  & ((a?: PH) => Or_1)
-
-// prettier-ignore
-type Or = ((a: any, b: any) => boolean)
+type Or =
   & ((a: any, b?: PH) => Or_2)
   & ((a: PH, b: any) => Or_1)
-  & ((a?: PH, b?: PH) => Or)
+  & ((a: any, b: any) => boolean)
 
 function _or(a: any, b: any) {
   return Boolean(a || b)

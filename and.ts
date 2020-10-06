@@ -2,19 +2,15 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-// prettier-ignore
-type And_2 = ((b: any) => boolean)
-  & ((b?: PH) => And_2)
+type And_2 = (b: any) => boolean
+
+type And_1 = (a: any) => boolean
 
 // prettier-ignore
-type And_1 = ((a: any) => boolean)
-  & ((a?: PH) => And_1)
-
-// prettier-ignore
-type And = ((a: any, b: any) => boolean)
+type And =
   & ((a: any, b?: PH) => And_2)
   & ((a: PH, b: any) => And_1)
-  & ((a?: PH, b?: PH) => And)
+  & ((a: any, b: any) => boolean)
 
 function _and(a: any, b: any) {
   return Boolean(a && b)

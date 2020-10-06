@@ -2,19 +2,15 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-// prettier-ignore
-type Xor_2 = ((b: any) => boolean)
-  & ((b?: PH) => Xor_2)
+type Xor_2 = (b: any) => boolean
+
+type Xor_1 = (a: any) => boolean
 
 // prettier-ignore
-type Xor_1 = ((a: any) => boolean)
-  & ((a?: PH) => Xor_1)
-
-// prettier-ignore
-type Xor = ((a: any, b: any) => boolean)
+type Xor =
   & ((a: any, b?: PH) => Xor_2)
   & ((a: PH, b: any) => Xor_1)
-  & ((a?: PH, b?: PH) => Xor)
+  & ((a: any, b: any) => boolean)
 
 function _xor(a: any, b: any) {
   return Boolean(a ? !b : b)

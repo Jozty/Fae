@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { and } from '../mod.ts'
+import { and, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('and', () => {
@@ -14,8 +14,10 @@ describe('and', () => {
     eq(and(and(false, false), true), false)
     eq(and(undefined, true), false)
     eq(and(undefined, false), false)
-    eq(and(undefined, undefined), false)
-    eq(and(true, undefined), false)
+    // fae-no-check
+    eq(and(undefined, undefined as any), false)
+    // fae-no-check
+    eq(and(true, undefined as any), false)
     eq(and(2, 1), true)
     eq(and(0, true), false)
     eq(and('', true), false)
@@ -24,7 +26,7 @@ describe('and', () => {
     eq(and('a', true), true)
     eq(and([], true), true)
     eq(and({}, true), true)
-    eq(and({}, undefined), false)
+    eq(and({}, undefined as any), false)
     eq(and([1, 2], NaN), false)
     eq(and({ 1: 2 }, true), true)
     eq(and([1, 2, 3], true), true)
@@ -35,5 +37,16 @@ describe('and', () => {
     eq(and(function () {}, ''),false)
     //prettier-ignore
     eq(and('', ""), false)
+  })
+
+
+  it('should work on curried versions too', () => {
+    eq(and(_, undefined)(undefined), false)
+    eq(and("")(0n), false)
+    eq(and(undefined)(undefined), false)
+    eq(and(112)(undefined), false)
+    eq(and(undefined)(112), false)
+    eq(and("sfd")(112), true)
+    eq(and("sfd")([]), true)
   })
 })

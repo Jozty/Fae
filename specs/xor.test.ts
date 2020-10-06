@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { xor } from '../mod.ts'
+import { xor, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('xor', () => {
@@ -24,7 +24,8 @@ describe('xor', () => {
 
   it('should return false when both values are false', () => {
     eq(xor(null, false), false)
-    eq(xor(false, undefined), false)
+    // fae-no-check
+    eq(xor(false, undefined as any), false)
     eq(xor(undefined, null), false)
     eq(xor(0, false), false)
     eq(xor(false, NaN), false)
@@ -36,7 +37,8 @@ describe('xor', () => {
     eq(xor('foo', null), true)
     eq(xor(null, 'foo'), true)
     eq(xor(undefined, 42), true)
-    eq(xor(42, undefined), true)
+    // fae-no-check
+    eq(xor(42, undefined as any), true)
     eq(xor(Infinity, NaN), true)
     eq(xor(NaN, Infinity), true)
     eq(xor({}, ''), true)
@@ -48,9 +50,16 @@ describe('xor', () => {
   })
 
   it('should return a curried function', () => {
-    eq(xor()(true)(true), false)
-    eq(xor()(true)(false), true)
-    eq(xor()(false)(true), true)
-    eq(xor()(false)(false), false)
+    eq(xor(true)(true), false)
+    eq(xor(true)(false), true)
+    eq(xor(false)(true), true)
+    eq(xor(false)(false), false)
+    eq(xor(_, "")(undefined), false)
+    eq(xor("")(null), false)
+    eq(xor(undefined)(undefined), false)
+    eq(xor(112)(undefined), true)
+    eq(xor(undefined)(112), true)
+    eq(xor("sfd")(112), false)
+    eq(xor("sfd")([]), false)
   })
 })
