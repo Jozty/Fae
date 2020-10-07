@@ -3,8 +3,11 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type Reverse = (<F extends T[] | string, T>(functor: F) => F) &
-  ((fn?: PH) => Reverse)
+type ReverseReturnType<F> = F extends (infer U)[] ? U[] : string
+
+// prettier-ignore
+type Reverse =
+  <F extends T[] | string, T = any>(functor: F) => ReverseReturnType<F>
 
 function _reverse<F extends T[] | string, T>(functor: F): F {
   if (isString(functor))

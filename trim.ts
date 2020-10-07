@@ -2,14 +2,15 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type Trim_2 = ((t: string) => string) & ((t?: PH) => Trim_2)
+type Trim_2 = (t: string) => string
 
-type Trim_1 = ((str: string) => string) & ((str?: PH) => Trim_1)
+type Trim_1 = (str: string) => string
 
-type Trim = ((str: string, t: string) => string) &
-  ((str: string, t?: PH) => Trim_2) &
-  ((str: PH, t: string) => Trim_1) &
-  ((str?: PH, t?: PH) => Trim)
+// prettier-ignore
+type Trim =
+  & ((str: string, t?: PH) => Trim_2)
+  & ((str: PH, t: string) => Trim_1)
+  & ((str: string, t: string) => string)
 
 function escapeRegEx(str: string) {
   return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')

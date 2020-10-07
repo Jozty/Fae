@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { range, rangeUntil } from '../mod.ts'
+import { range, rangeUntil, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('range, rangeUntil', () => {
@@ -22,5 +22,15 @@ describe('range, rangeUntil', () => {
     eq(result, [])
     result.push(5)
     eq(range(10, 5), [])
+  })
+
+  it('should work with curried versions too', () => {
+    eq(range(1)(5), [1, 2, 3, 4, 5])
+    eq(range(_, 5)(1), [1, 2, 3, 4, 5])
+    eq(range(1, _)(5), [1, 2, 3, 4, 5])
+
+    eq(rangeUntil(1)(5), [1, 2, 3, 4])
+    eq(rangeUntil(_, 5)(1), [1, 2, 3, 4])
+    eq(rangeUntil(1, _)(5), [1, 2, 3, 4])
   })
 })
