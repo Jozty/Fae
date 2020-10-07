@@ -1,4 +1,5 @@
 import curryN from './utils/curry_n.ts'
+import { isInteger } from './utils/is.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
@@ -13,6 +14,17 @@ type Range =
   & ((from: number, to: number) => number[])
 
 function _range(from: number, to: number) {
+  if (
+    isNaN(from) ||
+    isNaN(to) ||
+    !isInteger(from) ||
+    !isInteger(to)
+  ) {
+    throw new Error(
+      `The arguments should be finite integer values but got\n\tfrom: ${from}\n\tto: ${to}`,
+    )
+  }
+
   const result = []
   const l = to - from + 1
   if (l <= 0) return []

@@ -1,6 +1,5 @@
 import { isString } from './utils/is.ts'
 import curryN from './utils/curry_n.ts'
-import type { PH } from './utils/types.ts'
 
 // @types
 type ReverseReturnType<F> = F extends (infer U)[] ? U[] : string

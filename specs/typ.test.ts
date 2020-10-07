@@ -17,7 +17,6 @@ describe('typ', () => {
       'Function',
     )
     eq(typ(undefined), 'Undefined')
-    eq(typ(new XYZ()), 'Object')
   })
 
   it('should work with other types also', () => {

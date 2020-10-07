@@ -27,7 +27,7 @@ describe('reverse', () => {
     eq(reverse(arr), expected)
     eq(arr, arr2) // should not affect the original
     eq(reverse(expected), arr2)
-    eq(reverse(expected), arr2)
+    eq(reverse(expected), arr2) // check if the `expected` was not change in the previous call
   })
 
   it('should reverse strings', () => {
@@ -36,8 +36,6 @@ describe('reverse', () => {
     const expected = str.split('').reverse().join('')
     eq(reverse(str), expected)
     eq(str, str2) // should not affect the original
-    eq(reverse(str), expected)
-    eq(str, str2)
   })
 
   it('should reverse strings with non-ascii characters', () => {
