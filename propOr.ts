@@ -46,14 +46,14 @@ function _propOr<T, R>(d: R, p: Prop, obj: Obj<T> | null) {
  * If the given, non-null object has an own property with the specified name,
  * returns the value of that property. Otherwise returns the provided default
  * value.
- *      const alice = {
+ *      const fae = {
  *        name: 'Fae',
  *        age: 15
- *      };
- *      const Great = Fae.prop('GreatLibrary');
- *      const GreatWithDefault = Fae.propOr('FaeModule', 'GreatLibrary');
+ *      }
+ *      const Great = Fae.prop('GreatLibrary')
+ *      const GreatWithDefault = Fae.propOr('FaeModule', 'GreatLibrary')
  *
- *      Great(Fae);  //=> undefined
- *      GreatWithDefault(Fae);  //=> 'FaeModule'
+ *      Great(fae)  //=> undefined
+ *      GreatWithDefault(fae) //=> 'FaeModule'
  */
 export const propOr: PropOr = curryN(3, _propOr)

@@ -3,6 +3,7 @@ import { propOr, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('propOr', () => {
+  type O = Record<string, string | null | undefined>
   let shubham = { name: 'shubham', age: 23 }
   let shivam = { age: 99 }
 
@@ -24,12 +25,12 @@ describe('propOr', () => {
   })
 
   it('should use the default when supplied an object with a nil value', () => {
-    eq(propOr('foo', 'x', { x: null }), 'foo')
-    eq(propOr('foo', 'x', { x: undefined }), 'foo')
+    eq(propOr('foo', 'x', { x: null } as O), 'foo')
+    eq(propOr('foo', 'x', { x: undefined } as O), 'foo')
   })
 
   it('should work with curried calls too', () => {
-    const obj = { a: 1, b: 'abc', c: false }
+    const obj = { a: 1, b: 'abc', c: false } as Record<string, number | string | boolean | number[]>
 
     const x = propOr([1], 'a', obj)
 

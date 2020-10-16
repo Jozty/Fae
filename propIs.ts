@@ -43,7 +43,7 @@ function _propIs<T>(type: string, name: Prop, obj: Obj<T>) {
 }
 
 /**
- * Returns `true` if the specified object property(must be passed as string) is of the given type;
+ * Returns `true` if the specified object property is of the given type;
  * `false` otherwise.
  *
  *      Fae.propIs('Number', 'a', {a: 1, y: 2});  //=> true
