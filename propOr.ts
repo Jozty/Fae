@@ -1,48 +1,44 @@
 import curryN from './utils/curry_n.ts'
 import type { PH, Obj } from './utils/types.ts'
+import type { Prop } from './prop.ts'
 import { pathOr } from './pathOr.ts'
 
 // @types
-type PropOr_1<T> = (<R>(d: R) => R) & ((d?: PH) => PropOr_1<T>)
+type PropOr_1<T> = <R>(d: R) => R
 
-type PropOr_2<T, R> = ((p: string | number) => R) &
-  ((p?: PH) => PropOr_2<T, R>)
+type PropOr_2<T, R> = (p: Prop) => R
 
-type PropOr_3<R> = (<T>(obj: Obj<T> | null) => R) &
-  ((obj?: PH) => PropOr_3<R>)
+type PropOr_3<R> = <T>(obj: Obj<T> | null) => R
 
-type PropOr_2_3<R> = (<T>(
-  p: string | number,
-  obj: Obj<T> | null,
-) => R) &
-  ((p: string | number, obj?: PH) => PropOr_3<R>) &
-  (<T>(p: PH, obj: Obj<T> | null) => PropOr_2<T, R>) &
-  ((p?: PH, obj?: PH) => PropOr_2_3<R>)
+// prettier-ignore
+type PropOr_2_3<R> =
+  & ((p: Prop, obj?: PH) => PropOr_3<R>)
+  & (<T>(p: PH, obj: Obj<T> | null) => PropOr_2<T, R>)
+  & (<T>(p: Prop, obj: Obj<T> | null) => R)
 
-type PropOr_1_3 = (<T, R>(d: R, obj: Obj<T> | null) => R) &
-  (<R>(d: R, obj?: PH) => PropOr_3<R>) &
-  (<T>(d: PH, obj: Obj<T> | null) => PropOr_1<T>) &
-  ((d?: PH, obj?: PH) => PropOr_1_3)
+// prettier-ignore
+type PropOr_1_3 =
+  & (<R>(d: R, obj?: PH) => PropOr_3<R>)
+  & (<T>(d: PH, obj: Obj<T> | null) => PropOr_1<T>)
+  & (<T, R>(d: R, obj: Obj<T> | null) => R)
 
-type PropOr_1_2<T> = (<R>(d: R, p: string | number) => R) &
-  (<R>(d: R, p?: PH) => PropOr_2<T, R>) &
-  ((d: PH, p: string | number) => PropOr_1<T>) &
-  ((d?: PH, p?: PH) => PropOr_1_2<T>)
+// prettier-ignore
+type PropOr_1_2<T> =
+  & (<R>(d: R, p?: PH) => PropOr_2<T, R>)
+  & ((d: PH, p: Prop) => PropOr_1<T>)
+  & (<R>(d: R, p: Prop) => R)
 
-type PropOr = (<T, R>(
-  d: R,
-  p: string | number,
-  obj: Obj<T> | null,
-) => R) &
-  ((d?: PH, p?: PH, obj?: PH) => PropOr) &
-  (<R>(d: R, p?: PH, obj?: PH) => PropOr_2_3<R>) &
-  ((d: PH, p: string | number, obj?: PH) => PropOr_1_3) &
-  (<T>(d: PH, p: PH, obj: Obj<T> | null) => PropOr_1_2<T>) &
-  (<R>(d: R, p: string | number, obj?: PH) => PropOr_3<R>) &
-  (<T, R>(d: R, p: PH, obj: Obj<T> | null) => PropOr_2<T, R>) &
-  (<T>(d: PH, p: string | number, obj: Obj<T> | null) => PropOr_1<T>)
+// prettier-ignore
+type PropOr =
+  & (<R>(d: R, p?: PH, obj?: PH) => PropOr_2_3<R>)
+  & ((d: PH, p: Prop, obj?: PH) => PropOr_1_3)
+  & (<T>(d: PH, p: PH, obj: Obj<T> | null) => PropOr_1_2<T>)
+  & (<R>(d: R, p: Prop, obj?: PH) => PropOr_3<R>)
+  & (<T, R>(d: R, p: PH, obj: Obj<T> | null) => PropOr_2<T, R>)
+  & (<T>(d: PH, p: Prop, obj: Obj<T> | null) => PropOr_1<T>)
+  & (<T, R extends T>(d: R, p: Prop, obj: Obj<T> | null,) => R)
 
-function _propOr<T, R>(d: R, p: string | number, obj: Obj<T> | null) {
+function _propOr<T, R>(d: R, p: Prop, obj: Obj<T> | null) {
   return pathOr<T, R, T>(d, [p], obj)
 }
 
