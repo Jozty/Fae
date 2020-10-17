@@ -5,10 +5,11 @@ import { eq } from './utils/utils.ts'
 describe('prop', () => {
   const obj = { name: 'John', age: 23 }
 
-  it('should return a function that fetches the appropriate property', () => {
-    const nm = prop('name')
-    eq(typeof nm, 'function')
-    eq(nm(obj), 'John')
+  it('should work with curried functions too', () => {
+    eq(prop('name', obj), 'John')
+    eq(prop('name')(obj), 'John')
+    eq(prop('name', _)(obj), 'John')
+    eq(prop(_, obj)('name'), 'John')
   })
 
   it('should handle number as property', () => {
@@ -20,47 +21,43 @@ describe('prop', () => {
   })
 
   it('should show the same behavior as path for a nonexistent property', () => {
-    const propResult = prop('incorrect', obj)
-    const pathResult = path(['incorrect'], obj)
+    const propResult: string | number | undefined = prop('incorrect', obj)
+    const pathResult: typeof propResult = path(['incorrect'], obj)
     eq(propResult, pathResult)
   })
 
   it('should show the same behavior as path for an undefined property', () => {
-    // @ts-ignore
+    // @ts-expect-error
     const propResult = prop(undefined, obj)
-    // @ts-ignore
+    // @ts-expect-error
     const pathResult = path([undefined], obj)
-    // fae-no-check
-    // @ts-ignore
+    // @ts-expect-error
     eq(propResult, pathResult)
   })
 
   it('should show the same behavior as path for a null property', () => {
-    // @ts-ignore
+    // @ts-expect-error
     const propResult = prop(null, obj)
-    // @ts-ignore
+    // @ts-expect-error
     const pathResult = path([null], obj)
-    // fae-no-check
-    // @ts-ignore
+    // @ts-expect-error
     eq(propResult, pathResult)
   })
 
   it('should show the same behavior as path for a valid property and object', () => {
     const propResult = prop('age', obj)
-    const pathResult = path(['age'], obj)
+    const pathResult: typeof propResult = path(['age'], obj)
     eq(propResult, pathResult)
   })
 
   it('should show the same behavior as path for a null object', () => {
-    // @ts-ignore
-    const propResult = prop('age', null)
-    // @ts-ignore
-    const pathResult = path(['age'], null)
+    // @ts-expect-error
+    const propResult: null = prop('age', null)
+    const pathResult: null = path(['age'], null)
     eq(propResult, pathResult)
   })
 
   it('should show the same behavior as path for an undefined object', () => {
-    //@ts-ignore
     let propResult, propException, pathResult, pathException
     try {
       propResult = prop('name', undefined)
@@ -74,8 +71,7 @@ describe('prop', () => {
       pathException = e
     }
 
-    // fae-no-check
-    // @ts-ignore
+    // @ts-expect-error
     eq(propResult, pathResult)
     eq(propException, pathException)
   })

@@ -1,6 +1,6 @@
 import { describe, it } from './_describe.ts'
 import { trim, _ } from '../mod.ts'
-import { eq, thr } from './utils/utils.ts'
+import { eq } from './utils/utils.ts'
 
 describe('trim', () => {
   const str1 = `
@@ -31,5 +31,12 @@ describe('trim', () => {
     eq(trim3(']]'), '[[Hello]')
     eq(trim3(''), str3)
     eq(trim3('abc'), str3)
+  })
+
+  it('should work with curried versions', () => {
+    eq(trim('!!!abcabc!!', '!!'), '!abcabc')
+    eq(trim('!!!abcabc!!')('!!'), '!abcabc')
+    eq(trim('!!!abcabc!!', _)('!!'), '!abcabc')
+    eq(trim(_, '!!')('!!!abcabc!!'), '!abcabc')
   })
 })

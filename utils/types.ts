@@ -42,24 +42,14 @@ export type Func = ((...args: any[]) => any) & {
   [FUNCTION_LENGTH]?: number
 }
 
-export type Obj<T = any> = {
-  [key: string]: T
-}
+export type Obj<T = any> = Record<string | number, T>
 
-export type ObjArr<T = any> = {
-  [key: string]: T | T[]
-}
+export type ObjArr<T = any> = Record<string | number, T | T[]>
 
-export type ObjRec<T = any> = {
-  [key: string]:
-    | ObjRec
-    | ObjArr
-    | string
-    | number
-    | null
-    | undefined
-    | T
-}
+export type ObjRec<T = any> = Record<
+  string | number,
+  ObjArr | string | number | null | undefined | T
+>
 
 /** Comparator for functions like `sort` */
 export type Comparator<T> = (a: T, b: T) => 1 | -1 | 0
@@ -80,9 +70,7 @@ export type Predicate1<T = any> = (v: T) => boolean
 export type Predicate2<T1, T2 = T1> = (a: T1, b: T2) => boolean
 
 /** Type for spec object which contains predicate functions of type {Predicate1} */
-export type Tests<T> = {
-  [key: string]: Predicate1<T>
-}
+export type Tests<T> = Record<string | number, Predicate1<T>>
 
 export type FuncArr1<T, R> = (a: T) => R
 export type FuncArr2<T1, T2, R> = (a: T1, b: T2) => R

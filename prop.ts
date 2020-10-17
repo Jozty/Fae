@@ -7,23 +7,21 @@ import {
 import { nth } from './nth.ts'
 import curryN from './utils/curry_n.ts'
 
+export type Prop = string | number
+
 // @types
-type Prop_2 = (<T>(obj: Obj<T> | ArrayLike<T>) => T | undefined) &
-  ((obj?: PH) => Prop_2)
+type Prop_2 = <T>(obj: Obj<T> | ArrayLike<T>) => T | undefined
 
-type Prop_1<T> = ((p: string | number) => T | undefined) &
-  ((p?: PH) => Prop_1<T>)
+type Prop_1<T> = (p: Prop) => T | undefined
 
-type Prop = (<T>(
-  p: string | number,
-  obj: Obj<T> | ArrayLike<T>,
-) => T | undefined) &
-  ((p: string | number, obj?: PH) => Prop_2) &
-  (<T>(p: PH, obj: Obj<T> | ArrayLike<T>) => Prop_1<T>) &
-  ((p?: PH, obj?: PH) => Prop)
+// prettier-ignore
+type PropF =
+  & ((p: Prop, obj?: PH) => Prop_2)
+  & (<T>(p: PH, obj: Obj<T> | ArrayLike<T>) => Prop_1<T>)
+  & (<T>(p: Prop, obj: Obj<T> | ArrayLike<T>) => T | undefined)
 
 function _prop<T>(
-  p: string | number,
+  p: Prop,
   obj: Obj<T> | ArrayLike<T>,
 ): T | undefined {
   if (isUndefinedOrNull(obj)) return
@@ -32,4 +30,4 @@ function _prop<T>(
 }
 
 /** Returns p property `p` on the `obj` if exists */
-export const prop: Prop = curryN(2, _prop)
+export const prop: PropF = curryN(2, _prop)

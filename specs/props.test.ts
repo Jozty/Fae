@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { props } from '../mod.ts'
+import { props, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('props', () => {
@@ -22,5 +22,13 @@ describe('props', () => {
     eq(ps.length, 2)
     eq(ps[0], 1)
     eq(ps[1], void 0)
+  })
+
+  it('should test curried versions too', () => {
+    const properties = ['a', 'e']
+
+    eq(props(properties)(obj), [1, 5])
+    eq(props(_, obj)(properties), [1, 5])
+    eq(props(properties)(obj), [1, 5])
   })
 })
