@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { complement} from '../mod.ts'
+import { complement } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('complement', () => {
@@ -11,8 +11,8 @@ describe('complement', () => {
     eq(f(-1), true)
     eq(f(-4), false)
     eq(f(0), false)
-    eq(f(NaN), false)
-    eq(f(Infinity), false)
+    eq(f(NaN), true)
+    eq(f(Infinity), true)
     
   
   })
