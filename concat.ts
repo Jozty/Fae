@@ -3,15 +3,23 @@ import type { PH } from './utils/types.ts'
 import { isArray, isString } from './utils/is.ts'
 
 // @types
-type Concat_2<L extends T[] | string, T> = (b: L) => L
-  
-type Concat_1<L extends T[] | string, T> = (a: L) => L
+type ConcatReturnType<F> = F extends string
+  ? string
+  : F extends (infer U)[]
+  ? U[]
+  : never
+
+// prettier-ignore
+type Concat_2<L extends any[] | string> = (b: L) => ConcatReturnType<L>
+
+// prettier-ignore
+type Concat_1<L extends any[] | string> = (a: L) => ConcatReturnType<L>
 
 // prettier-ignore
 type Concat =
-  &(<L extends T[] | string, T>(a: L, b?: PH) => Concat_2<L, T>)
-  &(<L extends T[] | string, T>(a: PH, b: L) => Concat_1<L, T>)
-  &(<L extends T[] | string, T>(a: L, b: L) => L)
+  &(<L extends any[] | string>(a: L, b?: PH) => Concat_2<L>)
+  &(<L extends any[] | string>(a: PH, b: L) => Concat_1<L>)
+  &(<L extends any[] | string>(a: L, b: L) => ConcatReturnType<L>)
 
 function _concat<L extends T[] | string, T>(a: L, b: L): L {
   if (isArray<T>(a) && isArray<T>(b))
