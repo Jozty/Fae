@@ -40,14 +40,4 @@ describe('complement', () => {
     eq(f(_, _, 12)(12)(24), true)
     eq(f(_, -2)(12,6), true)
   })
-  
-
-  // TODO:
-  // it('should accept fantasy-land functors', () => {
-  //   const Just = S.Just
-  //   const Nothing = S.Nothing
-  //   eq(complement(Just(true)), Just(false))
-  //   eq(complement(Just(false)), Just(true))
-  //   eq(complement(Nothing()), Nothing())
-  // })
 })
