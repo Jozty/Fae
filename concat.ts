@@ -14,9 +14,9 @@ type Concat =
   &(<L extends T[] | string, T>(a: L, b: L) => L)
 
 function _concat<L extends T[] | string, T>(a: L, b: L): L {
-  if (isArray<T>(a) && isArray<T>(b)) 
+  if (isArray<T>(a) && isArray<T>(b))
     return a.concat(b) as L
-  if (isString(a) && isString(b)) 
+  if (isString(a) && isString(b))
     return (a + b) as L
   throw new TypeError('Types are not compatible. Both the arguments passed must be of same type.', )
 }
