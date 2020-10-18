@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { complement } from '../mod.ts'
+import { complement, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('complement', () => {
