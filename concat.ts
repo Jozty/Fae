@@ -17,9 +17,9 @@ type Concat_1<L extends any[] | string> = (a: L) => ConcatReturnType<L>
 
 // prettier-ignore
 type Concat =
-  &(<L extends any[] | string>(a: L, b?: PH) => Concat_2<L>)
-  &(<L extends any[] | string>(a: PH, b: L) => Concat_1<L>)
-  &(<L extends any[] | string>(a: L, b: L) => ConcatReturnType<L>)
+  & (<L extends any[] | string>(a: L, b?: PH) => Concat_2<L>)
+  & (<L extends any[] | string>(a: PH, b: L) => Concat_1<L>)
+  & (<L extends any[] | string>(a: L, b: L) => ConcatReturnType<L>)
 
 function _concat<L extends T[] | string, T>(a: L, b: L): L {
   if (isArray<T>(a) && isArray<T>(b))
