@@ -3,8 +3,18 @@ import { propEq, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('propEq', () => {
-  let obj1 = { name: 'Shubham', age: 22, hair: 'blue', isMarried: true }
-  let obj2 = { name: 'Shivam', age: 21, hair: 'black', isMarried: false }
+  let obj1 = {
+    name: 'Shubham',
+    age: 22,
+    hair: 'blue',
+    isMarried: true,
+  }
+  let obj2 = {
+    name: 'Shivam',
+    age: 21,
+    hair: 'black',
+    isMarried: false,
+  }
 
   it('should determine property matching a given value for a specific object properly', () => {
     eq(propEq('name', 'Shubham', obj1), true)

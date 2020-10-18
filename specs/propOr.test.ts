@@ -30,7 +30,10 @@ describe('propOr', () => {
   })
 
   it('should work with curried calls too', () => {
-    const obj = { a: 1, b: 'abc', c: false } as Record<string, number | string | boolean | number[]>
+    const obj = { a: 1, b: 'abc', c: false } as Record<
+      string,
+      number | string | boolean | number[]
+    >
 
     const x = propOr([1], 'a', obj)
 
