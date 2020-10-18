@@ -31,6 +31,16 @@ describe('complement', () => {
     eq(f(-12, -2, 0), false)
     
   })
+    it('should test curried versions too', () => {
+    const between = (a: number, b: number, c: number) =>
+      a < b && b < c
+    const f = complement(between)
+    eq(f(_, 5, 11)(4), false)
+    eq(f(_, _, 6)(12)(2), true)
+    eq(f(_, _, 12)(12)(24), true)
+    eq(f(_, -2)(12,6), true)
+  })
+  
 
   // TODO:
   // it('should accept fantasy-land functors', () => {
