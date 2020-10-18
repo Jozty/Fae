@@ -21,7 +21,10 @@ describe('prop', () => {
   })
 
   it('should show the same behavior as path for a nonexistent property', () => {
-    const propResult: string | number | undefined = prop('incorrect', obj)
+    const propResult: string | number | undefined = prop(
+      'incorrect',
+      obj,
+    )
     const pathResult: typeof propResult = path(['incorrect'], obj)
     eq(propResult, pathResult)
   })

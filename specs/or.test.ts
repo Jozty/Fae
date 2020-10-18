@@ -35,14 +35,13 @@ describe('or', () => {
     eq(or('', ""), false)
   })
 
-
   it('should work on curried versions too', () => {
-    eq(or(_, "")(undefined), false)
-    eq(or("")(1n), true)
+    eq(or(_, '')(undefined), false)
+    eq(or('')(1n), true)
     eq(or(undefined)(undefined), false)
     eq(or(112)(undefined), true)
     eq(or(undefined)(112), true)
-    eq(or("sfd")(112), true)
-    eq(or("sfd")([]), true)
+    eq(or('sfd')(112), true)
+    eq(or('sfd')([]), true)
   })
 })

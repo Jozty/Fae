@@ -39,14 +39,13 @@ describe('and', () => {
     eq(and('', ""), false)
   })
 
-
   it('should work on curried versions too', () => {
     eq(and(_, undefined)(undefined), false)
-    eq(and("")(0n), false)
+    eq(and('')(0n), false)
     eq(and(undefined)(undefined), false)
     eq(and(112)(undefined), false)
     eq(and(undefined)(112), false)
-    eq(and("sfd")(112), true)
-    eq(and("sfd")([]), true)
+    eq(and('sfd')(112), true)
+    eq(and('sfd')([]), true)
   })
 })
