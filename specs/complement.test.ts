@@ -13,7 +13,9 @@ describe('complement', () => {
     eq(f(0), false)
     eq(f(NaN), true)
     eq(f(Infinity), true)
-    
+    eq(f(0.2), true)
+    eq(f(2.2), true)
+    eq(f(8.0), false)
   
   })
 
