@@ -14,6 +14,8 @@ describe('reduce', () => {
   it('should return the accumulator for an empty array', () => {
     eq(reduce(add as f, 0, []), 0)
     eq(reduce(multiply as f, 1, []), 1)
+    //TODO(singla-shivam)
+    //@ts-ignore
     eq(reduce(concat as (a: [], b: []) => [], [], []), [])
   })
 
