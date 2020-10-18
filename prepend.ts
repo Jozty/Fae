@@ -2,15 +2,15 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type Prepend_2<T> = ((list: T[]) => T[]) &
-  ((list?: PH) => Prepend_2<T>)
+type Prepend_2<T> = (list: T[]) => T[]
 
-type Prepend_1<T> = ((el: T) => T[]) & ((el?: PH) => Prepend_1<T>)
+type Prepend_1<T> = (el: T) => T[]
 
-type Prepend = (<T>(el: T, list: T[]) => T[]) &
-  (<T>(el: T, list?: PH) => Prepend_2<T>) &
-  (<T>(el: PH, list: T[]) => Prepend_1<T>) &
-  ((el?: PH, list?: PH) => Prepend)
+// prettier-ignore
+type Prepend =
+  & (<T>(el: T, list?: PH) => Prepend_2<T>)
+  & (<T>(el: PH, list: T[]) => Prepend_1<T>)
+  & (<T>(el: T, list: T[]) => T[])
 
 function _prepend<T>(el: T, list: T[]) {
   return [el, ...list]

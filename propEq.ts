@@ -1,41 +1,44 @@
 import curryN from './utils/curry_n.ts'
 import type { PH, Obj } from './utils/types.ts'
+import type { Prop } from './prop.ts'
 import { equals } from './equals.ts'
 
 // @types
-type PropEq_1<T> = ((name: string) => boolean) &
-  ((name?: PH) => PropEq_1<T>)
+type PropEq_1 = (name: Prop) => boolean
 
-type PropEq_2<T> = ((val: T) => boolean) & ((val?: PH) => PropEq_2<T>)
+type PropEq_2<T> = (val: T) => boolean
 
-type PropEq_3<T> = ((obj: Obj<T>) => boolean) &
-  ((obj?: PH) => PropEq_3<T>)
+type PropEq_3<T1> = <T>(obj: Obj<T | T1>) => boolean
 
-type PropEq_2_3 = (<T>(val: T, obj: Obj<T>) => boolean) &
-  (<T>(val: T, obj?: PH) => PropEq_3<T>) &
-  (<T>(val: PH, obj: Obj<T>) => PropEq_2<T>) &
-  ((val?: PH, obj?: PH) => PropEq_2_3)
+// prettier-ignore
+type PropEq_2_3 =
+  & (<T>(val: T, obj?: PH) => PropEq_3<T>)
+  & (<T>(val: PH, obj: Obj<T>) => PropEq_2<T>)
+  & (<T>(val: T, obj: Obj<T>) => boolean)
 
-type PropEq_1_3<T> = ((name: string, obj: Obj<T>) => boolean) &
-  ((name: string, obj?: PH) => PropEq_3<T>) &
-  ((name: PH, obj: Obj<T>) => PropEq_1<T>) &
-  ((name?: PH, obj?: PH) => PropEq_1_3<T>)
+// prettier-ignore
+type PropEq_1_3<T1> =
+  & ((name: Prop, obj?: PH) => PropEq_3<T1>)
+  & (<T>(name: PH, obj: Obj<T | T1>) => PropEq_1)
+  & (<T>(name: Prop, obj: Obj<T | T1>) => boolean)
 
-type PropEq_1_2<T> = ((name: string, val: T) => boolean) &
-  ((name: string, val?: PH) => PropEq_2<T>) &
-  ((name: PH, val: T) => PropEq_1<T>) &
-  ((name?: PH, val?: PH) => PropEq_1_2<T>)
+// prettier-ignore
+type PropEq_1_2<T> =
+  & ((name: Prop, val?: PH) => PropEq_2<T>)
+  & ((name: PH, val: T) => PropEq_1)
+  & ((name: Prop, val: T) => boolean)
 
-type PropEq = (<T>(name: string, val: T, obj: Obj<T>) => boolean) &
-  ((name?: PH, val?: PH, obj?: PH) => PropEq) &
-  ((name: string, val?: PH, obj?: PH) => PropEq_2_3) &
-  (<T>(name: PH, val: T, obj?: PH) => PropEq_1_3<T>) &
-  (<T>(name: PH, val: PH, obj: Obj<T>) => PropEq_1_2<T>) &
-  (<T>(name: string, val: T, obj?: PH) => PropEq_3<T>) &
-  (<T>(name: string, val: PH, obj: Obj<T>) => PropEq_2<T>) &
-  (<T>(name: PH, val: T, obj: Obj<T>) => PropEq_1<T>)
+// prettier-ignore
+type PropEq =
+  & ((name: Prop, val?: PH, obj?: PH) => PropEq_2_3)
+  & (<T>(name: PH, val: T, obj?: PH) => PropEq_1_3<T>)
+  & (<T>(name: PH, val: PH, obj: Obj<T>) => PropEq_1_2<T>)
+  & (<T>(name: Prop, val: T, obj?: PH) => PropEq_3<T>)
+  & (<T>(name: Prop, val: PH, obj: Obj<T>) => PropEq_2<T>)
+  & (<T>(name: PH, val: T, obj: Obj<T>) => PropEq_1)
+  & (<T>(name: Prop, val: T, obj: Obj<T>) => boolean)
 
-function _propEq<T>(name: string, val: T, obj: Obj<T>) {
+function _propEq<T>(name: Prop, val: T, obj: Obj<T>) {
   return equals(val, obj[name])
 }
 

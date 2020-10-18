@@ -12,7 +12,20 @@ describe('prepend', () => {
     ])
   })
 
+  it('should not mutate original array', () => {
+    const arr = [1, 2, 3]
+    const arr2 = [...arr]
+    eq(prepend(-13, arr), [-13, 1, 2, 3])
+    eq(arr, arr2)
+  })
+
   it('should work on empty list', () => {
     eq(prepend(1, []), [1])
+  })
+
+  it('should work with curried versions too', () => {
+    eq(prepend(-1)([1, 2]), [-1, 1, 2])
+    eq(prepend(_, [1, 2])(-1), [-1, 1, 2])
+    eq(prepend(-1, _)([1, 2]), [-1, 1, 2])
   })
 })

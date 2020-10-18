@@ -3,16 +3,15 @@ import type { PH } from './utils/types.ts'
 import { range } from './range.ts'
 
 // @types
-type RangeUntil_2 = ((to: number) => number[]) &
-  ((to?: PH) => RangeUntil_2)
+type RangeUntil_2 = (to: number) => number[]
 
-type RangeUntil_1 = ((from: number) => number[]) &
-  ((from?: PH) => RangeUntil_1)
+type RangeUntil_1 = (from: number) => number[]
 
-type RangeUntil = ((from: number, to: number) => number[]) &
-  ((from: number, to?: PH) => RangeUntil_2) &
-  ((from: PH, to: number) => RangeUntil_1) &
-  ((from?: PH, to?: PH) => RangeUntil)
+// prettier-ignore
+type RangeUntil =
+  & ((from: number, to?: PH) => RangeUntil_2)
+  & ((from: PH, to: number) => RangeUntil_1)
+  & ((from: number, to: number) => number[])
 
 function _rangeUntil(from: number, to: number) {
   const r = range(from, to)

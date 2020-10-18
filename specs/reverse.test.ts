@@ -1,4 +1,5 @@
-import { describe, it, expect } from './_describe.ts'
+import { describe, it } from './_describe.ts'
+import { eq } from './utils/utils.ts'
 import { reverse, _ } from '../mod.ts'
 
 describe('reverse', () => {
@@ -6,10 +7,8 @@ describe('reverse', () => {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8]
     const arr2 = [...arr]
     const expected = [...arr].reverse()
-    expect(reverse(arr)).toEqual(expected)
-    expect(arr).toEqual(arr2)
-    expect(reverse(_)(arr)).toEqual(expected)
-    expect(arr).toEqual(arr2)
+    eq(reverse(arr), expected)
+    eq(arr, arr2) // should not affect the original
   })
 
   it('should reverse array with undefined and mixed types', () => {
@@ -25,20 +24,18 @@ describe('reverse', () => {
     ]
     const arr2 = [...arr]
     const expected = [...arr].reverse()
-    expect(reverse(arr)).toEqual(expected)
-    expect(arr).toEqual(arr2)
-    expect(reverse(_)(arr)).toEqual(expected)
-    expect(arr).toEqual(arr2)
+    eq(reverse(arr), expected)
+    eq(arr, arr2) // should not affect the original
+    eq(reverse(expected), arr2)
+    eq(reverse(expected), arr2) // check if the `expected` was not change in the previous call
   })
 
   it('should reverse strings', () => {
     const str = 'asdfghjklqwertyuiopQWERTYUIOPZXCVBNM'
     const str2 = str.split('').join('')
     const expected = str.split('').reverse().join('')
-    expect(reverse(str)).toEqual(expected)
-    expect(str).toEqual(str2)
-    expect(reverse(_)(str)).toEqual(expected)
-    expect(str).toEqual(str2)
+    eq(reverse(str), expected)
+    eq(str, str2) // should not affect the original
   })
 
   it('should reverse strings with non-ascii characters', () => {
@@ -46,9 +43,23 @@ describe('reverse', () => {
     for (let i = 0; i < 10000; i++) str += String.fromCharCode(i)
     const str2 = str.split('').join('')
     const expected = str.split('').reverse().join('')
-    expect(reverse(str)).toEqual(expected)
-    expect(str).toEqual(str2)
-    expect(reverse(_)(str)).toEqual(expected)
-    expect(str).toEqual(str2)
+    eq(reverse(str), expected)
+    eq(str, str2)
+  })
+
+  it('should work with arrays of different lengths', () => {
+    let arr: number[] = []
+    let expected: number[] = []
+    for (let i = 0; i < 10000; i++) arr.push(i)
+    for (let i = 9999; i >= 0; i--) expected.push(i)
+    eq(reverse(arr), expected)
+
+    arr = []
+    expected = []
+    eq(reverse(arr), expected)
+
+    arr = [1]
+    expected = [1]
+    eq(reverse(arr), expected)
   })
 })

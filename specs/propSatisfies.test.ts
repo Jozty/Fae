@@ -1,15 +1,50 @@
 import { describe, it } from './_describe.ts'
-import { propSatisfies } from '../mod.ts'
+import { propSatisfies, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('propSatisfies', () => {
   let isPositive = (n: number) => n > 0
+  const obj = { x: 1, y: 0 }
 
   it('should return true if the specified object property satisfies the given predicate', () => {
-    eq(propSatisfies(isPositive, 'x', { x: 1, y: 0 }), true)
+    eq(propSatisfies(isPositive, 'x', obj), true)
   })
 
   it('should return false otherwise', () => {
-    eq(propSatisfies(isPositive, 'y', { x: 1, y: 0 }), false)
+    eq(propSatisfies(isPositive, 'y', obj), false)
+  })
+
+
+  it('should work with curried calls too', () => {
+    const p_2_3 = propSatisfies(isPositive)
+    const x = p_2_3(_, obj)('y')
+
+    eq(p_2_3('y')(obj), false)
+    eq(p_2_3('y', obj), false)
+    eq(p_2_3(_, obj)('y'), false)
+    eq(p_2_3('y', _)(obj), false)
+
+    const p_1_3 = propSatisfies(_, 'y')
+
+    eq(p_1_3(isPositive)(obj), false)
+    eq(p_1_3(isPositive, obj), false)
+    eq(p_1_3(_, obj)(isPositive), false)
+    eq(p_1_3(isPositive, _)(obj), false)
+
+    const p_1_2 = propSatisfies(_, _, obj)
+
+    eq(p_1_2(isPositive)('y'), false)
+    eq(p_1_2(isPositive, 'y'), false)
+    eq(p_1_2(_, 'y')(isPositive), false)
+    eq(p_1_2(isPositive, _)('y'), false)
+
+    const p_3 = propSatisfies(isPositive, 'y')
+    eq(p_3(obj), false)
+
+    const p_2 = propSatisfies(isPositive, _, obj)
+    eq(p_2('y'), false)
+
+    const p_1 = propSatisfies(_, 'y', obj)
+    eq(p_1(isPositive), false)
   })
 })
