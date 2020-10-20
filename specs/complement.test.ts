@@ -11,12 +11,11 @@ describe('complement', () => {
     eq(f(-1), true)
     eq(f(-4), false)
     eq(f(0), false)
-    eq(f(NaN), true)
-    eq(f(Infinity), true)
+    eq(complement(isNaN)(NaN), false)
+    eq(complement(isNaN)(Infinity), true)
     eq(f(0.2), true)
     eq(f(2.2), true)
     eq(f(8.0), false)
-  
   })
 
   it('should accept a function that take multiple parameters', () => {
@@ -31,7 +30,5 @@ describe('complement', () => {
     eq(f(2, 4, 4), true)
     eq(f(0, 0, 0), true)
     eq(f(-12, -2, 0), false)
-    
   })
-  
 })
