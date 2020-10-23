@@ -13,7 +13,12 @@ describe('concat', () => {
     eq(concat('x', ''), 'x')
     eq(concat('', 'x'), 'x')
     eq(concat('', ''), '')
-    eq(concat(_, '')('aa'), 'aa')
+  })
+  it('should test curried versions too', () => {
+    eq(concat(_, 'bar')('foo'), 'foobar')
+    eq(concat('x', _)(''), 'x')
+    eq(concat(_, ['a'])(['c', 'd']), ['c', 'd', 'a'])
+    eq(concat(_, [] as string[])(['c', 'd']), ['c', 'd'])
   })
 
   it('should throw error with incompatible types', () => {
