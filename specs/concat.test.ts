@@ -1,6 +1,6 @@
 import { describe, it } from './_describe.ts'
 import { eq, thr } from './utils/utils.ts'
-import { concat } from '../mod.ts'
+import { concat, _ } from '../mod.ts'
 
 describe('concat', () => {
   it('should concat two arrays', () => {
@@ -13,6 +13,7 @@ describe('concat', () => {
     eq(concat('x', ''), 'x')
     eq(concat('', 'x'), 'x')
     eq(concat('', ''), '')
+    eq(concat(_, '')('aa'), 'aa')
   })
 
   it('should throw error with incompatible types', () => {

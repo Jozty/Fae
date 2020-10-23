@@ -11,8 +11,7 @@ import { not } from './not.ts'
 
 // @types
 type Complement = (<T extends any[]>(
-  a: (...args: T) => boolean,
-) => (...args: T) => boolean)
+  a: (...args: T) => boolean) => (...args: T) => boolean)
 
 const _complement = lift(not)
 /**

@@ -16,7 +16,8 @@ describe('complement', () => {
     eq(f(0.2), true)
     eq(f(2.2), true)
     eq(f(8.0), false)
-  })
+
+    })
 
   it('should accept a function that take multiple parameters', () => {
     const between = (a: number, b: number, c: number) =>
@@ -30,5 +31,7 @@ describe('complement', () => {
     eq(f(2, 4, 4), true)
     eq(f(0, 0, 0), true)
     eq(f(-12, -2, 0), false)
+
   })
+  
 })
