@@ -8,7 +8,16 @@ describe('complement', () => {
     const f = complement(even)
     eq(f(8), false)
     eq(f(13), true)
-  })
+    eq(f(-1), true)
+    eq(f(-4), false)
+    eq(f(0), false)
+    eq(complement(isNaN)(NaN), false)
+    eq(complement(isNaN)(Infinity), true)
+    eq(f(0.2), true)
+    eq(f(2.2), true)
+    eq(f(8.0), false)
+
+    })
 
   it('should accept a function that take multiple parameters', () => {
     const between = (a: number, b: number, c: number) =>
@@ -16,14 +25,13 @@ describe('complement', () => {
     const f = complement(between)
     eq(f(4, 5, 11), false)
     eq(f(12, 2, 6), true)
-  })
+    eq(f(12, 24, 12), true)
+    eq(f(12, -2, 6), true)
+    eq(f(2, 2, 4), true)
+    eq(f(2, 4, 4), true)
+    eq(f(0, 0, 0), true)
+    eq(f(-12, -2, 0), false)
 
-  // TODO:
-  // it('should accept fantasy-land functors', () => {
-  //   const Just = S.Just
-  //   const Nothing = S.Nothing
-  //   eq(complement(Just(true)), Just(false))
-  //   eq(complement(Just(false)), Just(true))
-  //   eq(complement(Nothing()), Nothing())
-  // })
+  })
+  
 })
