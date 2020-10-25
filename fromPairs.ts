@@ -1,10 +1,10 @@
 import curryN from './utils/curry_n.ts'
-import { Prop } from './prop.ts'
-import { Obj } from "./utils/types.ts"
+import type { Prop } from './prop.ts'
+import type { Obj } from "./utils/types.ts"
 
 
 // @types
-type FromPairs = <T>(pairs: Pair<T>[]) => Record<string, T>
+type FromPairs = <T>(pairs: Pair<T>[]) => Obj<T>
 
 export type Pair<T = any> = [Prop, T]
 

@@ -11,8 +11,7 @@ describe('groupWith', () => {
   })
 
   it('should split the list into "streaks" testing adjacent elements', () => {
-    // @ts-ignore
-    const isConsecutive = function (a, b) {
+    const isConsecutive = function (a: number, b: number) {
       return a + 1 === b
     }
     eq(groupWith(isConsecutive, []), [])
