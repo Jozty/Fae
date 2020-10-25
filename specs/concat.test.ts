@@ -9,7 +9,7 @@ describe('concat', () => {
     eq(concat([1, 2], [3, 4]), [1, 2, 3, 4])
     eq(concat([1, 2], ['a', 'b']), [1, 2, 'a', 'b'])
     eq(concat(['a'], [3, 4]), ['a', 3, 4])
-    eq(concat([{a: 1, b: 2}], [3, 4]), [{ a: 1, b: 2 }, 3, 4])
+    eq(concat([{ a: 1, b: 2 }], [3, 4]), [{ a: 1, b: 2 }, 3, 4])
   })
 
   it('should work on strings', () => {

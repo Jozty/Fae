@@ -26,7 +26,6 @@ describe('indexOf', () => {
   it('should find 1', () => {
     eq(indexOf(1, list), 0)
     eq(indexOf(2, list), 1)
-
   })
 
   it('should find 1 and is result strictly it', () => {
