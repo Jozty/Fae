@@ -1,5 +1,5 @@
 import { describe, it, expect } from './_describe.ts'
-import { indexOf, equals } from '../mod.ts'
+import { indexOf, equals, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('indexOf', () => {
@@ -11,12 +11,13 @@ describe('indexOf', () => {
   })
 
   const input = [1, 2, 1, 2, 5]
-  it('should return the index of the first item', () => {
+
+  it('should return the index of the first item when there are duplicates of such item', () => {
     eq(indexOf(1, input), 0)
     eq(indexOf(2, input), 1)
   })
 
-  it('should return the index of the last item', () => {
+  it('should return the index of the last item in the array', () => {
     eq(indexOf(5, input), 4)
   })
 
@@ -74,5 +75,12 @@ describe('indexOf', () => {
     const h = () => {}
     const list = [g, f]
     eq(indexOf(h, list), -1)
+  })
+
+  it('should test curried versions too', () => {
+    eq(indexOf(_, [-0])(0), -1)
+    eq(indexOf(2, _)(list), 1)
+    eq(indexOf(5, _)(input), 4)
+    eq(indexOf(_, input)(2), 1)
   })
 })

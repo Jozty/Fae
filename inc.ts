@@ -1,7 +1,7 @@
 import curryN from './utils/curry_n.ts'
 
 // @types
-type Inc = ((element: number) => number)
+type Inc = (element: number) => number
 
 function _inc(element: number) {
   return ++element

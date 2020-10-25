@@ -1,12 +1,15 @@
 import curryN from './utils/curry_n.ts'
+import { Prop } from './prop.ts'
+import { Obj } from "./utils/types.ts"
+
 
 // @types
 type FromPairs = <T>(pairs: Pair<T>[]) => Record<string, T>
 
-export type Pair<T = any> = [string | number, T]
+export type Pair<T = any> = [Prop, T]
 
 function _fromPairs<T>(pairs: Pair<T>[]) {
-  const result: Record<string, T> = {}
+  const result: Obj<T> = {}
   pairs.forEach((p) => {
     result[p[0]] = p[1]
   })

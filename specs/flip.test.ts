@@ -10,15 +10,15 @@ describe('flip', () => {
     const g = flip(f)
     eq(f('a', 'b', 'c'), 'a b c')
     eq(g('a', 'b', 'c'), 'b a c')
-    eq(g('a', '@', 'A'), '@ a A')  })
-  const c = (a: number, b: number, c: number) => a + b * c
+    eq(g('a', '@', 'A'), '@ a A')
+  })
   it('should return a function which inverts the first two arguments to the supplied function', () => {
-    const h = flip(c)
+    const h = flip(i)
     eq(i(2, 3, 4), 14)
     eq(h(2, 3, 4), 11)
     eq(i(2, -3, 4), -10)
     eq(h(2, -3, 4), 5)
-    })
+  })
 
   it('should return a curried function', () => {
     const g = flip(f)('a')
