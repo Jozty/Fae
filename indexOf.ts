@@ -4,16 +4,14 @@ import type { PH } from './utils/types.ts'
 import { equals } from './equals.ts'
 
 // @types
-type IndexOf_2<T> = ((list: T[]) => number) &
-  ((list?: PH) => IndexOf_2<T>)
+type IndexOf_2<T> = (list: T[]) => number
 
-type IndexOf_1<T> = ((value: T) => number) &
-  ((value?: PH) => IndexOf_1<T>)
+type IndexOf_1<T> = (value: T) => number
 
-type IndexOf = (<T>(value: T, list: T[]) => number) &
-  (<T>(value: T, list?: PH) => IndexOf_2<T>) &
-  (<T>(value: PH, list: T[]) => IndexOf_1<T>) &
-  ((value?: PH, list?: PH) => IndexOf)
+type IndexOf = 
+ & (<T>(value: T, list: T[]) => number)
+ & (<T>(value: T, list?: PH) => IndexOf_2<T>)
+ & (<T>(value: PH, list: T[]) => IndexOf_1<T>)
 
 function _indexOf<T>(value: T, list: T[]) {
   switch (typeof value) {

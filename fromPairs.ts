@@ -1,9 +1,7 @@
 import curryN from './utils/curry_n.ts'
-import type { PH } from './utils/types.ts'
 
 // @types
-type FromPairs = (<T>(pairs: Pair<T>[]) => Record<string, T>) &
-  ((pairs?: PH) => FromPairs)
+type FromPairs = <T>(pairs: Pair<T>[]) => Record<string, T>
 
 export type Pair<T = any> = [string | number, T]
 
