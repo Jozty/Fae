@@ -1,24 +1,23 @@
 import { describe, it, expect } from './_describe.ts'
-import { indexOf, equals } from '../mod.ts'
+import { indexOf, equals, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('indexOf', () => {
   it("should return a number indicating an object's position in a list", () => {
     const list = [0, 10, 20, 30]
     eq(indexOf(30, list), 3)
-  })
-
-  it('should return -1 if the object is not in the list', () => {
-    const list = [0, 10, 20, 30]
     eq(indexOf(40, list), -1)
+    eq(indexOf(0, list), 0)
   })
 
-  const input = [1, 2, 3, 4, 5]
-  it('should return the index of the first item', () => {
+  const input = [1, 2, 1, 2, 5]
+
+  it('should return the index of the first item when there are duplicates of such item', () => {
     eq(indexOf(1, input), 0)
+    eq(indexOf(2, input), 1)
   })
 
-  it('should return the index of the last item', () => {
+  it('should return the index of the last item in the array', () => {
     eq(indexOf(5, input), 4)
   })
 
@@ -27,6 +26,7 @@ describe('indexOf', () => {
 
   it('should find 1', () => {
     eq(indexOf(1, list), 0)
+    eq(indexOf(2, list), 1)
   })
 
   it('should find 1 and is result strictly it', () => {
@@ -62,39 +62,6 @@ describe('indexOf', () => {
     eq(indexOf(new Just([42]), [new Just([42])]), 0)
   })
 
-  // it('dispatches to `indexOf` method', () => {
-  //   function Empty() {}
-  //   Empty.prototype.indexOf = R.always(-1)
-
-  //   function List(head, tail) {
-  //     this.head = head
-  //     this.tail = tail
-  //   }
-  //   List.prototype.indexOf = function(x) {
-  //     const idx = this.tail.indexOf(x)
-  //     return this.head === x ? 0 : idx >= 0 ? 1 + idx : -1
-  //   }
-
-  //   const list = new List('b',
-  //     new List('a',
-  //       new List('n',
-  //         new List('a',
-  //           new List('n',
-  //             new List('a',
-  //               new Empty()
-  //             )
-  //           )
-  //         )
-  //       )
-  //     )
-  //   )
-
-  //   eq(indexOf('a', 'banana'), 1)
-  //   eq(indexOf('x', 'banana'), -1)
-  //   eq(indexOf('a', list), 1)
-  //   eq(indexOf('x', list), -1)
-  // })
-
   it('should find function, compared by identity', () => {
     const f = () => {}
     const g = () => {}
@@ -108,5 +75,12 @@ describe('indexOf', () => {
     const h = () => {}
     const list = [g, f]
     eq(indexOf(h, list), -1)
+  })
+
+  it('should test curried versions too', () => {
+    eq(indexOf(_, [-0])(0), -1)
+    eq(indexOf(2, _)(list), 1)
+    eq(indexOf(5, _)(input), 4)
+    eq(indexOf(_, input)(2), 1)
   })
 })
