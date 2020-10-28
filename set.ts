@@ -35,7 +35,7 @@ type Set =
   & (<F>(lens: PH, value: F, target?: PH) => Set_1_3<F>)
   & (<T>(lens: PH, value: PH, target: T) => Set_1_2<T>)
   & (<T, F>(lens: Lens<T, F>, value: F, target?: PH) => Set_3<T, F>)
-  & (<T, F>(lens: Lens<T, F>, value: PH, target: F) => Set_2<T, F>)
+  & (<T, F>(lens: Lens<T, F>, value: PH, target: T) => Set_2<T, F>)
   & (<T, F>(lens: PH, value: F, target: T) => Set_1<T, F>)
   & (<T, F>(lens: Lens<T, F>, value: F, target: T) => T)
 
@@ -48,7 +48,7 @@ function _set<T, F>(lens: Lens<T, F>, value: F, target: T) {
  * focused by the given `len`s to the given `value`.
  *
  *      const xLens = Fae.lensProp('x')
- *      Fae.set(xLens, 4, {x: 1, y: 2})  //=> {x: 4, y: 2}
- *      Fae.set(xLens, 8, {x: 1, y: 2})  //=> {x: 8, y: 2}
+ *      Fae.set(xLens, 4, {x: 1, y: 2})  // {x: 4, y: 2}
+ *      Fae.set(xLens, 8, {x: 1, y: 2})  // {x: 8, y: 2}
  */
 export const set: Set = curryN(3, _set)

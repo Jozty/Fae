@@ -33,7 +33,7 @@ type Over =
   & (<F>(lens: PH, fn: FuncArr1<F, F>, target?: PH) => Over_1_3<F>)
   & (<T>(lens: PH, fn: PH, target: T) => Over_1_2<T>)
   & (<T, F>(lens: Lens<T, F>, fn: FuncArr1<F, F>, target?: PH) => Over_3<T, F>)
-  & (<T, F>(lens: Lens<T, F>, fn: PH, target: F) => Over_2<T, F>)
+  & (<T, F>(lens: Lens<T, F>, fn: PH, target: T) => Over_2<T, F>)
   & (<T, F>(lens: PH, fn: FuncArr1<F, F>, target: T) => Over_1<T, F>)
   & (<T, F>(lens: Lens<T, F>, fn: FuncArr1<F, F>, target: T) => T)
 
@@ -64,7 +64,7 @@ function _over<T, F>(
  * the focused value.
  *
  *      const headLens = Fae.lensIndex(0)
- *      Fae.over(headLens, (x: string) => x.toUpperCase(), ['foo', 'bar', 'baz']) //=> ['FOO', 'bar', 'baz']
+ *      Fae.over(headLens, (x: string) => x.toUpperCase(), ['foo', 'bar', 'baz']) // ['FOO', 'bar', 'baz']
  */
 
 export const over: Over = curryN(3, _over)

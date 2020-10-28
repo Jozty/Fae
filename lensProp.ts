@@ -1,13 +1,13 @@
 import { lens, Lens, LensGetter, LensSetter } from './lens.ts'
 import { prop as prp } from './prop.ts'
+import type { Prop } from './prop.ts'
 import curryN from './utils/curry_n.ts'
-import type { PH } from './utils/types.ts'
 import { assoc } from './assoc.ts'
 
 // @types
-type LensProp = <T, F>(prop: string | number) => Lens<T, F>
+type LensProp = <T, F>(prop: Prop) => Lens<T, F>
 
-function _lensProp<T, F>(prop: string | number): Lens<T, F> {
+function _lensProp<T, F>(prop: Prop): Lens<T, F> {
   return lens(
     prp(prop) as LensGetter<T, F>,
     (assoc(prop) as any) as LensSetter<T, F>,

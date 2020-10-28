@@ -16,11 +16,16 @@ export type LensGetter<T, F> = (target: T) => F
 
 export type LensSetter<T, F> = (focus: F, target: T) => T
 
-export type GetTransformer<T, F, R> = (focus: F) => LensTransformer<T, F, R>
+export type GetTransformer<T, F, R> = (
+  focus: F,
+) => LensTransformer<T, F, R>
 
 export type LensTransformer<T, F, R> = {
-  value: F,
-  transform: (setter: LensSetter<T, F>, target: T) => LensTransformer<never, R, never>
+  value: F
+  transform: (
+    setter: LensSetter<T, F>,
+    target: T,
+  ) => LensTransformer<never, R, never>
 }
 
 export type Lens<T, F> = <R>(

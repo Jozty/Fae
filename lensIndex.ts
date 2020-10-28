@@ -17,8 +17,8 @@ function _lensIndex<T, F>(index: number): Lens<T, F> {
  * Returns a lens whose focus is the specified index.
  *
  *      const headLens = Fae.lensIndex(0)
- *      Fae.view(headLens, ['a', 'b', 'c'])            //=> 'a'
- *      Fae.set(headLens, 'x', ['a', 'b', 'c'])        //=> ['x', 'b', 'c']
- *      Fae.over(headLens, (x: string) => x.toUpperCase(), ['a', 'b', 'c']) //=> ['A', 'b', 'c']
+ *      Fae.view(headLens, ['a', 'b', 'c'])            // 'a'
+ *      Fae.set(headLens, 'x', ['a', 'b', 'c'])        // ['x', 'b', 'c']
+ *      Fae.over(headLens, (x: string) => x.toUpperCase(), ['a', 'b', 'c']) // ['A', 'b', 'c']
  */
 export const lensIndex: LensIndex = curryN(1, _lensIndex)
