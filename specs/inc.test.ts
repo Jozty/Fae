@@ -1,5 +1,5 @@
 import { describe, it, expect } from './_describe.ts'
-import { inc } from '../mod.ts'
+import { inc, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('inc', () => {

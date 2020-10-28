@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { groupWith, equals } from '../mod.ts'
+import { groupWith, equals, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('groupWith', () => {
@@ -64,6 +64,27 @@ describe('groupWith', () => {
       'll',
       'yy',
       'aa',
+    ])
+  })
+
+  it('should test curried versions too', () => {
+    eq(groupWith(equals, _)('Mississippi'), [
+      'M',
+      'i',
+      'ss',
+      'i',
+      'ss',
+      'i',
+      'pp',
+      'i',
+    ])
+    eq(groupWith(_, 'Finaallyy')(equals), [
+      'F',
+      'i',
+      'n',
+      'aa',
+      'll',
+      'yy',
     ])
   })
 })

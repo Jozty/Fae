@@ -4,31 +4,23 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type EndsWith_2<L extends T[] | string, T> = ((
-  functor: L,
-) => boolean) &
-  ((functor?: PH) => EndsWith_2<L, T>)
+type EndsWithReturnType<F> = F extends string
+  ? string
+  : F extends (infer U)[]
+  ? U[]
+  : never
 
-type EndsWith_1<L extends T[] | string, T> = ((
-  suffix: L,
-) => boolean) &
-  ((suffix?: PH) => EndsWith_1<L, T>)
+type EndsWith_2<L extends any[] | string> = (functor: L) => boolean
 
-type EndsWith = (<L extends T[] | string, T>(
-  suffix: L,
-  functor: L,
-) => boolean) &
-  (<L extends T[] | string, T>(
-    suffix: L,
-    functor?: PH,
-  ) => EndsWith_2<L, T>) &
-  (<L extends T[] | string, T>(
-    suffix: PH,
-    functor: L,
-  ) => EndsWith_1<L, T>) &
-  ((suffix?: PH, functor?: PH) => EndsWith)
+type EndsWith_1<L extends any[] | string> = (suffix: L) => boolean
 
-function _endsWith<L extends T[] | string, T>(suffix: L, functor: L) {
+type EndsWith =
+ & (<L extends any[] | string>(suffix: L,functor?: PH,) => EndsWith_2<EndsWithReturnType<L>>)
+ & (<L extends any[] | string>(suffix: PH,functor: L,) => EndsWith_1<EndsWithReturnType<L>>)
+ & (<L extends any[] | string>(suffix: L,functor: L,) => boolean)
+
+
+function _endsWith<L extends any[] | string>(suffix: L, functor: L) {
   const suffixF = takeLast(suffix.length, functor)
   return equals(suffix, suffixF)
 }

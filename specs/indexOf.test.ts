@@ -82,5 +82,5 @@ describe('indexOf', () => {
     eq(indexOf(2, _)(list), 1)
     eq(indexOf(5, _)(input), 4)
     eq(indexOf(_, input)(2), 1)
-  })
+  })  
 })
