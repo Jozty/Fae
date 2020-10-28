@@ -72,11 +72,10 @@ export { isEmpty } from './isEmpty.ts'
 export { join } from './join.ts'
 export { lens } from './lens.ts'
 export type {
-  Getter,
-  Setter,
+  LensGetter,
+  LensSetter,
   LensTransformer,
   GetTransformer,
-  SeenGetTransformer,
   Lens,
 } from './lens.ts'
 export { lensIndex } from './lensIndex.ts'

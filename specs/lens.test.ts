@@ -10,8 +10,8 @@ import {
   set,
   over,
   compose,
-  Getter,
-  Setter,
+  LensGetter,
+  LensSetter,
 } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
@@ -26,9 +26,10 @@ const alice = {
 type Alice = typeof alice
 
 const nameLens = lens(
-  prop('name') as Getter<Alice, string>,
-  (assoc('name') as any) as Setter<Alice, string>,
+  prop('name') as LensGetter<Alice, string>,
+  (assoc('name') as any) as LensSetter<Alice, string>,
 )
+
 const addressLens = lensProp<Alice, string[]>('address')
 const headLens = lensIndex<string[], string>(0)
 const dogLens = lensPath<Alice, string>(['pets', 'dog'])

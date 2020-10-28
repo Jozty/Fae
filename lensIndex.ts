@@ -1,17 +1,15 @@
-import { lens, Lens, Setter, Getter } from './lens.ts'
+import { lens, Lens, LensSetter, LensGetter } from './lens.ts'
 import { nth } from './nth.ts'
 import { update } from './update.ts'
 import curryN from './utils/curry_n.ts'
-import type { PH } from './utils/types.ts'
 
 // @types
-type LensIndex = (<T, F>(index: number) => Lens<T, F>) &
-  ((index?: PH) => LensIndex)
+type LensIndex = <T, F>(index: number) => Lens<T, F>
 
 function _lensIndex<T, F>(index: number): Lens<T, F> {
   return lens(
-    nth(index) as Getter<T, F>,
-    (update(index) as any) as Setter<T, F>,
+    nth(index) as LensGetter<T, F>,
+    (update(index) as any) as LensSetter<T, F>,
   )
 }
 

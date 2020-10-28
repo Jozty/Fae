@@ -5,40 +5,39 @@ import { always } from './always.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type Set_1<T, F> = ((lens: Lens<T, F>) => T) &
-  ((lens?: PH) => Set_1<T, F>)
+type Set_1<T, F> = (lens: Lens<T, F>) => T
 
-type Set_2<T, F> = ((value: F) => T) & ((value?: PH) => Set_2<T, F>)
+type Set_2<T, F> = (value: F) => T
 
-type Set_3<T, F> = ((target: T) => T) & ((target?: PH) => Set_3<T, F>)
+type Set_3<T, F> = (target: T) => T
 
-type Set_2_3<T, F> = ((value: F, target: T) => T) &
-  ((value: F, target?: PH) => Set_3<T, F>) &
-  ((value: PH, target: T) => Set_2<T, F>) &
-  ((value?: PH, target?: PH) => Set_2_3<T, F>)
+// prettier-ignore
+type Set_2_3<T, F> =
+  & ((value: F, target?: PH) => Set_3<T, F>)
+  & ((value: PH, target: T) => Set_2<T, F>)
+  & ((value: F, target: T) => T)
 
-type Set_1_3<F> = (<T>(lens: Lens<T, F>, target: T) => T) &
-  (<T>(lens: Lens<T, F>, target?: PH) => Set_3<T, F>) &
-  (<T>(lens: PH, target: T) => Set_1<T, F>) &
-  ((lens?: PH, target?: PH) => Set_1_3<F>)
+// prettier-ignore
+type Set_1_3<F> =
+  & (<T>(lens: Lens<T, F>, target?: PH) => Set_3<T, F>)
+  & (<T>(lens: PH, target: T) => Set_1<T, F>)
+  & (<T>(lens: Lens<T, F>, target: T) => T)
 
-type Set_1_2<T> = (<F>(lens: Lens<T, F>, value: F) => T) &
-  (<F>(lens: Lens<T, F>, value?: PH) => Set_2<T, F>) &
-  (<F>(lens: PH, value: F) => Set_1<T, F>) &
-  ((lens?: PH, value?: PH) => Set_1_2<T>)
+// prettier-ignore
+type Set_1_2<T> =
+  & (<F>(lens: Lens<T, F>, value?: PH) => Set_2<T, F>)
+  & (<F>(lens: PH, value: F) => Set_1<T, F>)
+  & (<F>(lens: Lens<T, F>, value: F) => T)
 
-type Set = (<T, F>(lens: Lens<T, F>, value: F, target: T) => T) &
-  ((lens?: PH, value?: PH, target?: PH) => Set) &
-  (<T, F>(
-    lens: Lens<T, F>,
-    value?: PH,
-    target?: PH,
-  ) => Set_2_3<T, F>) &
-  (<F>(lens: PH, value: F, target?: PH) => Set_1_3<F>) &
-  (<T>(lens: PH, value: PH, target: T) => Set_1_2<T>) &
-  (<T, F>(lens: Lens<T, F>, value: F, target?: PH) => Set_3<T, F>) &
-  (<T, F>(lens: Lens<T, F>, value: PH, target: T) => Set_2<T, F>) &
-  (<T, F>(lens: PH, value: F, target: T) => Set_1<T, F>)
+// prettier-ignore
+type Set =
+  & (<T, F>(lens: Lens<T, F>, value?: PH, target?: PH) => Set_2_3<T, F>)
+  & (<F>(lens: PH, value: F, target?: PH) => Set_1_3<F>)
+  & (<T>(lens: PH, value: PH, target: T) => Set_1_2<T>)
+  & (<T, F>(lens: Lens<T, F>, value: F, target?: PH) => Set_3<T, F>)
+  & (<T, F>(lens: Lens<T, F>, value: PH, target: F) => Set_2<T, F>)
+  & (<T, F>(lens: PH, value: F, target: T) => Set_1<T, F>)
+  & (<T, F>(lens: Lens<T, F>, value: F, target: T) => T)
 
 function _set<T, F>(lens: Lens<T, F>, value: F, target: T) {
   return over(lens, always(value), target)
