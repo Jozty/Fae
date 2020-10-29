@@ -19,17 +19,17 @@ describe('groupWith', () => {
     eq(groupWith(isConsecutive, [1, 2, 3, 4]), [[1, 2, 3, 4]])
     eq(groupWith(isConsecutive, [1, 2, 2, 3]), [
       [1, 2],
-      [2, 3],
+      [2, 3]
     ])
     eq(groupWith(isConsecutive, [1, 2, 9, 3, 4]), [
       [1, 2],
       [9],
-      [3, 4],
+      [3, 4]
     ])
     eq(groupWith(isConsecutive, [1, 2, 9, 10, 3, 4]), [
       [1, 2],
       [9, 10],
-      [3, 4],
+      [3, 4]
     ])
   })
 
@@ -46,7 +46,7 @@ describe('groupWith', () => {
       'ss',
       'i',
       'pp',
-      'i',
+      'i'
     ])
     eq(groupWith(equals, 'Finaallyy'), [
       'F',
@@ -54,7 +54,7 @@ describe('groupWith', () => {
       'n',
       'aa',
       'll',
-      'yy',
+      'yy'
     ])
     eq(groupWith(equals, 'Finaallyyaa'), [
       'F',
@@ -63,7 +63,7 @@ describe('groupWith', () => {
       'aa',
       'll',
       'yy',
-      'aa',
+      'aa'
     ])
   })
 
@@ -76,7 +76,7 @@ describe('groupWith', () => {
       'ss',
       'i',
       'pp',
-      'i',
+      'i'
     ])
     eq(groupWith(_, 'Finaallyy')(equals), [
       'F',
@@ -84,7 +84,7 @@ describe('groupWith', () => {
       'n',
       'aa',
       'll',
-      'yy',
+      'yy'
     ])
   })
 })
