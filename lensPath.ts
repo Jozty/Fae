@@ -1,4 +1,4 @@
-import { lens, Lens, Getter, Setter } from './lens.ts'
+import { lens, Lens, LensGetter, LensSetter } from './lens.ts'
 import { assocPath } from './assocPath.ts'
 import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
@@ -6,13 +6,12 @@ import type { Path } from './paths.ts'
 import { path as pth } from './path.ts'
 
 // @types
-type LensPath = (<T, F>(path: Path) => Lens<T, F>) &
-  ((path?: PH) => LensPath)
+type LensPath = <T, F>(path: Path) => Lens<T, F>
 
 function _lensPath<T, F>(path: Path): Lens<T, F> {
   return lens(
-    pth(path) as Getter<T, F>,
-    (assocPath(path) as any) as Setter<T, F>,
+    pth(path) as LensGetter<T, F>,
+    (assocPath(path) as any) as LensSetter<T, F>,
   )
 }
 

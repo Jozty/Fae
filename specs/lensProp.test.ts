@@ -16,45 +16,56 @@ const testObj = {
   c: 3,
 }
 
+type TestObj = typeof testObj & {
+  d?: number
+  X?: number
+}
+
+type TestObjEl = TestObj[keyof TestObj]
+
 type Inc = (a: number) => number
 
 describe('lensProp: view', () => {
   it('should focus object the specified object property', () => {
-    eq(view(lensProp('a'), testObj), 1)
+    eq(view<TestObj, TestObjEl>(lensProp('a'), testObj), 1)
   })
 
   it('should return undefined if the specified property does not exist', () => {
-    eq(view(lensProp('X'), testObj), undefined)
+    eq(view<TestObj, TestObjEl>(lensProp('X'), testObj), undefined)
   })
 })
 
 describe('lensProp: set', () => {
   it('should set the value of the object property specified', () => {
-    eq(set(lensProp('a'), 0, testObj), { a: 0, b: 2, c: 3 })
+    let result = set<TestObj, TestObjEl>(lensProp('a'), 0, testObj)
+    eq(result, { a: 0, b: 2, c: 3 })
+    // new object
+    eq(result == testObj, false)
+
   })
 
   it("should add the property to the object if it doesn't exist", () => {
-    eq(set(lensProp('d'), 4, testObj), {
+    eq(set<TestObj, TestObjEl>(lensProp('d'), 4, testObj), {
       a: 1,
       b: 2,
       c: 3,
       d: 4,
-    } as any)
+    })
   })
 })
 
 describe('lensProp: over', () => {
   it('should apply function to the value of the specified object property', () => {
-    eq(over(lensProp('a'), inc as Inc, testObj), { a: 2, b: 2, c: 3 })
+    eq(over<TestObj, number>(lensProp('a'), inc as Inc, testObj), { a: 2, b: 2, c: 3 })
   })
 
   it("should apply function to undefined and adds the property if it doesn't exist", () => {
-    eq(over(lensProp('X'), identity, testObj), {
+    eq(over<TestObj, TestObjEl>(lensProp('X'), identity, testObj), {
       a: 1,
       b: 2,
       c: 3,
       X: undefined,
-    } as any)
+    })
   })
 })
 
