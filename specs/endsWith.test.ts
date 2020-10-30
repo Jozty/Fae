@@ -4,7 +4,7 @@ import { eq } from './utils/utils.ts'
 
 describe('startsWith', () => {
   it('should return true when a string ends with the provided value', () => {
-    eq(endsWith(_, 'abc')('c'), true)
+    eq(endsWith('c', 'abc'), true)
   })
 
   it('should return true when a long string ends with the provided value', () => {
