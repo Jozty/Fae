@@ -7,6 +7,8 @@ describe('head', () => {
     eq(head([1, 2, 3]), 1)
     eq(head([2, 3]), 2)
     eq(head([3]), 3)
+    eq(head(['fi', 'fo', 'fum']), 'fi')
+    eq(head(['head', 'tail']), 'head')
     eq(head([]), undefined)
 
     eq(head('abc'), 'a')

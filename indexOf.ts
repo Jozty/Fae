@@ -1,4 +1,4 @@
-import { isNumber } from './utils/is.ts'
+
 import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 import { equals } from './equals.ts'

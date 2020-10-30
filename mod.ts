@@ -5,6 +5,8 @@ export type {
   Curry2,
   Curry3,
   Comparator,
+  InferElementType,
+  InferType,
   Predicate1,
   Predicate2,
   Tests,

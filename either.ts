@@ -5,14 +5,14 @@ import { lift } from './lift.ts'
 import { or } from './or.ts'
 
 // @types
-type Either_2<T> = ((g: T) => T) & ((g?: PH) => Either_2<T>)
+type Either_2<T> = (g: T) => T
 
-type Either_1<T> = ((f: T) => T) & ((f?: PH) => Either_1<T>)
+type Either_1<T> = (f: T) => T
 
-type Either = (<T>(f: T, g: T) => T) &
-  (<T>(f: T, g?: PH) => Either_2<T>) &
-  (<T>(f: PH, g: T) => Either_1<T>) &
-  ((f?: PH, g?: PH) => Either)
+type Either =
+  & (<T>(f: T, g?: PH) => Either_2<T>)
+  & (<T>(f: PH, g: T) => Either_1<T>)
+  & (<T>(f: T, g: T) => T)
 
 function _either<T extends Func>(f: T, g: T): T {
   if (isFunction(f)) {
