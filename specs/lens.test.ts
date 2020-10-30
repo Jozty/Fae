@@ -10,8 +10,9 @@ import {
   set,
   over,
   compose,
-  Getter,
-  Setter,
+  LensGetter,
+  LensSetter,
+  _,
 } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
@@ -26,9 +27,10 @@ const alice = {
 type Alice = typeof alice
 
 const nameLens = lens(
-  prop('name') as Getter<Alice, string>,
-  (assoc('name') as any) as Setter<Alice, string>,
+  prop('name') as LensGetter<Alice, string>,
+  (assoc('name') as any) as LensSetter<Alice, string>,
 )
+
 const addressLens = lensProp<Alice, string[]>('address')
 const headLens = lensIndex<string[], string>(0)
 const dogLens = lensPath<Alice, string>(['pets', 'dog'])
@@ -91,5 +93,91 @@ describe('view, over, and set', () => {
       address: ['52 Crane Ave', 'San Francisco', 'CA'],
       pets: { dog: 'joker', cat: 'batman' },
     })
+  })
+
+  they('should work with curried functions', () => {
+    // view
+    eq(view(dogLens, alice), 'joker')
+    eq(view(dogLens)(alice), 'joker')
+    eq(view(dogLens, _)(alice), 'joker')
+    eq(view(_, alice)(dogLens), 'joker')
+
+    // set
+
+    const setExpectedObject = {
+      name: 'Alice Jones',
+      address: ['22 Walnut St', 'San Francisco', 'CA'],
+      pets: { dog: 'a', cat: 'batman' },
+    }
+
+    const set_2_3 = set(dogLens)
+
+    eq(set_2_3('a')(alice), setExpectedObject)
+    eq(set_2_3('a', alice), setExpectedObject)
+    eq(set_2_3(_, alice)('a'), setExpectedObject)
+    eq(set_2_3('a', _)(alice), setExpectedObject)
+
+    const set_1_3 = set(_, 'a')
+
+    eq(set_1_3(dogLens)(alice), setExpectedObject)
+    eq(set_1_3(dogLens, alice), setExpectedObject)
+    eq(set_1_3(_, alice)(dogLens), setExpectedObject)
+    eq(set_1_3(dogLens, _)(alice), setExpectedObject)
+
+    const set_1_2 = set(_, _, alice)
+
+    eq(set_1_2(dogLens)('a'), setExpectedObject)
+    eq(set_1_2(dogLens, 'a'), setExpectedObject)
+    eq(set_1_2(_, 'a')(dogLens), setExpectedObject)
+    eq(set_1_2(dogLens, _)('a'), setExpectedObject)
+
+    const set_3 = set(dogLens, 'a')
+    eq(set_3(alice), setExpectedObject)
+
+    const set_2 = set(dogLens, _, alice)
+    eq(set_2('a'), setExpectedObject)
+
+    const set_1 = set(_, 'a', alice)
+    eq(set_1(dogLens), setExpectedObject)
+
+    // set
+
+    const overExpectedObject = {
+      name: 'Alice Jones',
+      address: ['22 Walnut St', 'San Francisco', 'CA'],
+      pets: { dog: 'JOKER', cat: 'batman' },
+    }
+
+    const trans = (x: string) => x.toUpperCase()
+
+    const over_2_3 = over(dogLens)
+
+    eq(over_2_3(trans)(alice), overExpectedObject)
+    eq(over_2_3(trans, alice), overExpectedObject)
+    eq(over_2_3(_, alice)(trans), overExpectedObject)
+    eq(over_2_3(trans, _)(alice), overExpectedObject)
+
+    const over_1_3 = over(_, trans)
+
+    eq(over_1_3(dogLens)(alice), overExpectedObject)
+    eq(over_1_3(dogLens, alice), overExpectedObject)
+    eq(over_1_3(_, alice)(dogLens), overExpectedObject)
+    eq(over_1_3(dogLens, _)(alice), overExpectedObject)
+
+    const over_1_2 = over(_, _, alice)
+
+    eq(over_1_2(dogLens)(trans), overExpectedObject)
+    eq(over_1_2(dogLens, trans), overExpectedObject)
+    eq(over_1_2(_, trans)(dogLens), overExpectedObject)
+    eq(over_1_2(dogLens, _)(trans), overExpectedObject)
+
+    const over_3 = over(dogLens, trans)
+    eq(over_3(alice), overExpectedObject)
+
+    const over_2 = over(dogLens, _, alice)
+    eq(over_2(trans), overExpectedObject)
+
+    const over_1 = over(_, trans, alice)
+    eq(over_1(dogLens), overExpectedObject)
   })
 })

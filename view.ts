@@ -3,27 +3,28 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type View_2<T, F> = ((target: T) => F) &
-  ((target?: PH) => View_2<T, F>)
+type View_2<T, F> = (target: T) => F
 
-type View_1<T> = (<F>(lens: Lens<T, F>) => F) &
-  ((lens?: PH) => View_1<T>)
+type View_1<T> = <F>(lens: Lens<T, F>) => F
 
-type View = (<T, F>(lens: Lens<T, F>, target: T) => F) &
-  (<T, F>(lens: Lens<T, F>, target?: PH) => View_2<T, F>) &
-  (<T>(lens: PH, target: T) => View_1<T>) &
-  ((lens?: PH, target?: PH) => View)
+// prettier-ignore
+type View =
+  & (<T, F>(lens: Lens<T, F>, target?: PH) => View_2<T, F>)
+  & (<T>(lens: PH, target: T) => View_1<T>)
+  & (<T, F>(lens: Lens<T, F>, target: T) => F)
 
-function _viewTransformer<T, F>(focus: F) {
+function _viewTransformer<T, F>(
+  focus: F,
+): LensTransformer<T, F, F> {
   return {
     value: focus,
-    func: function (this: LensTransformer<never, F, never>) {
-      return this
-    },
+    transform(_, __) {
+      return _viewTransformer(this.value)
+    }
   }
 }
 
-function _view<T, F>(lens: Lens<T, F>, target: T) {
+function _view<T, F>(lens: Lens<T, F>, target: T): F {
   return lens(_viewTransformer)(target).value
 }
 

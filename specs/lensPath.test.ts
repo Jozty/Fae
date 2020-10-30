@@ -22,36 +22,45 @@ const testObj = {
   d: 3,
 }
 
+type TestObj = typeof testObj & {
+  X?: number
+}
+type TestObjEl = TestObj[keyof TestObj] | TestObj
+
 type Inc = (a: number) => number
 
 describe('lensPath: view', () => {
   it('should focus the specified object property', () => {
-    eq(view(lensPath(['d']), testObj), 3)
-    eq(view(lensPath(['a', 1, 'b']), testObj), 2)
-    eq(view(lensPath([]), testObj), testObj)
+    eq(view<TestObj, TestObjEl>(lensPath(['d']), testObj), 3)
+    eq(view<TestObj, TestObjEl>(lensPath(['a', 1, 'b']), testObj), 2)
+    eq(view<TestObj, TestObjEl>(lensPath([]), testObj), testObj)
   })
 })
 
 describe('lensPath: set', () => {
   it('should set the value of the object property specified', () => {
-    eq(set(lensPath(['d']), 0, testObj), {
+    eq(set<TestObj, TestObjEl>(lensPath(['d']), 0, testObj), {
       a: [{ b: 1 }, { b: 2 }],
       d: 0,
     })
-    eq(set(lensPath(['a', 0, 'b']), 0, testObj), {
+    eq(set<TestObj, TestObjEl>(lensPath(['a', 0, 'b']), 0, testObj), {
       a: [{ b: 0 }, { b: 2 }],
       d: 3,
     })
-    eq(set(lensPath([]), 0, testObj as typeof testObj | number), 0)
+    // fae-no-check
+    // @ts-ignore
+    eq(set<TestObj, TestObjEl>(lensPath([]), 0, testObj), 0)
   })
 
   it("should add the property to the object if it doesn't exist", () => {
-    eq(set(lensPath(['X']), 0, testObj), {
+    eq(set<TestObj, TestObjEl>(lensPath(['X']), 0, testObj), {
       a: [{ b: 1 }, { b: 2 }],
       d: 3,
       X: 0,
-    } as any)
-    eq(set(lensPath(['a', 0, 'X']), 0, testObj), {
+    })
+    eq(set<TestObj, TestObjEl>(lensPath(['a', 0, 'X']), 0, testObj), {
+      // fae-no-check
+      // @ts-ignore
       a: [{ b: 1, X: 0 }, { b: 2 }],
       d: 3,
     })
@@ -60,11 +69,11 @@ describe('lensPath: set', () => {
 
 describe('lensPath: over', () => {
   it('should apply function to the value of the specified object property', () => {
-    eq(over(lensPath(['d']), inc as Inc, testObj), {
+    eq(over<TestObj, number>(lensPath(['d']), inc as Inc, testObj), {
       a: [{ b: 1 }, { b: 2 }],
       d: 4,
     })
-    eq(over(lensPath(['a', 1, 'b']), inc as Inc, testObj), {
+    eq(over<TestObj, number>(lensPath(['a', 1, 'b']), inc as Inc, testObj), {
       a: [{ b: 1 }, { b: 3 }],
       d: 3,
     })
@@ -73,12 +82,14 @@ describe('lensPath: over', () => {
   })
 
   it("should apply function to undefined and adds the property if it doesn't exist", () => {
-    eq(over(lensPath(['X']), identity, testObj), {
+    eq(over<TestObj, number>(lensPath(['X']), identity, testObj), {
       a: [{ b: 1 }, { b: 2 }],
       d: 3,
       X: undefined,
     } as any)
-    eq(over(lensPath(['a', 0, 'X']), identity, testObj), {
+    eq(over<TestObj, number>(lensPath(['a', 0, 'X']), identity, testObj), {
+      // fae-no-check
+      // @ts-ignore
       a: [{ b: 1, X: undefined }, { b: 2 }],
       d: 3,
     })

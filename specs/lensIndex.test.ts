@@ -14,27 +14,30 @@ const testList1: (O | number | string[])[] = [
   { c: 3 },
   [''],
 ]
+type TestList1 = typeof testList1
+type TestList1El = TestList1[number]
+
 const testList = testList1
 
 describe('lensIndex: view', () => {
   it('should focus list element at the specified index', () => {
-    eq(view(lensIndex(0), testList), { a: 1 })
+    eq(view(lensIndex<TestList1, TestList1El>(0), testList), { a: 1 })
   })
 
   it('should return undefined if the specified index does not exist', () => {
-    eq(view(lensIndex(10), testList), undefined)
+    eq(view<TestList1, TestList1El>(lensIndex(10), testList), undefined)
   })
 })
 
 describe('lensIndex: set', () => {
   it('should set the list value at the specified index', () => {
-    eq(set(lensIndex(0), 0, testList), [0, { b: 2 }, { c: 3 }, ['']])
+    eq(set<TestList1, TestList1El>(lensIndex(0), 0, testList), [0, { b: 2 }, { c: 3 }, ['']])
   })
 })
 
 describe('lensIndex: over', () => {
   it('should apply function to the value at the specified list index', () => {
-    eq(over(lensIndex(2), Object.keys, testList), [
+    eq(over<TestList1, TestList1El>(lensIndex(2), Object.keys, testList), [
       { a: 1 },
       { b: 2 },
       ['c'],
