@@ -74,19 +74,19 @@ export type Tests<T> = Record<string | number, Predicate1<T>>
 
 export type InferType<T> = T extends string
  ? string
- : T extends (infer U)[]
- ? U[]
- : T extends ArrayLike<infer U>
- ? ArrayLike<U>
- : never
+  : T extends (infer U)[]
+  ? U[]
+  : T extends ArrayLike<infer U>
+  ? ArrayLike<U>
+  : never
 
 export type InferElementType<T> = T extends string
- ? string
- : T extends (infer U)[]
- ? U
- : T extends ArrayLike<infer U>
- ? U
- : never
+  ? string
+  : T extends (infer U)[]
+  ? U
+  : T extends ArrayLike<infer U>
+  ? U
+  : never
 
 export type FuncArr1<T, R> = (a: T) => R
 export type FuncArr2<T1, T2, R> = (a: T1, b: T2) => R
