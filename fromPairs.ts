@@ -1,6 +1,6 @@
 import curryN from './utils/curry_n.ts'
 import type { Prop } from './prop.ts'
-import type { Obj } from "./utils/types.ts"
+import type { Obj } from './utils/types.ts'
 
 
 // @types

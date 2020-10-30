@@ -73,7 +73,7 @@ export type Predicate2<T1, T2 = T1> = (a: T1, b: T2) => boolean
 export type Tests<T> = Record<string | number, Predicate1<T>>
 
 export type InferType<T> = T extends string
- ? string
+  ? string
   : T extends (infer U)[]
   ? U[]
   : T extends ArrayLike<infer U>

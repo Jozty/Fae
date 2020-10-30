@@ -1,7 +1,7 @@
 import type { PH, Obj } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import { equals } from './equals.ts'
-import type { Prop } from "./prop.ts"
+import type { Prop } from './prop.ts'
 
 // @types
 type EqProps_1<T> = (prop: Prop) => boolean
