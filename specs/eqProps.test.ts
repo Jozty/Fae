@@ -49,9 +49,10 @@ describe('eqProps', () => {
     eq(
       eqProps(
         'age',
-        _
+        _,
       )({ name: 'shubham', age: 10 },
-      { name: 'shubham', age: 12 },),
+      { name: 'shubham', age: 12 },
+      ),
       false,
     )
   })

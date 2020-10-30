@@ -1,6 +1,6 @@
 import { nth } from './nth.ts'
 import curryN from './utils/curry_n.ts'
-import { InferElementType } from "./utils/types.ts"
+import type { InferElementType } from './utils/types.ts'
 
 // @types
 type Head = <L extends any[] | string>(functor: L) => InferElementType<L>
