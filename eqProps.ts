@@ -3,7 +3,7 @@ import curryN from './utils/curry_n.ts'
 import { equals } from './equals.ts'
 
 // @types
-type EqProps_1<T> = (prop: string) => boolean
+type EqProps_1<T> = (Prop: string) => boolean
 
 type EqProps_2<T> = (obj1: Obj<T>) => boolean
 
@@ -15,26 +15,26 @@ type EqProps_2_3 =
  & (<T>(obj1: Obj<T>, obj2: Obj<T>) => boolean)
 
 type EqProps_1_3<T> =
- & ((prop: string, obj2?: PH) => EqProps_3<T>)
- & ((prop: PH, obj2: Obj<T>) => EqProps_1<T>)
- & ((prop: string, obj2: Obj<T>) => boolean)
+ & ((Prop: string, obj2?: PH) => EqProps_3<T>)
+ & ((Prop: PH, obj2: Obj<T>) => EqProps_1<T>)
+ & ((Prop: string, obj2: Obj<T>) => boolean)
 
 type EqProps_1_2<T> =
- & ((prop: string, obj1?: PH) => EqProps_2<T>)
- & ((prop: PH, obj1: Obj<T>) => EqProps_1<T>)
- & ((prop: string, obj1: Obj<T>) => boolean)
+ & ((Prop: string, obj1?: PH) => EqProps_2<T>)
+ & ((Prop: PH, obj1: Obj<T>) => EqProps_1<T>)
+ & ((Prop: string, obj1: Obj<T>) => boolean)
 
 type EqProps =
- & ((prop: string, obj1?: PH, obj2?: PH) => EqProps_2_3)
- & (<T>(prop: PH, obj1: Obj<T>, obj2?: PH) => EqProps_1_3<T>)
- & (<T>(prop: PH, obj1: PH, obj2: Obj<T>) => EqProps_1_2<T>)
- & (<T>(prop: string, obj1: Obj<T>, obj2?: PH) => EqProps_3<T>)
- & (<T>(prop: string, obj1: PH, obj2: Obj<T>) => EqProps_2<T>)
- & (<T>(prop: PH, obj1: Obj<T>, obj2: Obj<T>) => EqProps_1<T>)
- & (<T>(prop: string,obj1: Obj<T>,obj2: Obj<T>) => boolean)
+ & ((Prop: string, obj1?: PH, obj2?: PH) => EqProps_2_3)
+ & (<T>(Prop: PH, obj1: Obj<T>, obj2?: PH) => EqProps_1_3<T>)
+ & (<T>(Prop: PH, obj1: PH, obj2: Obj<T>) => EqProps_1_2<T>)
+ & (<T>(Prop: string, obj1: Obj<T>, obj2?: PH) => EqProps_3<T>)
+ & (<T>(Prop: string, obj1: PH, obj2: Obj<T>) => EqProps_2<T>)
+ & (<T>(Prop: PH, obj1: Obj<T>, obj2: Obj<T>) => EqProps_1<T>)
+ & (<T>(Prop: string,obj1: Obj<T>,obj2: Obj<T>) => boolean)
 
-function _eqProps<T>(prop: string, obj1: Obj<T>, obj2: Obj<T>) {
-  return equals(obj1[prop], obj2[prop])
+function _eqProps<T>(Prop: string, obj1: Obj<T>, obj2: Obj<T>) {
+  return equals(obj1[Prop], obj2[Prop])
 }
 
 /**

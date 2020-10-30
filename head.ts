@@ -1,14 +1,9 @@
 import { nth } from './nth.ts'
 import curryN from './utils/curry_n.ts'
+import { InferElementType } from "./utils/types.ts"
 
 // @types
-type HeadReturnType<F> = F extends string
-  ? string
-  : F extends (infer U)[]
-  ? U
-  : never
-
-type Head = <L extends any[] | string>(functor: L) => HeadReturnType<L>
+type Head = <L extends any[] | string>(functor: L) => InferElementType<L>
 
 /**
  * Returns the first element of the given list or string. In some libraries

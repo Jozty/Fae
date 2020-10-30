@@ -7,6 +7,7 @@ describe('identity', () => {
   it('should returns its first argument', function () {
     eq(identity(undefined), undefined)
     eq(identity('foo'), 'foo')
+    // fae-no-check
     // @ts-ignore
     eq(identity('foo', 'bar'), 'foo')
   })
