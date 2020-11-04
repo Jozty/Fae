@@ -73,17 +73,10 @@ describe('lensPath: over', () => {
       a: [{ b: 1 }, { b: 2 }],
       d: 4,
     })
-    eq(
-      over<TestObj, number>(
-        lensPath(['a', 1, 'b']),
-        inc as Inc,
-        testObj,
-      ),
-      {
-        a: [{ b: 1 }, { b: 3 }],
-        d: 3,
-      },
-    )
+    eq(over<TestObj, number>(lensPath(['a', 1, 'b']), inc as Inc, testObj), {
+      a: [{ b: 1 }, { b: 3 }],
+      d: 3,
+    })
     // TODO:
     // eq(over(lensPath([]), toPairs, testObj), [['a', [{b: 1}, {b: 2}]], ['d', 3]])
   })
@@ -94,19 +87,12 @@ describe('lensPath: over', () => {
       d: 3,
       X: undefined,
     } as any)
-    eq(
-      over<TestObj, number>(
-        lensPath(['a', 0, 'X']),
-        identity,
-        testObj,
-      ),
-      {
-        // fae-no-check
-        // @ts-ignore
-        a: [{ b: 1, X: undefined }, { b: 2 }],
-        d: 3,
-      },
-    )
+    eq(over<TestObj, number>(lensPath(['a', 0, 'X']), identity, testObj), {
+      // fae-no-check
+      // @ts-ignore
+      a: [{ b: 1, X: undefined }, { b: 2 }],
+      d: 3,
+    })
   })
 })
 

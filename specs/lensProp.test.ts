@@ -41,6 +41,7 @@ describe('lensProp: set', () => {
     eq(result, { a: 0, b: 2, c: 3 })
     // new object
     eq(result == testObj, false)
+
   })
 
   it("should add the property to the object if it doesn't exist", () => {
@@ -55,11 +56,7 @@ describe('lensProp: set', () => {
 
 describe('lensProp: over', () => {
   it('should apply function to the value of the specified object property', () => {
-    eq(over<TestObj, number>(lensProp('a'), inc as Inc, testObj), {
-      a: 2,
-      b: 2,
-      c: 3,
-    })
+    eq(over<TestObj, number>(lensProp('a'), inc as Inc, testObj), { a: 2, b: 2, c: 3 })
   })
 
   it("should apply function to undefined and adds the property if it doesn't exist", () => {

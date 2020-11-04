@@ -37,7 +37,7 @@ type Insert =
 
 function _insert<T>(index: number, element: T, list: T[]) {
   index = index < list.length && index >= 0 ? index : list.length
-  let result = Array.from(list)
+  const result = [...list]
   result.splice(index, 0, element)
   return result
 }

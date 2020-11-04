@@ -7,7 +7,7 @@ import {
 } from './utils/is.ts'
 
 // @types
-type Empty = (<T>(x: T) => T | Partial<T>)
+type Empty = <T>(x: T) => T | Partial<T>
 
 function _empty(x: any) {
   if (x != null && typeof x.empty === 'function') return x.empty()
@@ -16,8 +16,9 @@ function _empty(x: any) {
     x != null &&
     x.constructor != null &&
     typeof x.constructor.empty === 'function'
-  )
+  ) {
     return x.constructor.empty()
+  }
 
   if (isArray(x)) return []
 

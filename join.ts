@@ -29,8 +29,11 @@ function _join<T extends Object>(
   functor: FunctorWithArLk<T>,
 ) {
   const sep = separator.toString()
-  if (isArray(functor))
+
+  if (isArray(functor)) {
     return _arrayJoin(sep, functor.filter(isNotUndefinedOrNull))
+  }
+
   if (
     isIterable(functor) ||
     isIterator(functor) ||

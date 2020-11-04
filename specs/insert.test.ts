@@ -68,11 +68,18 @@ describe('insert', () => {
 
   it('should test curried versions too', () => {
     const list = ['a', 'b', 'c', 'd', 'e']
+    const insert0 = insert(0,_,_)
+    const insertz = insert(_,'z',_)
+    const insertz0 = insert(0,'z',_)
     eq(insert(0, _, list)('z'), ['z', 'a', 'b', 'c', 'd', 'e'])
+    eq(insert0('z', list), ['z', 'a', 'b', 'c', 'd', 'e'])
     eq(insert(_, 'z', list)(8), ['a', 'b', 'c', 'd', 'e', 'z'])
     eq(insert(3, 'x', _)(list), ['a', 'b', 'c', 'x', 'd', 'e'])
+    eq(insert(3, _, list)('x'), ['a', 'b', 'c', 'x', 'd', 'e'])
     eq(insert(_, _, list)(4, 'x'), ['a', 'b', 'c', 'd', 'x', 'e'])
     eq(insert(5, _, _)('x', list), ['a', 'b', 'c', 'd', 'e', 'x'])
+    eq(insertz(5, list), ['a', 'b', 'c', 'd', 'e', 'z'])
     eq(insert(_, 'x', _)(1, list), ['a', 'x', 'b', 'c', 'd', 'e'])
+    eq(insertz0(list), ['a', 'x', 'b', 'c', 'd', 'e'])
   })
 })
