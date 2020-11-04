@@ -80,6 +80,6 @@ describe('insert', () => {
     eq(insert(5, _, _)('x', list), ['a', 'b', 'c', 'd', 'e', 'x'])
     eq(insertz(5, list), ['a', 'b', 'c', 'd', 'e', 'z'])
     eq(insert(_, 'x', _)(1, list), ['a', 'x', 'b', 'c', 'd', 'e'])
-    eq(insertz0(list), ['a', 'x', 'b', 'c', 'd', 'e'])
+    eq(insertz0(list), ['z', 'a', 'b', 'c', 'd', 'e'])
   })
 })
