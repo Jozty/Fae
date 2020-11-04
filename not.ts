@@ -1,11 +1,13 @@
 import curryN from './utils/curry_n.ts'
-import type { PH } from './utils/types.ts'
 
 // @types
-type Not = (<T>(fn: T) => boolean) & ((fn?: PH) => Not)
+type Not = <T>(fn: T) => boolean
 
 function _not<T>(a: T) {
   return !a
 }
 
+/**
+ * Returns the not(complement) value of the given value
+ */
 export const not: Not = curryN(1, _not)

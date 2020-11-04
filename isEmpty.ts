@@ -1,12 +1,11 @@
-import type { PH } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import { empty } from './empty.ts'
 import { equals } from './equals.ts'
 
 // @types
-type IsEmpty = ((x: any) => boolean) & ((x?: PH) => IsEmpty)
+type IsEmpty = <T>(x: T) => boolean
 
-function _isEmpty(x: any) {
+function _isEmpty<T>(x: T) {
   return x != null && equals(x, empty(x))
 }
 

@@ -31,10 +31,16 @@ describe('eqProps', () => {
     eq(eqProps('value', { value: 0 }, { value: -0 }), false)
     eq(eqProps('value', { value: -0 }, { value: 0 }), false)
     eq(eqProps('value', { value: NaN }, { value: NaN }), true)
-    eq(eqProps('value', { value: Infinity }, { value: Infinity }), true)
-    eq(eqProps('value', { value: Infinity }, { value: -Infinity }), false)
+    eq(
+      eqProps('value', { value: Infinity }, { value: Infinity }),
+      true,
+    )
+    eq(
+      eqProps('value', { value: Infinity }, { value: -Infinity }),
+      false,
+    )
   })
-  
+
   it('should test curried versions too', () => {
     eq(eqProps(_, { value: 0 }, { value: -0 })('value'), false)
     eq(eqProps('value', _)({ value: -0 }, { value: 0 }), false)
@@ -47,11 +53,9 @@ describe('eqProps', () => {
       true,
     )
     eq(
-      eqProps(
-        'age',
-        _,
-      )({ name: 'shubham', age: 10 },
-      { name: 'shubham', age: 12 },
+      eqProps('age', _)(
+        { name: 'shubham', age: 10 },
+        { name: 'shubham', age: 12 },
       ),
       false,
     )

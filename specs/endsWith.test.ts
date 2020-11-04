@@ -18,7 +18,7 @@ describe('startsWith', () => {
   it('should return false when a long string does not end with the provided value', () => {
     eq(endsWith('olog', 'astrology'), false)
   })
-  
+
   it('should return true when a long string will same as provided values', () => {
     eq(endsWith('samephrase', 'samephrase'), true)
   })
@@ -48,6 +48,5 @@ describe('startsWith', () => {
     eq(endsWith(['b'], _)(['a', 'b', 'c']), false)
     eq(endsWith(_, 'astrology')('olog'), false)
     eq(endsWith('ology', _)('astrology'), true)
-
   })
 })

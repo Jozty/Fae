@@ -3,7 +3,6 @@ import { identity } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('identity', () => {
-
   it('should returns its first argument', function () {
     eq(identity(undefined), undefined)
     eq(identity('foo'), 'foo')
@@ -14,7 +13,7 @@ describe('identity', () => {
 
   it('should returns its return value of function being passes', function () {
     let f = (x: number) => ++x
-    let g = (y: string) => y+'bar'
+    let g = (y: string) => y + 'bar'
     eq(identity(f(1)), 2)
     eq(identity(g('foo')), 'foobar')
   })

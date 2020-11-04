@@ -12,7 +12,7 @@ describe('flip', () => {
     eq(g('a', 'b', 'c'), 'b a c')
     eq(g('a', '@', 'A'), '@ a A')
   })
-  
+
   it('should return a function which inverts the first two arguments to the supplied function', () => {
     const h = flip(i)
     eq(i(2, 3, 4), 14)
