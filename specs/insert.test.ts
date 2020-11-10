@@ -67,40 +67,46 @@ describe('insert', () => {
   })
 
   it('should test curried versions too', () => {
-    const list = ['a', 'b', 'c', 'd', 'e']
-    
-    eq(insert(0)('z')(list), ['z', 'a', 'b', 'c', 'd', 'e'])
-    eq(insert(0, _, list)('z'), ['z', 'a', 'b', 'c', 'd', 'e'])
-    eq(insert(_, 'z', list)(8), ['a', 'b', 'c', 'd', 'e', 'z'])
-    eq(insert(3, 'x', _)(list), ['a', 'b', 'c', 'x', 'd', 'e'])
-    eq(insert(3, _, list)('x'), ['a', 'b', 'c', 'x', 'd', 'e'])
-    eq(insert(_, _, list)(4, 'x'), ['a', 'b', 'c', 'd', 'x', 'e'])
-    eq(insert(5, _, _)('x', list), ['a', 'b', 'c', 'd', 'e', 'x'])
-    eq(insert(_, 'x', _)(1, list), ['a', 'x', 'b', 'c', 'd', 'e'])
-    eq(insert(_, _, list)(1)('x'), ['a', 'x', 'b', 'c', 'd', 'e'])
+    const obj = ['a', 'b', 'c', 'd', 'e']
 
-    const insert0 = insert(0,_,_)
+    const p_2_3 = insert(0,_,_)
 
-    eq(insert0('z', list), ['z', 'a', 'b', 'c', 'd', 'e'])
-    eq(insert0('z', _)(list), ['z', 'a', 'b', 'c', 'd', 'e'])
-    eq(insert0(_, list)('z'), ['z', 'a', 'b', 'c', 'd', 'e'])
+    eq(p_2_3('z')(obj), ['z', 'a', 'b', 'c', 'd', 'e'])
+    eq(p_2_3('z', obj), ['z', 'a', 'b', 'c', 'd', 'e'])
+    eq(p_2_3(_, obj)('z'), ['z', 'a', 'b', 'c', 'd', 'e'])
+    eq(p_2_3('z', _)(obj), ['z', 'a', 'b', 'c', 'd', 'e'])
 
-    const insert1 = insert(1)
-    eq(insert1('z')(list), ['a', 'z', 'b', 'c', 'd', 'e'])
+    const p_1_3 = insert(_,'z')
 
-    const insertz = insert(_,'z',_)
-    eq(insertz(5, list), ['a', 'b', 'c', 'd', 'e', 'z'])
+    eq(p_1_3(5)(obj), ['a', 'b', 'c', 'd', 'e', 'z'])
+    eq(p_1_3(5, obj), ['a', 'b', 'c', 'd', 'e', 'z'])
+    eq(p_1_3(_, obj)(5), ['a', 'b', 'c', 'd', 'e', 'z'])
+    eq(p_1_3(5, _)(obj), ['a', 'b', 'c', 'd', 'e', 'z'])
 
-    const insertz0 = insert(0,'z',_)
-    eq(insertz0(list), ['z', 'a', 'b', 'c', 'd', 'e'])
+    const p_1_2 = insert(_, _, obj)
 
-    const insertz1 = insert1('z')
-    eq(insertz1(list), ['a', 'z', 'b', 'c', 'd', 'e'])
+    eq(p_1_2(1)('z'), ['a', 'z', 'b', 'c', 'd', 'e'])
+    eq(p_1_2(1, 'z'), ['a', 'z', 'b', 'c', 'd', 'e'])
+    eq(p_1_2(_, 'z')(1), ['a', 'z', 'b', 'c', 'd', 'e'])
+    eq(p_1_2(1, _)('z'), ['a', 'z', 'b', 'c', 'd', 'e'])
 
+    const p_3 = insert(0, 'z')
+    eq(p_3(obj), ['z', 'a', 'b', 'c', 'd', 'e'])
 
+    const p_2 = insert(0, _, obj)
+    eq(p_2('z'), ['z', 'a', 'b', 'c', 'd', 'e'])
 
+    const p_1 = insert(_, 'z', obj)
+    eq(p_1(0), ['z', 'a', 'b', 'c', 'd', 'e'])
 
-
- 
+    eq(insert(0)('z')(obj), ['z', 'a', 'b', 'c', 'd', 'e'])
+    eq(insert(0, _, obj)('z'), ['z', 'a', 'b', 'c', 'd', 'e'])
+    eq(insert(_, 'z', obj)(8), ['a', 'b', 'c', 'd', 'e', 'z'])
+    eq(insert(3, 'x', _)(obj), ['a', 'b', 'c', 'x', 'd', 'e'])
+    eq(insert(3, _, obj)('x'), ['a', 'b', 'c', 'x', 'd', 'e'])
+    eq(insert(_, _, obj)(4, 'x'), ['a', 'b', 'c', 'd', 'x', 'e'])
+    eq(insert(5, _, _)('x', obj), ['a', 'b', 'c', 'd', 'e', 'x'])
+    eq(insert(_, 'x', _)(1, obj), ['a', 'x', 'b', 'c', 'd', 'e'])
+    eq(insert(_, _, obj)(1)('x'), ['a', 'x', 'b', 'c', 'd', 'e'])
   })
 })

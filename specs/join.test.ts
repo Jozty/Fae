@@ -90,14 +90,18 @@ describe('join', () => {
   it('should test curried versions too', () => {
     const x = [1, true, '123', tS]
     const y = [...x]
-    const z = join(_, x)
-    const join99 = join(99, _)
 
     eq(join(99, _)(y), '199true9912399THE_OBJECT_WITH_TO_STRING')
     eq(join(_, x)(99), '199true9912399THE_OBJECT_WITH_TO_STRING')
-    eq(z(99), '199true9912399THE_OBJECT_WITH_TO_STRING')
-    eq(join99(x), '199true9912399THE_OBJECT_WITH_TO_STRING')
-    eq(join99(y), '199true9912399THE_OBJECT_WITH_TO_STRING')
+
+    const join_1 = join(_, x)
+
+    eq(join_1(99), '199true9912399THE_OBJECT_WITH_TO_STRING')
+    
+    const join_2 = join(99)
+
+    eq(join_2(x), '199true9912399THE_OBJECT_WITH_TO_STRING')
+    eq(join_2(y), '199true9912399THE_OBJECT_WITH_TO_STRING')
   })
 
   it('should throw error with other non-iterable objects', () => {
