@@ -69,14 +69,14 @@ describe('insert', () => {
   it('should test curried versions too', () => {
     const obj = ['a', 'b', 'c', 'd', 'e']
 
-    const p_2_3 = insert(0,_,_)
+    const p_2_3 = insert(0, _, _)
 
     eq(p_2_3('z')(obj), ['z', 'a', 'b', 'c', 'd', 'e'])
     eq(p_2_3('z', obj), ['z', 'a', 'b', 'c', 'd', 'e'])
     eq(p_2_3(_, obj)('z'), ['z', 'a', 'b', 'c', 'd', 'e'])
     eq(p_2_3('z', _)(obj), ['z', 'a', 'b', 'c', 'd', 'e'])
 
-    const p_1_3 = insert(_,'z')
+    const p_1_3 = insert(_, 'z')
 
     eq(p_1_3(5)(obj), ['a', 'b', 'c', 'd', 'e', 'z'])
     eq(p_1_3(5, obj), ['a', 'b', 'c', 'd', 'e', 'z'])
