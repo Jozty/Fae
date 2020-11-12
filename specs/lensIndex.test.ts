@@ -25,24 +25,34 @@ describe('lensIndex: view', () => {
   })
 
   it('should return undefined if the specified index does not exist', () => {
-    eq(view<TestList1, TestList1El>(lensIndex(10), testList), undefined)
+    eq(
+      view<TestList1, TestList1El>(lensIndex(10), testList),
+      undefined,
+    )
   })
 })
 
 describe('lensIndex: set', () => {
   it('should set the list value at the specified index', () => {
-    eq(set<TestList1, TestList1El>(lensIndex(0), 0, testList), [0, { b: 2 }, { c: 3 }, ['']])
+    eq(set<TestList1, TestList1El>(lensIndex(0), 0, testList), [
+      0,
+      { b: 2 },
+      { c: 3 },
+      [''],
+    ])
   })
 })
 
 describe('lensIndex: over', () => {
   it('should apply function to the value at the specified list index', () => {
-    eq(over<TestList1, TestList1El>(lensIndex(2), Object.keys, testList), [
-      { a: 1 },
-      { b: 2 },
-      ['c'],
-      [''],
-    ])
+    eq(
+      over<TestList1, TestList1El>(
+        lensIndex(2),
+        Object.keys,
+        testList,
+      ),
+      [{ a: 1 }, { b: 2 }, ['c'], ['']],
+    )
     eq(testList, [{ a: 1 }, { b: 2 }, { c: 3 }, ['']])
   })
 })

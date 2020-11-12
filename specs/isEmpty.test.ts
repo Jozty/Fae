@@ -9,6 +9,11 @@ describe('isEmpty', () => {
 
   it('should return false for undefined', () => {
     eq(isEmpty(undefined), false)
+    eq(isEmpty(1 / 0), false)
+  })
+
+  it('should return false for NaN', () => {
+    eq(isEmpty(NaN), false)
   })
 
   it('should return true for empty string', () => {
@@ -19,10 +24,12 @@ describe('isEmpty', () => {
   it('should return true for empty array', () => {
     eq(isEmpty([]), true)
     eq(isEmpty([[]]), false)
+    eq(isEmpty([null]), false)
   })
 
   it('should return true for empty object', () => {
     eq(isEmpty({}), true)
+    eq(isEmpty({ x: [] }), false)
     eq(isEmpty({ x: 0 }), false)
   })
 

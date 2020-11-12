@@ -1,4 +1,3 @@
-import type { PH } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import {
   isArray,
@@ -8,7 +7,7 @@ import {
 } from './utils/is.ts'
 
 // @types
-type Empty = (<T>(x: T) => T | Partial<T>) & ((fn?: PH) => Empty)
+type Empty = <T>(x: T) => T | Partial<T>
 
 function _empty(x: any) {
   if (x != null && typeof x.empty === 'function') return x.empty()
@@ -17,8 +16,9 @@ function _empty(x: any) {
     x != null &&
     x.constructor != null &&
     typeof x.constructor.empty === 'function'
-  )
+  ) {
     return x.constructor.empty()
+  }
 
   if (isArray(x)) return []
 
@@ -29,7 +29,7 @@ function _empty(x: any) {
   if (isArguments(x))
     return (function () {
       return arguments
-    })()
+  })()
 }
 
 /**
