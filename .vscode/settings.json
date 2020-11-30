@@ -5,5 +5,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "workbench.colorCustomizations": {},
-  "window.titleBarStyle": "custom"
+  "window.titleBarStyle": "custom",
+  "deno.import_intellisense_origins": {
+    "https://deno.land": true
+  }
 }

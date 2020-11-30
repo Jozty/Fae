@@ -37,7 +37,7 @@ deno test --coverage --unstable
 ```typescript
 import * as Fae from 'https://deno.land/x/fae@v0.6.2/mod.ts'
 
-// arithematic functions
+// arithmetic functions
 Fae.add(10, 20)                                     // 30
 Fae.add(10)(20)                                     // 30
 
