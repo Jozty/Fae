@@ -1,16 +1,16 @@
 ![](./assets/logo-160x160-2.png)
 
+
 # Fae
-
-A functional programming library for Deno inspired from [Ramda](https://ramdajs.com).
-Fae is a fully-fledged library that supports the functional style of programming in Deno. This style provides many benefits like it never mutates input data and is used to create function pipelines. Fae functions are automatically curried. The data to be operated on is generally supplied last. It results in easy to build functions as sequences of simpler or atomic functions (pipelines), each of which transforms the data and passes it along to the next.
-
-Fae provides over 110 functions that help programmers to write clean and concise code.
 
 [![CodeFactor](https://www.codefactor.io/repository/github/jozty/fae/badge)](https://www.codefactor.io/repository/github/jozty/fae)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/jozty/fae)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jozty/fae/Tests?label=tests)
 ![GitHub](https://img.shields.io/github/license/jozty/fae)
+
+Fae is a fully-fledged library that supports the functional style of programming in Deno and is inspired from [Ramda](https://ramdajs.com). This style provides many benefits like it never mutates input data and is used to create function pipelines. Fae functions are automatically curried. The data to be operated on is generally supplied last. It results in easy to build functions as sequences of simpler or atomic functions (pipelines), each of which transforms the data and passes it along to the next.
+
+Fae provides over 110 functions that help programmers to write clean and concise code.
 
 ## Installing
 
