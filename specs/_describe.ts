@@ -1,4 +1,4 @@
-export { expect } from 'https://deno.land/x/expect/expect.ts'
+export { expect } from 'https://deno.land/x/expect@v0.2.6/expect.ts'
 export {
   assertStrictEquals,
   AssertionError,
