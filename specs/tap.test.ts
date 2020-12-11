@@ -1,7 +1,5 @@
 import { describe, it } from './_describe.ts'
 import {
-  flip,
-  append,
   tap,
   identity,
   map,

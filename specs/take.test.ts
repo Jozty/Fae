@@ -62,4 +62,14 @@ describe('take', () => {
     eq(t3(arr), [])
     eq(transduce(t3, flip(append), [], arr), [])
   })
+
+  it('should work on curried versions', () => {
+    const arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    const expected = ['a', 'b', 'c']
+
+    eq(take(3, arr), expected)
+    eq(take(3)(arr), expected)
+    eq(take(3, _)(arr), expected)
+    eq(take(_, arr)(3), expected)
+  })
 })

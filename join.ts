@@ -1,4 +1,5 @@
 import { reduce } from './reduce.ts'
+
 import type { PH, FunctorWithArLk } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import {
@@ -24,7 +25,7 @@ function _arrayJoin<T>(separator: string, list: Array<T>) {
   return list.join(separator)
 }
 
-function _join<T extends Object>(
+function _join<T extends object>(
   separator: string | number,
   functor: FunctorWithArLk<T>,
 ) {

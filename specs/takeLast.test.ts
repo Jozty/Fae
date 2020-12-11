@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { takeLast } from '../mod.ts'
+import { takeLast, _ } from '../mod.ts'
 import { eq, strictNotEq } from './utils/utils.ts'
 
 describe('takeLast', () => {
@@ -35,5 +35,15 @@ describe('takeLast', () => {
 
   it('should handle zero correctly', () => {
     eq(takeLast(0, [1, 2, 3]), [])
+  })
+
+  it('should work on curried versions', () => {
+    const arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    const expected = ['e', 'f', 'g']
+
+    eq(takeLast(3, arr), expected)
+    eq(takeLast(3)(arr), expected)
+    eq(takeLast(3, _)(arr), expected)
+    eq(takeLast(_, arr)(3), expected)
   })
 })
