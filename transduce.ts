@@ -4,10 +4,10 @@ import { reduce } from './reduce.ts'
 import { getTransformer } from './utils/get.ts'
 
 /**
- * Initializes a transducer using supplied iterator function `trans2`.
+ * Initializes a transducer using supplied iterator function `transformer2`.
  * Returns a single item by iterating through the list,
- * successively calling the transformed `trans2` and passing it `acc`
- * and the current value from the array, and then passing through `trans1`
+ * successively calling the transformed `transformer2` and passing it `acc`
+ * and the current value from the array, and then passing through `transformer1`
  * and then passing the result to the next call.
  *
  *
@@ -21,11 +21,11 @@ import { getTransformer } from './utils/get.ts'
  *      Fae.transduce(t1, Fae.flip(Fae.append), [], arr) // [3]
  */
 export function transduce<T, L = T>(
-  trans1: Func,
-  trans2: Func | Transformer,
+  transformer1: Func,
+  transformer2: Func | Transformer,
   acc: T,
   functor: L[],
 ) {
-  const trans = getTransformer(trans2)
-  return reduce(trans1(trans), acc, functor)
+  transformer2 = getTransformer(transformer2)
+  return reduce(transformer1(transformer2), acc, functor)
 }

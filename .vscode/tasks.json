@@ -17,7 +17,7 @@
     {
       "label": "debug _test.ts",
       "type": "shell",
-      "command": "deno run --inspect-brk -A _test.ts",
+      "command": "deno run --inspect-brk -A _test1.ts",
       "isBackground": true,
       "problemMatcher": {
         "background": {
