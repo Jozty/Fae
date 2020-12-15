@@ -10,7 +10,7 @@ describe('find', () => {
   const gt100 = (x: any) => typeof x === 'number' && x > 100
   const isStr = (x: any) => typeof x === 'string'
   const xGt100 = (o: any) => o && o.x > 100
-  const intoArray = (a: any) => [a] 
+  const intoArray = (a: any) => [a]
 
   it('should return the first element that satisfies the predicate', () => {
     eq(find(even, a), 10)
