@@ -16,8 +16,7 @@ type FindIndex =
 
 function _findIndex(arr: Array<any>, element: any) {
   for (let i = 0; i <= arr.length; i++) {
-    if (element === arr[i])
-      return i
+    if (element === arr[i]) return i
   }
   return -1
 }

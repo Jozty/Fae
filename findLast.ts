@@ -15,8 +15,7 @@ type FindLast =
 
 function _findLast<T>(predicate: Predicate1<T>, list: T[]) {
   for (let i = list.length - 1; i >= 0; i--) {
-    if (predicate(list[i]))
-      return list[i]
+    if (predicate(list[i])) return list[i]
   }
   return void 0
 }

@@ -29,8 +29,7 @@ type Filter =
 
 function _objectFilter<T>(predicate: Predicate1<T>, functor: Obj<T>) {
   return reduce((acc: Obj<T>, key: string) => {
-    if (predicate(functor[key]))
-      acc[key] = functor[key]
+    if (predicate(functor[key])) acc[key] = functor[key]
     return acc
     },
     {},
@@ -40,8 +39,7 @@ function _objectFilter<T>(predicate: Predicate1<T>, functor: Obj<T>) {
 
 function _functorFilter<T>(predicate: Predicate1<T>, functor: FunctorWithArLk<T>): T[] {
   return reduce((acc: T[], value: T) => {
-    if (predicate(value))
-      acc.push(value)
+    if (predicate(value)) acc.push(value)
     return acc
     },
     [],
@@ -50,12 +48,10 @@ function _functorFilter<T>(predicate: Predicate1<T>, functor: FunctorWithArLk<T>
 }
 
 function _filter<T = any>(predicate: Predicate1<T>, functor: FunctorWithArLk<T> | Obj<T>): T[] | Partial<Obj<T>> {
-  if (isArray(functor))
-    return functor.filter(predicate)
+  if (isArray(functor)) return functor.filter(predicate)
   if (isArrayLike(functor) || isIterable(functor) || isIterator(functor))
     return _functorFilter(predicate, functor)
-  if (isObject(functor))
-    return _objectFilter(predicate, functor)
+  if (isObject(functor)) return _objectFilter(predicate, functor)
   throw throwFunctorError()
 }
 

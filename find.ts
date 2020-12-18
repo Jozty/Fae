@@ -15,8 +15,7 @@ type Find =
 
 function _find<T>(predicate: Predicate1<T>, list: T[]) {
   for (let i = 0; i < list.length; i++) {
-    if (predicate(list[i]))
-      return list[i]
+    if (predicate(list[i])) return list[i]
   }
   return void 0
 }

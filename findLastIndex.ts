@@ -15,8 +15,7 @@ type FindLastIndex =
 
 function _findLastIndex<T>(predicate: Predicate1<T>, list: T[]) {
   for (let i = list.length - 1; i >= 0; i--) {
-    if (predicate(list[i]))
-      return i
+    if (predicate(list[i])) return i
   }
   return -1
 }
