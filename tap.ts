@@ -4,15 +4,15 @@ import curryN from './utils/curry_n.ts'
 import TapTransformer from './utils/Transformers/tap.ts'
 
 // @types
-type Tap_2<T> = ((obj: T) => T) & ((obj?: PH) => Tap_2<T>)
+type Tap_2<T> = (obj: T) => T
 
-type Tap_1<T> = ((func: (obj: T) => any) => T) &
-  ((func?: PH) => Tap_1<T>)
+type Tap_1<T> = (func: (obj: T) => any) => T
 
-type Tap = (<T>(func: (obj: T) => any, obj: T) => T) &
-  (<T>(func: (obj: T) => any, obj?: PH) => Tap_2<T>) &
-  (<T>(func: PH, obj: T) => Tap_1<T>) &
-  ((func?: PH, obj?: PH) => Tap)
+// prettier-ignore
+type Tap =
+  & (<T>(func: (obj: T) => any, obj?: PH) => Tap_2<T>)
+  & (<T>(func: PH, obj: T) => Tap_1<T>)
+  & (<T>(func: (obj: T) => any, obj: T) => T)
 
 function _tap<T>(func: (obj: T) => any, obj: T) {
   func(obj)
