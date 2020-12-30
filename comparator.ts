@@ -8,6 +8,8 @@ export function comparator<T>(
   predicate: Predicate2<T, T>,
 ): Comparator<T> {
   return function (a: T, b: T) {
-    return predicate(a, b) ? -1 : predicate(b, a) ? 1 : 0
+    if (predicate(a, b)) return -1
+    if (predicate(b, a)) return 1
+    return 0
   }
 }
