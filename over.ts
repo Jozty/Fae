@@ -1,4 +1,9 @@
-import type { GetTransformer, Lens, LensSetter, LensTransformer } from './lens.ts'
+import type {
+  GetTransformer,
+  Lens,
+  LensSetter,
+  LensTransformer,
+} from './lens.ts'
 import curryN from './utils/curry_n.ts'
 import type { FuncArr1, PH } from './utils/types.ts'
 
@@ -37,14 +42,12 @@ type Over =
   & (<T, F>(lens: PH, fn: FuncArr1<F, F>, target: T) => Over_1<T, F>)
   & (<T, F>(lens: Lens<T, F>, fn: FuncArr1<F, F>, target: T) => T)
 
-function _overTransformer<T, F>(
-  focus: F,
-): LensTransformer<T, F, T> {
+function _overTransformer<T, F>(focus: F): LensTransformer<T, F, T> {
   return {
     value: focus,
     transform(setter, target) {
       return _overTransformer(setter(this.value, target))
-    }
+    },
   }
 }
 
@@ -53,9 +56,9 @@ function _over<T, F>(
   fn: FuncArr1<F, F>,
   target: T,
 ): T {
-  return lens(((focus) => _overTransformer(fn(focus))) as GetTransformer<T, F, T>)(
-    target,
-  ).value
+  return lens(((focus) =>
+    _overTransformer(fn(focus))) as GetTransformer<T, F, T>)(target)
+    .value
 }
 
 /**

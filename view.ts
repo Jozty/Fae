@@ -13,14 +13,12 @@ type View =
   & (<T>(lens: PH, target: T) => View_1<T>)
   & (<T, F>(lens: Lens<T, F>, target: T) => F)
 
-function _viewTransformer<T, F>(
-  focus: F,
-): LensTransformer<T, F, F> {
+function _viewTransformer<T, F>(focus: F): LensTransformer<T, F, F> {
   return {
     value: focus,
     transform(_, __) {
       return _viewTransformer(this.value)
-    }
+    },
   }
 }
 

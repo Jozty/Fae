@@ -26,10 +26,11 @@ function _empty(x: any) {
 
   if (isObject(x)) return {}
 
-  if (isArguments(x))
+  if (isArguments(x)) {
     return (function () {
       return arguments
-  })()
+    })()
+  }
 }
 
 /**

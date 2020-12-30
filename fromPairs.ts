@@ -2,7 +2,6 @@ import curryN from './utils/curry_n.ts'
 import type { Prop } from './prop.ts'
 import type { Obj } from './utils/types.ts'
 
-
 // @types
 type FromPairs = <T>(pairs: Pair<T>[]) => Obj<T>
 

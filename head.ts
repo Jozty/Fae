@@ -3,6 +3,7 @@ import curryN from './utils/curry_n.ts'
 import type { InferElementType } from './utils/types.ts'
 
 // @types
+// prettier-ignore
 type Head = <L extends any[] | string>(functor: L) => InferElementType<L>
 
 /**

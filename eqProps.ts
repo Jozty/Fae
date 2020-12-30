@@ -10,21 +10,25 @@ type EqProps_2<T> = (obj1: Obj<T>) => boolean
 
 type EqProps_3<T> = (obj2: Obj<T>) => boolean
 
+// prettier-ignore
 type EqProps_2_3 =
  & (<T>(obj1: Obj<T>, obj2?: PH) => EqProps_3<T>)
  & (<T>(obj1: PH, obj2: Obj<T>) => EqProps_2<T>)
  & (<T>(obj1: Obj<T>, obj2: Obj<T>) => boolean)
 
+// prettier-ignore
 type EqProps_1_3<T> =
  & ((prop: Prop, obj2?: PH) => EqProps_3<T>)
  & ((prop: PH, obj2: Obj<T>) => EqProps_1<T>)
  & ((prop: Prop, obj2: Obj<T>) => boolean)
 
+// prettier-ignore
 type EqProps_1_2<T> =
  & ((prop: Prop, obj1?: PH) => EqProps_2<T>)
  & ((prop: PH, obj1: Obj<T>) => EqProps_1<T>)
  & ((prop: Prop, obj1: Obj<T>) => boolean)
 
+// prettier-ignore
 type EqProps =
  & ((prop: Prop, obj1?: PH, obj2?: PH) => EqProps_2_3)
  & (<T>(prop: PH, obj1: Obj<T>, obj2?: PH) => EqProps_1_3<T>)

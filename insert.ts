@@ -8,24 +8,25 @@ type Insert_2<T> = (element: T) => T[]
 
 type Insert_3<T> = (list: T[]) => T[]
 
+// prettier-ignore
 type Insert_2_3 =
   & (<T>(element: T, list?: PH) => Insert_3<T>)
   & (<T>(element: PH, list: T[]) => Insert_2<T>)
   & (<T>(element: T, list: T[]) => T[])
 
-
+// prettier-ignore
 type Insert_1_3<T> =
   & ((index: number, list?: PH) => Insert_3<T>)
   & (<T>(index: PH, list: T[]) => Insert_1<T>)
   & ((index: number, list: T[]) => T[])
 
-
+// prettier-ignore
 type Insert_1_2<T> =
   & ((index: number, element?: PH) => Insert_2<T>)
   & ((index: PH, element: T) => Insert_1<T>)
   & ((index: number, element: T) => T[])
 
-
+// prettier-ignore
 type Insert =
   & ((index: number, element?: PH, list?: PH) => Insert_2_3)
   & (<T>(index: PH, element: T, list?: PH) => Insert_1_3<T>)

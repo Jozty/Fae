@@ -2,7 +2,6 @@ import curryN from './utils/curry_n.ts'
 import type { PH, InferType } from './utils/types.ts'
 import { isArray, isString } from './utils/is.ts'
 
-
 // @types
 // prettier-ignore
 type Concat_2<L extends any[] | string> = (b: L) => InferType<L>
