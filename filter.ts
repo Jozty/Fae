@@ -43,8 +43,8 @@ function _functorFilter<T>(
 ): T[] {
   return reduce(
     (acc: T[], value: T) => {
-    if (predicate(value)) acc.push(value)
-    return acc
+      if (predicate(value)) acc.push(value)
+      return acc
     },
     [],
     functor,
@@ -58,8 +58,8 @@ function _filter<T = any>(
   if (isArray(functor)) return functor.filter(predicate)
   if (
     isArrayLike(functor) ||
-     isIterable(functor) ||
-      isIterator(functor)
+    isIterable(functor) ||
+    isIterator(functor)
   ) return _functorFilter(predicate, functor)
   if (isObject(functor)) return _objectFilter(predicate, functor)
   throw throwFunctorError()
