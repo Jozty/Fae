@@ -4,7 +4,7 @@ import { liftN } from './liftN.ts'
 import { getFunctionLength } from './utils/get.ts'
 
 // @types
-type Lift = ((f: Func) => Func) & ((f?: PH) => Lift)
+type Lift = (f: Func) => Func
 
 function _lift(f: Func) {
   return liftN(getFunctionLength(f), f)

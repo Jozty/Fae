@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { dissocPath } from '../mod.ts'
+import { dissocPath, _ } from '../mod.ts'
 import { eq, strictEq } from './utils/utils.ts'
 
 describe('dissocPath', () => {
@@ -48,10 +48,13 @@ describe('dissocPath', () => {
   it('should flatten properties from prototype', () => {
     const F = function () {}
     F.prototype.a = 1
+    // fae-no-check
     // @ts-ignore
     const obj1 = new F()
     obj1.b = { c: 2, d: 3 }
     const obj2 = dissocPath(['b', 'c'], obj1)
+    // fae-no-check
+    // @ts-ignore
     eq(obj2, { a: 1, b: { d: 3 } })
   })
 
@@ -61,5 +64,16 @@ describe('dissocPath', () => {
 
   it('should allow integer to be used as key for object', () => {
     eq(dissocPath([42], { a: 1, b: 2, 42: 3 }), { a: 1, b: 2 })
+  })
+
+  it('should work on curried versions too', () => {
+    const a = 'b'
+    const b = { a: 1, b: 2, c: 3 }
+    const expected = { a: 1, c: 3 }
+
+    eq(dissocPath(a, b), expected)
+    eq(dissocPath(a)(b), expected)
+    eq(dissocPath(a, _)(b), expected)
+    eq(dissocPath(_, b)(a), expected)
   })
 })

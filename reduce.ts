@@ -8,85 +8,43 @@ import Transformer, {
 import { throwFunctorError } from './utils/throw.ts'
 
 // @types
-type Reduce_1<T, R> = (<P>(
-  func: FuncArr2<R, P, R | ReducedTransformer<R>> | Transformer,
-) => R) &
-  ((func?: PH) => Reduce_1<T, R>)
+type Reducer<R, P> =
+  | FuncArr2<R, P, R | ReducedTransformer<R>>
+  | Transformer
 
-type Reduce_2<T, R, P> = ((acc: R) => R) &
-  ((acc?: PH) => Reduce_2<T, R, P>)
+type Reduce_1<T, R> = <P>(func: Reducer<R, P>) => R
 
-type Reduce_3<R, P> = (<T>(functor: FunctorWithArLk<T>) => R) &
-  ((functor?: PH) => Reduce_3<R, P>)
+type Reduce_2<T, R, P> = (acc: R) => R
 
-type Reduce_2_3<R, P> = (<T>(
-  acc: R,
-  functor: FunctorWithArLk<T>,
-) => R) &
-  ((acc: R, functor?: PH) => Reduce_3<R, P>) &
-  (<T>(acc: PH, functor: FunctorWithArLk<T>) => Reduce_2<T, R, P>) &
-  ((acc?: PH, functor?: PH) => Reduce_2_3<R, P>)
+type Reduce_3<R, P> = <T>(functor: FunctorWithArLk<T>) => R
 
-type Reduce_1_3<R> = (<T, P>(
-  func: FuncArr2<R, P, R | ReducedTransformer<R>> | Transformer,
-  functor: FunctorWithArLk<T>,
-) => R) &
-  (<P>(
-    func: FuncArr2<R, P, R | ReducedTransformer<R>> | Transformer,
-    functor?: PH,
-  ) => Reduce_3<R, P>) &
-  (<T>(func: PH, functor: FunctorWithArLk<T>) => Reduce_1<T, R>) &
-  ((func?: PH, functor?: PH) => Reduce_1_3<R>)
+// prettier-ignore
+type Reduce_2_3<R, P> =
+  & ((acc: R, functor?: PH) => Reduce_3<R, P>)
+  & (<T>(acc: PH, functor: FunctorWithArLk<T>) => Reduce_2<T, R, P>)
+  & (<T>(acc: R, functor: FunctorWithArLk<T>) => R)
 
-type Reduce_1_2<T> = (<R, P>(
-  func: FuncArr2<R, P, R | ReducedTransformer<R>> | Transformer,
-  acc: R,
-) => R) &
-  (<R, P>(
-    func: FuncArr2<R, P, R | ReducedTransformer<R>> | Transformer,
-    acc?: PH,
-  ) => Reduce_2<T, R, P>) &
-  (<R>(func: PH, acc: R) => Reduce_1<T, R>) &
-  ((func?: PH, acc?: PH) => Reduce_1_2<T>)
+// prettier-ignore
+type Reduce_1_3<R> =
+  & (<P>(func: Reducer<R, P>, functor?: PH) => Reduce_3<R, P>)
+  & (<T>(func: PH, functor: FunctorWithArLk<T>) => Reduce_1<T, R>)
+  & (<T, P>(func: Reducer<R, P>, functor: FunctorWithArLk<T>) => R)
 
-type Reduce = (<T, R, P>(
-  func:
-    | FuncArr2<
-        R,
-        P,
-        R | ReducedTransformer<R> | ReducedTransformer<R>
-      >
-    | Transformer,
-  acc: R,
-  functor: FunctorWithArLk<T>,
-) => R) &
-  ((func?: PH, acc?: PH, functor?: PH) => Reduce) &
-  (<R, P>(
-    func: FuncArr2<R, P, R | ReducedTransformer<R>> | Transformer,
-    acc?: PH,
-    functor?: PH,
-  ) => Reduce_2_3<R, P>) &
-  (<R>(func: PH, acc: R, functor?: PH) => Reduce_1_3<R>) &
-  (<T>(
-    func: PH,
-    acc: PH,
-    functor: FunctorWithArLk<T>,
-  ) => Reduce_1_2<T>) &
-  (<R, P>(
-    func: FuncArr2<R, P, R | ReducedTransformer<R>> | Transformer,
-    acc: R,
-    functor?: PH,
-  ) => Reduce_3<R, P>) &
-  (<T, R, P>(
-    func: FuncArr2<R, P, R | ReducedTransformer<R>> | Transformer,
-    acc: PH,
-    functor: FunctorWithArLk<T>,
-  ) => Reduce_2<T, R, P>) &
-  (<T, R>(
-    func: PH,
-    acc: R,
-    functor: FunctorWithArLk<T>,
-  ) => Reduce_1<T, R>)
+// prettier-ignore
+type Reduce_1_2<T> =
+  & (<R, P>(func: Reducer<R, P>, acc?: PH) => Reduce_2<T, R, P>)
+  & (<R>(func: PH, acc: R) => Reduce_1<T, R>)
+  & (<R, P>(func: Reducer<R, P>, acc: R) => R)
+
+// prettier-ignore
+type Reduce =
+  & (<R, P>(func: Reducer<R, P>, acc?: PH, functor?: PH) => Reduce_2_3<R, P>)
+  & (<R>(func: PH, acc: R, functor?: PH) => Reduce_1_3<R>)
+  & (<T>(func: PH, acc: PH, functor: FunctorWithArLk<T>) => Reduce_1_2<T>)
+  & (<R, P>(func: Reducer<R, P>, acc: R, functor?: PH) => Reduce_3<R, P>)
+  & (<T, R, P>(func: Reducer<R, P>, acc: PH, functor: FunctorWithArLk<T>) => Reduce_2<T, R, P>)
+  & (<T, R>(func: PH, acc: R, functor: FunctorWithArLk<T>) => Reduce_1<T, R>)
+  & (<T, R, P>(func: Reducer<R, P>, acc: R, functor: FunctorWithArLk<T>) => R)
 
 function _arrayReduce<T, R>(
   trans: Transformer,
@@ -121,7 +79,7 @@ function _iterableReduce<T, R>(
 }
 
 function _reduce<T, R, P>(
-  func: FuncArr2<R, P, R | ReducedTransformer<R>> | Transformer,
+  func: Reducer<R, P>,
   acc: R,
   functor: FunctorWithArLk<T>,
 ): R {

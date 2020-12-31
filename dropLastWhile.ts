@@ -25,7 +25,7 @@ type DropLastWhile =
 function _dropLastWhile<L extends T[] | string, T>(
   predicate: Predicate1<T>,
   list: L,
-): L {
+) {
   let i = list.length - 1
   while (i >= 0 && predicate(list[i] as any)) i--
 

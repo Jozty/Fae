@@ -31,7 +31,7 @@ describe('append', () => {
   it('should work on curried versions too', () => {
     const a = 9
     const b = [1, 2, 3, 4, 5, 6, 7, 8]
-    const expected = [1, 2, 3, 4, 5, 6, 7, 8, 10]
+    const expected = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     eq(append(a, b), expected)
     eq(append(a)(b), expected)

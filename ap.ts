@@ -33,7 +33,7 @@ function _ap<T, R>(applyF: ApplyF<T, R>, applyX: T[] | Func) {
     // @ts-ignore
     (acc: T[], f: Func) => concat(acc, map(f, applyX) as T[]),
     [],
-    applyF,
+    applyF as any[],
   )
 }
 

@@ -1,5 +1,12 @@
 import { isFunction, isObject, isArray } from './utils/is.ts'
-import type { Func, PH, Obj, FuncArr1 } from './utils/types.ts'
+import type {
+  Func,
+  PH,
+  Obj,
+  FuncArr1,
+  InferType,
+  InferElementType,
+} from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import { reduce } from './reduce.ts'
 import { dispatch } from './utils/dispatch.ts'
@@ -8,25 +15,37 @@ import { getFunctionLength } from './utils/get.ts'
 
 // @types
 // prettier-ignore
-type MapReturnType<F, T, R> = F extends T[]
+type MapReturnType<F, R> = F extends any[]
   ? R[]
-  : F extends Obj<T>
-    ? Obj<R>
-    : Func
+  : F extends Func
+  ? Func
+  : F extends Obj<any>
+  ? Obj<R>
+  : never
+
+type MapInferType<F> = F extends Func
+  ? Func
+  : F extends Obj<infer U>
+  ? Obj<U>
+  : InferType<F>
+
+type MapInferElementType<F> = F extends Func
+  ? Func
+  : F extends Obj<infer U>
+  ? U
+  : InferElementType<F>
 
 // prettier-ignore
-type Map_2<T, R> = (<F extends Obj<T> | Func | T[]>(functor: F) => MapReturnType<F, T, R>)
-  & ((functor?: PH) => Map_2<T, R>)
+type Map_2<T, R> = (<F extends Obj<T> | Func | T[]>(functor: F) => MapReturnType<F, R>)
 
 // prettier-ignore
-type Map_1<F extends Obj<T> | Func | T[], T, R> = ((fn: FuncArr1<T, R>) => MapReturnType<F, T, R>)
-  & ((fn?: PH) => Map_1<F, T, R>)
+type Map_1<F extends Obj<any> | Func | any[]> = (<R>(fn: FuncArr1<MapInferElementType<F>, R>) => MapReturnType<F, R>)
 
 // prettier-ignore
-type Map = (<F extends Obj<T> | Func | T[], T, R>(fn: FuncArr1<T, R>, functor: F) => MapReturnType<F, T, R>)
+type Map =
   & (<T, R>(fn: FuncArr1<T, R>, functor?: PH) => Map_2<T, R>)
-  & (<F extends Obj<T> | Func | T[], T, R>(fn: PH, functor: F) => Map_1<F, T, R>)
-  & ((fn?: PH, functor?: PH) => Map)
+  & (<F extends Obj<any> | Func | any[]>(fn: PH, functor: F) => Map_1<F>)
+  & (<F extends Obj<T> | Func | T[], T, R>(fn: FuncArr1<T, R>, functor: F) => MapReturnType<F, R>)
 
 function _functionMap<T, R>(fn: FuncArr1<T, R>, functor: Func): Func {
   return curryN(getFunctionLength(functor), function (
@@ -63,7 +82,7 @@ function _arrayMap<T, R>(func: FuncArr1<T, R>, functor: T[]) {
 function _map<F extends Obj<T> | Func | T[], T, R>(
   fn: FuncArr1<T, R>,
   functor: F,
-): MapReturnType<F, T, R> {
+): MapReturnType<F, R> {
   if (isFunction(functor)) return _functionMap(fn, functor) as any
   if (isArray(functor)) return _arrayMap(fn, functor) as any
   if (isObject(functor)) return _objectMap(fn, functor as any) as any

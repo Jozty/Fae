@@ -2,15 +2,15 @@ import type { ObjRec, PH } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type Dissoc_2 = ((obj: ObjRec) => ObjRec) & ((obj?: PH) => Dissoc_2)
+type Dissoc_2 = (obj: ObjRec) => ObjRec
 
-type Dissoc_1 = ((prop: string | number) => ObjRec) &
-  ((prop?: PH) => Dissoc_1)
+type Dissoc_1 = (prop: string | number) => ObjRec
 
-type Dissoc = ((prop: string | number, obj: ObjRec) => ObjRec) &
-  ((prop: string | number, obj?: PH) => Dissoc_2) &
-  ((prop: PH, obj: ObjRec) => Dissoc_1) &
-  ((prop?: PH, obj?: PH) => Dissoc)
+// prettier-ignore
+type Dissoc =
+  & ((prop: string | number, obj?: PH) => Dissoc_2)
+  & ((prop: PH, obj: ObjRec) => Dissoc_1)
+  & ((prop: string | number, obj: ObjRec) => ObjRec)
 
 function _dissoc(prop: string | number, obj: ObjRec) {
   const result: ObjRec = {}

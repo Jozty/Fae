@@ -15,6 +15,12 @@
       "isBackground": true,
     },
     {
+      "label": "prettify",
+      "type": "shell",
+      "command": "prettier -w specs/*.ts && prettier -w *.ts",
+      "isBackground": true,
+    },
+    {
       "label": "debug _test.ts",
       "type": "shell",
       "command": "deno run --inspect-brk -A _test1.ts",

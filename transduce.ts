@@ -25,7 +25,7 @@ export function transduce<T, L = T>(
   transformer2: Func | Transformer,
   acc: T,
   functor: L[],
-) {
+): unknown {
   transformer2 = getTransformer(transformer2)
   return reduce(transformer1(transformer2), acc, functor)
 }

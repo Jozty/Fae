@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { lift, curry, add, multiply, subtract, _ } from '../mod.ts'
+import { lift, curry } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 const add3 = curry(3, function (a: number, b: number, c: number) {
@@ -67,10 +67,4 @@ describe('lift', () => {
       1055,
     ])
   })
-
-  // TODO:
-  // it('should work with other functors such as "Maybe"', () => {
-  //   const addM = liftN(2, add)
-  //   eq(addM(Maybe.Just(3), Maybe.Just(5)), Maybe.Just(8))
-  // })
 })

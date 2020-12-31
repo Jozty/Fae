@@ -8,16 +8,15 @@ import curryN from './utils/curry_n.ts'
 import type { PH, ObjRec } from './utils/types.ts'
 
 // @types
-type DissocPath_2 = ((obj: ObjRec) => ObjRec) &
-  ((obj?: PH) => DissocPath_2)
+type DissocPath_2 = (obj: ObjRec) => ObjRec
 
-type DissocPath_1 = ((path: Path) => ObjRec) &
-  ((path?: PH) => DissocPath_1)
+type DissocPath_1 = (path: Path) => ObjRec
 
-type DissocPathPath = ((path: Path, obj: ObjRec) => ObjRec) &
-  ((path: Path, obj?: PH) => DissocPath_2) &
-  ((path: PH, obj: ObjRec) => DissocPath_1) &
-  ((path?: PH, obj?: PH) => DissocPathPath)
+// prettier-ignore
+type DissocPathPath =
+  & ((path: Path, obj?: PH) => DissocPath_2)
+  & ((path: PH, obj: ObjRec) => DissocPath_1)
+  & ((path: Path, obj: ObjRec) => ObjRec)
 
 // TODO: move to mod
 function _remove(index: number, arr: any[]) {
