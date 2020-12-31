@@ -3,8 +3,7 @@ import type { PH, Func, Predicate } from './utils/types.ts'
 import { getFunctionsLengths } from './utils/get.ts'
 
 // @types
-type AnyPass = (<T>(predicates: Predicate<T>[]) => Func) &
-  ((predicates?: PH) => AnyPass)
+type AnyPass = <T>(predicates: Predicate<T>[]) => Func
 
 function _anyPass<T>(predicates: Predicate<T>[]) {
   const len = predicates.length

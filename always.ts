@@ -2,7 +2,7 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type Always = (<T>(value: T) => () => T) & ((value?: PH) => Always)
+type Always = <T>(value: T) => () => T
 
 function _always<T>(value: T) {
   return function () {

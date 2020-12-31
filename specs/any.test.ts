@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { any, pipe, map, transduce, flip, inc } from '../mod.ts'
+import { any, pipe, map, transduce, flip, inc, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('any', () => {
@@ -11,7 +11,7 @@ describe('any', () => {
     eq(any(odd, [2, 4, 6, 8, 10, 11, 12]), true)
   })
 
-  it('should return false if all elements fails to satisfy the predicate', () => {
+  it('should return false if any elements fails to satisfy the predicate', () => {
     eq(any(odd, [2, 4, 6, 8, 10, 12]), false)
   })
 
@@ -19,7 +19,7 @@ describe('any', () => {
   //   eq(intoArray(any(odd), [2, 4, 6, 8, 10, 11, 12]), [true])
   // })
 
-  // it('returns false if all elements fails to satisfy the predicate', () => {
+  // it('returns false if any elements fails to satisfy the predicate', () => {
   //   eq(intoArray(any(odd), [2, 4, 6, 8, 10, 12]), [false])
   // })
 
@@ -29,12 +29,12 @@ describe('any', () => {
       { first: 'Mike', last: 'Hurley' },
       { first: 'Will', last: 'Klein' },
     ]
-    const alliterative = (person: typeof people[number]) =>
+    const anyiterative = (person: typeof people[number]) =>
       person.first.charAt(0) === person.last.charAt(0)
 
-    eq(any(alliterative, people), false)
+    eq(any(anyiterative, people), false)
     people.push({ first: 'Scott', last: 'Sauyet' })
-    eq(any(alliterative, people), true)
+    eq(any(anyiterative, people), true)
   })
 
   it('can use a configurable function', () => {
@@ -73,5 +73,16 @@ describe('any', () => {
       ),
       2,
     )
+  })
+
+  it('should work on curried versions too', () => {
+    const a = (a: number) => a % 3 === 0
+    const b = [1, 2, 3, 4, 5, 6, 7, 8]
+    const expected = true
+
+    eq(any(a, b), expected)
+    eq(any(a)(b), expected)
+    eq(any(a, _)(b), expected)
+    eq(any(_, b)(a), expected)
   })
 })

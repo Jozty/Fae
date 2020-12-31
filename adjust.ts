@@ -2,36 +2,39 @@ import type { Func, PH } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type Adjust_1<T> = ((index: number) => T[]) &
-  ((index?: PH) => Adjust_1<T>)
+type Adjust_1<T> = (index: number) => T[]
 
-type Adjust_2<T> = ((fn: Func) => T[]) & ((fn?: PH) => Adjust_2<T>)
+type Adjust_2<T> = (fn: Func) => T[]
 
-type Adjust_3 = (<T>(list: T[]) => T[]) & ((list?: PH) => Adjust_3)
+type Adjust_3 = <T>(list: T[]) => T[]
 
-type Adjust_2_3 = (<T>(fn: Func, list: T[]) => T[]) &
-  ((fn: Func, list?: PH) => Adjust_3) &
-  (<T>(fn: PH, list: T[]) => Adjust_2<T>) &
-  ((fn?: PH, list?: PH) => Adjust_2_3)
+// prettier-ignore
+type Adjust_2_3 =
+  & ((fn: Func, list?: PH) => Adjust_3)
+  & (<T>(fn: PH, list: T[]) => Adjust_2<T>)
+  & (<T>(fn: Func, list: T[]) => T[])
 
-type Adjust_1_3 = (<T>(index: number, list: T[]) => T[]) &
-  ((index: number, list?: PH) => Adjust_3) &
-  (<T>(index: PH, list: T[]) => Adjust_1<T>) &
-  ((index?: PH, list?: PH) => Adjust_1_3)
+// prettier-ignore
+type Adjust_1_3 =
+  & ((index: number, list?: PH) => Adjust_3)
+  & (<T>(index: PH, list: T[]) => Adjust_1<T>)
+  & (<T>(index: number, list: T[]) => T[])
 
-type Adjust_1_2<T> = ((index: number, fn: Func) => T[]) &
-  ((index: number, fn?: PH) => Adjust_2<T>) &
-  ((index: PH, fn: Func) => Adjust_1<T>) &
-  ((index?: PH, fn?: PH) => Adjust_1_2<T>)
+// prettier-ignore
+type Adjust_1_2<T> =
+  & ((index: number, fn?: PH) => Adjust_2<T>)
+  & ((index: PH, fn: Func) => Adjust_1<T>)
+  & ((index: number, fn: Func) => T[])
 
-type Adjust = (<T>(index: number, fn: Func, list: T[]) => T[]) &
-  ((index?: PH, fn?: PH, list?: PH) => Adjust) &
-  ((index: number, fn?: PH, list?: PH) => Adjust_2_3) &
-  ((index: PH, fn: Func, list?: PH) => Adjust_1_3) &
-  (<T>(index: PH, fn: PH, list: T[]) => Adjust_1_2<T>) &
-  ((index: number, fn: Func, list?: PH) => Adjust_3) &
-  (<T>(index: number, fn: PH, list: T[]) => Adjust_2<T>) &
-  (<T>(index: PH, fn: Func, list: T[]) => Adjust_1<T>)
+// prettier-ignore
+type Adjust =
+  & ((index: number, fn?: PH, list?: PH) => Adjust_2_3)
+  & ((index: PH, fn: Func, list?: PH) => Adjust_1_3)
+  & (<T>(index: PH, fn: PH, list: T[]) => Adjust_1_2<T>)
+  & ((index: number, fn: Func, list?: PH) => Adjust_3)
+  & (<T>(index: number, fn: PH, list: T[]) => Adjust_2<T>)
+  & (<T>(index: PH, fn: Func, list: T[]) => Adjust_1<T>)
+  & (<T>(index: number, fn: Func, list: T[]) => T[])
 
 function _adjust<T>(index: number, fn: Func, list: T[][]) {
   const result = [...list]

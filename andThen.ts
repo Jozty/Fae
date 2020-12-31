@@ -3,16 +3,15 @@ import type { Func, PH } from './utils/types.ts'
 import { assertPromise } from './utils/assert.ts'
 
 // @types
-type AndThen_2 = ((p: any) => PromiseLike<any>) &
-  ((b?: PH) => AndThen_2)
+type AndThen_2 = (p: any) => PromiseLike<any>
 
-type AndThen_1 = ((f: Func) => PromiseLike<any>) &
-  ((a?: PH) => AndThen_1)
+type AndThen_1 = (f: Func) => PromiseLike<any>
 
-type AndThen = ((f: Func, p: any) => PromiseLike<any>) &
-  ((f: Func, b?: PH) => AndThen_2) &
-  ((a: PH, p: any) => AndThen_1) &
-  ((a?: PH, b?: PH) => AndThen)
+// prettier-ignore
+type AndThen =
+  & ((f: Func, b?: PH) => AndThen_2)
+  & ((a: PH, p: any) => AndThen_1)
+  & ((f: Func, p: any) => PromiseLike<any>)
 
 function _andThen(f: Func, p: any) {
   assertPromise('andThen', p)

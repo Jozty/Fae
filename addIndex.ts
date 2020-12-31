@@ -5,7 +5,7 @@ import type { Func } from './utils/types.ts'
 import { getFunctionLength } from './utils/get.ts'
 
 // @types
-type AddIndex = ((fn: Func) => Func) & ((fn?: PH) => AddIndex)
+type AddIndex = (fn: Func) => Func
 
 function _addIndex(fn: Func) {
   return curryN(getFunctionLength(fn), function (this: any) {
