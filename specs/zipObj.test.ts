@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { zipObj } from '../mod.ts'
+import { zipObj, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('zipObj', () => {
@@ -29,5 +29,17 @@ describe('zipObj', () => {
       b: 2,
       c: 3,
     })
+  })
+
+  it('should work on curried version too', () => {
+    const a = ['a', 'b', 'c']
+    const b = [1, 2, 3]
+    const expected = { a: 1, b: 2, c: 3 }
+
+    eq(zipObj(a, b), expected)
+    eq(zipObj(a)(b), expected)
+    eq(zipObj(a, _)(b), expected)
+    eq(zipObj(a, _)(b), expected)
+    eq(zipObj(_, b)(a), expected)
   })
 })

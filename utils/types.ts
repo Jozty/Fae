@@ -72,6 +72,12 @@ export type Predicate2<T1, T2 = T1> = (a: T1, b: T2) => boolean
 /** Type for spec object which contains predicate functions of type {Predicate1} */
 export type Tests<T> = Record<string | number, Predicate1<T>>
 
+export type InferPrimitive<T> = T extends number
+  ? number
+  : T extends string
+  ? string
+  : T
+
 export type InferType<T> = T extends string
   ? string
   : T extends (infer U)[]

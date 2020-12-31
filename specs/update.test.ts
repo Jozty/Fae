@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { update } from '../mod.ts'
+import { update, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('update', () => {
@@ -33,5 +33,42 @@ describe('update', () => {
     }
     // @ts-ignore
     eq(update(2, 4, args(0, 1, 2, 3)), [0, 1, 4, 3])
+  })
+
+  it('should work on curried version too', () => {
+    const a = -3
+    const b = 4
+    const c = [0, 1, 2, 3]
+    const expected = [0, 4, 2, 3]
+
+    const u_2_3 = update(a)
+
+    eq(u_2_3(b)(c), expected)
+    eq(u_2_3(b, c), expected)
+    eq(u_2_3(_, c)(b), expected)
+    eq(u_2_3(b, _)(c), expected)
+
+    const u_1_3 = update(_, b)
+
+    eq(u_1_3(a)(c), expected)
+    eq(u_1_3(a, c), expected)
+    eq(u_1_3(_, c)(a), expected)
+    eq(u_1_3(a, _)(c), expected)
+
+    const u_1_2 = update(_, _, c)
+
+    eq(u_1_2(a)(b), expected)
+    eq(u_1_2(a, b), expected)
+    eq(u_1_2(_, b)(a), expected)
+    eq(u_1_2(a, _)(b), expected)
+
+    const u_3 = update(a, b)
+    eq(u_3(c), expected)
+
+    const u_2 = update(a, _, c)
+    eq(u_2(b), expected)
+
+    const u_1 = update(_, b, c)
+    eq(u_1(a), expected)
   })
 })

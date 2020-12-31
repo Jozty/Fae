@@ -6,8 +6,7 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type DropRepeats = (<T>(list: T[]) => T[]) &
-  ((list?: PH) => DropRepeats)
+type DropRepeats = <T>(list: T[]) => T[]
 
 const _dropRepeats = dropRepeatsWith(equals)
 
