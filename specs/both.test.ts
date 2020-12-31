@@ -14,7 +14,8 @@ describe('both', () => {
   })
 
   it('should accept functions that take multiple parameters', () => {
-    const between = (a: number, b: number, c: number) => a < b && b < c
+    const between = (a: number, b: number, c: number) =>
+      a < b && b < c
     const total20 = (a: number, b: number, c: number) =>
       a + b + c === 20
     const f = both(between, total20)
