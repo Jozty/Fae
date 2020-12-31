@@ -2,21 +2,20 @@ import { slice } from './slice.ts'
 import { dispatch } from './utils/dispatch.ts'
 import DropTransformer from './utils/Transformers/drop.ts'
 import curryN from './utils/curry_n.ts'
-import type { PH } from './utils/types.ts'
+import type { InferType, PH } from './utils/types.ts'
 
 // @types
-type Drop_2 = (<L extends T[] | string, T>(list: L) => L) &
-  ((list?: PH) => Drop_2)
+type Drop_2 = <L extends any[] | string>(list: L) => InferType<L>
 
-type Drop_1<L extends T[] | string, T> = ((n: number) => L) &
-  ((n?: PH) => Drop_1<L, T>)
+type Drop_1<L extends any[] | string> = (n: number) => InferType<L>
 
-type Drop = (<L extends T[] | string, T>(n: number, list: L) => L) &
-  ((n: number, list?: PH) => Drop_2) &
-  (<L extends T[] | string, T>(n: PH, list: L) => Drop_1<L, T>) &
-  ((n?: PH, list?: PH) => Drop)
+// prettier-ignore
+type Drop =
+  & ((n: number, list?: PH) => Drop_2)
+  & (<L extends any[] | string>(n: PH, list: L) => Drop_1<L>)
+  & (<L extends any[] | string>(n: number, list: L) => InferType<L>)
 
-function _drop<L extends T[] | string, T>(n: number, list: L) {
+function _drop<L extends any[] | string>(n: number, list: L) {
   return slice(Math.max(0, n), Infinity, list)
 }
 

@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { drop } from '../mod.ts'
+import { drop, _ } from '../mod.ts'
 import { eq, strictNotEq } from './utils/utils.ts'
 
 describe('drop', () => {
@@ -37,5 +37,15 @@ describe('drop', () => {
     eq(drop(7, 'operate'), '')
     eq(drop(8, 'operate'), '')
     eq(drop(-1, 'operate'), 'operate')
+  })
+
+  it('should work on curried versions', () => {
+    const a = 3
+    const b = 'operate'
+    const expected = 'rate'
+
+    eq(drop(a, b), expected)
+    eq(drop(a)(b), expected)
+    eq(drop(_, b)(a), expected)
   })
 })

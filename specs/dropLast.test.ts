@@ -8,6 +8,7 @@ import {
   map,
   filter,
   range,
+  _,
 } from '../mod.ts'
 import { eq, strictNotEq } from './utils/utils.ts'
 
@@ -71,5 +72,15 @@ describe('dropLast', () => {
 
     eq(t3(arr), [])
     eq(transduce(t3, flip(append), [], arr), [2, 4, 6, 8])
+  })
+
+  it('should work on curried versions', () => {
+    const a = 3
+    const b = 'transducer'
+    const expected = 'transdu'
+
+    eq(dropLast(a, b), expected)
+    eq(dropLast(a)(b), expected)
+    eq(dropLast(_, b)(a), expected)
   })
 })

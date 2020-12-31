@@ -2,16 +2,15 @@ import type { PH } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type DefaultTo_2<T1> = (<T2>(value: T2) => T1 | T2) &
-  ((value?: PH) => DefaultTo_2<T1>)
+type DefaultTo_2<T1> = <T2>(value: T2) => T1 | T2
 
-type DefaultTo_1<T2> = (<T1>(defaultV: T1) => T1 | T2) &
-  ((defaultV?: PH) => DefaultTo_1<T2>)
+type DefaultTo_1<T2> = <T1>(defaultV: T1) => T1 | T2
 
-type DefaultTo = (<T1, T2>(defaultV: T1, value: T2) => T1 | T2) &
-  (<T1>(defaultV: T1, value?: PH) => DefaultTo_2<T1>) &
-  (<T2>(defaultV: PH, value: T2) => DefaultTo_1<T2>) &
-  ((defaultV?: PH, value?: PH) => DefaultTo)
+// prettier-ignore
+type DefaultTo =
+  & (<T1>(defaultV: T1, value?: PH) => DefaultTo_2<T1>)
+  & (<T2>(defaultV: PH, value: T2) => DefaultTo_1<T2>)
+  & (<T1, T2>(defaultV: T1, value: T2) => T1 | T2)
 
 function _defaultTo<T1, T2>(defaultV: T1, value: T2) {
   return value == null || value !== value ? defaultV : value

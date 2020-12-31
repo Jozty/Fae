@@ -23,4 +23,12 @@ describe('contains', () => {
     eq(c({ b: NaN }), false)
     eq(c(200), false)
   })
+
+  it('should work on curried versions', () => {
+    const list = [1, 2, 3, 4, 8, 9, 10]
+
+    eq(contains(10, list), true)
+    eq(contains(10)(list), true)
+    eq(contains(_, list)(10), true)
+  })
 })

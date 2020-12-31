@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { crossProduct } from '../mod.ts'
+import { crossProduct, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('crossProduct', () => {
@@ -23,5 +23,20 @@ describe('crossProduct', () => {
       [null, 'b'],
       [null, 'c'],
     ])
+  })
+
+  it('should work on curried versions', () => {
+    const a = [1, 2]
+    const b = ['a', 'b']
+    const expected = [
+      [1, 'a'],
+      [1, 'b'],
+      [2, 'a'],
+      [2, 'b'],
+    ]
+
+    eq(crossProduct(a, b), expected)
+    eq(crossProduct(a)(b), expected)
+    eq(crossProduct(_, b)(a), expected)
   })
 })

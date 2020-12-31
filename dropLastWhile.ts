@@ -1,31 +1,26 @@
-import type { Predicate1, PH } from './utils/types.ts'
+import type {
+  Predicate1,
+  PH,
+  InferElementType,
+  InferType,
+} from './utils/types.ts'
 import { slice } from './slice.ts'
 import { dispatch } from './utils/dispatch.ts'
 import DropLastWhileTransformer from './utils/Transformers/dropLastWhile.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type DropLastWhile_2<L extends T[] | string, T> = ((list: L) => L) &
-  ((list?: PH) => DropLastWhile_2<L, T>)
+// prettier-ignore
+type DropLastWhile_2<T> = <L extends T[] | string>(list: L) => InferType<L>
 
-type DropLastWhile_1<L extends T[] | string, T> = ((
-  predicate: Predicate1<T>,
-) => L) &
-  ((predicate?: PH) => DropLastWhile_1<L, T>)
+// prettier-ignore
+type DropLastWhile_1<L extends any[] | string> = (predicate: Predicate1<InferElementType<L>>) => InferType<L>
 
-type DropLastWhile = (<L extends T[] | string, T>(
-  predicate: Predicate1<T>,
-  list: L,
-) => L) &
-  (<L extends T[] | string, T>(
-    predicate: Predicate1<T>,
-    list?: PH,
-  ) => DropLastWhile_2<L, T>) &
-  (<L extends T[] | string, T>(
-    predicate: PH,
-    list: L,
-  ) => DropLastWhile_1<L, T>) &
-  ((predicate?: PH, list?: PH) => DropLastWhile)
+// prettier-ignore
+type DropLastWhile =
+  & (<T>(predicate: Predicate1<T>, list?: PH) => DropLastWhile_2<T>)
+  & (<L extends any[] | string>(predicate: PH, list: L) => DropLastWhile_1<L>)
+  & (<L extends T[] | string, T>(predicate: Predicate1<T>, list: L) => InferType<L>)
 
 function _dropLastWhile<L extends T[] | string, T>(
   predicate: Predicate1<T>,
