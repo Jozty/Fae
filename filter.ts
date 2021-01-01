@@ -29,11 +29,11 @@ type Filter =
 
 function _objectFilter<T>(predicate: Predicate1<T>, functor: Obj<T>) {
   return reduce((acc: Obj<T>, key: string) => {
-    if (predicate(functor[key])) acc[key] = functor[key]
-    return acc
-    },
-    {},
-    Object.keys(functor),
+   if (predicate(functor[key])) acc[key] = functor[key]
+   return acc
+  },
+  {},
+  Object.keys(functor),
   )
 }
 
@@ -43,8 +43,8 @@ function _functorFilter<T>(
 ): T[] {
   return reduce(
     (acc: T[], value: T) => {
-      if (predicate(value)) acc.push(value)
-      return acc
+     if (predicate(value)) acc.push(value)
+     return acc
     },
     [],
     functor,

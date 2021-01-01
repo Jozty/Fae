@@ -13,8 +13,8 @@ type FindIndex =
 
 // TODO: (singla-shivam) Add transformer
 // TODO: (ch-shubham) Add Support for Predicates
-
-function _findIndex(arr: Array<any>, element: any) {
+//@ts-ignore
+function _findIndex(arr: Array<T>, element: T) {
   for (let i = 0; i <= arr.length; i++) {
     if (element === arr[i]) return i
   }
