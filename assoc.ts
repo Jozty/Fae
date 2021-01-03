@@ -27,7 +27,7 @@ type Assoc_1_2 =
   & ((prop: string | number, val: unknown) => ObjRec)
 
 // prettier-ignore
-type Assoc = 
+type Assoc =
   & ((prop: string | number, val?: PH, obj?: PH) => Assoc_2_3)
   & ((prop: PH, val: unknown, obj?: PH) => Assoc_1_3)
   & ((prop: PH, val: PH, obj: ObjRec) => Assoc_1_2)
