@@ -4,19 +4,14 @@ import { dispatch } from './utils/dispatch.ts'
 import FindTransformer from './utils/Transformers/find.ts'
 
 // @types
-type Find_2<T> = ((list: T[]) => T | undefined) &
-  ((list?: PH) => Find_2<T>)
+type Find_2<T> = (list: T[]) => T | undefined
 
-type Find_1<T> = ((predicate: Predicate1<T>) => T | undefined) &
-  ((predicate?: PH) => Find_1<T>)
+type Find_1<T> = (predicate: Predicate1<T>) => T | undefined
 
-type Find = (<T>(
-  predicate: Predicate1<T>,
-  list: T[],
-) => T | undefined) &
-  (<T>(predicate: Predicate1<T>, list?: PH) => Find_2<T>) &
-  (<T>(predicate: PH, list: T[]) => Find_1<T>) &
-  ((predicate?: PH, list?: PH) => Find)
+type Find =
+  & (<T>(predicate: Predicate1<T>, list?: PH) => Find_2<T>)
+  & (<T>(predicate: PH, list: T[]) => Find_1<T>)
+  & (<T>(predicate: Predicate1<T>, list: T[]) => T | undefined)
 
 function _find<T>(predicate: Predicate1<T>, list: T[]) {
   for (let i = 0; i < list.length; i++) {

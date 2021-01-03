@@ -4,19 +4,14 @@ import { dispatch } from './utils/dispatch.ts'
 import FindLastIdxTransformer from './utils/Transformers/findLastIndex.ts'
 
 // @types
-type FindLastIndex_2<T> = ((list: T[]) => number) &
-  ((list?: PH) => FindLastIndex_2<T>)
+type FindLastIndex_2<T> = ((list: T[]) => number)
 
-type FindLastIndex_1<T> = ((predicate: Predicate1<T>) => number) &
-  ((predicate?: PH) => FindLastIndex_1<T>)
+type FindLastIndex_1<T> = ((predicate: Predicate1<T>) => number)
 
-type FindLastIndex = (<T>(
-  predicate: Predicate1<T>,
-  list: T[],
-) => number) &
-  (<T>(predicate: Predicate1<T>, list?: PH) => FindLastIndex_2<T>) &
-  (<T>(predicate: PH, list: T[]) => FindLastIndex_1<T>) &
-  ((predicate?: PH, list?: PH) => FindLastIndex)
+type FindLastIndex =
+  & (<T>(predicate: Predicate1<T>, list?: PH) => FindLastIndex_2<T>)
+  & (<T>(predicate: PH, list: T[]) => FindLastIndex_1<T>)
+  & (<T>(predicate: Predicate1<T>,list: T[]) => number)
 
 function _findLastIndex<T>(predicate: Predicate1<T>, list: T[]) {
   for (let i = list.length - 1; i >= 0; i--) {
