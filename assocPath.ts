@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { Path, getPath } from './paths.ts'
 import { tail } from './tail.ts'
 import { assoc } from './assoc.ts'

@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { lens, Lens, LensGetter, LensSetter } from './lens.ts'
 import { prop as prp } from './prop.ts'
 import type { Prop } from './prop.ts'

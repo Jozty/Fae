@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { equals } from './equals.ts'
 import { takeLast } from './takeLast.ts'
 import curryN from './utils/curry_n.ts'

@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { Predicate1, PH } from './utils/types.ts'
 import { dispatch } from './utils/dispatch.ts'
 import AnyTransformer from './utils/Transformers/any.ts'

@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { dispatch } from './utils/dispatch.ts'
 import curryN from './utils/curry_n.ts'
 import type { InferType, PH } from './utils/types.ts'

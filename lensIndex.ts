@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { lens, Lens, LensSetter, LensGetter } from './lens.ts'
 import { nth } from './nth.ts'
 import { update } from './update.ts'

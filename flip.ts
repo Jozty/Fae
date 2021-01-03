@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { Func } from './utils/types.ts'
 import { getFunctionLength } from './utils/get.ts'
 import curryN from './utils/curry_n.ts'

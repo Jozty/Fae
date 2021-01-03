@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 // deno run -A --unstable declarations.ts
 
 import {

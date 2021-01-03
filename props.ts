@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { Obj, PH } from './utils/types.ts'
 import { prop } from './prop.ts'
 import type { Prop } from './prop.ts'

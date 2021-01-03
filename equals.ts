@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { Curry2, Obj } from './utils/types.ts'
 import { isFunction } from './utils/is.ts'

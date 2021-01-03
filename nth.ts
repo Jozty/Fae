@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { FunctorWithArLk, PH } from './utils/types.ts'
 import {
   isArrayLike,

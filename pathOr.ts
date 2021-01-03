@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { PH, ObjRec } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import { defaultTo } from './defaultTo.ts'

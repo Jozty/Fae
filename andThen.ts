@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { Func, PH } from './utils/types.ts'
 import { assertPromise } from './utils/assert.ts'

@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { Predicate2, PH } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import { slice } from './slice.ts'

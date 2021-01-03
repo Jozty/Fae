@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { isString } from './utils/is.ts'
 import curryN from './utils/curry_n.ts'
 

@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { Path, getPath } from './paths.ts'
 import { isInteger, isArray, isUndefinedOrNull } from './utils/is.ts'
 import { dissoc } from './dissoc.ts'

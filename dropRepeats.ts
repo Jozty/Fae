@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { dropRepeatsWith } from './dropRepeatsWith.ts'
 import { equals } from './equals.ts'
 import { dispatch } from './utils/dispatch.ts'

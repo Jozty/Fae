@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { reduce } from './reduce.ts'
 
 import type { PH, FunctorWithArLk } from './utils/types.ts'

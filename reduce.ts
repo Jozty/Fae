@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { isArrayLike, isIterable, isIterator } from './utils/is.ts'
 import { getIterator, getTransformer } from './utils/get.ts'
 import curryN from './utils/curry_n.ts'

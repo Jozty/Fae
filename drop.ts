@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { slice } from './slice.ts'
 import { dispatch } from './utils/dispatch.ts'
 import DropTransformer from './utils/Transformers/drop.ts'

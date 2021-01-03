@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { Obj, Predicate1, PH } from './utils/types.ts'
 import type { Prop } from './prop.ts'
 import curryN from './utils/curry_n.ts'

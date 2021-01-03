@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { Func } from './utils/types.ts'
 import type Transformer from './utils/Transformers/transformers.ts'
 import { reduce } from './reduce.ts'

@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { pipe } from './pipe.ts'
 import type { Func } from './utils/types.ts'
 import { reverse } from './reverse.ts'

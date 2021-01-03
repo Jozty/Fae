@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { adjust } from './adjust.ts'
 import { always } from './always.ts'
 import curryN from './utils/curry_n.ts'

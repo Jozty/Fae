@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { isFunction, isObject, isArray } from './utils/is.ts'
 import type {
   Func,

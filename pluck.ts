@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { PH, Obj, FuncArr1 } from './utils/types.ts'
 import { map } from './map.ts'

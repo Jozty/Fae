@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { InferType, PH } from './utils/types.ts'
 import { isString } from './utils/is.ts'
