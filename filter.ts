@@ -18,22 +18,33 @@ import FilterTransformer from './utils/Transformers/filter.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type Filter_2<T> = (functor: FunctorWithArLk<T> | Obj<T>) => T[] | Partial<Obj<T>>
+type Filter_2<T> = (
+  functor: FunctorWithArLk<T> | Obj<T>,
+) => T[] | Partial<Obj<T>>
 
 type Filter_1<T> = (predicate: Predicate1<T>) => T[] | Partial<Obj<T>>
 
-type Filter =
-  & (<T>(predicate: Predicate1<T>, functor?: PH) => Filter_2<T>)
-  & (<T>(predicate: PH, functor: FunctorWithArLk<T> | Obj<T>) => Filter_1<T>)
-  & (<T>(predicate: Predicate1<T>, functor: FunctorWithArLk<T> | Obj<T>) => T[] | Partial<Obj<T>>)
+type Filter = (<T>(
+  predicate: Predicate1<T>,
+  functor?: PH,
+) => Filter_2<T>) &
+  (<T>(
+    predicate: PH,
+    functor: FunctorWithArLk<T> | Obj<T>,
+  ) => Filter_1<T>) &
+  (<T>(
+    predicate: Predicate1<T>,
+    functor: FunctorWithArLk<T> | Obj<T>,
+  ) => T[] | Partial<Obj<T>>)
 
 function _objectFilter<T>(predicate: Predicate1<T>, functor: Obj<T>) {
-  return reduce((acc: Obj<T>, key: string) => {
-   if (predicate(functor[key])) acc[key] = functor[key]
-   return acc
-  },
-  {},
-  Object.keys(functor),
+  return reduce(
+    (acc: Obj<T>, key: string) => {
+      if (predicate(functor[key])) acc[key] = functor[key]
+      return acc
+    },
+    {},
+    Object.keys(functor),
   )
 }
 
@@ -43,8 +54,8 @@ function _functorFilter<T>(
 ): T[] {
   return reduce(
     (acc: T[], value: T) => {
-     if (predicate(value)) acc.push(value)
-     return acc
+      if (predicate(value)) acc.push(value)
+      return acc
     },
     [],
     functor,
@@ -54,13 +65,14 @@ function _functorFilter<T>(
 function _filter<T = any>(
   predicate: Predicate1<T>,
   functor: FunctorWithArLk<T> | Obj<T>,
-  ): T[] | Partial<Obj<T>> {
+): T[] | Partial<Obj<T>> {
   if (isArray(functor)) return functor.filter(predicate)
   if (
     isArrayLike(functor) ||
     isIterable(functor) ||
     isIterator(functor)
-  ) return _functorFilter(predicate, functor)
+  )
+    return _functorFilter(predicate, functor)
   if (isObject(functor)) return _objectFilter(predicate, functor)
   throw throwFunctorError()
 }

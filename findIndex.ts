@@ -6,15 +6,13 @@ type FindIndex_2<T> = (element: T) => number
 
 type FindIndex_1<T> = (arr: T[]) => number
 
-type FindIndex =
-  & (<T>(arr: T[], element?: PH) => FindIndex_2<T>)
-  & (<T>(arr: PH, element: T) => FindIndex_1<T>)
-  & (<T>(arr: T[], element: T) => number)
+type FindIndex = (<T>(arr: T[], element?: PH) => FindIndex_2<T>) &
+  (<T>(arr: PH, element: T) => FindIndex_1<T>) &
+  (<T>(arr: T[], element: T) => number)
 
 // TODO: (singla-shivam) Add transformer
 // TODO: (ch-shubham) Add Support for Predicates
-//@ts-ignore
-function _findIndex(arr: Array<T>, element: T) {
+function _findIndex<T>(arr: Array<T>, element: T) {
   for (let i = 0; i <= arr.length; i++) {
     if (element === arr[i]) return i
   }
