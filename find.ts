@@ -8,6 +8,7 @@ type Find_2<T> = (list: T[]) => T | undefined
 
 type Find_1<T> = (predicate: Predicate1<T>) => T | undefined
 
+// prettier-ignore
 type Find =
   & (<T>(predicate: Predicate1<T>, list?: PH) => Find_2<T>)
   & (<T>(predicate: PH, list: T[]) => Find_1<T>)

@@ -60,7 +60,7 @@ describe('equals', () => {
   })
 
   it('should return the curried version', () => {
-    eq(equals(_ , '')(''), true)
+    eq(equals(_, '')(''), true)
     eq(equals('', _)('x'), false)
     eq(equals('x')(''), false)
   })

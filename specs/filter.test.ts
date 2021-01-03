@@ -52,7 +52,10 @@ describe('filter', () => {
   })
 
   it('should return an empty array if no element matches', () => {
-    eq(filter((x: number) => x > 100, [1, 9, 99]),[])
+    eq(
+      filter((x: number) => x > 100, [1, 9, 99]),
+      [],
+    )
   })
 
   it('returns an empty array if asked to filter an empty array', () => {
@@ -67,7 +70,7 @@ describe('filter', () => {
     eq(f({ x: 1, y: 0, z: 0 }), { x: 1 })
     eq(f({ x: 1, y: 2, z: 0 }), { x: 1, y: 2 })
     eq(f({ x: 1, y: 2, z: 3 }), { x: 1, y: 2, z: 3 })
-    eq(f({ x: -1, y: 2, z: -3 }), {y: 2})
+    eq(f({ x: -1, y: 2, z: -3 }), { y: 2 })
   })
 
   it('should work on iterables and iterator', () => {
@@ -78,12 +81,17 @@ describe('filter', () => {
 
   it('should work with transformers', () => {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    const transform1 = pipe(map((a: number) => a + 1), filter(even)
+    const transform1 = pipe(
+      map((a: number) => a + 1),
+      filter(even),
     )
     eq(transform1(arr), [2, 4, 6, 8, 10])
     eq(transduce(transform1, flip(append), [], arr), [3, 5, 7, 9, 11])
 
-    const transform2 = compose(map((a: number) => a + 1), filter(even))
+    const transform2 = compose(
+      map((a: number) => a + 1),
+      filter(even),
+    )
     eq(transform2(arr), [3, 5, 7, 9, 11])
     eq(transduce(transform2, flip(append), [], arr), [2, 4, 6, 8, 10])
 
@@ -94,14 +102,26 @@ describe('filter', () => {
     )
     eq(transform3(arr), [10, 8, 6, 4, 2])
 
-    const transform4 = pipe(map((a:number) => a + 2), filter(even))
+    const transform4 = pipe(
+      map((a: number) => a + 2),
+      filter(even),
+    )
     eq(transform4(arr), [4, 6, 8, 10, 12])
-    eq(transduce(transform4, flip(append), [], arr), [4, 6, 8, 10, 12])
+    eq(transduce(transform4, flip(append), [], arr), [
+      4,
+      6,
+      8,
+      10,
+      12,
+    ])
   })
 
   it('should return the curried versions too', () => {
-    eq(filter((x: number) => x > 100, _)([100, 9, 99]),[])
-    eq(filter(_, [100, 9, 99])((x: number) => x > 100),[])
-    eq(filter((x: number) => x > 100)([100, 9, 99]),[])
+    eq(filter((x: number) => x > 100, _)([100, 9, 99]), [])
+    eq(
+      filter(_, [100, 9, 99])((x: number) => x > 100),
+      [],
+    )
+    eq(filter((x: number) => x > 100)([100, 9, 99]), [])
   })
 })

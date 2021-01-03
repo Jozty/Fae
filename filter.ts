@@ -18,10 +18,12 @@ import FilterTransformer from './utils/Transformers/filter.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type Filter_2<T> = (functor: FunctorWithArLk<T> | Obj<T>) => T[] | Partial<Obj<T>>
-
 type Filter_1<T> = (predicate: Predicate1<T>) => T[] | Partial<Obj<T>>
 
+// prettier-ignore
+type Filter_2<T> = (functor: FunctorWithArLk<T> | Obj<T>) => T[] | Partial<Obj<T>>
+
+// prettier-ignore
 type Filter =
   & (<T>(predicate: Predicate1<T>, functor?: PH) => Filter_2<T>)
   & (<T>(predicate: PH, functor: FunctorWithArLk<T> | Obj<T>) => Filter_1<T>)

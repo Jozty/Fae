@@ -5,7 +5,24 @@ import { eq } from './utils/utils.ts'
 describe('findLastIndex', () => {
   var obj1 = { x: 100 }
   var obj2 = { x: 200 }
-  var a = [11, 10, 9, 'cow', obj1, 8, 7, 100, 200, 300, obj2, 4, 3, 2, 1, 0]
+  var a = [
+    11,
+    10,
+    9,
+    'cow',
+    obj1,
+    8,
+    7,
+    100,
+    200,
+    300,
+    obj2,
+    4,
+    3,
+    2,
+    1,
+    0,
+  ]
   const even = (x: any) => typeof x === 'number' && x % 2 === 0
   const gt100 = (x: any) => typeof x === 'number' && x > 100
   const isStr = (x: any) => typeof x === 'string'
