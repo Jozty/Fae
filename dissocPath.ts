@@ -15,7 +15,7 @@ type DissocPath_2 = (obj: ObjRec) => ObjRec
 type DissocPath_1 = (path: Path) => ObjRec
 
 // prettier-ignore
-type DissocPathPath =
+type DissocPath =
   & ((path: Path, obj?: PH) => DissocPath_2)
   & ((path: PH, obj: ObjRec) => DissocPath_1)
   & ((path: Path, obj: ObjRec) => ObjRec)
@@ -53,4 +53,4 @@ function _dissocPath(path: Path, obj: ObjRec): ObjRec {
  *      Fae.dissocPath(['a', 'b', 'c'], {a: {b: {c: 42}}}); //=> {a: {b: {}}}
  *
  */
-export const dissocPath: DissocPathPath = curryN(2, _dissocPath)
+export const dissocPath: DissocPath = curryN(2, _dissocPath)
