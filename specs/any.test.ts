@@ -11,7 +11,7 @@ describe('any', () => {
     eq(any(odd, [2, 4, 6, 8, 10, 11, 12]), true)
   })
 
-  it('should return false if any elements fails to satisfy the predicate', () => {
+  it('should return false if all elements fails to satisfy the predicate', () => {
     eq(any(odd, [2, 4, 6, 8, 10, 12]), false)
   })
 
@@ -19,7 +19,7 @@ describe('any', () => {
   //   eq(intoArray(any(odd), [2, 4, 6, 8, 10, 11, 12]), [true])
   // })
 
-  // it('returns false if any elements fails to satisfy the predicate', () => {
+  // it('returns false if all elements fails to satisfy the predicate', () => {
   //   eq(intoArray(any(odd), [2, 4, 6, 8, 10, 12]), [false])
   // })
 
