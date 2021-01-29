@@ -1,0 +1,89 @@
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+name: Upload Release Asset
+
+jobs:
+  build:
+    name: Upload Release Asset
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set tag name
+        run: echo "TAG_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Use deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: v1.x
+
+      - name: Use node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install dev npm packages
+        run: npm i -g dts-bundle-generator typescript
+
+      - name: Generate declaration
+        run: deno run --allow-write --allow-read --allow-run --unstable declarations.ts ${{ env.TAG_NAME }}
+
+      - name: Compile files
+        run: |
+          cd temp/
+          tsc --init
+          tsc --lib esnext --downlevelIteration --outDir compiled
+          cd compiled
+          zip -r ${{ env.TAG_NAME }}.zip .
+          ls
+          pwd
+
+      - name: Bundle project
+        run: deno bundle mod.ts bundle.js
+
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Bundle
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./bundle.js
+          asset_name: bundle.js
+          asset_content_type: text/javascript
+
+      - name: Upload declaration file
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./temp/${{ env.TAG_NAME }}.d.ts
+          asset_name: ${{ env.TAG_NAME }}.d.ts
+          asset_content_type: text/typescript
+
+      - name: Upload zip js bundle
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./temp/compiled/${{ env.TAG_NAME }}.zip
+          asset_name: ${{ env.TAG_NAME }}.zip
+          asset_content_type: text/typescript

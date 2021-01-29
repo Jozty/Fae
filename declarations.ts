@@ -4,7 +4,6 @@
 
 import {
   emptyDirSync,
-  copySync,
 } from 'https://deno.land/std/fs/mod.ts'
 
 const start = Date.now()
@@ -58,33 +57,15 @@ async function generateDeclarations() {
   }).status()
 }
 
-async function getCurrentTags() {
-  const process = Deno.run({
-    cmd: ['git', 'tag', '--points-at', 'HEAD'],
-    stdout: 'piped',
-  })
-
-  await process.status()
-
-  const rawOutput = await process.output()
-
-  const output = new TextDecoder().decode(rawOutput)
-  return output.split('\n').filter((a) => !!a)
-}
-
 async function saveBundle() {
-  const tags = await getCurrentTags()
+  const tag = Deno.args[0]
 
-  tags.forEach((tag) => {
-    Deno.mkdirSync('./declarations/' + tag, { recursive: true })
-    const path = './declarations/' + tag + '/mod.d.ts'
-    copySync('./temp/mod.d.ts', path, { overwrite: true })
+  const path = './temp/' + tag + '.d.ts'
 
-    let text = Deno.readTextFileSync(path)
-    text =
-      "// This file auto-generated. Don't edit this file\n\n" + text
-    Deno.writeTextFileSync(path, text)
-  })
+  let text = Deno.readTextFileSync('./temp/mod.d.ts')
+  text =
+    "// This file auto-generated. Don't edit this file\n\n" + text
+  Deno.writeTextFileSync(path, text)
 }
 
 printInfo('copying original files')
@@ -101,9 +82,9 @@ printInfo('saving declarations')
 await saveBundle()
 printDone('saved declarations')
 
-printInfo('clean up')
-emptyDirSync('./temp')
-printDone('clean up')
+// printInfo('clean up')
+// emptyDirSync('./temp')
+// printDone('clean up')
 
 // printInfo('refactoring .d.ts files')
 // refactorDeclarationsFiles('./temp')
