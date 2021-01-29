@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import { empty } from './empty.ts'
 import { equals } from './equals.ts'

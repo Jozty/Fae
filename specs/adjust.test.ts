@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { adjust, add } from '../mod.ts'
+import { adjust, add, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('adjust', () => {
@@ -29,5 +29,42 @@ describe('adjust', () => {
     }
     // @ts-ignore
     eq(adjust(2, add(1), args(0, 1, 2, 3)), [0, 1, 3, 3])
+  })
+
+  it('should work with curried calls too', () => {
+    const a = 2
+    const b = add(1)
+    const c = [0, 1, 2, 3]
+    const expected = [0, 1, 3, 3]
+
+    const a_2_3 = adjust(a)
+
+    eq(a_2_3(b)(c), expected)
+    eq(a_2_3(b, c), expected)
+    eq(a_2_3(_, c)(b), expected)
+    eq(a_2_3(b, _)(c), expected)
+
+    const a_1_3 = adjust(_, b)
+
+    eq(a_1_3(a)(c), expected)
+    eq(a_1_3(a, c), expected)
+    eq(a_1_3(_, c)(a), expected)
+    eq(a_1_3(a, _)(c), expected)
+
+    const a_1_2 = adjust(_, _, c)
+
+    eq(a_1_2(a)(b), expected)
+    eq(a_1_2(a, b), expected)
+    eq(a_1_2(_, b)(a), expected)
+    eq(a_1_2(a, _)(b), expected)
+
+    const a_3 = adjust(a, b)
+    eq(a_3(c), expected)
+
+    const a_2 = adjust(a, _, c)
+    eq(a_2(b), expected)
+
+    const a_1 = adjust(_, b, c)
+    eq(a_1(a), expected)
   })
 })

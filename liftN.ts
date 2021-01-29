@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { PH, Func } from './utils/types.ts'
 import { reduce } from './reduce.ts'
@@ -5,16 +7,16 @@ import { ap } from './ap.ts'
 import { map } from './map.ts'
 import { tail } from './tail.ts'
 
-// TODO: more work on types
 // @types
-type LiftN_2 = ((fn: Func) => Func) & ((fn?: PH) => LiftN_2)
+type LiftN_2 = (fn: Func) => Func
 
-type LiftN_1 = ((arity: number) => Func) & ((arity?: PH) => LiftN_1)
+type LiftN_1 = (arity: number) => Func
 
-type LiftN = ((arity: number, fn: Func) => Func) &
-  ((arity: number, fn?: PH) => LiftN_2) &
-  ((arity: PH, fn: Func) => LiftN_1) &
-  ((arity?: PH, fn?: PH) => LiftN)
+// prettier-ignore
+type LiftN =
+  & ((arity: number, fn?: PH) => LiftN_2)
+  & ((arity: PH, fn: Func) => LiftN_1)
+  & ((arity: number, fn: Func) => Func)
 
 function _liftN(arity: number, fn: Func): Func {
   const lifted = curryN(arity, fn)
@@ -34,4 +36,4 @@ function _liftN(arity: number, fn: Func): Func {
  *      const add2 = Fae.liftN(3, (...args: number[]) => R.sum(args))
  *      add2([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
  */
-export const liftN: Func = curryN(2, _liftN)
+export const liftN: LiftN = curryN(2, _liftN)

@@ -5,11 +5,9 @@ import {
   append,
   flip,
   transduce,
-  map,
-  filter,
-  range,
+  _,
 } from '../mod.ts'
-import { eq, strictNotEq } from './utils/utils.ts'
+import { eq } from './utils/utils.ts'
 
 describe('dropRepeatsWith', () => {
   const obj = [
@@ -62,5 +60,14 @@ describe('dropRepeatsWith', () => {
   it('should act as a transducer', () => {
     const t1 = pipe(dropRepeatsWith(eqI))
     eq(transduce(t1, flip(append), [], obj2), obj)
+  })
+
+  it('should work with curried versions too', () => {
+    const func = (a: number, b: number) => b - 1 === a
+    const list = [1, 2, 3, 4, 6, 7, 8]
+
+    eq(dropRepeatsWith(func, list), [1, 6])
+    eq(dropRepeatsWith(func)(list), [1, 6])
+    eq(dropRepeatsWith(_, list)(func), [1, 6])
   })
 })

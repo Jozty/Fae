@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { drop } from './drop.ts'
 import curryN from './utils/curry_n.ts'
 import type { PH, InferType } from './utils/types.ts'

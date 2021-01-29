@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { Lens } from './lens.ts'
 import type { PH } from './utils/types.ts'
 import { over } from './over.ts'

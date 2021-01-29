@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { reject, curry } from '../mod.ts'
+import { reject, curry, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 type O = {
@@ -10,8 +10,8 @@ type O = {
 
 describe('reject', () => {
   const equals = curry(2, (x: number, y: number) => x === y)
-  let even = (x: number) => (x & 1) === 0
-  let odd = (x: number) => (x & 1) === 1
+  const even = (x: number) => (x & 1) === 0
+  const odd = (x: number) => (x & 1) === 1
 
   it('should reduce an array to those not matching a filter', () => {
     eq(reject(even, [1, 2, 3, 4, 5]), [1, 3, 5])
@@ -36,5 +36,16 @@ describe('reject', () => {
       y: 2,
       z: 3,
     })
+  })
+
+  it('should work on curried versions too', () => {
+    const a = even
+    const b = [1, 2, 3, 4, 5]
+    const expected = [1, 3, 5]
+
+    eq(reject(a, b), expected)
+    eq(reject(a)(b), expected)
+    eq(reject(a, _)(b), expected)
+    eq(reject(_, b)(a), expected)
   })
 })

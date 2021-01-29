@@ -1,4 +1,4 @@
-import { describe, it, expect } from './_describe.ts'
+import { describe, it } from './_describe.ts'
 import { map, add, multiply, subtract, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 import type { Curry2 } from '../utils/types.ts'
@@ -57,6 +57,7 @@ describe('map', () => {
     let a = 11
     let b = 3
     let result = add3(function1(a, b))
+    let x = map(add3)
     const m1 = map(add3)(function1) as typeof function1
     const m2 = map(add3, function1) as Curry2<number>
     eq(m1(a, b), result)
@@ -86,5 +87,18 @@ describe('map', () => {
     const mdouble = map(times2 as (a: number) => number)
     const mdec = map(dec as (a: number) => number)
     eq(mdec(mdouble([10, 20, 30])), [19, 39, 59])
+  })
+
+  it('should work on curried versions too', () => {
+    const a = add1
+    const b = [1, 2, 3, 4, 5, 6, 7, 8]
+    const expected = [2, 3, 4, 5, 6, 7, 8, 9]
+
+    let x = map(_, b)(a)
+
+    eq(map(a, b), expected)
+    eq(map(a)(b), expected)
+    eq(map(a, _)(b), expected)
+    eq(map(_, b)(a), expected)
   })
 })

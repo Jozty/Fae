@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import {
   isArray,
@@ -26,10 +28,11 @@ function _empty(x: any) {
 
   if (isObject(x)) return {}
 
-  if (isArguments(x))
+  if (isArguments(x)) {
     return (function () {
       return arguments
-  })()
+    })()
+  }
 }
 
 /**

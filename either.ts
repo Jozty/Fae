@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { Func, PH } from './utils/types.ts'
 import { isFunction } from './utils/is.ts'
@@ -9,6 +11,7 @@ type Either_2<T> = (g: T) => T
 
 type Either_1<T> = (f: T) => T
 
+// prettier-ignore
 type Either =
   & (<T>(f: T, g?: PH) => Either_2<T>)
   & (<T>(f: PH, g: T) => Either_1<T>)

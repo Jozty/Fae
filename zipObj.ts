@@ -1,17 +1,18 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { Obj, PH } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type ZipObj_2 = (<T>(values: T[]) => Obj<T>) &
-  ((values?: PH) => ZipObj_2)
+type ZipObj_2 = <T>(values: T[]) => Obj<T>
 
-type ZipObj_1<T> = ((keys: string[]) => Obj<T>) &
-  ((keys?: PH) => ZipObj_1<T>)
+type ZipObj_1<T> = (keys: string[]) => Obj<T>
 
-type ZipObj = (<T>(keys: string[], values: T[]) => Obj<T>) &
-  ((keys: string[], values?: PH) => ZipObj_2) &
-  (<T>(keys: PH, values: T[]) => ZipObj_1<T>) &
-  ((keys?: PH, values?: PH) => ZipObj)
+// prettier-ignore
+type ZipObj =
+  & ((keys: string[], values?: PH) => ZipObj_2)
+  & (<T>(keys: PH, values: T[]) => ZipObj_1<T>)
+  & (<T>(keys: string[], values: T[]) => Obj<T>)
 
 function _zipObj<T>(keys: string[], values: T[]): Obj<T> {
   const result: Obj<T> = {}

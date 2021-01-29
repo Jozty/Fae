@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { Func, PH } from './utils/types.ts'
 import { isFunction } from './utils/is.ts'
@@ -5,14 +7,15 @@ import { lift } from './lift.ts'
 import { and } from './and.ts'
 
 // @types
-type Both_2<T> = ((g: T) => T) & ((g?: PH) => Both_2<T>)
+type Both_2<T> = (g: T) => T
 
-type Both_1<T> = ((f: T) => T) & ((f?: PH) => Both_1<T>)
+type Both_1<T> = (f: T) => T
 
-type Both = (<T>(f: T, g: T) => T) &
-  (<T>(f: T, g?: PH) => Both_2<T>) &
-  (<T>(f: PH, g: T) => Both_1<T>) &
-  ((f?: PH, g?: PH) => Both)
+// prettier-ignore
+type Both =
+  & (<T>(f: T, g?: PH) => Both_2<T>)
+  & (<T>(f: PH, g: T) => Both_1<T>)
+  & (<T>(f: T, g: T) => T)
 
 function _both<T extends Func>(f: T, g: T): T {
   if (isFunction(f)) {
@@ -24,6 +27,7 @@ function _both<T extends Func>(f: T, g: T): T {
     return lift(and)(f, g)
   }
 }
+
 /**
  * A function which calls the two provided functions and returns the `&&`
  * of the results.

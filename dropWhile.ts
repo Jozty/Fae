@@ -1,31 +1,28 @@
-import type { Predicate1, PH } from './utils/types.ts'
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
+import type {
+  Predicate1,
+  PH,
+  InferType,
+  InferElementType,
+} from './utils/types.ts'
 import { slice } from './slice.ts'
 import { dispatch } from './utils/dispatch.ts'
 import curryN from './utils/curry_n.ts'
 import DropWhileTransformer from './utils/Transformers/dropWhile.ts'
 
 // @types
-type DropWhile_2<L extends T[] | string, T> = ((functor: L) => L) &
-  ((functor?: PH) => DropWhile_2<L, T>)
+// prettier-ignore
+type DropWhile_2<T> = <L extends T[] | string>(list: L) => InferType<L>
 
-type DropWhile_1<L extends T[] | string, T> = ((
-  predicate: Predicate1<T>,
-) => L) &
-  ((predicate?: PH) => DropWhile_1<L, T>)
+// prettier-ignore
+type DropWhile_1<L extends any[] | string> = (predicate: Predicate1<InferElementType<L>>) => InferType<L>
 
-type DropWhile = (<L extends T[] | string, T>(
-  predicate: Predicate1<T>,
-  functor: L,
-) => L) &
-  (<L extends T[] | string, T>(
-    predicate: Predicate1<T>,
-    functor?: PH,
-  ) => DropWhile_2<L, T>) &
-  (<L extends T[] | string, T>(
-    predicate: PH,
-    functor: L,
-  ) => DropWhile_1<L, T>) &
-  ((predicate?: PH, functor?: PH) => DropWhile)
+// prettier-ignore
+type DropWhile =
+  & (<T>(predicate: Predicate1<T>, list?: PH) => DropWhile_2<T>)
+  & (<L extends any[] | string>(predicate: PH, list: L) => DropWhile_1<L>)
+  & (<L extends T[] | string, T>(predicate: Predicate1<T>, list: L) => InferType<L>)
 
 function _dropWhile<L extends T[] | string, T>(
   predicate: Predicate1<T>,

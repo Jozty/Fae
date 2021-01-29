@@ -8,7 +8,6 @@ describe('mean', () => {
     eq(mean([7, 6]), 6.5)
     eq(mean([2, 7, 9]), 6)
     eq(mean([2, 7, 9, 10]), 7)
-
   })
 
   it('returns Infinity if Infinity is in list', () => {

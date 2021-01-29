@@ -1,11 +1,5 @@
 import { describe, it } from './_describe.ts'
-import {
-  tap,
-  identity,
-  map,
-  pipe,
-  curry,
-} from '../mod.ts'
+import { tap, identity, map, pipe, curry } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('tap', () => {

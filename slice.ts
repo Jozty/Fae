@@ -1,79 +1,49 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
-import type { PH } from './utils/types.ts'
+import type { InferType, PH } from './utils/types.ts'
 import { isString } from './utils/is.ts'
 
 // @types
-type Slice_1<L extends ArrayLike<T> | string, T = any> = ((
-  fromIndex: number,
-) => L) &
-  ((fromIndex?: PH) => Slice_1<L, T>)
+// prettier-ignore
+type Slice_1<L extends ArrayLike<any> | string> = (fromIndex: number) => InferType<L>
 
-type Slice_2<L extends ArrayLike<T> | string, T = any> = ((
-  toIndex: number,
-) => L) &
-  ((toIndex?: PH) => Slice_2<L, T>)
+// prettier-ignore
+type Slice_2<L extends ArrayLike<any> | string> = (toIndex: number) => InferType<L>
 
-type Slice_3 = (<L extends ArrayLike<T> | string, T = any>(
-  list: L,
-) => L) &
-  ((list?: PH) => Slice_3)
+// prettier-ignore
+type Slice_3 = <L extends ArrayLike<any> | string>(list: L) => InferType<L>
 
-type Slice_2_3 = (<L extends ArrayLike<T> | string, T = any>(
-  toIndex: number,
-  list: L,
-) => L) &
-  ((toIndex: number, list?: PH) => Slice_3) &
-  (<L extends ArrayLike<T> | string, T = any>(
-    toIndex: PH,
-    list: L,
-  ) => Slice_2<L, T>) &
-  ((toIndex?: PH, list?: PH) => Slice_2_3)
+// prettier-ignore
+type Slice_2_3 =
+  & ((toIndex: number, list?: PH) => Slice_3)
+  & (<L extends ArrayLike<any> | string>(toIndex: PH, list: L) => Slice_2<L>)
+  & (<L extends ArrayLike<any> | string>(toIndex: number, list: L) => InferType<L>)
 
-type Slice_1_3 = (<L extends ArrayLike<T> | string, T = any>(
-  fromIndex: number,
-  list: L,
-) => L) &
-  ((fromIndex: number, list?: PH) => Slice_3) &
-  (<L extends ArrayLike<T> | string, T = any>(
-    fromIndex: PH,
-    list: L,
-  ) => Slice_1<L, T>) &
-  ((fromIndex?: PH, list?: PH) => Slice_1_3)
+// prettier-ignore
+type Slice_1_3 =
+  & ((fromIndex: number, list?: PH) => Slice_3)
+  & (<L extends ArrayLike<any> | string>(fromIndex: PH, list: L) => Slice_1<L>)
+  & (<L extends ArrayLike<any> | string>(fromIndex: number, list: L) => InferType<L>)
 
-type Slice_1_2<L extends ArrayLike<T> | string, T = any> = ((
-  fromIndex: number,
-  toIndex: number,
-) => L) &
-  ((fromIndex: number, toIndex?: PH) => Slice_2<L, T>) &
-  ((fromIndex: PH, toIndex: number) => Slice_1<L, T>) &
-  ((fromIndex?: PH, toIndex?: PH) => Slice_1_2<L, T>)
+// prettier-ignore
+type Slice_1_2<L extends ArrayLike<any> | string> =
+  & ((fromIndex: number, toIndex?: PH) => Slice_2<L>)
+  & ((fromIndex: PH, toIndex: number) => Slice_1<L>)
+  & ((fromIndex: number, toIndex: number) => InferType<L>)
 
-type Slice = (<L extends ArrayLike<T> | string, T = any>(
-  fromIndex: number,
-  toIndex: number,
-  list: L,
-) => L) &
-  ((fromIndex?: PH, toIndex?: PH, list?: PH) => Slice) &
-  ((fromIndex: number, toIndex?: PH, list?: PH) => Slice_2_3) &
-  ((fromIndex: PH, toIndex: number, list?: PH) => Slice_1_3) &
-  (<L extends ArrayLike<T> | string, T = any>(
-    fromIndex: PH,
-    toIndex: PH,
-    list: L,
-  ) => Slice_1_2<L, T>) &
-  ((fromIndex: number, toIndex: number, list?: PH) => Slice_3) &
-  (<L extends ArrayLike<T> | string, T = any>(
-    fromIndex: number,
-    toIndex: PH,
-    list: L,
-  ) => Slice_2<L, T>) &
-  (<L extends ArrayLike<T> | string, T = any>(
-    fromIndex: PH,
-    toIndex: number,
-    list: L,
-  ) => Slice_1<L, T>)
+// prettier-ignore
+type Slice =
+  & ((fromIndex?: PH, toIndex?: PH, list?: PH) => Slice)
+  & ((fromIndex: number, toIndex?: PH, list?: PH) => Slice_2_3)
+  & ((fromIndex: PH, toIndex: number, list?: PH) => Slice_1_3)
+  & (<L extends ArrayLike<any> | string>(fromIndex: PH, toIndex: PH, list: L) => Slice_1_2<L>)
+  & ((fromIndex: number, toIndex: number, list?: PH) => Slice_3)
+  & (<L extends ArrayLike<any> | string>(fromIndex: number, toIndex: PH, list: L) => Slice_2<L>)
+  & (<L extends ArrayLike<any> | string>(fromIndex: PH, toIndex: number, list: L) => Slice_1<L>)
+  & (<L extends ArrayLike<any> | string>(fromIndex: number, toIndex: number, list: L) => InferType<L>)
 
-function _slice<L extends ArrayLike<T> | string, T = any>(
+function _slice<L extends ArrayLike<any> | string>(
   fromIndex: number,
   toIndex: number,
   list: L,

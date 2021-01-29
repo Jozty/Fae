@@ -5,6 +5,7 @@ import {
   append,
   flip,
   transduce,
+  _,
 } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 import type { Predicate1 } from '../utils/types.ts'
@@ -57,5 +58,15 @@ describe('dropLastWhile', () => {
       9,
     ])
     eq(transduce(t1, flip(append), [], [1, 3, 5]), [])
+  })
+
+  it('should work on curried versions', () => {
+    const a = (x: string) => x !== 'd'
+    const b = 'transducer'
+    const expected = 'transd'
+
+    eq(dropLastWhile(a, b), expected)
+    eq(dropLastWhile(a)(b), expected)
+    eq(dropLastWhile(_, b)(a), expected)
   })
 })

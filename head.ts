@@ -1,8 +1,11 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { nth } from './nth.ts'
 import curryN from './utils/curry_n.ts'
 import type { InferElementType } from './utils/types.ts'
 
 // @types
+// prettier-ignore
 type Head = <L extends any[] | string>(functor: L) => InferElementType<L>
 
 /**

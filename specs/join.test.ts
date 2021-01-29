@@ -97,7 +97,7 @@ describe('join', () => {
     const join_1 = join(_, x)
 
     eq(join_1(99), '199true9912399THE_OBJECT_WITH_TO_STRING')
-    
+
     const join_2 = join(99)
 
     eq(join_2(x), '199true9912399THE_OBJECT_WITH_TO_STRING')

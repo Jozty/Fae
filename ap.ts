@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { Curry2, FuncArr1, Func } from './utils/types.ts'
 import { concat } from './concat.ts'
@@ -33,7 +35,7 @@ function _ap<T, R>(applyF: ApplyF<T, R>, applyX: T[] | Func) {
     // @ts-ignore
     (acc: T[], f: Func) => concat(acc, map(f, applyX) as T[]),
     [],
-    applyF,
+    applyF as any[],
   )
 }
 

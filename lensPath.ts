@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { lens, Lens, LensGetter, LensSetter } from './lens.ts'
 import { assocPath } from './assocPath.ts'
 import curryN from './utils/curry_n.ts'

@@ -1,17 +1,18 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type CrossProduct_2<T1> = (<T2>(b: T2[]) => [T1, T2][]) &
-  ((b?: PH) => CrossProduct_2<T1>)
+type CrossProduct_2<T1> = <T2>(b: T2[]) => [T1, T2][]
 
-type CrossProduct_1<T2> = (<T1>(a: T1[]) => [T1, T2][]) &
-  ((a?: PH) => CrossProduct_1<T2>)
+type CrossProduct_1<T2> = <T1>(a: T1[]) => [T1, T2][]
 
-type CrossProduct = (<T1, T2>(a: T1[], b: T2[]) => [T1, T2][]) &
-  (<T1>(a: T1, b?: PH) => CrossProduct_2<T1>) &
-  (<T2>(a: PH, b: T2[]) => CrossProduct_1<T2>) &
-  ((a?: PH, b?: PH) => CrossProduct)
+// prettier-ignore
+type CrossProduct =
+  & (<T1>(a: T1[], b?: PH) => CrossProduct_2<T1>)
+  & (<T2>(a: PH, b: T2[]) => CrossProduct_1<T2>)
+  & (<T1, T2>(a: T1[], b: T2[]) => [T1, T2][])
 
 function _crossProduct<T1, T2>(a: T1[], b: T2[]): [T1, T2][] {
   let result: [T1, T2][] = []

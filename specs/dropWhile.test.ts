@@ -8,6 +8,7 @@ import {
   map,
   filter,
   range,
+  _,
 } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
@@ -88,5 +89,15 @@ describe('dropWhile', () => {
 
     eq(t3(arr), [21])
     eq(transduce(t3, flip(append), [], arr), [20])
+  })
+
+  it('should work on curried versions', () => {
+    const a = (x: string) => x !== 'd'
+    const b = 'transducer'
+    const expected = 'ducer'
+
+    eq(dropWhile(a, b), expected)
+    eq(dropWhile(a)(b), expected)
+    eq(dropWhile(_, b)(a), expected)
   })
 })

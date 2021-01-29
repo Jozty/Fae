@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type {
   FunctorWithArLk,
   PH,
@@ -18,26 +20,16 @@ import FilterTransformer from './utils/Transformers/filter.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type Filter_2<T> = ((
-  functor: FunctorWithArLk<T> | Obj<T>,
-) => T[] | Partial<Obj<T>>) &
-  ((functor?: PH) => Filter_2<T>)
+type Filter_1<T> = (predicate: Predicate1<T>) => T[] | Partial<Obj<T>>
 
-type Filter_1<T> = ((
-  predicate: Predicate1<T>,
-) => T[] | Partial<Obj<T>>) &
-  ((predicate?: PH) => Filter_1<T>)
+// prettier-ignore
+type Filter_2<T> = (functor: FunctorWithArLk<T> | Obj<T>) => T[] | Partial<Obj<T>>
 
-type Filter = (<T>(
-  predicate: Predicate1<T>,
-  functor: FunctorWithArLk<T> | Obj<T>,
-) => T[] | Partial<Obj<T>>) &
-  (<T>(predicate: Predicate1<T>, functor?: PH) => Filter_2<T>) &
-  (<T>(
-    predicate: PH,
-    functor: FunctorWithArLk<T> | Obj<T>,
-  ) => Filter_1<T>) &
-  ((predicate?: PH, functor?: PH) => Filter)
+// prettier-ignore
+type Filter =
+  & (<T>(predicate: Predicate1<T>, functor?: PH) => Filter_2<T>)
+  & (<T>(predicate: PH, functor: FunctorWithArLk<T> | Obj<T>) => Filter_1<T>)
+  & (<T>(predicate: Predicate1<T>, functor: FunctorWithArLk<T> | Obj<T>) => T[] | Partial<Obj<T>>)
 
 function _objectFilter<T>(predicate: Predicate1<T>, functor: Obj<T>) {
   return reduce(
@@ -73,9 +65,8 @@ function _filter<T = any>(
     isArrayLike(functor) ||
     isIterable(functor) ||
     isIterator(functor)
-  ) {
+  )
     return _functorFilter(predicate, functor)
-  }
   if (isObject(functor)) return _objectFilter(predicate, functor)
   throw throwFunctorError()
 }

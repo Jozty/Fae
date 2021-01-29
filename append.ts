@@ -1,15 +1,16 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type Append_2<T> = ((list: T[]) => T[]) & ((list?: PH) => Append_2<T>)
+type Append_2<T> = (list: T[]) => T[]
 
-type Append_1<T> = ((el: T) => T[]) & ((el?: PH) => Append_1<T>)
+type Append_1<T> = (el: T) => T[]
 
-type Append = (<T>(el: T, list: T[]) => T[]) &
-  (<T>(el: T, list?: PH) => Append_2<T>) &
+type Append = (<T>(el: T, list?: PH) => Append_2<T>) &
   (<T>(el: PH, list: T[]) => Append_1<T>) &
-  ((el?: PH, list?: PH) => Append)
+  (<T>(el: T, list: T[]) => T[])
 
 function _append<T>(el: T, list: T[]) {
   return [...list, el]

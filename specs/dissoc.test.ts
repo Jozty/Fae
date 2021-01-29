@@ -1,6 +1,6 @@
 import { describe, it } from './_describe.ts'
-import { dissoc } from '../mod.ts'
-import { eq, strictEq } from './utils/utils.ts'
+import { dissoc, _ } from '../mod.ts'
+import { eq } from './utils/utils.ts'
 
 describe('dissoc', () => {
   it('should copy an object omitting the specified property', () => {
@@ -14,14 +14,21 @@ describe('dissoc', () => {
       this.height = height
     }
     const area = (Rectangle.prototype.area = () => {
+      // fae-no-check
       // @ts-ignore
       return this.width * this.height
     })
+    // fae-no-check
     // @ts-ignore
     const rect = new Rectangle(7, 6)
 
+    // @ts-ignore
     eq(dissoc('area', rect), { width: 7, height: 6 })
+    // fae-no-check
+    // @ts-ignore
     eq(dissoc('width', rect), { height: 6, area: area })
+    // fae-no-check
+    // @ts-ignore
     eq(dissoc('depth', rect), { width: 7, height: 6, area: area })
   })
 
@@ -34,5 +41,16 @@ describe('dissoc', () => {
       a: 1,
       b: 2,
     })
+  })
+
+  it('should work on curried versions too', () => {
+    const a = 'b'
+    const b = { a: 1, b: 2, c: 3 }
+    const expected = { a: 1, c: 3 }
+
+    eq(dissoc(a, b), expected)
+    eq(dissoc(a)(b), expected)
+    eq(dissoc(a, _)(b), expected)
+    eq(dissoc(_, b)(a), expected)
   })
 })

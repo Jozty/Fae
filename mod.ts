@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 export { _ } from './utils/constants.ts'
 export type {
   PlaceHolder,

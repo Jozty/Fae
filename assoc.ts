@@ -1,43 +1,44 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { ObjRec, PH } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type Assoc_1 = ((prop: string | number) => ObjRec) &
-  ((prop?: PH) => Assoc_1)
+type Assoc_1 = (prop: string | number) => ObjRec
 
-type Assoc_2 = ((val: any) => ObjRec) & ((val?: PH) => Assoc_2)
+type Assoc_2 = (val: unknown) => ObjRec
 
-type Assoc_3 = ((obj: ObjRec) => ObjRec) & ((obj?: PH) => Assoc_3)
+type Assoc_3 = (obj: ObjRec) => ObjRec
 
-type Assoc_2_3 = ((val: any, obj: ObjRec) => ObjRec) &
-  ((val: any, obj?: PH) => Assoc_3) &
-  ((val: PH, obj: ObjRec) => Assoc_2) &
-  ((val?: PH, obj?: PH) => Assoc_2_3)
+// prettier-ignore
+type Assoc_2_3 =
+  & ((val: PH, obj: ObjRec) => Assoc_2)
+  & ((val: unknown, obj?: PH) => Assoc_3)
+  & ((val: unknown, obj: ObjRec) => ObjRec)
 
-type Assoc_1_3 = ((prop: string | number, obj: ObjRec) => ObjRec) &
-  ((prop: string | number, obj?: PH) => Assoc_3) &
-  ((prop: PH, obj: ObjRec) => Assoc_1) &
-  ((prop?: PH, obj?: PH) => Assoc_1_3)
+// prettier-ignore
+type Assoc_1_3 =
+  & ((prop: PH, obj: ObjRec) => Assoc_1)
+  & ((prop: string | number, obj?: PH) => Assoc_3)
+  & ((prop: string | number, obj: ObjRec) => ObjRec)
 
-type Assoc_1_2 = ((prop: string | number, val: any) => ObjRec) &
-  ((prop: string | number, val?: PH) => Assoc_2) &
-  ((prop: PH, val: any) => Assoc_1) &
-  ((prop?: PH, val?: PH) => Assoc_1_2)
+// prettier-ignore
+type Assoc_1_2 =
+  & ((prop: PH, val: unknown) => Assoc_1)
+  & ((prop: string | number, val?: PH) => Assoc_2)
+  & ((prop: string | number, val: unknown) => ObjRec)
 
-type Assoc = ((
-  prop: string | number,
-  val: any,
-  obj: ObjRec,
-) => ObjRec) &
-  ((prop?: PH, val?: PH, obj?: PH) => Assoc) &
-  ((prop: string | number, val?: PH, obj?: PH) => Assoc_2_3) &
-  ((prop: PH, val: any, obj?: PH) => Assoc_1_3) &
-  ((prop: PH, val: PH, obj: ObjRec) => Assoc_1_2) &
-  ((prop: string | number, val: any, obj?: PH) => Assoc_3) &
-  ((prop: string | number, val: PH, obj: ObjRec) => Assoc_2) &
-  ((prop: PH, val: any, obj: ObjRec) => Assoc_1)
+// prettier-ignore
+type Assoc =
+  & ((prop: string | number, val?: PH, obj?: PH) => Assoc_2_3)
+  & ((prop: PH, val: unknown, obj?: PH) => Assoc_1_3)
+  & ((prop: PH, val: PH, obj: ObjRec) => Assoc_1_2)
+  & ((prop: string | number, val: unknown, obj?: PH) => Assoc_3)
+  & ((prop: string | number, val: PH, obj: ObjRec) => Assoc_2)
+  & ((prop: PH, val: unknown, obj: ObjRec) => Assoc_1)
+  & ((prop: string | number, val: unknown, obj: ObjRec) => ObjRec)
 
-function _assoc(prop: string | number, val: any, obj: ObjRec) {
+function _assoc(prop: string | number, val: unknown, obj: ObjRec) {
   const result: ObjRec = {}
 
   for (let p in obj) result[p] = obj[p]

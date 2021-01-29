@@ -1,3 +1,4 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
 import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
@@ -8,6 +9,7 @@ type IndexOf_2<T> = (list: T[]) => number
 
 type IndexOf_1<T> = (value: T) => number
 
+// prettier-ignore
 type IndexOf =
  & (<T>(value: T, list?: PH) => IndexOf_2<T>)
  & (<T>(value: PH, list: T[]) => IndexOf_1<T>)

@@ -1,18 +1,20 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { Predicate1, PH } from './utils/types.ts'
 import { dispatch } from './utils/dispatch.ts'
 import AnyTransformer from './utils/Transformers/any.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
-type Any_2<T> = ((list: T[]) => boolean) & ((list?: PH) => Any_2<T>)
+type Any_2<T> = (list: T[]) => boolean
 
-type Any_1<T> = ((predicate: Predicate1<T>) => boolean) &
-  ((predicate?: PH) => Any_1<T>)
+type Any_1<T> = (predicate: Predicate1<T>) => boolean
 
-type Any = (<T>(predicate: Predicate1<T>, list: T[]) => boolean) &
-  (<T>(predicate: Predicate1<T>, list?: PH) => Any_2<T>) &
-  (<T>(predicate: PH, list: T[]) => Any_1<T>) &
-  ((predicate?: PH, list?: PH) => Any)
+// prettier-ignore
+type Any =
+  & (<T>(predicate: Predicate1<T>, list?: PH) => Any_2<T>)
+  & (<T>(predicate: PH, list: T[]) => Any_1<T>)
+  & (<T>(predicate: Predicate1<T>, list: T[]) => boolean)
 
 function _any<T>(predicate: Predicate1<T>, list: T[]) {
   for (let i = 0; i < list.length; i++) {

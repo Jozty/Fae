@@ -1,10 +1,11 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { PH, Func, Predicate } from './utils/types.ts'
 import { getFunctionsLengths } from './utils/get.ts'
 
 // @types
-type AnyPass = (<T>(predicates: Predicate<T>[]) => Func) &
-  ((predicates?: PH) => AnyPass)
+type AnyPass = <T>(predicates: Predicate<T>[]) => Func
 
 function _anyPass<T>(predicates: Predicate<T>[]) {
   const len = predicates.length

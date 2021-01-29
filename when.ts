@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { PH, Predicate1, FuncArr1 } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 

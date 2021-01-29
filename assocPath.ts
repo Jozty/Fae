@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { Path, getPath } from './paths.ts'
 import { tail } from './tail.ts'
 import { assoc } from './assoc.ts'
@@ -11,38 +13,39 @@ import curryN from './utils/curry_n.ts'
 import type { PH, ObjRec } from './utils/types.ts'
 
 // @types
-type AssocPath_1 = ((path: Path) => ObjRec) &
-  ((path?: PH) => AssocPath_1)
+type AssocPath_1 = (path: Path) => ObjRec
 
-type AssocPath_2 = ((val: any) => ObjRec) &
-  ((val?: PH) => AssocPath_2)
+type AssocPath_2 = (val: any) => ObjRec
 
-type AssocPath_3 = ((obj: ObjRec) => ObjRec) &
-  ((obj?: PH) => AssocPath_3)
+type AssocPath_3 = (obj: ObjRec) => ObjRec
 
-type AssocPath_2_3 = ((val: any, obj: ObjRec) => ObjRec) &
-  ((val: any, obj?: PH) => AssocPath_3) &
-  ((val: PH, obj: ObjRec) => AssocPath_2) &
-  ((val?: PH, obj?: PH) => AssocPath_2_3)
+// prettier-ignore
+type AssocPath_2_3 =
+  & ((val: any, obj?: PH) => AssocPath_3)
+  & ((val: PH, obj: ObjRec) => AssocPath_2)
+  & ((val: any, obj: ObjRec) => ObjRec)
 
-type AssocPath_1_3 = ((path: Path, obj: ObjRec) => ObjRec) &
-  ((path: Path, obj?: PH) => AssocPath_3) &
-  ((path: PH, obj: ObjRec) => AssocPath_1) &
-  ((path?: PH, obj?: PH) => AssocPath_1_3)
+// prettier-ignore
+type AssocPath_1_3 =
+  & ((path: Path, obj?: PH) => AssocPath_3)
+  & ((path: PH, obj: ObjRec) => AssocPath_1)
+  & ((path: Path, obj: ObjRec) => ObjRec)
 
-type AssocPath_1_2 = ((path: Path, val: any) => ObjRec) &
-  ((path: Path, val?: PH) => AssocPath_2) &
-  ((path: PH, val: any) => AssocPath_1) &
-  ((path?: PH, val?: PH) => AssocPath_1_2)
+// prettier-ignore
+type AssocPath_1_2 =
+  & ((path: Path, val?: PH) => AssocPath_2)
+  & ((path: PH, val: any) => AssocPath_1)
+  & ((path: Path, val: any) => ObjRec)
 
-type AssocPath = ((path: Path, val: any, obj: ObjRec) => ObjRec) &
-  ((path?: PH, val?: PH, obj?: PH) => AssocPath) &
-  ((path: Path, val?: PH, obj?: PH) => AssocPath_2_3) &
-  ((path: PH, val: any, obj?: PH) => AssocPath_1_3) &
-  ((path: PH, val: PH, obj: ObjRec) => AssocPath_1_2) &
-  ((path: Path, val: any, obj?: PH) => AssocPath_3) &
-  ((path: Path, val: PH, obj: ObjRec) => AssocPath_2) &
-  ((path: PH, val: any, obj: ObjRec) => AssocPath_1)
+// prettier-ignore
+type AssocPath =
+  & ((path: Path, val?: PH, obj?: PH) => AssocPath_2_3)
+  & ((path: PH, val: any, obj?: PH) => AssocPath_1_3)
+  & ((path: PH, val: PH, obj: ObjRec) => AssocPath_1_2)
+  & ((path: Path, val: any, obj?: PH) => AssocPath_3)
+  & ((path: Path, val: PH, obj: ObjRec) => AssocPath_2)
+  & ((path: PH, val: any, obj: ObjRec) => AssocPath_1)
+  & ((path: Path, val: any, obj: ObjRec) => ObjRec)
 
 function _assocPath(path: Path, val: any, obj: ObjRec) {
   if (path.length === 0) return val

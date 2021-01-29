@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { Curry2, Obj } from './utils/types.ts'
 import { isFunction } from './utils/is.ts'
@@ -55,7 +57,6 @@ function _checkEnumerableProps(
     if (!(has(b, key) && _equals(a[key], b[key], s1, s2)))
       return false
   }
-
   return true
 }
 
@@ -69,7 +70,6 @@ function _checkObjects(
   if (isFunction(c) && getFunctionName(c) === 'Promise') {
     return a === b
   }
-
   return _checkEnumerableProps(a, b, stackA, stackB)
 }
 
@@ -82,7 +82,6 @@ function _checkPrimitives(
   if (typeof a === typeof b && Object.is(a.valueOf(), b.valueOf())) {
     return _checkEnumerableProps(a, b, stackA, stackB)
   }
-
   return false
 }
 
@@ -158,7 +157,6 @@ function _checkMaps(
     if (!_equals(a.get(keyA), b.get(keyB), stackA, stackB))
       return false
   }
-
   return true
 }
 
@@ -168,9 +166,7 @@ function _checkSets(
   stackA: any[],
   stackB: any[],
 ) {
-  if (a.size !== b.size) {
-    return false
-  }
+  if (a.size !== b.size) return false
 
   stackA = stackA.concat([a])
   stackB = stackB.concat([b])
@@ -185,14 +181,11 @@ function _checkSets(
     const valueB = valuesB[i]
 
     for (let i = stackA.length - 1; i >= 0; i--) {
-      if (stackA[i] === valueA) {
-        return stackB[i] === valueB
-      }
+      if (stackA[i] === valueA) return stackB[i] === valueB
     }
 
     if (!_equals(valueA, valueB, stackA, stackB)) return false
   }
-
   return true
 }
 

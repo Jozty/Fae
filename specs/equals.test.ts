@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { equals } from '../mod.ts'
+import { equals, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('equals', () => {
@@ -57,6 +57,12 @@ describe('equals', () => {
     eq(equals('foo', 'foo'), true)
     eq(equals('foo', 'bar'), false)
     eq(equals('bar', 'foo'), false)
+  })
+
+  it('should return the curried version', () => {
+    eq(equals(_, '')(''), true)
+    eq(equals('', _)('x'), false)
+    eq(equals('x')(''), false)
   })
 
   it('should consider equivalent String objects equal', () => {

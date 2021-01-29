@@ -1,16 +1,18 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { PH, Comparator } from './utils/types.ts'
 
 // @types
-type Sort_2<T> = ((list: T[]) => T[]) & ((list?: PH) => Sort_2<T>)
+type Sort_2<T> = (list: T[]) => T[]
 
-type Sort_1<T> = ((comparator: Comparator<T>) => T[]) &
-  ((comparator?: PH) => Sort_1<T>)
+type Sort_1<T> = (comparator: Comparator<T>) => T[]
 
-type Sort = (<T>(comparator: Comparator<T>, list: T[]) => T[]) &
-  (<T>(comparator: Comparator<T>, list?: PH) => Sort_2<T>) &
-  (<T>(comparator: PH, list: T[]) => Sort_1<T>) &
-  ((comparator?: PH, list?: PH) => Sort)
+// prettier-ignore
+type Sort =
+  & (<T>(comparator: Comparator<T>, list?: PH) => Sort_2<T>)
+  & (<T>(comparator: PH, list: T[]) => Sort_1<T>)
+  & (<T>(comparator: Comparator<T>, list: T[]) => T[])
 
 function _sort<T>(comparator: Comparator<T>, list: T[]) {
   return [...list].sort(comparator)

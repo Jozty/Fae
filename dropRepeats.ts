@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { dropRepeatsWith } from './dropRepeatsWith.ts'
 import { equals } from './equals.ts'
 import { dispatch } from './utils/dispatch.ts'
@@ -6,8 +8,7 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type DropRepeats = (<T>(list: T[]) => T[]) &
-  ((list?: PH) => DropRepeats)
+type DropRepeats = <T>(list: T[]) => T[]
 
 const _dropRepeats = dropRepeatsWith(equals)
 

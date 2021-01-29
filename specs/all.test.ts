@@ -7,6 +7,7 @@ import {
   transduce,
   flip,
   compose,
+  _,
 } from '../mod.ts'
 import { eq, thr } from './utils/utils.ts'
 
@@ -57,5 +58,16 @@ describe('all', () => {
       ) as any,
       false,
     )
+  })
+
+  it('should work on curried versions too', () => {
+    const a = (a: number) => a % 3 === 0
+    const b = [1, 2, 3, 4, 5, 6, 7, 8]
+    const expected = false
+
+    eq(all(a, b), expected)
+    eq(all(a)(b), expected)
+    eq(all(a, _)(b), expected)
+    eq(all(_, b)(a), expected)
   })
 })

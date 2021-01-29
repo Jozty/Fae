@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import type { Func } from './utils/types.ts'
 import type Transformer from './utils/Transformers/transformers.ts'
 import { reduce } from './reduce.ts'
@@ -25,7 +27,7 @@ export function transduce<T, L = T>(
   transformer2: Func | Transformer,
   acc: T,
   functor: L[],
-) {
+): unknown {
   transformer2 = getTransformer(transformer2)
   return reduce(transformer1(transformer2), acc, functor)
 }

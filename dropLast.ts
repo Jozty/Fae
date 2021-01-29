@@ -1,23 +1,22 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { dispatch } from './utils/dispatch.ts'
 import curryN from './utils/curry_n.ts'
-import type { PH } from './utils/types.ts'
+import type { InferType, PH } from './utils/types.ts'
 import { take } from './take.ts'
 import DropLastTransformer from './utils/Transformers/dropLast.ts'
 
 // @types
-type DropLast_2 = (<L extends T[] | string, T>(list: L) => L) &
-  ((list?: PH) => DropLast_2)
+type DropLast_2 = <L extends any[] | string>(list: L) => InferType<L>
 
-type DropLast_1<L extends T[] | string, T> = ((n: number) => L) &
-  ((n?: PH) => DropLast_1<L, T>)
+// prettier-ignore
+type DropLast_1<L extends any[] | string> = (n: number) => InferType<L>
 
-type DropLast = (<L extends T[] | string, T>(
-  n: number,
-  list: L,
-) => L) &
-  ((n: number, list?: PH) => DropLast_2) &
-  (<L extends T[] | string, T>(n: PH, list: L) => DropLast_1<L, T>) &
-  ((n?: PH, list?: PH) => DropLast)
+// prettier-ignore
+type DropLast =
+  & ((n: number, list?: PH) => DropLast_2)
+  & (<L extends any[] | string>(n: PH, list: L) => DropLast_1<L>)
+  & (<L extends any[] | string>(n: number, list: L) => InferType<L>)
 
 function _dropLast<L extends T[] | string, T>(n: number, list: L) {
   return take(n < list.length ? list.length - n : 0, list)

@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { reduce } from './reduce.ts'
 
 import type { PH, FunctorWithArLk } from './utils/types.ts'
@@ -16,6 +18,7 @@ type Join_2 = <T>(functor: FunctorWithArLk<T>) => string
 
 type Join_1<T> = (separator: string | number) => string
 
+// prettier-ignore
 type Join =
   & ((separator: string | number, functor?: PH) => Join_2)
   & (<T>(separator: PH, functor: FunctorWithArLk<T>) => Join_1<T>)

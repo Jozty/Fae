@@ -1,3 +1,5 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import { concat } from './concat.ts'
 import type { PH } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
@@ -5,7 +7,7 @@ import type { Func } from './utils/types.ts'
 import { getFunctionLength } from './utils/get.ts'
 
 // @types
-type AddIndex = ((fn: Func) => Func) & ((fn?: PH) => AddIndex)
+type AddIndex = (fn: Func) => Func
 
 function _addIndex(fn: Func) {
   return curryN(getFunctionLength(fn), function (this: any) {

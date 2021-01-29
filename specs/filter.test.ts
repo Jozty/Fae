@@ -9,6 +9,7 @@ import {
   append,
   compose,
   reverse,
+  _,
 } from '../mod.ts'
 import { eq, thr } from './utils/utils.ts'
 
@@ -69,6 +70,7 @@ describe('filter', () => {
     eq(f({ x: 1, y: 0, z: 0 }), { x: 1 })
     eq(f({ x: 1, y: 2, z: 0 }), { x: 1, y: 2 })
     eq(f({ x: 1, y: 2, z: 3 }), { x: 1, y: 2, z: 3 })
+    eq(f({ x: -1, y: 2, z: -3 }), { y: 2 })
   })
 
   it('should work on iterables and iterator', () => {
@@ -100,8 +102,26 @@ describe('filter', () => {
     )
     eq(transform3(arr), [10, 8, 6, 4, 2])
 
-    const transform4 = pipe(filter(even))
-    eq(transform4(arr), [2, 4, 6, 8, 10])
-    eq(transduce(transform4, flip(append), [], arr), [2, 4, 6, 8, 10])
+    const transform4 = pipe(
+      map((a: number) => a + 2),
+      filter(even),
+    )
+    eq(transform4(arr), [4, 6, 8, 10, 12])
+    eq(transduce(transform4, flip(append), [], arr), [
+      4,
+      6,
+      8,
+      10,
+      12,
+    ])
+  })
+
+  it('should return the curried versions too', () => {
+    eq(filter((x: number) => x > 100, _)([100, 9, 99]), [])
+    eq(
+      filter(_, [100, 9, 99])((x: number) => x > 100),
+      [],
+    )
+    eq(filter((x: number) => x > 100)([100, 9, 99]), [])
   })
 })

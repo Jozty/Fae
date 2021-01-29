@@ -1,10 +1,12 @@
+// Copyright (c) 2020 Jozty. All rights reserved. MIT license.
+
 import curryN from './utils/curry_n.ts'
 import type { Func, PH } from './utils/types.ts'
 import { liftN } from './liftN.ts'
 import { getFunctionLength } from './utils/get.ts'
 
 // @types
-type Lift = ((f: Func) => Func) & ((f?: PH) => Lift)
+type Lift = (f: Func) => Func
 
 function _lift(f: Func) {
   return liftN(getFunctionLength(f), f)

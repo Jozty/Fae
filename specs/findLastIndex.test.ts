@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts'
-import { findLastIndex, pipe, transduce } from '../mod.ts'
+import { findLastIndex, pipe, transduce, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('findLastIndex', () => {
@@ -27,7 +27,7 @@ describe('findLastIndex', () => {
   const gt100 = (x: any) => typeof x === 'number' && x > 100
   const isStr = (x: any) => typeof x === 'string'
   const xGt100 = (o: any) => o && o.x > 100
-  // var intoArray = R.into([])
+  const intoArray = (a: any) => [a]
 
   it('should return the index of the last element that satisfies the predicate', () => {
     eq(findLastIndex(even, a), 15)
@@ -40,17 +40,16 @@ describe('findLastIndex', () => {
     eq(findLastIndex(even, ['zing']), -1)
   })
 
-  // TODO:
-  // it('returns the index of the last element into an array that satisfies the predicate', () => {
-  //   eq(intoArray(findLastIndex(even), a), [15])
-  //   eq(intoArray(findLastIndex(gt100), a), [9])
-  //   eq(intoArray(findLastIndex(isStr), a), [3])
-  //   eq(intoArray(findLastIndex(xGt100), a), [10])
-  // })
+  it('returns the index of the last element into an array that satisfies the predicate', () => {
+    eq(intoArray(findLastIndex(even, a)), [15])
+    eq(intoArray(findLastIndex(gt100, a)), [9])
+    eq(intoArray(findLastIndex(isStr, a)), [3])
+    eq(intoArray(findLastIndex(xGt100, a)), [10])
+  })
 
-  // it('returns -1 into an array when no element satisfies the predicate', () => {
-  //   eq(intoArray(findLastIndex(even), ['zing']), [-1])
-  // })
+  it('returns -1 into an array when no element satisfies the predicate', () => {
+    eq(intoArray(findLastIndex(even, ['zing'])), [-1])
+  })
 
   it('should works when the first element matches', () => {
     eq(findLastIndex(even, [2, 3, 5]), 0)
@@ -58,6 +57,12 @@ describe('findLastIndex', () => {
 
   it('should not go into an infinite loop on an empty array', () => {
     eq(findLastIndex(even, []), -1)
+  })
+
+  it('should return the curried versions too', () => {
+    eq(findLastIndex(even, _)(a), 15)
+    eq(findLastIndex(_, a)(gt100), 9)
+    eq(findLastIndex(isStr)(a), 3)
   })
 
   it('should act as transducer', () => {
