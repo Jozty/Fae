@@ -40,8 +40,6 @@ jobs:
           tsc --lib esnext --downlevelIteration --outDir compiled
           cd compiled
           zip -r ${{ env.TAG_NAME }}.zip .
-          ls
-          pwd
 
       - name: Bundle project
         run: deno bundle mod.ts bundle.js
