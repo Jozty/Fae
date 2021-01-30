@@ -19,7 +19,7 @@ _Deno allows you to directly import modules from URLs!_
 To import and use the client in your file, add the following import statement:
 
 ```typescript
-import * as Fae from 'https://deno.land/x/fae@v0.6.2/mod.ts'
+import * as Fae from 'https://deno.land/x/fae@v1.0.0/mod.ts'
 ```
 
 Function usage and documentation can be found [here](https://fae.jozty.io/)
@@ -35,7 +35,7 @@ deno test --coverage --unstable
 ### Usage
 
 ```typescript
-import * as Fae from 'https://deno.land/x/fae@v0.6.2/mod.ts'
+import * as Fae from 'https://deno.land/x/fae@v1.0.0/mod.ts'
 
 // arithmetic functions
 Fae.add(10, 20)                                     // 30
@@ -57,7 +57,7 @@ Fae.pipe(double, add5, subtract10, half)(15)        // 12.5
 ```
 **With lenses**
 ```typescript
-import { lens, view, over, inc, set } from 'https://deno.land/x/fae@v0.6.2/mod.ts'
+import { lens, view, over, inc, set } from 'https://deno.land/x/fae@v1.0.0/mod.ts'
 
 const array = [1, 2, 3, 4, 5, 6, 7, 8]
 
