@@ -58,9 +58,7 @@ async function generateDeclarations() {
 }
 
 async function saveBundle() {
-  const tag = Deno.args[0]
-
-  const path = './temp/' + tag + '.d.ts'
+  const path = './temp/declarations.d.ts'
 
   let text = Deno.readTextFileSync('./temp/mod.d.ts')
   text =

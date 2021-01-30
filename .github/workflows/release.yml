@@ -31,7 +31,7 @@ jobs:
         run: npm i -g dts-bundle-generator typescript
 
       - name: Generate declaration
-        run: deno run --allow-write --allow-read --allow-run --unstable declarations.ts ${{ env.TAG_NAME }}
+        run: deno run --allow-write --allow-read --allow-run --unstable declarations.ts
 
       - name: Compile files
         run: |
@@ -39,7 +39,7 @@ jobs:
           tsc --init
           tsc --lib esnext --downlevelIteration --outDir compiled
           cd compiled
-          zip -r ${{ env.TAG_NAME }}.zip .
+          zip -r bundle.zip .
 
       - name: Bundle project
         run: deno bundle mod.ts bundle.js
@@ -72,8 +72,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./temp/${{ env.TAG_NAME }}.d.ts
-          asset_name: ${{ env.TAG_NAME }}.d.ts
+          asset_path: ./temp/$declarations.d.ts
+          asset_name: declarations.d.ts
           asset_content_type: text/typescript
 
       - name: Upload zip js bundle
@@ -82,6 +82,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./temp/compiled/${{ env.TAG_NAME }}.zip
-          asset_name: ${{ env.TAG_NAME }}.zip
+          asset_path: ./temp/compiled/bundle.zip
+          asset_name: bundle.zip
           asset_content_type: text/typescript
