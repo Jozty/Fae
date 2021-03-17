@@ -18,23 +18,3 @@ jobs:
 
       - name: Run tests
         run: deno test
-  coverage:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Use deno
-        uses: denolib/setup-deno@v2
-        with:
-          deno-version: v1.x
-
-      - name: Generate coverage
-        run: deno test --coverage=cov_profile --unstable
-      - run: deno coverage --lcov cov_profile > cov.lcov --unstable
-
-      - uses: codecov/codecov-action@v1
-        with:
-          files: cov.lcov # optional
-          verbose: true # optional (default = false)
-
