@@ -6,12 +6,9 @@ import type { PH } from './utils/types.ts'
 // @types
 type Add_2 = (b: number) => number
 
-type Add_1 = (a: number) => number
-
 // prettier-ignore
 type Add =
-  & ((a: number, b?: PH) => Add_2)
-  & ((a: PH, b: number) => Add_1)
+  & ((a: number) => Add_2)
   & ((a: number, b: number) => number)
 
 function _add(a: number, b: number) {

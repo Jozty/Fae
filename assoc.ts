@@ -13,27 +13,27 @@ type Assoc_3 = (obj: ObjRec) => ObjRec
 // prettier-ignore
 type Assoc_2_3 =
   & ((val: PH, obj: ObjRec) => Assoc_2)
-  & ((val: unknown, obj?: PH) => Assoc_3)
+  & ((val: unknown) => Assoc_3)
   & ((val: unknown, obj: ObjRec) => ObjRec)
 
 // prettier-ignore
 type Assoc_1_3 =
   & ((prop: PH, obj: ObjRec) => Assoc_1)
-  & ((prop: string | number, obj?: PH) => Assoc_3)
+  & ((prop: string | number) => Assoc_3)
   & ((prop: string | number, obj: ObjRec) => ObjRec)
 
 // prettier-ignore
 type Assoc_1_2 =
   & ((prop: PH, val: unknown) => Assoc_1)
-  & ((prop: string | number, val?: PH) => Assoc_2)
+  & ((prop: string | number) => Assoc_2)
   & ((prop: string | number, val: unknown) => ObjRec)
 
 // prettier-ignore
 type Assoc =
-  & ((prop: string | number, val?: PH, obj?: PH) => Assoc_2_3)
-  & ((prop: PH, val: unknown, obj?: PH) => Assoc_1_3)
+  & ((prop: string | number) => Assoc_2_3)
+  & ((prop: PH, val: unknown) => Assoc_1_3)
   & ((prop: PH, val: PH, obj: ObjRec) => Assoc_1_2)
-  & ((prop: string | number, val: unknown, obj?: PH) => Assoc_3)
+  & ((prop: string | number, val: unknown) => Assoc_3)
   & ((prop: string | number, val: PH, obj: ObjRec) => Assoc_2)
   & ((prop: PH, val: unknown, obj: ObjRec) => Assoc_1)
   & ((prop: string | number, val: unknown, obj: ObjRec) => ObjRec)

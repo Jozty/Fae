@@ -8,10 +8,12 @@ type Append_2<T> = (list: T[]) => T[]
 
 type Append_1<T> = (el: T) => T[]
 
-type Append = (<T>(el: T, list?: PH) => Append_2<T>) &
-  (<T>(el: PH, list: T[]) => Append_1<T>) &
-  (<T>(el: T, list: T[]) => T[])
-
+// prettier-ignore
+type Append =
+  & (<T>(el: T) => Append_2<T>)
+  & (<T>(el: PH, list: T[]) => Append_1<T>)
+  & (<T>(el: T, list: T[]) => T[])
+  
 function _append<T>(el: T, list: T[]) {
   return [...list, el]
 }

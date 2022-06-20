@@ -12,13 +12,13 @@ type Contains_1<T> = (element: T) => boolean
 
 // prettier-ignore
 type Contains =
-  & (<T>(element: T, list?: PH) => Contains_2<T>)
+  & (<T>(element: T) => Contains_2<T>)
   & (<T>(element: PH, list: ArrayLike<T>) => Contains_1<T>)
   & (<T>(element: T, list: ArrayLike<T>) => boolean)
 
 function _contains<T>(element: T, list: ArrayLike<T>) {
   let index = 0
-  while (index != list.length) {
+  while (index < list.length) {
     if (list[index] === element) return true
     index++
   }
