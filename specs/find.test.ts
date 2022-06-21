@@ -70,7 +70,7 @@ describe('find', () => {
 
   it('should return the curried versions too', () => {
     eq(find(_, a)(even), 10)
-    eq(find(gt100, _)(a), 200)
+    eq(find(gt100)(a), 200)
     eq(find(isStr)(a), 'cow')
   })
 })

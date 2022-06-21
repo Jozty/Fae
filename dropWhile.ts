@@ -20,7 +20,7 @@ type DropWhile_1<L extends any[] | string> = (predicate: Predicate1<InferElement
 
 // prettier-ignore
 type DropWhile =
-  & (<T>(predicate: Predicate1<T>, list?: PH) => DropWhile_2<T>)
+  & (<T>(predicate: Predicate1<T>) => DropWhile_2<T>)
   & (<L extends any[] | string>(predicate: PH, list: L) => DropWhile_1<L>)
   & (<L extends T[] | string, T>(predicate: Predicate1<T>, list: L) => InferType<L>)
 

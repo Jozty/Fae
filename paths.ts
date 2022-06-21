@@ -30,7 +30,8 @@ export function getPath(path: Path): Array<string | number> {
     if (path.includes('.')) return trim(path, '.').split('.')
     return path ? [path] : []
   }
-  return path as Array<string | number>
+
+  return path
 }
 
 function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {

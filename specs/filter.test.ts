@@ -117,7 +117,7 @@ describe('filter', () => {
   })
 
   it('should return the curried versions too', () => {
-    eq(filter((x: number) => x > 100, _)([100, 9, 99]), [])
+    eq(filter((x: number) => x > 100)([100, 9, 99]), [])
     eq(
       filter(_, [100, 9, 99])((x: number) => x > 100),
       [],

@@ -20,9 +20,9 @@ type DropLastWhile_1<L extends any[] | string> = (predicate: Predicate1<InferEle
 
 // prettier-ignore
 type DropLastWhile =
-  & (<T>(predicate: Predicate1<T>, list?: PH) => DropLastWhile_2<T>)
+  & (<T>(predicate: Predicate1<T>) => DropLastWhile_2<T>)
   & (<L extends any[] | string>(predicate: PH, list: L) => DropLastWhile_1<L>)
-  & (<L extends T[] | string, T>(predicate: Predicate1<T>, list: L) => InferType<L>)
+  & (<T, L extends T[] | string>(predicate: Predicate1<T>, list: L) => InferType<L>)
 
 function _dropLastWhile<L extends T[] | string, T>(
   predicate: Predicate1<T>,

@@ -42,6 +42,8 @@ export type Func<A extends any[] = any[], R = any> = ((...args: A) => R) & {
   [FUNCTION_LENGTH]?: number
 }
 
+export type EmptyObj = Record<never, never>
+
 export type Obj<T = any> = Record<string | number, T>
 
 export type ObjArr<T = any> = Record<string | number, T | T[]>

@@ -10,7 +10,7 @@ type Divide_1 = (a: number) => number
 
 // prettier-ignore
 type Divide =
-  & ((a: number, b?: PH) => Divide_2)
+  & ((a: number) => Divide_2)
   & ((a: PH, b: number) => Divide_1)
   & ((a: number, b: number) => number)
 
