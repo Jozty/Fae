@@ -1,6 +1,6 @@
 ---
 name: Types refine/fix
-about: Create a report to help us refinehe type of the functions
+about: Create a report to help us refine the type of the functions
 title: ''
 labels: types
 assignees: ''
