@@ -15,7 +15,7 @@ type TakeLast_1<F extends any[] | string> = (n: number) => InferType<F>
 
 // prettier-ignore
 type TakeLast =
-  & ((n: number, functor?: PH) => TakeLast_2)
+  & ((n: number) => TakeLast_2)
   & (<F extends any[] | string>(n: PH, functor: F) => TakeLast_1<InferType<F>>)
   & (<F extends any[] | string>(n: number, functor: F) => InferType<F>)
 

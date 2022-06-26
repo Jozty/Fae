@@ -10,7 +10,7 @@ type ZipObj_1<T> = (keys: string[]) => Obj<T>
 
 // prettier-ignore
 type ZipObj =
-  & ((keys: string[], values?: PH) => ZipObj_2)
+  & ((keys: string[]) => ZipObj_2)
   & (<T>(keys: PH, values: T[]) => ZipObj_1<T>)
   & (<T>(keys: string[], values: T[]) => Obj<T>)
 

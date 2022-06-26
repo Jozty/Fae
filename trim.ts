@@ -10,7 +10,7 @@ type Trim_1 = (str: string) => string
 
 // prettier-ignore
 type Trim =
-  & ((str: string, t?: PH) => Trim_2)
+  & ((str: string) => Trim_2)
   & ((str: PH, t: string) => Trim_1)
   & ((str: string, t: string) => string)
 

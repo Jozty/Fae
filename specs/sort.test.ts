@@ -16,7 +16,6 @@ describe('sort', () => {
 
     eq(sort(comp, list), expected)
     eq(sort(comp)(list), expected)
-    eq(sort(comp, _)(list), expected)
     eq(sort(_, list)(comp), expected)
   })
 })

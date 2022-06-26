@@ -25,11 +25,9 @@ describe('range, rangeUntil', () => {
   it('should work with curried versions too', () => {
     eq(range(1)(5), [1, 2, 3, 4, 5])
     eq(range(_, 5)(1), [1, 2, 3, 4, 5])
-    eq(range(1, _)(5), [1, 2, 3, 4, 5])
 
     eq(rangeUntil(1)(5), [1, 2, 3, 4])
     eq(rangeUntil(_, 5)(1), [1, 2, 3, 4])
-    eq(rangeUntil(1, _)(5), [1, 2, 3, 4])
   })
 
   it('should not work with float/NaN and infinity values', () => {

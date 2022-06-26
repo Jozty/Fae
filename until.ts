@@ -17,28 +17,28 @@ type Until_3<T> = (init: T) => T
 
 // prettier-ignore
 type Until_2_3<T> =
-  & ((fn: FuncArr1<T, T>, init?: PH) => Until_3<T>)
+  & ((fn: FuncArr1<T, T>) => Until_3<T>)
   & (<T>(fn: PH, init: T) => Until_2<T>)
   & ((fn: FuncArr1<T, T>, init: T) => T)
 
 // prettier-ignore
 type Until_1_3<T> =
-  & ((pred: Predicate1<T>, init?: PH) => Until_3<T>)
+  & ((pred: Predicate1<T>) => Until_3<T>)
   & (<T>(pred: PH, init: T) => Until_1<T>)
   & ((pred: Predicate1<T>, init: T) => T)
 
 // prettier-ignore
 type Until_1_2<T> =
-  & ((pred: Predicate1<T>, fn?: PH) => Until_2<T>)
+  & ((pred: Predicate1<T>) => Until_2<T>)
   & ((pred: PH, fn: FuncArr1<T, T>) => Until_1<T>)
   & ((pred: Predicate1<T>, fn: FuncArr1<T, T>) => T)
 
 // prettier-ignore
 type Until =
-  & (<T>(pred: Predicate1<T>, fn?: PH, init?: PH) => Until_2_3<T>)
-  & (<T>(pred: PH, fn: FuncArr1<T, T>, init?: PH) => Until_1_3<T>)
+  & (<T>(pred: Predicate1<T>) => Until_2_3<T>)
+  & (<T>(pred: PH, fn: FuncArr1<T, T>) => Until_1_3<T>)
   & (<T>(pred: PH, fn: PH, init: T) => Until_1_2<InferPrimitive<T>>)
-  & (<T>(pred: Predicate1<T>, fn: FuncArr1<T, T>, init?: PH) => Until_3<T>)
+  & (<T>(pred: Predicate1<T>, fn: FuncArr1<T, T>) => Until_3<T>)
   & (<T>(pred: Predicate1<T>, fn: PH, init: T) => Until_2<InferPrimitive<T>>)
   & (<T>(pred: PH, fn: FuncArr1<T, T>, init: T) => Until_1<T>)
   & (<T>(pred: Predicate1<T>, fn: FuncArr1<T, T>, init: T) => T)

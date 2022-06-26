@@ -11,7 +11,7 @@ type Range_1 = (from: number) => number[]
 
 // prettier-ignore
 type Range =
-  & ((from: number, to?: PH) => Range_2)
+  & ((from: number) => Range_2)
   & ((from: PH, to: number) => Range_1)
   & ((from: number, to: number) => number[])
 

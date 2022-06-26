@@ -1,7 +1,6 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
 import curryN from './utils/curry_n.ts'
-import type { PH } from './utils/types.ts'
 
 // @types
 type Always = <T>(value: T) => () => T

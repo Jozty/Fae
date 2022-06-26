@@ -22,28 +22,28 @@ type Reduce_3<R, P> = <T>(functor: FunctorWithArLk<T>) => R
 
 // prettier-ignore
 type Reduce_2_3<R, P> =
-  & ((acc: R, functor?: PH) => Reduce_3<R, P>)
+  & ((acc: R) => Reduce_3<R, P>)
   & (<T>(acc: PH, functor: FunctorWithArLk<T>) => Reduce_2<T, R, P>)
   & (<T>(acc: R, functor: FunctorWithArLk<T>) => R)
 
 // prettier-ignore
 type Reduce_1_3<R> =
-  & (<P>(func: Reducer<R, P>, functor?: PH) => Reduce_3<R, P>)
+  & (<P>(func: Reducer<R, P>) => Reduce_3<R, P>)
   & (<T>(func: PH, functor: FunctorWithArLk<T>) => Reduce_1<T, R>)
   & (<T, P>(func: Reducer<R, P>, functor: FunctorWithArLk<T>) => R)
 
 // prettier-ignore
 type Reduce_1_2<T> =
-  & (<R, P>(func: Reducer<R, P>, acc?: PH) => Reduce_2<T, R, P>)
+  & (<R, P>(func: Reducer<R, P>) => Reduce_2<T, R, P>)
   & (<R>(func: PH, acc: R) => Reduce_1<T, R>)
   & (<R, P>(func: Reducer<R, P>, acc: R) => R)
 
 // prettier-ignore
 type Reduce =
-  & (<R, P>(func: Reducer<R, P>, acc?: PH, functor?: PH) => Reduce_2_3<R, P>)
-  & (<R>(func: PH, acc: R, functor?: PH) => Reduce_1_3<R>)
+  & (<R, P>(func: Reducer<R, P>) => Reduce_2_3<R, P>)
+  & (<R>(func: PH, acc: R) => Reduce_1_3<R>)
   & (<T>(func: PH, acc: PH, functor: FunctorWithArLk<T>) => Reduce_1_2<T>)
-  & (<R, P>(func: Reducer<R, P>, acc: R, functor?: PH) => Reduce_3<R, P>)
+  & (<R, P>(func: Reducer<R, P>, acc: R) => Reduce_3<R, P>)
   & (<T, R, P>(func: Reducer<R, P>, acc: PH, functor: FunctorWithArLk<T>) => Reduce_2<T, R, P>)
   & (<T, R>(func: PH, acc: R, functor: FunctorWithArLk<T>) => Reduce_1<T, R>)
   & (<T, R, P>(func: Reducer<R, P>, acc: R, functor: FunctorWithArLk<T>) => R)

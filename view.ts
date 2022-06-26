@@ -11,7 +11,7 @@ type View_1<T> = <F>(lens: Lens<T, F>) => F
 
 // prettier-ignore
 type View =
-  & (<T, F>(lens: Lens<T, F>, target?: PH) => View_2<T, F>)
+  & (<T, F>(lens: Lens<T, F>) => View_2<T, F>)
   & (<T>(lens: PH, target: T) => View_1<T>)
   & (<T, F>(lens: Lens<T, F>, target: T) => F)
 

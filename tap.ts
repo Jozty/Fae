@@ -12,7 +12,7 @@ type Tap_1<T> = (func: (obj: T) => any) => T
 
 // prettier-ignore
 type Tap =
-  & (<T>(func: (obj: T) => any, obj?: PH) => Tap_2<T>)
+  & (<T>(func: (obj: T) => any) => Tap_2<T>)
   & (<T>(func: PH, obj: T) => Tap_1<T>)
   & (<T>(func: (obj: T) => any, obj: T) => T)
 
