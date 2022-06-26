@@ -1,6 +1,6 @@
 import { describe, it } from './_describe.ts'
 import { dissocPath, _ } from '../mod.ts'
-import { eq, strictEq } from './utils/utils.ts'
+import { eq, strictEq, strictNotEq } from './utils/utils.ts'
 
 describe('dissocPath', () => {
   it('should make a shallow clone of an object, omitting only what is necessary for the path', () => {
@@ -74,5 +74,11 @@ describe('dissocPath', () => {
     eq(dissocPath(a, b), expected)
     eq(dissocPath(a)(b), expected)
     eq(dissocPath(_, b)(a), expected)
+  })
+  it('should make a shallow clone of an object when the path is empty', () => {
+    const obj1 = { a: 1, b: 2 }
+    const result = dissocPath([], obj1)
+    eq(result, obj1)
+    strictNotEq(result, obj1)
   })
 })

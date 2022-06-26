@@ -28,9 +28,13 @@ function _remove(index: number, arr: any[]) {
 }
 
 function _dissocPath(path: Path, obj: ObjRec): ObjRec {
+  // create shallow clone of obj
+  let result: ObjRec
+  if (isArray(obj)) result = [...obj]
+  else result = { ...obj }
   const p = getPath(path)
   const prop = p[0]
-  if (p.length === 0) return obj
+  if (p.length === 0) return result
   if (p.length === 1) {
     if (isInteger(prop) && isArray(obj)) return _remove(prop, obj)
     return dissoc(prop, obj)
