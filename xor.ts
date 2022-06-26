@@ -10,7 +10,7 @@ type Xor_1 = (a: any) => boolean
 
 // prettier-ignore
 type Xor =
-  & ((a: any, b?: PH) => Xor_2)
+  & ((a: any) => Xor_2)
   & ((a: PH, b: any) => Xor_1)
   & ((a: any, b: any) => boolean)
 

@@ -50,21 +50,18 @@ describe('slice', () => {
     eq(s_2_3(b)(c), expected)
     eq(s_2_3(b, c), expected)
     eq(s_2_3(_, c)(b), expected)
-    eq(s_2_3(b, _)(c), expected)
 
     const s_1_3 = slice(_, b)
 
     eq(s_1_3(a)(c), expected)
     eq(s_1_3(a, c), expected)
     eq(s_1_3(_, c)(a), expected)
-    eq(s_1_3(a, _)(c), expected)
 
     const s_1_2 = slice(_, _, c)
 
     eq(s_1_2(a)(b), expected)
     eq(s_1_2(a, b), expected)
     eq(s_1_2(_, b)(a), expected)
-    eq(s_1_2(a, _)(b), expected)
 
     const s_3 = slice(a, b)
     eq(s_3(c), expected)

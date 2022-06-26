@@ -6,16 +6,15 @@ import curryN from './utils/curry_n.ts'
 import type { PH } from './utils/types.ts'
 
 // @types
-type Aperture_2 = (<T>(list: T[]) => T[][]) &
-  ((list?: PH) => Aperture_2)
+type Aperture_2 = (<T>(list: T[]) => T[][])
 
-type Aperture_1<T> = ((n: number) => T[][]) &
-  ((n?: PH) => Aperture_1<T>)
+type Aperture_1<T> = ((n: number) => T[][])
 
-type Aperture = (<T>(n: number, list: T[]) => T[][]) &
-  ((n: number, list?: PH) => Aperture_2) &
-  (<T>(n: PH, list: T[]) => Aperture_1<T>) &
-  ((n?: PH, list?: PH) => Aperture)
+// prettier-ignore
+type Aperture =
+  & ((n: number) => Aperture_2)
+  & (<T>(n: PH, list: T[]) => Aperture_1<T>)
+  & (<T>(n: number, list: T[]) => T[][])
 
 function _aperture<T>(n: number, list: T[]) {
   const len = list.length - n + 1

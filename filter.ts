@@ -27,7 +27,7 @@ type Filter_2<T> = (functor: FunctorWithArLk<T> | Obj<T>) => T[] | Partial<Obj<T
 
 // prettier-ignore
 type Filter =
-  & (<T>(predicate: Predicate1<T>, functor?: PH) => Filter_2<T>)
+  & (<T>(predicate: Predicate1<T>) => Filter_2<T>)
   & (<T>(predicate: PH, functor: FunctorWithArLk<T> | Obj<T>) => Filter_1<T>)
   & (<T>(predicate: Predicate1<T>, functor: FunctorWithArLk<T> | Obj<T>) => T[] | Partial<Obj<T>>)
 

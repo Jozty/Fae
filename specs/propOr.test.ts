@@ -42,21 +42,18 @@ describe('propOr', () => {
     eq(p_2_3('d')(obj), 'default')
     eq(p_2_3('d', obj), 'default')
     eq(p_2_3(_, obj)('d'), 'default')
-    eq(p_2_3('d', _)(obj), 'default')
 
     const p_1_3 = propOr(_, 'd')
 
     eq(p_1_3('default')(obj), 'default')
     eq(p_1_3('default', obj), 'default')
     eq(p_1_3(_, obj)('default'), 'default')
-    eq(p_1_3('default', _)(obj), 'default')
 
     const p_1_2 = propOr(_, _, obj)
 
     eq(p_1_2('default')('d'), 'default')
     eq(p_1_2('default', 'd'), 'default')
     eq(p_1_2(_, 'd')('default'), 'default')
-    eq(p_1_2('default', _)('d'), 'default')
 
     const p_3 = propOr('default', 'd')
     eq(p_3(obj), 'default')

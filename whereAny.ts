@@ -10,7 +10,7 @@ type WhereAny_1<T> = (specs: Tests<T>) => boolean
 
 // prettier-ignore
 type WhereAny =
-  & (<T>(specs: Tests<T>, testObj?: PH) => WhereAny_2<T>)
+  & (<T>(specs: Tests<T>) => WhereAny_2<T>)
   & (<T>(specs: PH, testObj: Obj<T>) => WhereAny_1<T>)
   & (<T>(specs: Tests<T>, testObj: Obj<T>) => boolean)
 

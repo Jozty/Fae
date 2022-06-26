@@ -1,46 +1,47 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import curryN from './utils/curry_n.ts'
 import {
   isArray,
   isString,
   isObject,
   isArguments,
 } from './utils/is.ts'
+import type { EmptyObj } from './utils/types.ts'
 
-// @types
-type Empty = <T>(x: T) => T | Partial<T>
-
-function _empty(x: any) {
-  if (x != null && typeof x.empty === 'function') return x.empty()
-
-  if (
-    x != null &&
-    x.constructor != null &&
-    typeof x.constructor.empty === 'function'
-  ) {
-    return x.constructor.empty()
-  }
-
-  if (isArray(x)) return []
-
-  if (isString(x)) return ''
-
-  if (isObject(x)) return {}
-
-  if (isArguments(x)) {
-    return (function () {
-      return arguments
-    })()
-  }
-}
+type EmptyReturnType<T> = T extends (infer U)[]
+  ? U[]
+  : T extends string
+  ? ''
+  : T extends EmptyObj
+  ? EmptyObj
+  : T
 
 /**
  * Returns the empty value of its argument's type.
- * Dispatches to the `empty` method of the first argument, if present.
  *
  *      Fae.empty([1, 2, 3])     //=> []
  *      Fae.empty('unicorns')    //=> ''
  *      Fae.empty({x: 1, y: 2})  //=> {}
  */
-export const empty: Empty = curryN(1, _empty)
+export function empty<T>(x: T): EmptyReturnType<T> {
+  if (x === null || x === undefined) return x as EmptyReturnType<T>;
+
+  // @ts-ignore: types handled by EmptyReturnType
+  if (isArray(x)) return []
+
+  // @ts-ignore: types handled by EmptyReturnType
+  if (isString(x)) return ''
+
+  // @ts-ignore: types handled by EmptyReturnType
+  if (isObject(x)) return {}
+
+  if (isArguments(x)) {
+    // @ts-ignore: types handled by EmptyReturnType
+    return (function () {
+      return arguments
+    })()
+  }
+
+  // @ts-ignore: types handled by EmptyReturnType
+  return null
+}

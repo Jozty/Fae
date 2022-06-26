@@ -15,7 +15,6 @@ describe('add', () => {
 
   it('should test curried versions too', () => {
     eq(add(25)(25), 50)
-    eq(add(_, 25)(25), 50)
-    eq(add(25, _)(25), 50)
+    eq(add(25, 25), 50)
   })
 })

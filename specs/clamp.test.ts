@@ -38,21 +38,18 @@ describe('clamp', () => {
     eq(c_2_3(max)(value), expected)
     eq(c_2_3(max, value), expected)
     eq(c_2_3(_, value)(max), expected)
-    eq(c_2_3(max, _)(value), expected)
 
     const c_1_3 = clamp(_, max)
 
     eq(c_1_3(min)(value), expected)
     eq(c_1_3(min, value), expected)
     eq(c_1_3(_, value)(min), expected)
-    eq(c_1_3(min, _)(value), expected)
 
     const c_1_2 = clamp(_, _, value)
 
     eq(c_1_2(min)(max), expected)
     eq(c_1_2(min, max), expected)
     eq(c_1_2(_, max)(min), expected)
-    eq(c_1_2(min, _)(max), expected)
 
     const c_3 = clamp(min, max)
     eq(c_3(value), expected)

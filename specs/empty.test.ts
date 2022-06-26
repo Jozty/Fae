@@ -20,6 +20,5 @@ describe('empty', () => {
     eq(empty('abc'), '')
     eq(empty('[1, 2, 3]'), '')
     eq(empty(new String('abc')), '')
-    eq(empty(new Array([1, 2])), [])
   })
 })

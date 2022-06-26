@@ -10,7 +10,7 @@ type LensF_1<T, F> = (getter: LensGetter<T, F>) => Lens<T, F>
 
 // prettier-ignore
 type LensF =
-  & (<T, F>(getter: LensGetter<T, F>, setter?: PH) => LensF_2<T, F>)
+  & (<T, F>(getter: LensGetter<T, F>) => LensF_2<T, F>)
   & (<T, F>(getter: PH, setter: LensSetter<T, F>) => LensF_1<T, F>)
   & (<T, F>(getter: LensGetter<T, F>, setter: LensSetter<T, F>) => Lens<T, F>)
 

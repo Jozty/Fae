@@ -39,21 +39,18 @@ describe('assoc', () => {
     eq(a_2_3(val)(functor), expected)
     eq(a_2_3(val, functor), expected)
     eq(a_2_3(_, functor)(val), expected)
-    eq(a_2_3(val, _)(functor), expected)
 
     const a_1_3 = assoc(_, val)
 
     eq(a_1_3('z')(functor), expected)
     eq(a_1_3('z', functor), expected)
     eq(a_1_3(_, functor)('z'), expected)
-    eq(a_1_3('z', _)(functor), expected)
 
     const a_1_2 = assoc(_, _, functor)
 
     eq(a_1_2('z')(val), expected)
     eq(a_1_2('z', val), expected)
     eq(a_1_2(_, val)('z'), expected)
-    eq(a_1_2('z', _)(val), expected)
 
     const a_3 = assoc('z', val)
     eq(a_3(functor), expected)

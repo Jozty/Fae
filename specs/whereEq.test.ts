@@ -68,7 +68,6 @@ describe('whereEq', () => {
 
     eq(whereEq(spec)(test1), false)
     eq(whereEq(_, test2)(spec), true)
-    eq(whereEq(spec, _)(test1), false)
     eq(whereEq(spec, test2), true)
   })
 })

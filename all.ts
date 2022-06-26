@@ -12,7 +12,7 @@ type All_1<T> = (predicate: Predicate1<T>) => boolean
 
 // prettier-ignore
 type All =
-  & (<T>(predicate: Predicate1<T>, functor?: PH) => All_2<T>)
+  & (<T>(predicate: Predicate1<T>) => All_2<T>)
   & (<T>(predicate: PH, functor: ArrayLike<T>) => All_1<T>)
   & (<T>(predicate: Predicate1<T>, functor: ArrayLike<T>) => boolean)
 

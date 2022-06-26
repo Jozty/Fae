@@ -11,7 +11,7 @@ type AndThen_1 = (f: Func) => PromiseLike<any>
 
 // prettier-ignore
 type AndThen =
-  & ((f: Func, b?: PH) => AndThen_2)
+  & ((f: Func) => AndThen_2)
   & ((a: PH, p: any) => AndThen_1)
   & ((f: Func, p: any) => PromiseLike<any>)
 

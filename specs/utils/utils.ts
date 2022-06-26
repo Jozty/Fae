@@ -8,6 +8,10 @@ export function eq<T>(actual: T, expected: T) {
   expect(actual).toEqual(expected)
 }
 
+export function noEq<T>(actual: T, expected: T) {
+  expect(actual).not.toEqual(expected)
+}
+
 export function strictEq(actual: any, expected: any) {
   assertStrictEquals(actual, expected)
 }

@@ -34,6 +34,5 @@ describe('defaultTo', () => {
 
     eq(defaultTo(a, b), expected)
     eq(defaultTo(a)(b), expected)
-    eq(defaultTo(_, b)(a), expected)
   })
 })

@@ -19,7 +19,7 @@ type Reject_1<F extends any[] | Obj<any>> = (predicate: Predicate1<InferElementT
 // prettier-ignore
 type Reject =
   & (<F extends T[] | Obj<T>, T>(predicate: Predicate1<T>, filterable: F) => F)
-  & (<T>(predicate: Predicate1<T>, filterable?: PH) => Reject_2<T>)
+  & (<T>(predicate: Predicate1<T>) => Reject_2<T>)
   & (<F extends any[] | Obj<any>>(predicate: PH, filterable: F) => Reject_1<F>)
 
 function _reject<F extends T[] | Obj<T>, T>(

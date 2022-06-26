@@ -12,7 +12,7 @@ type FindLastIndex_1<T> = (predicate: Predicate1<T>) => number
 
 // prettier-ignore
 type FindLastIndex =
-  & (<T>(predicate: Predicate1<T>, list?: PH) => FindLastIndex_2<T>)
+  & (<T>(predicate: Predicate1<T>) => FindLastIndex_2<T>)
   & (<T>(predicate: PH, list: T[]) => FindLastIndex_1<T>)
   & (<T>(predicate: Predicate1<T>,list: T[]) => number)
 

@@ -12,28 +12,28 @@ type Clamp_3<T> = (value: T) => T
 
 // prettier-ignore
 type Clamp_2_3<T> =
-  & ((max: T, value?: PH) => Clamp_3<T>)
+  & ((max: T) => Clamp_3<T>)
   & ((max: PH, value: T) => Clamp_2<T>)
   & ((max: T, value: T) => T)
 
 // prettier-ignore
 type Clamp_1_3<T> =
-  & ((min: T, value?: PH) => Clamp_3<T>)
+  & ((min: T) => Clamp_3<T>)
   & ((min: PH, value: T) => Clamp_1<T>)
   & ((min: T, value: T) => T)
 
 // prettier-ignore
 type Clamp_1_2<T> =
-  & ((min: T, max?: PH) => Clamp_2<T>)
+  & ((min: T) => Clamp_2<T>)
   & ((min: PH, max: T) => Clamp_1<T>)
   & ((min: T, max: T) => T)
 
 // prettier-ignore
 type Clamp =
-  & (<T>(min: T, max?: PH, value?: PH) => Clamp_2_3<T>)
-  & (<T>(min: PH, max: T, value?: PH) => Clamp_1_3<T>)
+  & (<T>(min: T) => Clamp_2_3<T>)
+  & (<T>(min: PH, max: T) => Clamp_1_3<T>)
   & (<T>(min: PH, max: PH, value: T) => Clamp_1_2<T>)
-  & (<T>(min: T, max: T, value?: PH) => Clamp_3<T>)
+  & (<T>(min: T, max: T) => Clamp_3<T>)
   & (<T>(min: T, max: PH, value: T) => Clamp_2<T>)
   & (<T>(min: PH, max: T, value: T) => Clamp_1<T>)
   & (<T>(min: T, max: T, value: T) => T)

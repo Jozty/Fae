@@ -99,7 +99,6 @@ describe('view, over, and set', () => {
     // view
     eq(view(dogLens, alice), 'joker')
     eq(view(dogLens)(alice), 'joker')
-    eq(view(dogLens, _)(alice), 'joker')
     eq(view(_, alice)(dogLens), 'joker')
 
     // set
@@ -115,21 +114,18 @@ describe('view, over, and set', () => {
     eq(set_2_3('a')(alice), setExpectedObject)
     eq(set_2_3('a', alice), setExpectedObject)
     eq(set_2_3(_, alice)('a'), setExpectedObject)
-    eq(set_2_3('a', _)(alice), setExpectedObject)
 
     const set_1_3 = set(_, 'a')
 
     eq(set_1_3(dogLens)(alice), setExpectedObject)
     eq(set_1_3(dogLens, alice), setExpectedObject)
     eq(set_1_3(_, alice)(dogLens), setExpectedObject)
-    eq(set_1_3(dogLens, _)(alice), setExpectedObject)
 
     const set_1_2 = set(_, _, alice)
 
     eq(set_1_2(dogLens)('a'), setExpectedObject)
     eq(set_1_2(dogLens, 'a'), setExpectedObject)
     eq(set_1_2(_, 'a')(dogLens), setExpectedObject)
-    eq(set_1_2(dogLens, _)('a'), setExpectedObject)
 
     const set_3 = set(dogLens, 'a')
     eq(set_3(alice), setExpectedObject)
@@ -155,21 +151,18 @@ describe('view, over, and set', () => {
     eq(over_2_3(trans)(alice), overExpectedObject)
     eq(over_2_3(trans, alice), overExpectedObject)
     eq(over_2_3(_, alice)(trans), overExpectedObject)
-    eq(over_2_3(trans, _)(alice), overExpectedObject)
 
     const over_1_3 = over(_, trans)
 
     eq(over_1_3(dogLens)(alice), overExpectedObject)
     eq(over_1_3(dogLens, alice), overExpectedObject)
     eq(over_1_3(_, alice)(dogLens), overExpectedObject)
-    eq(over_1_3(dogLens, _)(alice), overExpectedObject)
 
     const over_1_2 = over(_, _, alice)
 
     eq(over_1_2(dogLens)(trans), overExpectedObject)
     eq(over_1_2(dogLens, trans), overExpectedObject)
     eq(over_1_2(_, trans)(dogLens), overExpectedObject)
-    eq(over_1_2(dogLens, _)(trans), overExpectedObject)
 
     const over_3 = over(dogLens, trans)
     eq(over_3(alice), overExpectedObject)

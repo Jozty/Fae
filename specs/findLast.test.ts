@@ -60,7 +60,7 @@ describe('findLast', () => {
   })
 
   it('should return the curried versions too', () => {
-    eq(findLast(even, _)([]), undefined)
+    eq(findLast(even)([]), undefined)
     eq(findLast(_, [2, 3, 5])(even), 2)
     eq(findLast(even)([2, 3, 5]), 2)
   })

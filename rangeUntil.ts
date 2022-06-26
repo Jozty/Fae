@@ -11,7 +11,7 @@ type RangeUntil_1 = (from: number) => number[]
 
 // prettier-ignore
 type RangeUntil =
-  & ((from: number, to?: PH) => RangeUntil_2)
+  & ((from: number) => RangeUntil_2)
   & ((from: PH, to: number) => RangeUntil_1)
   & ((from: number, to: number) => number[])
 

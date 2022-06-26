@@ -18,7 +18,7 @@ type Prop_1<T> = (p: Prop) => T | undefined
 
 // prettier-ignore
 type PropF =
-  & ((p: Prop, obj?: PH) => Prop_2)
+  & ((p: Prop) => Prop_2)
   & (<T>(p: PH, obj: Obj<T> | ArrayLike<T>) => Prop_1<T>)
   & (<T>(p: Prop, obj: Obj<T> | ArrayLike<T>) => T | undefined)
 

@@ -10,7 +10,7 @@ type Prepend_1<T> = (el: T) => T[]
 
 // prettier-ignore
 type Prepend =
-  & (<T>(el: T, list?: PH) => Prepend_2<T>)
+  & (<T>(el: T) => Prepend_2<T>)
   & (<T>(el: PH, list: T[]) => Prepend_1<T>)
   & (<T>(el: T, list: T[]) => T[])
 

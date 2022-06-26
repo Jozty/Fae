@@ -64,21 +64,18 @@ describe('assocPath', () => {
     eq(a_2_3(val)(functor), expected)
     eq(a_2_3(val, functor), expected)
     eq(a_2_3(_, functor)(val), expected)
-    eq(a_2_3(val, _)(functor), expected)
 
     const a_1_3 = assocPath(_, val)
 
     eq(a_1_3(path)(functor), expected)
     eq(a_1_3(path, functor), expected)
     eq(a_1_3(_, functor)(path), expected)
-    eq(a_1_3(path, _)(functor), expected)
 
     const a_1_2 = assocPath(_, _, functor)
 
     eq(a_1_2(path)(val), expected)
     eq(a_1_2(path, val), expected)
     eq(a_1_2(_, val)(path), expected)
-    eq(a_1_2(path, _)(val), expected)
 
     const a_3 = assocPath(path, val)
     eq(a_3(functor), expected)

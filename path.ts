@@ -11,7 +11,7 @@ type PathF_1<T, R> = (ps: Path) => R
 
 // prettier-ignore
 type PathF =
-  & ((ps: Path, obj?: PH) => PathF_2)
+  & ((ps: Path) => PathF_2)
   & (<T, R>(ps: PH, obj: ObjRec<T> | null) => PathF_1<T, R>)
   & (<T, R>(ps: Path, obj: ObjRec<T> | null) => R)
 

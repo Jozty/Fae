@@ -37,9 +37,11 @@ describe('max', () => {
     let d2: Date = new Date('2002-02-02')
 
     eq(max(d1)(d2), d2)
+    // @ts-expect-error: because max(a, b) === max(b, a)
     eq(max(_, d1)(d2), d2)
     eq(max(25)(50), 50)
+    // @ts-expect-error: because max(a, b) === max(b, a)
     eq(max(_, 25)(20), 25)
-    eq(max(25, _)(30), 30)
+    eq(max(25)(30), 30)
   })
 })

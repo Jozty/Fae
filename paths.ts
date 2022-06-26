@@ -20,7 +20,7 @@ type Paths_1<T, R> = (pathsArr: Path[]) => R[]
 
 // prettier-ignore
 type Paths =
-  & ((pathsArr: Path[], obj?: PH) => Paths_2)
+  & ((pathsArr: Path[]) => Paths_2)
   & (<T, R>(pathsArr: PH, obj: ObjRec<T> | null) => Paths_1<T, R>)
   & (<T, R>(pathsArr: Path[], obj: ObjRec<T> | null) => R[])
 
@@ -30,7 +30,8 @@ export function getPath(path: Path): Array<string | number> {
     if (path.includes('.')) return trim(path, '.').split('.')
     return path ? [path] : []
   }
-  return path as Array<string | number>
+
+  return path
 }
 
 function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {
@@ -38,7 +39,7 @@ function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {
     const path = getPath(p)
     let val: any = obj
     for (let i = 0; i < path.length; i++) {
-      if (isUndefinedOrNull(val)) return
+      if (isUndefinedOrNull(val)) return undefined
       const p = path[i]
       const pInt = parseInt(p as string, 10)
       val =

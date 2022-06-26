@@ -10,7 +10,7 @@ type Dissoc_1 = (prop: string | number) => ObjRec
 
 // prettier-ignore
 type Dissoc =
-  & ((prop: string | number, obj?: PH) => Dissoc_2)
+  & ((prop: string | number) => Dissoc_2)
   & ((prop: PH, obj: ObjRec) => Dissoc_1)
   & ((prop: string | number, obj: ObjRec) => ObjRec)
 

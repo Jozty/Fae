@@ -6,18 +6,18 @@ import { isArray, isString } from './utils/is.ts'
 
 // @types
 // prettier-ignore
-type Concat_2<L extends any[] | string> = (b: L) => InferType<L>
+type Concat_2<L extends unknown[] | string> = (b: L) => InferType<L>
 
 // prettier-ignore
-type Concat_1<L extends any[] | string> = (a: L) => InferType<L>
+type Concat_1<L extends unknown[] | string> = (a: L) => InferType<L>
 
 // prettier-ignore
 type Concat =
-  & (<L extends any[] | string>(a: L, b?: PH) => Concat_2<InferType<L>>)
-  & (<L extends any[] | string>(a: PH, b: L) => Concat_1<InferType<L>>)
-  & (<L extends any[] | string>(a: L, b: L) => InferType<L>)
+  & (<L extends unknown[] | string>(a: L) => Concat_2<InferType<L>>)
+  & (<L extends unknown[] | string>(a: PH, b: L) => Concat_1<InferType<L>>)
+  & (<L extends unknown[] | string>(a: L, b: L) => InferType<L>)
 
-function _concat<L extends any[] | string, T>(a: L, b: L): L {
+function _concat<L extends unknown[] | string, T>(a: L, b: L): L {
   if (isArray<T>(a) && isArray<T>(b)) return a.concat(b) as L
   if (isString(a) && isString(b)) return (a + b) as L
   throw new TypeError(

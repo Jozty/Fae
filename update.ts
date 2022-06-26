@@ -14,28 +14,28 @@ type Update_3<T> = (list: T[]) => T[]
 
 // prettier-ignore
 type Update_2_3 =
-  & (<T>(value: T, list?: PH) => Update_3<InferPrimitive<T>>)
+  & (<T>(value: T) => Update_3<InferPrimitive<T>>)
   & (<T>(value: PH, list: T[]) => Update_2<T>)
   & (<T>(value: T, list: T[]) => T[])
 
 // prettier-ignore
 type Update_1_3<T> =
-  & ((index: number, list?: PH) => Update_3<T>)
+  & ((index: number) => Update_3<T>)
   & ((index: PH, list: T[]) => Update_1<T>)
   & ((index: number, list: T[]) => T[])
 
 // prettier-ignore
 type Update_1_2<T> =
-  & ((index: number, value?: PH) => Update_2<T>)
+  & ((index: number) => Update_2<T>)
   & ((index: PH, value: T) => Update_1<T>)
   & ((index: number, value: T) => T[])
 
 // prettier-ignore
 type Update =
-  & ((index: number, value?: PH, list?: PH) => Update_2_3)
-  & (<T>(index: PH, value: T, list?: PH) => Update_1_3<InferPrimitive<T>>)
+  & ((index: number) => Update_2_3)
+  & (<T>(index: PH, value: T) => Update_1_3<InferPrimitive<T>>)
   & (<T>(index: PH, value: PH, list: T[]) => Update_1_2<T>)
-  & (<T>(index: number, value: T, list?: PH) => Update_3<InferPrimitive<T>>)
+  & (<T>(index: number, value: T) => Update_3<InferPrimitive<T>>)
   & (<T>(index: number, value: PH, list: T[]) => Update_2<T>)
   & (<T>(index: PH, value: T, list: T[]) => Update_1<T>)
   & (<T>(index: number, value: T, list: T[]) => T[])

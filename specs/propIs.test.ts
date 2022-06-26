@@ -22,21 +22,18 @@ describe('propIs', () => {
     eq(p_2_3('a')(obj), true)
     eq(p_2_3('a', obj), true)
     eq(p_2_3(_, obj)('a'), true)
-    eq(p_2_3('a', _)(obj), true)
 
     const p_1_3 = propIs(_, 'a')
 
     eq(p_1_3('Number')(obj), true)
     eq(p_1_3('Number', obj), true)
     eq(p_1_3(_, obj)('Number'), true)
-    eq(p_1_3('Number', _)(obj), true)
 
     const p_1_2 = propIs(_, _, obj)
 
     eq(p_1_2('Number')('a'), true)
     eq(p_1_2('Number', 'a'), true)
     eq(p_1_2(_, 'a')('Number'), true)
-    eq(p_1_2('Number', _)('a'), true)
 
     const p_3 = propIs('Number', 'a')
     eq(p_3(obj), true)

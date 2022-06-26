@@ -43,7 +43,7 @@ describe('eqProps', () => {
 
   it('should test curried versions too', () => {
     eq(eqProps(_, { value: 0 }, { value: -0 })('value'), false)
-    eq(eqProps('value', _)({ value: -0 }, { value: 0 }), false)
+    eq(eqProps('value')({ value: -0 }, { value: 0 }), false)
     eq(
       eqProps(
         _,
@@ -53,11 +53,17 @@ describe('eqProps', () => {
       true,
     )
     eq(
-      eqProps('age', _)(
+      eqProps('age')(
         { name: 'shubham', age: 10 },
         { name: 'shubham', age: 12 },
       ),
       false,
+    )
+    eq(
+      eqProps('age', { name: 'shubham', age: 10 })(
+        { name: 'shubham', age: 10 }
+      ),
+      true,
     )
   })
 })

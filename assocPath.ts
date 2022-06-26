@@ -15,39 +15,39 @@ import type { PH, ObjRec } from './utils/types.ts'
 // @types
 type AssocPath_1 = (path: Path) => ObjRec
 
-type AssocPath_2 = (val: any) => ObjRec
+type AssocPath_2 = (val: unknown) => ObjRec
 
 type AssocPath_3 = (obj: ObjRec) => ObjRec
 
 // prettier-ignore
 type AssocPath_2_3 =
-  & ((val: any, obj?: PH) => AssocPath_3)
+  & ((val: unknown) => AssocPath_3)
   & ((val: PH, obj: ObjRec) => AssocPath_2)
-  & ((val: any, obj: ObjRec) => ObjRec)
+  & ((val: unknown, obj: ObjRec) => ObjRec)
 
 // prettier-ignore
 type AssocPath_1_3 =
-  & ((path: Path, obj?: PH) => AssocPath_3)
+  & ((path: Path) => AssocPath_3)
   & ((path: PH, obj: ObjRec) => AssocPath_1)
   & ((path: Path, obj: ObjRec) => ObjRec)
 
 // prettier-ignore
 type AssocPath_1_2 =
-  & ((path: Path, val?: PH) => AssocPath_2)
-  & ((path: PH, val: any) => AssocPath_1)
-  & ((path: Path, val: any) => ObjRec)
+  & ((path: Path) => AssocPath_2)
+  & ((path: PH, val: unknown) => AssocPath_1)
+  & ((path: Path, val: unknown) => ObjRec)
 
 // prettier-ignore
 type AssocPath =
-  & ((path: Path, val?: PH, obj?: PH) => AssocPath_2_3)
-  & ((path: PH, val: any, obj?: PH) => AssocPath_1_3)
+  & ((path: Path) => AssocPath_2_3)
+  & ((path: PH, val: unknown) => AssocPath_1_3)
   & ((path: PH, val: PH, obj: ObjRec) => AssocPath_1_2)
-  & ((path: Path, val: any, obj?: PH) => AssocPath_3)
+  & ((path: Path, val: unknown) => AssocPath_3)
   & ((path: Path, val: PH, obj: ObjRec) => AssocPath_2)
-  & ((path: PH, val: any, obj: ObjRec) => AssocPath_1)
-  & ((path: Path, val: any, obj: ObjRec) => ObjRec)
+  & ((path: PH, val: unknown, obj: ObjRec) => AssocPath_1)
+  & ((path: Path, val: unknown, obj: ObjRec) => ObjRec)
 
-function _assocPath(path: Path, val: any, obj: ObjRec) {
+function _assocPath(path: Path, val: unknown, obj: ObjRec) {
   if (path.length === 0) return val
   const p = getPath(path)
 
@@ -65,7 +65,7 @@ function _assocPath(path: Path, val: any, obj: ObjRec) {
   }
 
   if (isInteger(prop) && isArray(obj)) {
-    const result: any[] = [...obj]
+    const result: unknown[] = [...obj]
     result[prop] = val
     return result
   }

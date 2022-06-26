@@ -12,7 +12,7 @@ type EndsWith_1<L extends any[] | string> = (suffix: L) => boolean
 
 // prettier-ignore
 type EndsWith =
- & (<L extends any[] | string>(suffix: L, functor?: PH) => EndsWith_2<InferType<L>>)
+ & (<L extends any[] | string>(suffix: L) => EndsWith_2<InferType<L>>)
  & (<L extends any[] | string>(suffix: PH, functor: L) => EndsWith_1<InferType<L>>)
  & (<L extends any[] | string>(suffix: L, functor: L) => boolean)
 

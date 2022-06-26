@@ -35,7 +35,6 @@ describe('append', () => {
 
     eq(append(a, b), expected)
     eq(append(a)(b), expected)
-    eq(append(a, _)(b), expected)
     eq(append(_, b)(a), expected)
   })
 })

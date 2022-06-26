@@ -8,7 +8,7 @@ describe('prop', () => {
   it('should work with curried functions too', () => {
     eq(prop('name', obj), 'John')
     eq(prop('name')(obj), 'John')
-    eq(prop('name', _)(obj), 'John')
+    eq(prop('name')(obj), 'John')
     eq(prop(_, obj)('name'), 'John')
   })
 
@@ -63,12 +63,14 @@ describe('prop', () => {
   it('should show the same behavior as path for an undefined object', () => {
     let propResult, propException, pathResult, pathException
     try {
+      // @ts-expect-error: it should have been object instead of undefined
       propResult = prop('name', undefined)
     } catch (e) {
       propException = e
     }
 
     try {
+      // @ts-expect-error: it should have been object instead of undefined
       pathResult = path(['name'], undefined)
     } catch (e) {
       pathException = e

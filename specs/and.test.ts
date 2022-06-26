@@ -40,7 +40,6 @@ describe('and', () => {
   })
 
   it('should work on curried versions too', () => {
-    eq(and(_, undefined)(undefined), false)
     eq(and('')(0n), false)
     eq(and(undefined)(undefined), false)
     eq(and(112)(undefined), false)

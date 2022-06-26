@@ -7,15 +7,15 @@ import { lift } from './lift.ts'
 import { or } from './or.ts'
 
 // @types
-type Either_2<T> = (g: T) => T
+type Either_2<A extends unknown[]> = (g: Func<A>) => Func<A, boolean>
 
-type Either_1<T> = (f: T) => T
+type Either_1<A extends unknown[]> = (f: Func<A>) => Func<A, boolean>
 
 // prettier-ignore
 type Either =
-  & (<T>(f: T, g?: PH) => Either_2<T>)
-  & (<T>(f: PH, g: T) => Either_1<T>)
-  & (<T>(f: T, g: T) => T)
+  & (<A extends unknown[]>(f: Func<A>) => Either_2<A>)
+  & (<A extends unknown[]>(f: PH, g: Func<A>) => Either_1<A>)
+  & (<A extends unknown[]>(f: Func<A>, g: Func<A>) => Func<A, boolean>)
 
 function _either<T extends Func>(f: T, g: T): T {
   if (isFunction(f)) {

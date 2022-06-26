@@ -98,7 +98,6 @@ describe('map', () => {
 
     eq(map(a, b), expected)
     eq(map(a)(b), expected)
-    eq(map(a, _)(b), expected)
     eq(map(_, b)(a), expected)
   })
 })

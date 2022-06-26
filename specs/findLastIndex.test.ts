@@ -60,7 +60,7 @@ describe('findLastIndex', () => {
   })
 
   it('should return the curried versions too', () => {
-    eq(findLastIndex(even, _)(a), 15)
+    eq(findLastIndex(even)(a), 15)
     eq(findLastIndex(_, a)(gt100), 9)
     eq(findLastIndex(isStr)(a), 3)
   })

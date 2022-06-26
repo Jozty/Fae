@@ -12,28 +12,28 @@ type Adjust_3<T> = (list: T[]) => T[]
 
 // prettier-ignore
 type Adjust_2_3 =
-  & (<T>(fn: FuncArr1<T, T>, list?: PH) => Adjust_3<T>)
+  & (<T>(fn: FuncArr1<T, T>) => Adjust_3<T>)
   & (<T>(fn: PH, list: T[]) => Adjust_2<T>)
   & (<T>(fn: FuncArr1<T, T>, list: T[]) => T[])
 
 // prettier-ignore
 type Adjust_1_3<T> =
-  & ((index: number, list?: PH) => Adjust_3<T>)
+  & ((index: number) => Adjust_3<T>)
   & ((index: PH, list: T[]) => Adjust_1<T>)
   & ((index: number, list: T[]) => T[])
 
 // prettier-ignore
 type Adjust_1_2<T> =
-  & ((index: number, fn?: PH) => Adjust_2<T>)
+  & ((index: number) => Adjust_2<T>)
   & ((index: PH, fn: FuncArr1<T, T>) => Adjust_1<T>)
   & ((index: number, fn: FuncArr1<T, T>) => T[])
 
 // prettier-ignore
 type Adjust =
-  & ((index: number, fn?: PH, list?: PH) => Adjust_2_3)
-  & (<T>(index: PH, fn: FuncArr1<T, T>, list?: PH) => Adjust_1_3<T>)
+  & ((index: number) => Adjust_2_3)
+  & (<T>(index: PH, fn: FuncArr1<T, T>) => Adjust_1_3<T>)
   & (<T>(index: PH, fn: PH, list: T[]) => Adjust_1_2<T>)
-  & (<T>(index: number, fn: FuncArr1<T, T>, list?: PH) => Adjust_3<T>)
+  & (<T>(index: number, fn: FuncArr1<T, T>) => Adjust_3<T>)
   & (<T>(index: number, fn: PH, list: T[]) => Adjust_2<T>)
   & (<T>(index: PH, fn: FuncArr1<T, T>, list: T[]) => Adjust_1<T>)
   & (<T>(index: number, fn: FuncArr1<T, T>, list: T[]) => T[])

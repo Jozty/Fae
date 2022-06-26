@@ -36,7 +36,6 @@ describe('trim', () => {
   it('should work with curried versions', () => {
     eq(trim('!!!abcabc!!', '!!'), '!abcabc')
     eq(trim('!!!abcabc!!')('!!'), '!abcabc')
-    eq(trim('!!!abcabc!!', _)('!!'), '!abcabc')
     eq(trim(_, '!!')('!!!abcabc!!'), '!abcabc')
   })
 })

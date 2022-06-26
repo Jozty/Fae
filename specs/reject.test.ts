@@ -45,7 +45,6 @@ describe('reject', () => {
 
     eq(reject(a, b), expected)
     eq(reject(a)(b), expected)
-    eq(reject(a, _)(b), expected)
     eq(reject(_, b)(a), expected)
   })
 })

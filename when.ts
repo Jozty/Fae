@@ -12,28 +12,28 @@ type When_3<T, R> = (value: T) => T | R
 
 // prettier-ignore
 type When_2_3<T> =
-  & (<R>(func: FuncArr1<T, R>, value?: PH) => When_3<T, R>)
+  & (<R>(func: FuncArr1<T, R>) => When_3<T, R>)
   & ((func: PH, value: T) => When_2<T>)
   & (<R>(func: FuncArr1<T, R>, value: T) => T | R)
 
 // prettier-ignore
 type When_1_3<T, R> =
-  & ((predicate: Predicate1<T>, value?: PH) => When_3<T, R>)
+  & ((predicate: Predicate1<T>) => When_3<T, R>)
   & ((predicate: PH, value: T) => When_1<T, R>)
   & ((predicate: Predicate1<T>, value: T) => T | R)
 
 // prettier-ignore
 type When_1_2<T> =
-  & ((predicate: Predicate1<T>, func?: PH) => When_2<T>)
+  & ((predicate: Predicate1<T>) => When_2<T>)
   & (<R>(predicate: PH, func: FuncArr1<T, R>) => When_1<T, R>)
   & (<R>(predicate: Predicate1<T>, func: FuncArr1<T, R>) => T | R)
 
 // prettier-ignore
 type When =
-  & (<T>(predicate: Predicate1<T>, func?: PH, value?: PH) => When_2_3<T>)
-  & (<T, R>(predicate: PH, func: FuncArr1<T, R>, value?: PH) => When_1_3<T, R>)
+  & (<T>(predicate: Predicate1<T>) => When_2_3<T>)
+  & (<T, R>(predicate: PH, func: FuncArr1<T, R>) => When_1_3<T, R>)
   & (<T>(predicate: PH, func: PH, value: T) => When_1_2<T>)
-  & (<T, R>(predicate: Predicate1<T>, func: FuncArr1<T, R>, value?: PH) => When_3<T, R>)
+  & (<T, R>(predicate: Predicate1<T>, func: FuncArr1<T, R>) => When_3<T, R>)
   & (<T>(predicate: Predicate1<T>, func: PH, value: T) => When_2<T>)
   & (<T, R>(predicate: PH, func: FuncArr1<T, R>, value: T) => When_1<T, R>)
   & (<T, R>(predicate: Predicate1<T>, func: FuncArr1<T, R>, value: T) => T | R)

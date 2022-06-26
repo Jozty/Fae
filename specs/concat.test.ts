@@ -21,7 +21,6 @@ describe('concat', () => {
 
   it('should test curried versions too', () => {
     eq(concat(_, 'bar')('foo'), 'foobar')
-    eq(concat('x', _)(''), 'x')
     eq(concat(_, ['a'])(['c', 'd']), ['c', 'd', 'a'])
     eq(concat(_, [] as string[])(['c', 'd']), ['c', 'd'])
   })
@@ -29,11 +28,9 @@ describe('concat', () => {
   it('should throw error with incompatible types', () => {
     const message =
       'Types are not compatible. Both the arguments passed must be of same type.'
-    //// @ts-expect-error
-    // @ts-ignore
+    // @ts-expect-error: different type of args are passed
     thr(() => concat('bar', ['a', 'foo']), message)
-    //// @ts-expect-error
-    // @ts-ignore
+    // @ts-expect-error: different type of args are passed
     thr(() => concat(['a', 'foo'], 'bar'), message)
   })
 })

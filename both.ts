@@ -7,22 +7,21 @@ import { lift } from './lift.ts'
 import { and } from './and.ts'
 
 // @types
-type Both_2<T> = (g: T) => T
+type Both_2<A extends unknown[]> = (g: Func<A>) => Func<A, boolean>
 
-type Both_1<T> = (f: T) => T
+type Both_1<A extends unknown[]> = (f: Func<A>) => Func<A, boolean>
 
 // prettier-ignore
 type Both =
-  & (<T>(f: T, g?: PH) => Both_2<T>)
-  & (<T>(f: PH, g: T) => Both_1<T>)
-  & (<T>(f: T, g: T) => T)
+  & (<A extends unknown[]>(f: Func<A>) => Both_2<A>)
+  & (<A extends unknown[]>(f: PH, g: Func<A>) => Both_1<A>)
+  & (<A extends unknown[]>(f: Func<A>, g: Func<A>) => Func<A, boolean>)
 
-function _both<T extends Func>(f: T, g: T): T {
+function _both<A extends unknown[]>(f: Func<A>, g: Func<A>): Func<A, boolean> {
   if (isFunction(f)) {
-    const __both = function (this: any, ...args: any[]) {
-      return f.apply(this, args) && g.apply(this, args)
+    return function (this: unknown, ...args: A) {
+      return !!(f.apply(this, args) && g.apply(this, args))
     }
-    return __both as T
   } else {
     return lift(and)(f, g)
   }

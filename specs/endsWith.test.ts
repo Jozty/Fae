@@ -45,8 +45,8 @@ describe('startsWith', () => {
 
   it('should test curried versions too', () => {
     eq(endsWith(_, ['a', 'b', 'c'])(['a', 'b', 'c']), true)
-    eq(endsWith(['b'], _)(['a', 'b', 'c']), false)
+    eq(endsWith(['b'])(['a', 'b', 'c']), false)
     eq(endsWith(_, 'astrology')('olog'), false)
-    eq(endsWith('ology', _)('astrology'), true)
+    eq(endsWith('ology')('astrology'), true)
   })
 })

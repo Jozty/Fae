@@ -14,7 +14,7 @@ type DropLast_1<L extends any[] | string> = (n: number) => InferType<L>
 
 // prettier-ignore
 type DropLast =
-  & ((n: number, list?: PH) => DropLast_2)
+  & ((n: number) => DropLast_2)
   & (<L extends any[] | string>(n: PH, list: L) => DropLast_1<L>)
   & (<L extends any[] | string>(n: number, list: L) => InferType<L>)
 

@@ -25,7 +25,7 @@ export function isInteger(x: any): x is number {
   return Number.isInteger(x)
 }
 
-export function isArray<T = any>(x: any): x is Array<T> {
+export function isArray<T = any>(x: unknown): x is Array<T> {
   return Array.isArray(x)
 }
 

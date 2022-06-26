@@ -16,29 +16,28 @@ type Slice_3 = <L extends ArrayLike<any> | string>(list: L) => InferType<L>
 
 // prettier-ignore
 type Slice_2_3 =
-  & ((toIndex: number, list?: PH) => Slice_3)
+  & ((toIndex: number) => Slice_3)
   & (<L extends ArrayLike<any> | string>(toIndex: PH, list: L) => Slice_2<L>)
   & (<L extends ArrayLike<any> | string>(toIndex: number, list: L) => InferType<L>)
 
 // prettier-ignore
 type Slice_1_3 =
-  & ((fromIndex: number, list?: PH) => Slice_3)
+  & ((fromIndex: number) => Slice_3)
   & (<L extends ArrayLike<any> | string>(fromIndex: PH, list: L) => Slice_1<L>)
   & (<L extends ArrayLike<any> | string>(fromIndex: number, list: L) => InferType<L>)
 
 // prettier-ignore
 type Slice_1_2<L extends ArrayLike<any> | string> =
-  & ((fromIndex: number, toIndex?: PH) => Slice_2<L>)
+  & ((fromIndex: number) => Slice_2<L>)
   & ((fromIndex: PH, toIndex: number) => Slice_1<L>)
   & ((fromIndex: number, toIndex: number) => InferType<L>)
 
 // prettier-ignore
 type Slice =
-  & ((fromIndex?: PH, toIndex?: PH, list?: PH) => Slice)
-  & ((fromIndex: number, toIndex?: PH, list?: PH) => Slice_2_3)
-  & ((fromIndex: PH, toIndex: number, list?: PH) => Slice_1_3)
+  & ((fromIndex: number) => Slice_2_3)
+  & ((fromIndex: PH, toIndex: number) => Slice_1_3)
   & (<L extends ArrayLike<any> | string>(fromIndex: PH, toIndex: PH, list: L) => Slice_1_2<L>)
-  & ((fromIndex: number, toIndex: number, list?: PH) => Slice_3)
+  & ((fromIndex: number, toIndex: number) => Slice_3)
   & (<L extends ArrayLike<any> | string>(fromIndex: number, toIndex: PH, list: L) => Slice_2<L>)
   & (<L extends ArrayLike<any> | string>(fromIndex: PH, toIndex: number, list: L) => Slice_1<L>)
   & (<L extends ArrayLike<any> | string>(fromIndex: number, toIndex: number, list: L) => InferType<L>)
