@@ -63,6 +63,6 @@ describe('path', () => {
   it('should test curried versions too', () => {
     eq(path('a')({ a: 2, b: 3, c: { k: [1, 2, 3] } }), 2)
     eq(path(_, { a: 2, b: 3, c: { k: [1, 2, 3] } })('c.k'), [1, 2, 3])
-    eq(path('c.k.0', _)({ a: 2, b: 3, c: { k: [1, 2, 3] } }), 1)
+    eq(path('c.k.0')({ a: 2, b: 3, c: { k: [1, 2, 3] } }), 1)
   })
 })

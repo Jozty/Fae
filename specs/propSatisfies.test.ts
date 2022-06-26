@@ -21,21 +21,18 @@ describe('propSatisfies', () => {
     eq(p_2_3('y')(obj), false)
     eq(p_2_3('y', obj), false)
     eq(p_2_3(_, obj)('y'), false)
-    eq(p_2_3('y', _)(obj), false)
 
     const p_1_3 = propSatisfies(_, 'y')
 
     eq(p_1_3(isPositive)(obj), false)
     eq(p_1_3(isPositive, obj), false)
     eq(p_1_3(_, obj)(isPositive), false)
-    eq(p_1_3(isPositive, _)(obj), false)
 
     const p_1_2 = propSatisfies(_, _, obj)
 
     eq(p_1_2(isPositive)('y'), false)
     eq(p_1_2(isPositive, 'y'), false)
     eq(p_1_2(_, 'y')(isPositive), false)
-    eq(p_1_2(isPositive, _)('y'), false)
 
     const p_3 = propSatisfies(isPositive, 'y')
     eq(p_3(obj), false)

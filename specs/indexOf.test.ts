@@ -79,8 +79,8 @@ describe('indexOf', () => {
 
   it('should test curried versions too', () => {
     eq(indexOf(_, [-0])(0), -1)
-    eq(indexOf(2, _)(list), 1)
-    eq(indexOf(5, _)(input), 4)
+    eq(indexOf(2)(list), 1)
+    eq(indexOf(5)(input), 4)
     eq(indexOf(_, input)(2), 1)
   })
 })

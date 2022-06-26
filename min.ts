@@ -6,12 +6,9 @@ import type { PH } from './utils/types.ts'
 // @types
 type Min_2<T extends number | string | Date> = (b: T) => T
 
-type Min_1<T extends number | string | Date> = (a: T) => T
-
 // prettier-ignore
 type _Min<T extends number | string | Date> =
-  & ((a: T, b?: PH) => Min_2<T>)
-  & ((a: PH, b: T) => Min_1<T>)
+  & ((a: T) => Min_2<T>)
   & ((a: T, b: T) => T)
 
 type Min = _Min<number> & _Min<string> & _Min<Date>

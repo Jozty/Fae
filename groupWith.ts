@@ -12,7 +12,7 @@ type GroupWith_1<L extends T[] | string, T> = (predicate: Predicate2<T>) => L[]
 
 // prettier-ignore
 type GroupWith =
-  & (<L extends T[] | string, T>(predicate: Predicate2<T>, functor?: PH) => GroupWith_2<L, T>)
+  & (<L extends T[] | string, T>(predicate: Predicate2<T>) => GroupWith_2<L, T>)
   & (<L extends T[] | string, T>(predicate: PH, functor: L) => GroupWith_1<L, T>)
   & (<L extends T[] | string, T>(predicate: Predicate2<T>, functor: L) => L[])
 

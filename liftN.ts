@@ -14,7 +14,7 @@ type LiftN_1 = (arity: number) => Func
 
 // prettier-ignore
 type LiftN =
-  & ((arity: number, fn?: PH) => LiftN_2)
+  & ((arity: number) => LiftN_2)
   & ((arity: PH, fn: Func) => LiftN_1)
   & ((arity: number, fn: Func) => Func)
 

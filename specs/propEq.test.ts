@@ -28,21 +28,18 @@ describe('propEq', () => {
     eq(p_2_3('Shubham')(obj1), true)
     eq(p_2_3('Shubham', obj1), true)
     eq(p_2_3(_, obj1)('Shubham'), true)
-    eq(p_2_3('Shubham', _)(obj1), true)
 
     const p_1_3 = propEq(_, 'Shubham')
 
     eq(p_1_3('name')(obj1), true)
     eq(p_1_3('name', obj1), true)
     eq(p_1_3(_, obj1)('name'), true)
-    eq(p_1_3('name', _)(obj1), true)
 
     const p_1_2 = propEq(_, _, obj1)
 
     eq(p_1_2('name')('Shubham'), true)
     eq(p_1_2('name', 'Shubham'), true)
     eq(p_1_2(_, 'Shubham')('name'), true)
-    eq(p_1_2('name', _)('Shubham'), true)
 
     const p_3 = propEq('name', 'Shubham')
     eq(p_3(obj1), true)

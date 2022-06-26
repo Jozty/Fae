@@ -45,7 +45,7 @@ type Map_1<F extends Obj<any> | Func | any[]> = (<R>(fn: FuncArr1<MapInferElemen
 
 // prettier-ignore
 type Map =
-  & (<T, R>(fn: FuncArr1<T, R>, functor?: PH) => Map_2<T, R>)
+  & (<T, R>(fn: FuncArr1<T, R>) => Map_2<T, R>)
   & (<F extends Obj<any> | Func | any[]>(fn: PH, functor: F) => Map_1<F>)
   & (<F extends Obj<T> | Func | T[], T, R>(fn: FuncArr1<T, R>, functor: F) => MapReturnType<F, R>)
 

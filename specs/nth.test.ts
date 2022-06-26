@@ -149,6 +149,6 @@ describe('nth', () => {
   it('should test curried versions too', () => {
     eq(nth(2)([50, 30, 22, 21]), 22)
     eq(nth(_, [25, 50, 22, 19])(-1), 19)
-    eq(nth(4, _)(['a', 'an', 'the']), undefined)
+    eq(nth(4)(['a', 'an', 'the']), undefined)
   })
 })

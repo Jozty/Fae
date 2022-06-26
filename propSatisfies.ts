@@ -13,29 +13,28 @@ type PropSatisfies_3<T> = (obj: Obj<T>) => boolean
 
 // prettier-ignore
 type PropSatisfies_2_3<T> =
-  & ((name: Prop, obj?: PH) => PropSatisfies_3<T>)
+  & ((name: Prop) => PropSatisfies_3<T>)
   & ((name: PH, obj: Obj<T>) => PropSatisfies_2<T>)
   & ((name: Prop, obj: Obj<T>) => boolean)
 
 // prettier-ignore
 type PropSatisfies_1_3 =
-  & (<T>(pred: Predicate1<T>, obj?: PH) => PropSatisfies_3<T>)
+  & (<T>(pred: Predicate1<T>) => PropSatisfies_3<T>)
   & (<T>(pred: PH, obj: Obj<T>) => PropSatisfies_1<T>)
   & (<T>(pred: Predicate1<T>, obj: Obj<T>) => boolean)
 
 // prettier-ignore
 type PropSatisfies_1_2<T> =
-  & ((pred: Predicate1<T>, name?: PH) => PropSatisfies_2<T>)
+  & ((pred: Predicate1<T>) => PropSatisfies_2<T>)
   & ((pred: PH, name: Prop) => PropSatisfies_1<T>)
   & ((pred: Predicate1<T>, name: Prop, ) => boolean)
 
 // prettier-ignore
 type PropSatisfies =
-  & ((pred?: PH, name?: PH, obj?: PH) => PropSatisfies)
-  & (<T>(pred: Predicate1<T>, name?: PH, obj?: PH,) => PropSatisfies_2_3<T>)
-  & ((pred: PH, name: Prop, obj?: PH) => PropSatisfies_1_3)
+  & (<T>(pred: Predicate1<T>) => PropSatisfies_2_3<T>)
+  & ((pred: PH, name: Prop) => PropSatisfies_1_3)
   & (<T>(pred: PH, name: PH, obj: Obj<T>) => PropSatisfies_1_2<T>)
-  & (<T>(pred: Predicate1<T>, name: Prop, obj?: PH) => PropSatisfies_3<T>)
+  & (<T>(pred: Predicate1<T>, name: Prop) => PropSatisfies_3<T>)
   & (<T>(pred: Predicate1<T>, name: PH, obj: Obj<T>) => PropSatisfies_2<T>)
   & (<T>(pred: PH, name: Prop, obj: Obj<T>) => PropSatisfies_1<T>)
   & (<T>(pred: Predicate1<T>, name: Prop, obj: Obj<T>) => boolean)

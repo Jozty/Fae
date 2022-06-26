@@ -14,28 +14,28 @@ type PropIs_3 = <T>(obj: Obj<T>) => boolean
 
 // prettier-ignore
 type PropIs_2_3 =
-  & ((name: Prop, obj?: PH) => PropIs_3)
+  & ((name: Prop) => PropIs_3)
   & (<T>(name: PH, obj: Obj<T>) => PropIs_2<T>)
   & (<T>(name: Prop, obj: Obj<T>) => boolean)
 
 // prettier-ignore
 type PropIs_1_3 =
-  & ((type: string, obj?: PH) => PropIs_3)
+  & ((type: string) => PropIs_3)
   & (<T>(type: PH, obj: Obj<T>) => PropIs_1<T>)
   & (<T>(type: string, obj: Obj<T>) => boolean)
 
 // prettier-ignore
 type PropIs_1_2<T> =
-  & ((type: string, name?: PH) => PropIs_2<T>)
+  & ((type: string) => PropIs_2<T>)
   & ((type: PH, name: Prop) => PropIs_1<T>)
   & ((type: string, name: Prop) => boolean)
 
 // prettier-ignore
 type PropIs =
-  & ((type: string, name?: PH, obj?: PH) => PropIs_2_3)
-  & ((type: PH, name: Prop, obj?: PH) => PropIs_1_3)
+  & ((type: string) => PropIs_2_3)
+  & ((type: PH, name: Prop) => PropIs_1_3)
   & (<T>(type: PH, name: PH, obj: Obj<T>) => PropIs_1_2<T>)
-  & ((type: string, name: Prop, obj?: PH) => PropIs_3)
+  & ((type: string, name: Prop) => PropIs_3)
   & (<T>(type: string, name: PH, obj: Obj<T>) => PropIs_2<T>)
   & (<T>(type: PH, name: Prop, obj: Obj<T>) => PropIs_1<T>)
   & (<T>(type: string, name: Prop, obj: Obj<T>,) => boolean)

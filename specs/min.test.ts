@@ -37,13 +37,16 @@ describe('min', () => {
     let d2: Date = new Date('01-01-2002')
 
     eq(min(d1)(d2), d1)
+    // @ts-expect-error: because min(a, b) === min(b, a)
     eq(min(_, d1)(d2), d1)
   })
 
   it('should test curried versions too', () => {
     eq(min(25)(50), 25)
+    // @ts-expect-error: because min(a, b) === min(b, a)
     eq(min(_, 25)(20), 20)
-    eq(min(25, _)(30), 25)
+    eq(min(25)(30), 25)
+    // @ts-expect-error: because min(a, b) === min(b, a)
     eq(min(_, 'ab')('aaa'), 'aaa')
     eq(min('aa')('aab'), 'aa')
   })

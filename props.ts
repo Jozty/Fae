@@ -12,7 +12,7 @@ type Props_1<T> = (p: Prop[]) => (T | undefined)[]
 
 // prettier-ignore
 type Props =
-  & ((p: Prop[], obj?: PH) => Props_2)
+  & ((p: Prop[]) => Props_2)
   & (<T>(p: PH, obj: Obj<T> | ArrayLike<T>) => Props_1<T>)
   & (<T>(p: Prop[], obj: Obj<T> | ArrayLike<T>,) => (T | undefined)[])
 

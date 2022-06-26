@@ -13,7 +13,7 @@ type Pluck_1<T> = (p: Prop) => T[]
 
 // prettier-ignore
 type Pluck =
-  & ((p: Prop, list?: PH) => Pluck_2)
+  & ((p: Prop) => Pluck_2)
   & (<T>(p: PH, list: Obj<T>[]) => Pluck_1<T>)
   & (<T>(p: Prop, list: Obj<T>[]) => T[])
 

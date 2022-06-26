@@ -14,28 +14,28 @@ type PropEq_3<T1> = <T>(obj: Obj<T | T1>) => boolean
 
 // prettier-ignore
 type PropEq_2_3 =
-  & (<T>(val: T, obj?: PH) => PropEq_3<T>)
+  & (<T>(val: T) => PropEq_3<T>)
   & (<T>(val: PH, obj: Obj<T>) => PropEq_2<T>)
   & (<T>(val: T, obj: Obj<T>) => boolean)
 
 // prettier-ignore
 type PropEq_1_3<T1> =
-  & ((name: Prop, obj?: PH) => PropEq_3<T1>)
+  & ((name: Prop) => PropEq_3<T1>)
   & (<T>(name: PH, obj: Obj<T | T1>) => PropEq_1)
   & (<T>(name: Prop, obj: Obj<T | T1>) => boolean)
 
 // prettier-ignore
 type PropEq_1_2<T> =
-  & ((name: Prop, val?: PH) => PropEq_2<T>)
+  & ((name: Prop) => PropEq_2<T>)
   & ((name: PH, val: T) => PropEq_1)
   & ((name: Prop, val: T) => boolean)
 
 // prettier-ignore
 type PropEq =
-  & ((name: Prop, val?: PH, obj?: PH) => PropEq_2_3)
-  & (<T>(name: PH, val: T, obj?: PH) => PropEq_1_3<T>)
+  & ((name: Prop) => PropEq_2_3)
+  & (<T>(name: PH, val: T) => PropEq_1_3<T>)
   & (<T>(name: PH, val: PH, obj: Obj<T>) => PropEq_1_2<T>)
-  & (<T>(name: Prop, val: T, obj?: PH) => PropEq_3<T>)
+  & (<T>(name: Prop, val: T) => PropEq_3<T>)
   & (<T>(name: Prop, val: PH, obj: Obj<T>) => PropEq_2<T>)
   & (<T>(name: PH, val: T, obj: Obj<T>) => PropEq_1)
   & (<T>(name: Prop, val: T, obj: Obj<T>) => boolean)

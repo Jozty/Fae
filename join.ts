@@ -2,7 +2,7 @@
 
 import { reduce } from './reduce.ts'
 
-import type { PH, FunctorWithArLk } from './utils/types.ts'
+import type { PH, FunctorWithArLk, EmptyObj } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 import {
   isArray,
@@ -20,7 +20,7 @@ type Join_1<T> = (separator: string | number) => string
 
 // prettier-ignore
 type Join =
-  & ((separator: string | number, functor?: PH) => Join_2)
+  & ((separator: string | number) => Join_2)
   & (<T>(separator: PH, functor: FunctorWithArLk<T>) => Join_1<T>)
   & (<T>(separator: string | number, functor: FunctorWithArLk<T>,) => string)
 
@@ -28,7 +28,7 @@ function _arrayJoin<T>(separator: string, list: Array<T>) {
   return list.join(separator)
 }
 
-function _join<T extends object>(
+function _join<T extends EmptyObj>(
   separator: string | number,
   functor: FunctorWithArLk<T>,
 ) {

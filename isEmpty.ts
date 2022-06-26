@@ -1,15 +1,7 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import curryN from './utils/curry_n.ts'
 import { empty } from './empty.ts'
 import { equals } from './equals.ts'
-
-// @types
-type IsEmpty = <T>(x: T) => boolean
-
-function _isEmpty<T>(x: T) {
-  return x != null && equals(x, empty(x))
-}
 
 /**
  * Returns `true` if the given value is its type's empty value, `false`
@@ -21,4 +13,6 @@ function _isEmpty<T>(x: T) {
  *      Fae.isEmpty(null)        //=> false
  *      Fae.isEmpty({})          //=> true
  */
-export const isEmpty: IsEmpty = curryN(1, _isEmpty)
+export function isEmpty<T>(x: T) {
+  return x != null && equals(x, empty(x))
+}
