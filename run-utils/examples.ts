@@ -73,7 +73,7 @@ const outputs = await Promise.all(executedExamples.map(async (e) => {
 }));
 
 const nonEmptyOutputExamples = outputs.filter(({ output, error }) =>
-  output.length !== 0 || error.includes("Assertion failed")
+  output !== 'Example ran successfully' || error.includes("Assertion failed")
 );
 
 if (nonEmptyOutputExamples.length) {
