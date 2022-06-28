@@ -1,4 +1,4 @@
-import * as Fae from 'https://deno.land/x/fae/mod.ts';
+import * as Fae from 'https://deno.land/x/fae/mod.ts'
 
 // "or" with two input arguments
 // returns false if both args are false
@@ -21,4 +21,4 @@ console.assert(orWithTruthyValue(true) === true)
 console.assert(orWithTruthyValue('ab') === true)
 console.assert(orWithTruthyValue(2) === true)
 
-console.log("Examples successfully running");
+console.log('Examples successfully running')

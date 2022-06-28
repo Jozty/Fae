@@ -21,4 +21,4 @@ console.assert(bothFunction3() === false)
 console.assert(bothFunction4() === true)
 console.assert(bothFunction5() === false)
 
-console.log("Examples successfully running");
+console.log('Examples successfully running')
