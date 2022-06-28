@@ -82,7 +82,6 @@ describe('any', () => {
 
     eq(any(a, b), expected)
     eq(any(a)(b), expected)
-    eq(any(a, _)(b), expected)
     eq(any(_, b)(a), expected)
   })
 })

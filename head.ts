@@ -18,4 +18,4 @@ type Head = <L extends any[] | string>(functor: L) => InferElementType<L>
  *      Fae.head('abc'); //=> 'a'
  *      Fae.head(''); //=> ''
  */
-export const head: Head = curryN(1, nth(0))
+export const head: Head = nth(0)

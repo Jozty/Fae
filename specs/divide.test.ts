@@ -18,6 +18,5 @@ describe('divide', () => {
   it('should test curried versions too', () => {
     eq(divide(25)(5), 5)
     eq(divide(_, 5)(25), 5)
-    eq(divide(5, _)(25), 0.2)
   })
 })

@@ -12,7 +12,7 @@ type Any_1<T> = (predicate: Predicate1<T>) => boolean
 
 // prettier-ignore
 type Any =
-  & (<T>(predicate: Predicate1<T>, list?: PH) => Any_2<T>)
+  & (<T>(predicate: Predicate1<T>) => Any_2<T>)
   & (<T>(predicate: PH, list: T[]) => Any_1<T>)
   & (<T>(predicate: Predicate1<T>, list: T[]) => boolean)
 

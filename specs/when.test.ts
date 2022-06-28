@@ -76,10 +76,10 @@ describe('when', () => {
 
     eq(when(isNumber)(add(1))(15), 16)
     eq(ifIsNumber((add(1) as any) as T)('hello'), 'hello')
-    eq(when(equals(_, 5), _, _)(g)(5), 15)
-    eq(when(_, g, _)(equals(_, 5.1))(5), 5)
+    eq(when(equals(_, 5))(g)(5), 15)
+    eq(when(_, g)(equals(5.1))(5), 5)
     eq(when(_, _, 10)(equals(_, 10))(g), 30)
-    eq(when(equals(_, 8), g, _)(5.2), 5.2)
+    eq(when(equals(8), g)(5.2), 5.2)
     eq(when(_, add1 as Func, 3)(equals(_, 3)), 4)
     eq(when(equals(_, 5), _, 5)(add1 as Func), 6)
   })

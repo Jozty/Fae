@@ -68,7 +68,7 @@ describe('groupWith', () => {
   })
 
   it('should test curried versions too', () => {
-    eq(groupWith(equals, _)('Mississippi'), [
+    eq(groupWith(equals)('Mississippi'), [
       'M',
       'i',
       'ss',

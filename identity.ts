@@ -1,15 +1,8 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import curryN from './utils/curry_n.ts'
-
-// @types
-type Identity = <T>(x: T) => T
-
-function _identity<T = any>(x: T) {
-  return x
-}
-
 /**
  * Returns the supplied parameter
  */
-export const identity: Identity = curryN(1, _identity)
+export function identity<T>(x: T) {
+  return x
+}

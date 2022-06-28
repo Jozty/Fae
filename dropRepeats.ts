@@ -5,7 +5,6 @@ import { equals } from './equals.ts'
 import { dispatch } from './utils/dispatch.ts'
 import { DropRepeatsTransformer } from './utils/Transformers/dropRepeatsWith.ts'
 import curryN from './utils/curry_n.ts'
-import type { PH } from './utils/types.ts'
 
 // @types
 type DropRepeats = <T>(list: T[]) => T[]

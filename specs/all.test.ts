@@ -67,7 +67,6 @@ describe('all', () => {
 
     eq(all(a, b), expected)
     eq(all(a)(b), expected)
-    eq(all(a, _)(b), expected)
     eq(all(_, b)(a), expected)
   })
 })

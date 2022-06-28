@@ -13,7 +13,7 @@ type WhereEq_1<T> = (spec: Obj<T>) => boolean
 
 // prettier-ignore
 type WhereEq = (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)
-  & (<T>(spec: Obj<T>, testObj?: PH) => WhereEq_2<T>)
+  & (<T>(spec: Obj<T>) => WhereEq_2<T>)
   & (<T>(spec: PH, testObj: Obj<T>) => WhereEq_1<T>)
   & (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)
 

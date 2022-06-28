@@ -9,25 +9,21 @@ import {
 } from './utils/is.ts'
 import { getIterable } from './utils/get.ts'
 import { throwFunctorError } from './utils/throw.ts'
+import type { InferElementType } from './utils/types.ts'
 import curryN from './utils/curry_n.ts'
 
 // @types
 // prettier-ignore
-type NthReturnType<F> = F extends FunctorWithArLk<infer U>
-  ? U
-  : string
+type Nth_2 = <F extends FunctorWithArLk | string>(functor: F,) => InferElementType<F>
 
 // prettier-ignore
-type Nth_2 = <F extends FunctorWithArLk<any> | string>(functor: F,) => NthReturnType<F>
-
-// prettier-ignore
-type Nth_1<F extends FunctorWithArLk<any> | string> = (index: number) => NthReturnType<F>
+type Nth_1<F extends FunctorWithArLk | string> = (index: number) => InferElementType<F>
 
 // prettier-ignore
 type Nth =
-  & ((index: number, functor?: PH) => Nth_2)
-  & (<F extends FunctorWithArLk<any> | string>(index: PH, functor: F) => Nth_1<F>)
-  & (<F extends FunctorWithArLk<any> | string>(index: number, functor: F) => NthReturnType<F>)
+  & ((index: number) => Nth_2)
+  & (<F extends FunctorWithArLk | string>(index: PH, functor: F) => Nth_1<F>)
+  & (<F extends FunctorWithArLk | string>(index: number, functor: F) => InferElementType<F>)
 
 function _nth<F extends FunctorWithArLk<T> | string, T>(
   index: number,

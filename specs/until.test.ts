@@ -20,21 +20,18 @@ describe('until', () => {
     eq(u_2_3(b)(c), expected)
     eq(u_2_3(b, c), expected)
     eq(u_2_3(_, c)(b), expected)
-    eq(u_2_3(b, _)(c), expected)
 
     const u_1_3 = until(_, b)
 
     eq(u_1_3(a)(c), expected)
     eq(u_1_3(a, c), expected)
     eq(u_1_3(_, c)(a), expected)
-    eq(u_1_3(a, _)(c), expected)
 
     const u_1_2 = until(_, _, c)
 
     eq(u_1_2(a)(b), expected)
     eq(u_1_2(a, b), expected)
     eq(u_1_2(_, b)(a), expected)
-    eq(u_1_2(a, _)(b), expected)
 
     const u_3 = until(a, b)
     eq(u_3(c), expected)

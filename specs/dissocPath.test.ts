@@ -73,7 +73,6 @@ describe('dissocPath', () => {
 
     eq(dissocPath(a, b), expected)
     eq(dissocPath(a)(b), expected)
-    eq(dissocPath(a, _)(b), expected)
     eq(dissocPath(_, b)(a), expected)
   })
   it('should make a shallow clone of an object when the path is empty', () => {

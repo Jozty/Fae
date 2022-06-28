@@ -35,7 +35,7 @@ describe('either', () => {
     eq(f(8), true)
     eq(f(13), true)
     eq(f(7), false)
-    let g = either(even, _)(gt10)
+    let g = either(even)(gt10)
     eq(g(8), true)
     eq(g(13), true)
     eq(g(7), false)

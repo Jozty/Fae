@@ -12,7 +12,7 @@ type Chain_1<T> = <R>(f: (a: T) => R[]) => R[]
 
 // prettier-ignore
 type Chain =
-  & (<T, R>(f: (a: T) => R[], g?: PH) => Chain_2<T, R>)
+  & (<T, R>(f: (a: T) => R[]) => Chain_2<T, R>)
   & (<T>(f: PH, g: T[]) => Chain_1<T>)
   & (<T, R>(f: (a: T) => R[], g: T[]) => R[])
 

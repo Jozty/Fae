@@ -76,7 +76,6 @@ describe('whereAny', () => {
 
     eq(whereAny(spec)(test1), false)
     eq(whereAny(_, test2)(spec), true)
-    eq(whereAny(spec, _)(test1), false)
     eq(whereAny(spec, test2), true)
   })
 })

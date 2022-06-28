@@ -13,7 +13,7 @@ type Drop_1<L extends any[] | string> = (n: number) => InferType<L>
 
 // prettier-ignore
 type Drop =
-  & ((n: number, list?: PH) => Drop_2)
+  & ((n: number) => Drop_2)
   & (<L extends any[] | string>(n: PH, list: L) => Drop_1<L>)
   & (<L extends any[] | string>(n: number, list: L) => InferType<L>)
 

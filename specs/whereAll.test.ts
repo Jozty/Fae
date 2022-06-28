@@ -98,7 +98,6 @@ describe('whereAll', () => {
 
     eq(whereAll(spec)(test1), false)
     eq(whereAll(_, test2)(spec), true)
-    eq(whereAll(spec, _)(test1), false)
     eq(whereAll(spec, test2), true)
   })
 })

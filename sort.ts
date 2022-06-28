@@ -10,7 +10,7 @@ type Sort_1<T> = (comparator: Comparator<T>) => T[]
 
 // prettier-ignore
 type Sort =
-  & (<T>(comparator: Comparator<T>, list?: PH) => Sort_2<T>)
+  & (<T>(comparator: Comparator<T>) => Sort_2<T>)
   & (<T>(comparator: PH, list: T[]) => Sort_1<T>)
   & (<T>(comparator: Comparator<T>, list: T[]) => T[])
 

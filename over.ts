@@ -18,28 +18,28 @@ type Over_3<T, F> = (target: T) => T
 
 // prettier-ignore
 type Over_2_3<T, F> =
-  & ((fn: FuncArr1<F, F>, target?: PH) => Over_3<T, F>)
+  & ((fn: FuncArr1<F, F>) => Over_3<T, F>)
   & ((fn: PH, target: T) => Over_2<T, F>)
   & ((fn: FuncArr1<F, F>, target: T) => T)
 
 // prettier-ignore
 type Over_1_3<F> =
-  & (<T>(lens: Lens<T, F>, target?: PH) => Over_3<T, F>)
+  & (<T>(lens: Lens<T, F>) => Over_3<T, F>)
   & (<T>(lens: PH, target: T) => Over_1<T, F>)
   & (<T>(lens: Lens<T, F>, target: T) => T)
 
 // prettier-ignore
 type Over_1_2<T> =
-  & (<F>(lens: Lens<T, F>, fn?: PH) => Over_2<T, F>)
+  & (<F>(lens: Lens<T, F>) => Over_2<T, F>)
   & (<F>(lens: PH, fn: FuncArr1<F, F>) => Over_1<T, F>)
   & (<F>(lens: Lens<T, F>, fn: FuncArr1<F, F>) => T)
 
 // prettier-ignore
 type Over =
-  & (<T, F>(lens: Lens<T, F>, fn?: PH, target?: PH) => Over_2_3<T, F>)
-  & (<F>(lens: PH, fn: FuncArr1<F, F>, target?: PH) => Over_1_3<F>)
+  & (<T, F>(lens: Lens<T, F>) => Over_2_3<T, F>)
+  & (<F>(lens: PH, fn: FuncArr1<F, F>) => Over_1_3<F>)
   & (<T>(lens: PH, fn: PH, target: T) => Over_1_2<T>)
-  & (<T, F>(lens: Lens<T, F>, fn: FuncArr1<F, F>, target?: PH) => Over_3<T, F>)
+  & (<T, F>(lens: Lens<T, F>, fn: FuncArr1<F, F>) => Over_3<T, F>)
   & (<T, F>(lens: Lens<T, F>, fn: PH, target: T) => Over_2<T, F>)
   & (<T, F>(lens: PH, fn: FuncArr1<F, F>, target: T) => Over_1<T, F>)
   & (<T, F>(lens: Lens<T, F>, fn: FuncArr1<F, F>, target: T) => T)

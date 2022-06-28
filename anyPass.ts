@@ -1,7 +1,7 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
 import curryN from './utils/curry_n.ts'
-import type { PH, Func, Predicate } from './utils/types.ts'
+import type { Func, Predicate } from './utils/types.ts'
 import { getFunctionsLengths } from './utils/get.ts'
 
 // @types

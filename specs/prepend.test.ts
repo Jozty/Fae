@@ -26,6 +26,5 @@ describe('prepend', () => {
   it('should work with curried versions too', () => {
     eq(prepend(-1)([1, 2]), [-1, 1, 2])
     eq(prepend(_, [1, 2])(-1), [-1, 1, 2])
-    eq(prepend(-1, _)([1, 2]), [-1, 1, 2])
   })
 })

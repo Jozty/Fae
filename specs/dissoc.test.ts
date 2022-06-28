@@ -50,7 +50,6 @@ describe('dissoc', () => {
 
     eq(dissoc(a, b), expected)
     eq(dissoc(a)(b), expected)
-    eq(dissoc(a, _)(b), expected)
     eq(dissoc(_, b)(a), expected)
   })
 })

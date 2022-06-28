@@ -15,7 +15,7 @@ type Take_1<L extends ArrayLike<any> | string> = (n: number) => InferType<L>
 
 // prettier-ignore
 type Take =
-  & ((n: number, list?: PH) => Take_2)
+  & ((n: number) => Take_2)
   & (<L extends ArrayLike<any> | string>(n: PH, list: L) => Take_1<InferType<L>>)
   & (<L extends ArrayLike<any> | string>(n: number, list: L) => InferType<L>)
 

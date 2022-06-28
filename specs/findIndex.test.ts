@@ -30,7 +30,7 @@ describe('findIndex', () => {
   })
 
   it('should return the curried versions too', function () {
-    eq(findIndex(a, _)(obj1), 2)
+    eq(findIndex(a)(obj1), 2)
     eq(findIndex(_, 3)(b), 2)
     eq(findIndex(a)(obj1), 2)
   })

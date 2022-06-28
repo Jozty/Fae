@@ -43,7 +43,6 @@ describe('takeLast', () => {
 
     eq(takeLast(3, arr), expected)
     eq(takeLast(3)(arr), expected)
-    eq(takeLast(3, _)(arr), expected)
     eq(takeLast(_, arr)(3), expected)
   })
 })

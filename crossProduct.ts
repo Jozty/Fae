@@ -10,15 +10,17 @@ type CrossProduct_1<T2> = <T1>(a: T1[]) => [T1, T2][]
 
 // prettier-ignore
 type CrossProduct =
-  & (<T1>(a: T1[], b?: PH) => CrossProduct_2<T1>)
+  & (<T1>(a: T1[]) => CrossProduct_2<T1>)
   & (<T2>(a: PH, b: T2[]) => CrossProduct_1<T2>)
   & (<T1, T2>(a: T1[], b: T2[]) => [T1, T2][])
 
 function _crossProduct<T1, T2>(a: T1[], b: T2[]): [T1, T2][] {
-  let result: [T1, T2][] = []
+  const result: [T1, T2][] = []
+
   for (let idx = 0; idx < a.length; idx++)
     for (let j = 0; j < b.length; j++)
       result[result.length] = [a[idx], b[j]]
+
   return result
 }
 

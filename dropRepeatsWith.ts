@@ -12,7 +12,7 @@ type DropRepeatsWith_1<T> = (predicate: Predicate2<T>) => T[]
 
 // prettier-ignore
 type DropRepeatsWith =
-  & (<T>(predicate: Predicate2<T>, list?: PH) => DropRepeatsWith_2<T>)
+  & (<T>(predicate: Predicate2<T>) => DropRepeatsWith_2<T>)
   & (<T>(predicate: PH, list: T[]) => DropRepeatsWith_1<T>)
   & (<T>(predicate: Predicate2<T>, list: T[]) => T[])
 

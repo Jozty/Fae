@@ -3,8 +3,8 @@ import { crossProduct, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 
 describe('crossProduct', () => {
-  let a = [1, 2, null]
-  let b = ['a', 'b', 'c']
+  const a = [1, 2, null]
+  const b = ['a', 'b', 'c']
 
   it('should return an empty list if either input list is empty', () => {
     eq(crossProduct([], [1, 2, 3]), [])

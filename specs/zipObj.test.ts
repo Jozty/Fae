@@ -38,8 +38,6 @@ describe('zipObj', () => {
 
     eq(zipObj(a, b), expected)
     eq(zipObj(a)(b), expected)
-    eq(zipObj(a, _)(b), expected)
-    eq(zipObj(a, _)(b), expected)
     eq(zipObj(_, b)(a), expected)
   })
 })

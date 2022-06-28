@@ -16,7 +16,7 @@ type DissocPath_1 = (path: Path) => ObjRec
 
 // prettier-ignore
 type DissocPath =
-  & ((path: Path, obj?: PH) => DissocPath_2)
+  & ((path: Path) => DissocPath_2)
   & ((path: PH, obj: ObjRec) => DissocPath_1)
   & ((path: Path, obj: ObjRec) => ObjRec)
 

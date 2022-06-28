@@ -1,21 +1,17 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
 import curryN from './utils/curry_n.ts'
-import type { PH } from './utils/types.ts'
 
 // @types
-type And_2 = (b: any) => boolean
-
-type And_1 = (a: any) => boolean
+type And_2 = (b: unknown) => boolean
 
 // prettier-ignore
 type And =
-  & ((a: any, b?: PH) => And_2)
-  & ((a: PH, b: any) => And_1)
-  & ((a: any, b: any) => boolean)
+  & ((a: unknown) => And_2)
+  & ((a: unknown, b: unknown) => boolean)
 
-function _and(a: any, b: any) {
-  return Boolean(a && b)
+function _and(a: unknown, b: unknown) {
+  return !!(a && b)
 }
 
 /**

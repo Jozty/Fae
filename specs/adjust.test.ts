@@ -42,21 +42,18 @@ describe('adjust', () => {
     eq(a_2_3(b)(c), expected)
     eq(a_2_3(b, c), expected)
     eq(a_2_3(_, c)(b), expected)
-    eq(a_2_3(b, _)(c), expected)
 
     const a_1_3 = adjust(_, b)
 
     eq(a_1_3(a)(c), expected)
     eq(a_1_3(a, c), expected)
     eq(a_1_3(_, c)(a), expected)
-    eq(a_1_3(a, _)(c), expected)
 
     const a_1_2 = adjust(_, _, c)
 
     eq(a_1_2(a)(b), expected)
     eq(a_1_2(a, b), expected)
     eq(a_1_2(_, b)(a), expected)
-    eq(a_1_2(a, _)(b), expected)
 
     const a_3 = adjust(a, b)
     eq(a_3(c), expected)

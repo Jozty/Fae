@@ -10,7 +10,7 @@ type FindIndex_1<T> = (arr: T[]) => number
 
 // prettier-ignore
 type FindIndex =
-  & (<T>(arr: T[], element?: PH) => FindIndex_2<T>)
+  & (<T>(arr: T[]) => FindIndex_2<T>)
   & (<T>(arr: PH, element: T) => FindIndex_1<T>)
   & (<T>(arr: T[], element: T) => number)
 

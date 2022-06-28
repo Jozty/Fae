@@ -69,7 +69,6 @@ describe('take', () => {
 
     eq(take(3, arr), expected)
     eq(take(3)(arr), expected)
-    eq(take(3, _)(arr), expected)
     eq(take(_, arr)(3), expected)
   })
 })

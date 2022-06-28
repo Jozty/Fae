@@ -10,7 +10,7 @@ type Subtract_1 = (a: number) => number
 
 // prettier-ignore
 type Subtract =
-  & ((a: number, b?: PH) => Subtract_2)
+  & ((a: number) => Subtract_2)
   & ((a: PH, b: number) => Subtract_1)
   & ((a: number, b: number) => number)
 

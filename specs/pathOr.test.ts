@@ -52,14 +52,13 @@ describe('pathOr', () => {
   it('should return the default value for null/undefined', () => {
     eq(pathOr('Unknown', ['toString'], null), 'Unknown')
     eq(pathOr('Unknown', [], null), 'Unknown')
-    // fae-no-check
-    eq(pathOr('Unknown', ['toString'], undefined) as any, 'Unknown')
+    // @ts-ignore: object is undefined
+    eq(pathOr('Unknown', ['toString'], undefined), 'Unknown')
   })
 
   it('should work with falsy items', () => {
     eq(
-      // fae-no-check
-      // @ts-ignore
+      // @ts-ignore: object is boolean
       pathOr('Unknown', ['toString'], false),
       Boolean.prototype.toString,
     )
@@ -77,12 +76,11 @@ describe('pathOr', () => {
       pathOr(
         'Default',
         'c.k.0',
-        _,
       )({ a: 2, b: 3, c: { k: [1, 2, 3] } }),
       1,
     )
     eq(
-      pathOr('Default', _, _)('c/k/-1')({
+      pathOr('Default')('c/k/-1')({
         a: 2,
         b: 3,
         c: { k: [1, 2, 3] },
@@ -109,7 +107,7 @@ describe('pathOr', () => {
       'Undefined',
     )
     eq(
-      pathOr(_, 'c/k/3', _)('Default')({
+      pathOr(_, 'c/k/3')('Default')({
         a: 2,
         b: 3,
         c: { k: [1, 2, 3] },
