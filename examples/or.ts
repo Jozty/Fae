@@ -21,4 +21,4 @@ console.assert(orWithTruthyValue(true) === true)
 console.assert(orWithTruthyValue('ab') === true)
 console.assert(orWithTruthyValue(2) === true)
 
-console.log('Examples successfully running')
+console.log('Example ran successfully')

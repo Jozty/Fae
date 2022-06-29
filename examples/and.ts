@@ -21,4 +21,4 @@ console.assert(andWithTruthyValue(true) === true)
 console.assert(andWithTruthyValue('ab') === true)
 console.assert(andWithTruthyValue(2) === true)
 
-console.log('Examples successfully running')
+console.log('Example ran successfully')

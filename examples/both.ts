@@ -1,24 +1,16 @@
 import * as Fae from 'https://deno.land/x/fae/mod.ts'
 
-/**  
- "both" takes two functions (func1 & func2) as arguments ,
-  returns a function which when called upon gives logical "and" ("&&") of the output of the input argument functions;
-*/
-const func1 = () => 3 > 5
-const func2 = () => 1 === 1
-const func3 = () => Fae.and(3)(2)
-const func4 = () => Fae.or('', 0)
+const isGreaterThan5 = (x: number) => x > 5
+const isLessThan13 = (x: number) => x < 13
+const isOdd = (y: number) => y % 2 !== 0
+const isLessThan1 = (x: number) => x < 1
 
-const bothFunction1 = Fae.both(func1, func2)
-const bothFunction2 = Fae.both(func1, func3)
-const bothFunction3 = Fae.both(func4, func3)
-const bothFunction4 = Fae.both(func3, func2)
-const bothFunction5 = Fae.both(func1, func4)
+const isBetween5And13 = Fae.both(isGreaterThan5, isLessThan13)
+const oddLessThan1 = Fae.both(isLessThan1, isOdd)
+const oddGreaterThan5 = Fae.both(isOdd, isGreaterThan5)
 
-console.assert(bothFunction1() === false)
-console.assert(bothFunction2() === false)
-console.assert(bothFunction3() === false)
-console.assert(bothFunction4() === true)
-console.assert(bothFunction5() === false)
+console.assert(isBetween5And13(12) === true)
+console.assert(oddLessThan1(3) === false)
+console.assert(oddGreaterThan5(21) === true)
 
-console.log('Examples successfully running')
+console.log('Example ran successfully')
