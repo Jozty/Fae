@@ -28,7 +28,7 @@ Function usage and documentation can be found [here](https://fae.jozty.io/)
 
 ### Running tests
 
-```typescript
+```shell
 deno test
 # for coverage tests
 deno test --coverage --unstable
@@ -49,9 +49,9 @@ add20(125)                                          // 145
 
 // Expression - (2*5+5-10)/2
 const double = Fae.multiply(2)
-const half = Fae.divide(_, 2)
+const half = Fae.divide(Fae._, 2)
 const add5 = Fae.add(5)
-const subtract10 = Fae.subtract(_, 10)
+const subtract10 = Fae.subtract(Fae._, 10)
 
 half(subtract10(add5(double(15))))                  // 12.5
 Fae.compose(half, subtract10, add5, double)(15)     // 12.5
