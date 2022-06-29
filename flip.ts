@@ -6,20 +6,22 @@ import curryN from './utils/curry_n.ts'
 
 /**
  * Returns a new function much like the supplied one, except that the first two
- * arguments' order is reversed.
+ * arguments' order is reversed. The returned function is automatically curried.
+ * But the types are not preserved as of now. For that matter, you can use `Curry1`,
+ * `Curry2`, `Curry3`.
  *
  *
  *      const mergeThree = (a, b, c) => [].concat(a, b, c)
  *      mergeThree(1, 2, 3); // [1, 2, 3]
  *      Fae.flip(mergeThree)(1, 2, 3); // [2, 1, 3]
  */
-export function flip(fn: Func) {
+export function flip<T, A extends unknown[], R>(fn: (a: T, b: T, ...rest: A) => R) {
   return curryN(getFunctionLength(fn), function (
     this: any,
-    a: any,
-    b: any,
-    ...rest: any[]
+    b: T,
+    a: T,
+    ...rest: A
   ) {
-    return fn.apply(this, [b, a, ...rest])
-  } as typeof fn)
+    return fn.apply(this, [a, b, ...rest])
+  })
 }

@@ -2,19 +2,20 @@ import { describe, it } from './_describe.ts'
 import { flip, _ } from '../mod.ts'
 import { eq } from './utils/utils.ts'
 import { getFunctionLength } from '../utils/get.ts'
+import { Curry3, Curry2 } from '../utils/types.ts'
 
 describe('flip', () => {
-  const f = (a: string, b: string, c: string) => a + ' ' + b + ' ' + c
+  const f = (a: string, b: string, c: number) => a + ' ' + b + ' ' + c
   const i = (a: number, b: number, c: number) => a + b * c
   it('should return a function which inverts the first two arguments to the supplied function', () => {
-    const g = flip(f)
-    eq(f('a', 'b', 'c'), 'a b c')
-    eq(g('a', 'b', 'c'), 'b a c')
-    eq(g('a', '@', 'A'), '@ a A')
+    const g: Curry3<string, string, number, string> = flip(f)
+    eq(f('a', 'b', 3), 'a b 3')
+    eq(g('a', 'b', -3), 'b a -3')
+    eq(g('a', '@', Infinity), '@ a Infinity')
   })
 
   it('should return a function which inverts the first two arguments to the supplied function', () => {
-    const h = flip(i)
+    const h: Curry3<number> = flip(i)
     eq(i(2, 3, 4), 14)
     eq(h(2, 3, 4), 11)
     eq(i(2, -3, 4), -10)
@@ -22,17 +23,15 @@ describe('flip', () => {
   })
 
   it('should return a curried function', () => {
-    const g = flip(f)('a')
-    eq(g('b', 'c'), 'b a c')
-    eq(g(_, 'c')('b'), 'b a c')
-    eq(g('b', _)('c'), 'b a c')
-    eq(g(_, _)('b', 'c'), 'b a c')
+    const g: Curry2<string, number, string> = flip(f)('a')
+    eq(g('b', 3), 'b a 3')
+    eq(g(_, 3)('b'), 'b a 3')
+    eq(g('b')(3), 'b a 3')
 
-    const h = flip(i)(2)
+    const h:  Curry2<number> = flip(i)(2)
     eq(h(-4, 5), 6)
-    eq(h(-4, _)(3), 2)
+    eq(h(-4)(3), 2)
     eq(h(_, 3)(-4), 2)
-    eq(h(_, _)(-4, 3), 2)
   })
 
   it('should return a function with the correct arity', () => {
