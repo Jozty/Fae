@@ -17,7 +17,7 @@ jobs:
           deno-version: v1.x
 
       - name: Run tests
-        run: deno test
+        run: deno test --doc
 
   examples:
     runs-on: ubuntu-latest
