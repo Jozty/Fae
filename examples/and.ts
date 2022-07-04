@@ -20,5 +20,3 @@ const andWithTruthyValue = Fae.and(2)
 console.assert(andWithTruthyValue(true) === true)
 console.assert(andWithTruthyValue('ab') === true)
 console.assert(andWithTruthyValue(2) === true)
-
-console.log('Example ran successfully')
