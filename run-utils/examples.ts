@@ -3,6 +3,7 @@ import {
   italic,
   red,
   yellow,
+  underline,
 } from 'https://deno.land/std@0.145.0/fmt/colors.ts'
 
 const examples: Deno.DirEntry[] = []
@@ -54,10 +55,11 @@ if (nonZeroExamples.length) {
       const name = functionNameForLog(e.name)
       const errorCode = red(e.status.code.toString())
 
-      return `${name}- ${errorCode}`
+      return `${name} ${errorCode}`
     })
     .join('\n')
 
+  console.error(underline(red('Some or all examples failed with status codes-\n')))
   console.error(statusInfo)
   Deno.exit(1)
 }
@@ -79,9 +81,7 @@ const outputs = await Promise.all(
 )
 
 const nonEmptyOutputExamples = outputs.filter(
-  ({ output, error }) =>
-    output.trim() !== 'Example ran successfully' ||
-    error.includes('Assertion failed'),
+  ({ error }) => error.includes('Assertion failed'),
 )
 
 if (nonEmptyOutputExamples.length) {

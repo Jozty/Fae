@@ -15,5 +15,3 @@ const oddOrLessThan1 = Fae.either(isOdd, isLessThan1)
 console.assert(is5OrLessThan13(12) === true)
 console.assert(isOddOrEquals5(4) === false)
 console.assert(oddOrLessThan1(21) === true)
-
-console.log('Example ran successfully')

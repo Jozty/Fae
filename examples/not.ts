@@ -12,5 +12,3 @@ console.assert(Fae.not(true) === false)
 console.assert(Fae.not('ab') === false)
 console.assert(Fae.not([1, 2]) === false)
 console.assert(Fae.not({ a: 1, b: 3 }) === false)
-
-console.log('Example ran successfully')
