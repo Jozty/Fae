@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "ES2016",
+      "deno.window"
+    ],
+    "downlevelIteration": true
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"],
+      "exclude": [
+        "no-explicit-any", 
+        "no-unused-vars", 
+        "prefer-const", 
+        "ban-types", 
+        "no-inferrable-types", 
+        "no-fallthrough",
+        "no-prototype-builtins",
+        "ban-ts-comment",
+        "no-empty",
+        "require-await",
+        "no-var"
+      ]
+    }
+  },
+  "fmt": {
+    "options": {
+      "indentWidth": 2,
+      "lineWidth": 80,
+      "singleQuote": true,
+      "useTabs": false
+    }
+  }
+}
