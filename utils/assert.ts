@@ -1,4 +1,4 @@
-import { isFunction } from './is.ts'
+import { isFunction } from './is.ts';
 
 // TODO: (singla-shivam) change toString function
 
@@ -9,7 +9,7 @@ export function assertPromise(
   if (p == null || !isFunction(p.then)) {
     throw new TypeError(
       '`' + name + '` expected a Promise, received ' + p.toString(),
-    )
+    );
   }
-  return true
+  return true;
 }
