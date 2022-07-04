@@ -1,26 +1,26 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import curryN from './utils/curry_n.ts'
-import type { Func, Predicate } from './utils/types.ts'
-import { getFunctionsLengths } from './utils/get.ts'
+import curryN from './utils/curry_n.ts';
+import type { Func, Predicate } from './utils/types.ts';
+import { getFunctionsLengths } from './utils/get.ts';
 
 // @types
-type AnyPass = <T>(predicates: Predicate<T>[]) => Func
+type AnyPass = <T>(predicates: Predicate<T>[]) => Func;
 
 function _anyPass<T>(predicates: Predicate<T>[]) {
-  const len = predicates.length
+  const len = predicates.length;
   const fn = function (this: any, ...args: T[]) {
     for (let idx = 0; idx < len; idx++) {
       if (predicates[idx].apply(this, args)) {
-        return true
+        return true;
       }
     }
-    return false
-  }
+    return false;
+  };
 
-  const noOfParams = getFunctionsLengths(predicates)
+  const noOfParams = getFunctionsLengths(predicates);
 
-  return curryN(Math.max(...noOfParams, 0), fn)
+  return curryN(Math.max(...noOfParams, 0), fn);
 }
 
 /**
@@ -28,4 +28,4 @@ function _anyPass<T>(predicates: Predicate<T>[]) {
  * given list of arguments if at least one of the provided predicates is
  * satisfied by those arguments.
  */
-export const anyPass: AnyPass = curryN(1, _anyPass)
+export const anyPass: AnyPass = curryN(1, _anyPass);

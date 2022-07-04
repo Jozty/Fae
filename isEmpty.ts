@@ -1,7 +1,7 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import { empty } from './empty.ts'
-import { equals } from './equals.ts'
+import { empty } from './empty.ts';
+import { equals } from './equals.ts';
 
 /**
  * Returns `true` if the given value is its type's empty value, `false`
@@ -14,5 +14,5 @@ import { equals } from './equals.ts'
  *      Fae.isEmpty({})          //=> true
  */
 export function isEmpty<T>(x: T) {
-  return x != null && equals(x, empty(x))
+  return x != null && equals(x, empty(x));
 }

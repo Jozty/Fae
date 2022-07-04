@@ -1,27 +1,27 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import curryN from './utils/curry_n.ts'
-import type { PH, Obj, Tests, Func } from './utils/types.ts'
-import { whereAll } from './whereAll.ts'
-import { map } from './map.ts'
-import { equals } from './equals.ts'
+import curryN from './utils/curry_n.ts';
+import type { Func, Obj, PH, Tests } from './utils/types.ts';
+import { whereAll } from './whereAll.ts';
+import { map } from './map.ts';
+import { equals } from './equals.ts';
 
 // @types
-type WhereEq_2<T> = (testObj: Obj<T>) => boolean
+type WhereEq_2<T> = (testObj: Obj<T>) => boolean;
 
-type WhereEq_1<T> = (spec: Obj<T>) => boolean
+type WhereEq_1<T> = (spec: Obj<T>) => boolean;
 
-// prettier-ignore
-type WhereEq = (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)
+type WhereEq =
+  & (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)
   & (<T>(spec: Obj<T>) => WhereEq_2<T>)
   & (<T>(spec: PH, testObj: Obj<T>) => WhereEq_1<T>)
-  & (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean)
+  & (<T>(spec: Obj<T>, testObj: Obj<T>) => boolean);
 
 function _whereEq<T>(spec: Obj<T>, testObj: Obj<T>) {
   return whereAll(
     (map(equals as Func, spec) as unknown) as Tests<T>,
     testObj,
-  )
+  );
 }
 
 /**
@@ -36,4 +36,4 @@ function _whereEq<T>(spec: Obj<T>, testObj: Obj<T>) {
  *      pred({a: 1, b: 2, c: 3})  //=> true
  *      pred({a: 1, b: 1})        //=> false
  */
-export const whereEq: WhereEq = curryN(2, _whereEq)
+export const whereEq: WhereEq = curryN(2, _whereEq);

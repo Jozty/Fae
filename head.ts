@@ -1,12 +1,11 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import { nth } from './nth.ts'
-import curryN from './utils/curry_n.ts'
-import type { InferElementType } from './utils/types.ts'
+import { nth } from './nth.ts';
+import curryN from './utils/curry_n.ts';
+import type { InferElementType } from './utils/types.ts';
 
 // @types
-// prettier-ignore
-type Head = <L extends any[] | string>(functor: L) => InferElementType<L>
+type Head = <L extends any[] | string>(functor: L) => InferElementType<L>;
 
 /**
  * Returns the first element of the given list or string. In some libraries
@@ -18,4 +17,4 @@ type Head = <L extends any[] | string>(functor: L) => InferElementType<L>
  *      Fae.head('abc'); //=> 'a'
  *      Fae.head(''); //=> ''
  */
-export const head: Head = nth(0)
+export const head: Head = nth(0);

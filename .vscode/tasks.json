@@ -12,13 +12,13 @@
       "label": "dec",
       "type": "shell",
       "command": "deno run -A --unstable declarations.ts",
-      "isBackground": true,
+      "isBackground": true
     },
     {
       "label": "prettify",
       "type": "shell",
       "command": "prettier -w specs/*.ts && prettier -w *.ts",
-      "isBackground": true,
+      "isBackground": true
     },
     {
       "label": "debug _test.ts",
@@ -30,7 +30,7 @@
           "activeOnStart": true,
           "beginsPattern": "Debugger listening"
         }
-      },
+      }
     }
   ]
 }

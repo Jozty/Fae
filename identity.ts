@@ -4,5 +4,5 @@
  * Returns the supplied parameter
  */
 export function identity<T>(x: T) {
-  return x
+  return x;
 }
