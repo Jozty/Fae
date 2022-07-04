@@ -12,5 +12,3 @@ const oddGreaterThan5 = Fae.both(isOdd, isGreaterThan5)
 console.assert(isBetween5And13(12) === true)
 console.assert(oddLessThan1(3) === false)
 console.assert(oddGreaterThan5(21) === true)
-
-console.log('Example ran successfully')
