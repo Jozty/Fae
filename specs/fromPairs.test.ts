@@ -1,6 +1,6 @@
-import { describe, it } from './_describe.ts'
-import { fromPairs } from '../mod.ts'
-import { eq } from './utils/utils.ts'
+import { describe, it } from './_describe.ts';
+import { fromPairs } from '../mod.ts';
+import { eq } from './utils/utils.ts';
 
 describe('fromPairs', () => {
   it('should combine an array of two-element arrays into an object', () => {
@@ -11,7 +11,7 @@ describe('fromPairs', () => {
         ['c', 3],
       ]),
       { a: 1, b: 2, c: 3 },
-    )
+    );
     eq(
       fromPairs([
         ['a', 1],
@@ -20,7 +20,7 @@ describe('fromPairs', () => {
         ['d', 4],
       ]),
       { a: 1, b: 2, c: 3, d: 4 },
-    )
+    );
     eq(
       fromPairs([
         [1, 1],
@@ -29,8 +29,8 @@ describe('fromPairs', () => {
         [4, 4],
       ]),
       { 1: 1, 2: 2, 3: 3, 4: 4 },
-    )
-  })
+    );
+  });
 
   it('should gives later entries precedence over earlier ones', () => {
     eq(
@@ -39,7 +39,7 @@ describe('fromPairs', () => {
         ['x', 2],
       ]),
       { x: 2 },
-    )
+    );
     eq(
       fromPairs([
         ['x', 1],
@@ -48,7 +48,7 @@ describe('fromPairs', () => {
         ['x', 3],
       ]),
       { x: 3 },
-    )
+    );
     eq(
       fromPairs([
         ['x', 1],
@@ -58,6 +58,6 @@ describe('fromPairs', () => {
         ['y', 3],
       ]),
       { x: 2, y: 3 },
-    )
-  })
-})
+    );
+  });
+});

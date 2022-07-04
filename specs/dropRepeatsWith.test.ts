@@ -1,13 +1,6 @@
-import { describe, it } from './_describe.ts'
-import {
-  dropRepeatsWith,
-  pipe,
-  append,
-  flip,
-  transduce,
-  _,
-} from '../mod.ts'
-import { eq } from './utils/utils.ts'
+import { describe, it } from './_describe.ts';
+import { _, append, dropRepeatsWith, flip, pipe, transduce } from '../mod.ts';
+import { eq } from './utils/utils.ts';
 
 describe('dropRepeatsWith', () => {
   const obj = [
@@ -17,7 +10,7 @@ describe('dropRepeatsWith', () => {
     { i: 4 },
     { i: 5 },
     { i: 3 },
-  ]
+  ];
   const obj2 = [
     { i: 1 },
     { i: 1 },
@@ -29,13 +22,13 @@ describe('dropRepeatsWith', () => {
     { i: 4 },
     { i: 5 },
     { i: 3 },
-  ]
-  const eqI = (a: any, b: any) => a.i === b.i
+  ];
+  const eqI = (a: any, b: any) => a.i === b.i;
 
   it('should remove repeated elements based on predicate', () => {
-    eq(dropRepeatsWith(eqI, obj2), obj)
-    eq(dropRepeatsWith(eqI, obj), obj)
-  })
+    eq(dropRepeatsWith(eqI, obj2), obj);
+    eq(dropRepeatsWith(eqI, obj), obj);
+  });
 
   it('should keep elements from the left', () => {
     eq(
@@ -50,24 +43,24 @@ describe('dropRepeatsWith', () => {
         { i: 1, n: 1 },
         { i: 4, n: 1 },
       ],
-    )
-  })
+    );
+  });
 
   it('should return an empty array for an empty array', () => {
-    eq(dropRepeatsWith(eqI, []), [])
-  })
+    eq(dropRepeatsWith(eqI, []), []);
+  });
 
   it('should act as a transducer', () => {
-    const t1 = pipe(dropRepeatsWith(eqI))
-    eq(transduce(t1, flip(append), [], obj2), obj)
-  })
+    const t1 = pipe(dropRepeatsWith(eqI));
+    eq(transduce(t1, flip(append), [], obj2), obj);
+  });
 
   it('should work with curried versions too', () => {
-    const func = (a: number, b: number) => b - 1 === a
-    const list = [1, 2, 3, 4, 6, 7, 8]
+    const func = (a: number, b: number) => b - 1 === a;
+    const list = [1, 2, 3, 4, 6, 7, 8];
 
-    eq(dropRepeatsWith(func, list), [1, 6])
-    eq(dropRepeatsWith(func)(list), [1, 6])
-    eq(dropRepeatsWith(_, list)(func), [1, 6])
-  })
-})
+    eq(dropRepeatsWith(func, list), [1, 6]);
+    eq(dropRepeatsWith(func)(list), [1, 6]);
+    eq(dropRepeatsWith(_, list)(func), [1, 6]);
+  });
+});
