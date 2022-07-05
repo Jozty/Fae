@@ -31,4 +31,4 @@ jobs:
           deno-version: v1.x
 
       - name: Run examples
-        run: deno run --allow-read --allow-run run-utils/examples.ts
+        run: deno task examples

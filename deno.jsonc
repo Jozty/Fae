@@ -1,20 +1,19 @@
 {
   "compilerOptions": {
     "lib": [
-      "ES2016",
-      "deno.window"
+      "esnext"
     ],
-    "downlevelIteration": true
+    "target": "es6"
   },
   "lint": {
     "rules": {
       "tags": ["recommended"],
       "exclude": [
-        "no-explicit-any", 
-        "no-unused-vars", 
-        "prefer-const", 
-        "ban-types", 
-        "no-inferrable-types", 
+        "no-explicit-any",
+        "no-unused-vars",
+        "prefer-const",
+        "ban-types",
+        "no-inferrable-types",
         "no-fallthrough",
         "no-prototype-builtins",
         "ban-ts-comment",
@@ -29,7 +28,13 @@
       "indentWidth": 2,
       "lineWidth": 80,
       "singleQuote": true,
-      "useTabs": false
+      "useTabs": false,
+      "proseWrap": "preserve"
     }
+  },
+  "tasks": {
+    "test": "deno test",
+    "examples": "deno run --allow-run --allow-read run-utils/examples.ts",
+    "gen-declarations": "deno run -A run-utils/declarations.ts"
   }
 }
