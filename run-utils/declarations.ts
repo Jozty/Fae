@@ -56,7 +56,7 @@ async function generateDeclarations() {
     cmd: [
       'dts-bundle-generator',
       '--project',
-      './deno.jsonc',
+      './run-utils/generator-tsconfig.json',
       getDeclarationsPath('./mod.ts'),
     ],
   }).status();

@@ -261,23 +261,31 @@ describe('equals', () => {
     );
     eq(equals(new Map([[1, 'a']]), new Map([[2, 'a']])), false);
     eq(equals(new Map([[1, 'a']]), new Map([[1, 'b']])), false);
-    // fae-no-check
-    // @ts-ignore
-    // prettier-ignore
+
+    const m1 = new Map<number, string | Map<number, string>>([[1, 'a'], [
+      2,
+      new Map([[3, 'c']]),
+    ]]);
+    const m2 = new Map<number, string | Map<number, string>>([[1, 'a'], [
+      2,
+      new Map([[3, 'c']]),
+    ]]);
+    const m3 = new Map<number, string | Map<number, string>>([[1, 'a'], [
+      2,
+      new Map([[3, 'd']]),
+    ]]);
+
     eq(
       equals(
-        new Map([[1, 'a'], [2, new Map([[3, 'c']])]]),
-        new Map([[1, 'a'], [2, new Map([[3, 'c']])]]),
+        m1,
+        m2,
       ),
       true,
     );
-    // fae-no-check
-    // @ts-ignore
-    // prettier-ignore
     eq(
       equals(
-        new Map([[1, 'a'], [2, new Map([[3, 'c']])]]),
-        new Map([[1, 'a'], [2, new Map([[3, 'd']])]]),
+        m1,
+        m3,
       ),
       false,
     );
