@@ -1,34 +1,34 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import curryN from './utils/curry_n.ts'
-import type { Curry2, FuncArr1, Func } from './utils/types.ts'
-import { concat } from './concat.ts'
-import { reduce } from './reduce.ts'
-import { map } from './map.ts'
-import { isFunction } from './utils/is.ts'
+import curryN from './utils/curry_n.ts';
+import type { Curry2, Func, FuncArr1 } from './utils/types.ts';
+import { concat } from './concat.ts';
+import { reduce } from './reduce.ts';
+import { map } from './map.ts';
+import { isFunction } from './utils/is.ts';
 
 type ApplyFAp<T = any, R = any> = {
-  ap: FuncArr1<T[] | Func | T, R>
-}
+  ap: FuncArr1<T[] | Func | T, R>;
+};
 
 type ApplyF<T = any, R = any> =
   | FuncArr1<T, R>
   | FuncArr1<T, R>[]
-  | ApplyFAp<T, R>
+  | ApplyFAp<T, R>;
 
 function _checkForCustomAp<T, R>(
   applyF: ApplyF<T, R>,
 ): applyF is ApplyFAp<T, R> {
-  return isFunction((applyF as ApplyFAp<T, R>).ap)
+  return isFunction((applyF as ApplyFAp<T, R>).ap);
 }
 
 function _ap<T, R>(applyF: ApplyF<T, R>, applyX: T[] | Func) {
   if (_checkForCustomAp(applyF)) {
-    return applyF.ap(applyX)
+    return applyF.ap(applyX);
   }
 
   if (isFunction(applyF) && isFunction(applyX)) {
-    return (x: T) => applyF(x)(applyX(x))
+    return (x: T) => applyF(x)(applyX(x));
   }
 
   return reduce(
@@ -36,11 +36,11 @@ function _ap<T, R>(applyF: ApplyF<T, R>, applyX: T[] | Func) {
     (acc: T[], f: Func) => concat(acc, map(f, applyX) as T[]),
     [],
     applyF as any[],
-  )
+  );
 }
 
 /**
- *Iit applies a list of functions to a list of values.
+ * Iit applies a list of functions to a list of values.
  * Dispatches to the `ap` method of the second argument, if present. Also
  * treats curried functions as applicatives.
  *
@@ -52,4 +52,4 @@ function _ap<T, R>(applyF: ApplyF<T, R>, applyX: T[] | Func) {
  *      const obj = {ap: (n: number) => 'called ap with ' + n}
  *      Fae.ap(obj, 10) // 'called ap with 10'
  */
-export const ap: Curry2<ApplyF, any, any> = curryN(2, _ap)
+export const ap: Curry2<ApplyF, any, any> = curryN(2, _ap);

@@ -1,12 +1,11 @@
 {
   "deno.enable": true,
   "editor.formatOnSave": true,
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "workbench.colorCustomizations": {},
-  "window.titleBarStyle": "custom",
-  "deno.import_intellisense_origins": {
-    "https://deno.land": true
-  }
+  "deno.lint": true,
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "deno.codeLens.implementations": true,
+  "deno.codeLens.references": true,
+  "deno.codeLens.test": true,
+  "deno.codeLens.referencesAllFunctions": true
 }

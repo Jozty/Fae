@@ -1,27 +1,26 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import curryN from './utils/curry_n.ts'
-import type { PH } from './utils/types.ts'
+import curryN from './utils/curry_n.ts';
+import type { PH } from './utils/types.ts';
 
 // @types
-type Trim_2 = (t: string) => string
+type Trim_2 = (t: string) => string;
 
-type Trim_1 = (str: string) => string
+type Trim_1 = (str: string) => string;
 
-// prettier-ignore
 type Trim =
   & ((str: string) => Trim_2)
   & ((str: PH, t: string) => Trim_1)
-  & ((str: string, t: string) => string)
+  & ((str: string, t: string) => string);
 
 function escapeRegEx(str: string) {
-  return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+  return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
 function _trim(str: string, t: string) {
-  t = escapeRegEx(t)
-  const regEx = new RegExp(`^(${t})+|(${t})+$`, 'g')
-  return t ? str.replace(regEx, '') : str.trim()
+  t = escapeRegEx(t);
+  const regEx = new RegExp(`^(${t})+|(${t})+$`, 'g');
+  return t ? str.replace(regEx, '') : str.trim();
 }
 
 /**
@@ -32,4 +31,4 @@ function _trim(str: string, t: string) {
  *      Fae.trim('[[Hello]]]', '[') // Hello]]]
  *      Fae.trim('[[Hello]]]', ']]') // [[Hello]]
  */
-export const trim: Trim = curryN(2, _trim)
+export const trim: Trim = curryN(2, _trim);

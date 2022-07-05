@@ -1,17 +1,16 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import curryN from './utils/curry_n.ts'
+import curryN from './utils/curry_n.ts';
 
 // @types
-type And_2 = (b: unknown) => boolean
+type And_2 = (b: unknown) => boolean;
 
-// prettier-ignore
 type And =
   & ((a: unknown) => And_2)
-  & ((a: unknown, b: unknown) => boolean)
+  & ((a: unknown, b: unknown) => boolean);
 
 function _and(a: unknown, b: unknown) {
-  return !!(a && b)
+  return !!(a && b);
 }
 
 /**
@@ -22,4 +21,4 @@ function _and(a: unknown, b: unknown) {
  *      Fae.and(false, true)  //=> false
  *      Fae.and(false, false) //=> false
  */
-export const and: And = curryN(2, _and)
+export const and: And = curryN(2, _and);
