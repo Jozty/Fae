@@ -19,6 +19,12 @@ jobs:
       - name: Run tests
         run: deno test --doc
 
+      - name: Linter
+        run: deno lint
+
+      - name: Formatter
+        run: deno fmt --check
+
   examples:
     runs-on: ubuntu-latest
     steps:
