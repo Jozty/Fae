@@ -126,13 +126,17 @@ describe('equals', () => {
   try {
     RegExp('', 'y');
     supportsSticky = true;
-  } catch (e) {}
+  } catch (e) {
+    // does not support stickyflag
+  }
 
   let supportsUnicode = false;
   try {
     RegExp('', 'u');
     supportsUnicode = true;
-  } catch (e) {}
+  } catch (e) {
+    // does not support Unicode
+  }
 
   it('should handle regex', () => {
     eq(equals(/\s/, /\s/), true);

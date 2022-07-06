@@ -20,10 +20,7 @@
         "no-inferrable-types",
         "no-fallthrough",
         "no-prototype-builtins",
-        "ban-ts-comment",
-        "no-empty",
-        "require-await",
-        "no-var"
+        "ban-ts-comment"
       ]
     }
   },
