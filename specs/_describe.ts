@@ -8,7 +8,7 @@ type F = () => void | Promise<void>;
 
 export const tests: [string, F][] = [];
 
-export function describe(name: string, func: F) {
+export function describe(_: string, func: F) {
   func();
 }
 

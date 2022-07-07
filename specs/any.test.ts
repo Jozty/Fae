@@ -67,7 +67,7 @@ describe('any', () => {
     eq(
       transduce(
         t1,
-        flip((a: number, b: number) => a),
+        flip((a: number, _: number) => a),
         11,
         arr,
       ),

@@ -27,7 +27,7 @@ describe('all', () => {
     eq(
       transduce(
         t1,
-        flip((a, b) => a),
+        flip((a, _) => a),
         11,
         arr,
       ),
@@ -43,7 +43,7 @@ describe('all', () => {
     eq(
       transduce(
         t2,
-        flip((a, b) => a),
+        flip((a, _) => a),
         11,
         arr,
       ) as any,

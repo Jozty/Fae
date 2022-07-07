@@ -16,7 +16,6 @@ describe('propSatisfies', () => {
 
   it('should work with curried calls too', () => {
     const p_2_3 = propSatisfies(isPositive);
-    const x = p_2_3(_, obj)('y');
 
     eq(p_2_3('y')(obj), false);
     eq(p_2_3('y', obj), false);

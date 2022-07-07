@@ -12,7 +12,7 @@ type Complement = <T extends any[]>(
 const _complement = lift(not);
 
 function _complement1<T extends any[]>(
-  a: (...args: T) => boolean,
+  _a: (...args: T) => boolean,
   // @ts-ignore
 ): (...args: T) => boolean {
   // ..

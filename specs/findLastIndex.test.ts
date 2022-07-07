@@ -69,14 +69,14 @@ describe('findLastIndex', () => {
     const t1 = pipe(findLastIndex(even));
     eq(t1(a), 15);
     eq(
-      transduce(t1, (a: number, b: number) => b, undefined, a),
+      transduce(t1, (_: number, b: number) => b, undefined, a),
       15,
     );
 
     const t2 = pipe(findLastIndex((x: number) => x > 1000));
     eq(t2(a), -1);
     eq(
-      transduce(t2, (a: number, b: number) => b, undefined, a),
+      transduce(t2, (_: number, b: number) => b, undefined, a),
       -1,
     );
   });

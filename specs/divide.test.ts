@@ -1,4 +1,4 @@
-import { describe, expect, it } from './_describe.ts';
+import { describe, it } from './_describe.ts';
 import { _, divide } from '../mod.ts';
 import { eq } from './utils/utils.ts';
 

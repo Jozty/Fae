@@ -69,7 +69,7 @@ describe('findLast', () => {
     const t1 = pipe(findLast(even));
     eq(t1(a), 0);
     eq(
-      transduce(t1, (a: number, b: number) => b, undefined, a),
+      transduce(t1, (_a: number, b: number) => b, undefined, a),
       0,
     );
   });
