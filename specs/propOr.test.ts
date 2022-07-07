@@ -35,8 +35,6 @@ describe('propOr', () => {
       number | string | boolean | number[]
     >;
 
-    const x = propOr([1], 'a', obj);
-
     const p_2_3 = propOr('default');
 
     eq(p_2_3('d')(obj), 'default');

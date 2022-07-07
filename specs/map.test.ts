@@ -57,7 +57,6 @@ describe('map', () => {
     let a = 11;
     let b = 3;
     let result = add3(function1(a, b));
-    let x = map(add3);
     const m1 = map(add3)(function1) as typeof function1;
     const m2 = map(add3, function1) as Curry2<number>;
     eq(m1(a, b), result);
@@ -93,8 +92,6 @@ describe('map', () => {
     const a = add1;
     const b = [1, 2, 3, 4, 5, 6, 7, 8];
     const expected = [2, 3, 4, 5, 6, 7, 8, 9];
-
-    let x = map(_, b)(a);
 
     eq(map(a, b), expected);
     eq(map(a)(b), expected);

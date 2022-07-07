@@ -126,7 +126,7 @@ describe('equals', () => {
   try {
     RegExp('', 'y');
     supportsSticky = true;
-  } catch (e) {
+  } catch (_e) {
     // does not support stickyflag
   }
 
@@ -134,7 +134,7 @@ describe('equals', () => {
   try {
     RegExp('', 'u');
     supportsUnicode = true;
-  } catch (e) {
+  } catch (_e) {
     // does not support Unicode
   }
 

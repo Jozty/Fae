@@ -1,10 +1,9 @@
-import { describe, expect, it } from './_describe.ts';
+import { describe, it } from './_describe.ts';
 import { _, findIndex } from '../mod.ts';
 import { eq } from './utils/utils.ts';
 
 describe('findIndex', () => {
   let obj1 = { x: 10 };
-  let obj2 = { x: 20 };
   let a = [2, 4, obj1, 3, 12, 25, obj1, 'Foo', undefined, 21];
   let b = [2, 4, 3, 12, 25, 21];
 

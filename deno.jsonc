@@ -14,7 +14,6 @@
       "tags": ["recommended"],
       "exclude": [
         "no-explicit-any",
-        "no-unused-vars",
         "prefer-const",
         "ban-types",
         "no-inferrable-types",

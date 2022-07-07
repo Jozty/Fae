@@ -5,13 +5,12 @@ import {
   compose,
   filter,
   flip,
-  identity,
   map,
   pipe,
   reverse,
   transduce,
 } from '../mod.ts';
-import { eq, thr } from './utils/utils.ts';
+import { eq } from './utils/utils.ts';
 
 const iterable: any = {
   limit: 70,

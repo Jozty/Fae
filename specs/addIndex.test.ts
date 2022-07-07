@@ -1,5 +1,5 @@
-import { describe, expect, it } from './_describe.ts';
-import { add, addIndex, map, multiply, reduce, sum } from '../mod.ts';
+import { describe, it } from './_describe.ts';
+import { add, addIndex, map, multiply, reduce } from '../mod.ts';
 import { eq } from './utils/utils.ts';
 
 describe('addIndex', () => {

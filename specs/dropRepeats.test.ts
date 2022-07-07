@@ -1,6 +1,6 @@
 import { describe, it } from './_describe.ts';
 import { append, dropRepeats, equals, flip, pipe, transduce } from '../mod.ts';
-import { eq, strictNotEq } from './utils/utils.ts';
+import { eq } from './utils/utils.ts';
 
 describe('dropRepeats', () => {
   const obj = [1, 2, 3, 4, 5, 3, 2];

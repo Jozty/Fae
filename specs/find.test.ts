@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts';
-import { _, filter, find, pipe, transduce } from '../mod.ts';
+import { _, find, pipe, transduce } from '../mod.ts';
 import { eq } from './utils/utils.ts';
 
 describe('find', () => {
@@ -63,7 +63,7 @@ describe('find', () => {
     const t1 = pipe(find(even));
     eq(t1(a), 10);
     eq(
-      transduce(t1, (a: number, b: number) => b, undefined, a),
+      transduce(t1, (_: number, b: number) => b, undefined, a),
       10,
     );
   });

@@ -1,5 +1,5 @@
 import { describe, it } from './_describe.ts';
-import { _, concat, flip } from '../mod.ts';
+import { _, flip } from '../mod.ts';
 import { eq } from './utils/utils.ts';
 import { getFunctionLength } from '../utils/get.ts';
 import { Curry2, Curry3 } from '../utils/types.ts';
