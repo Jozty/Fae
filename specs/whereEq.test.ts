@@ -19,11 +19,11 @@ describe('whereEq', () => {
   };
 
   it('should return true if the test object satisfies the spec otherwise false', () => {
-    let spec = { x: 1, y: 2 };
-    let test1 = { x: 0, y: 200 };
-    let test2 = { x: 0, y: 10 };
-    let test3 = { x: 1, y: 101 };
-    let test4 = { x: 1, y: 2 };
+    const spec = { x: 1, y: 2 };
+    const test1 = { x: 0, y: 200 };
+    const test2 = { x: 0, y: 10 };
+    const test3 = { x: 1, y: 101 };
+    const test4 = { x: 1, y: 2 };
 
     eq(whereEq(spec, test1), false);
     eq(whereEq(spec, test2), false);
@@ -35,12 +35,12 @@ describe('whereEq', () => {
   });
 
   it('should work if interfaces are different', () => {
-    let spec = { x: 100 };
-    let spec2 = { w: 1, x: 100, y: 200 };
-    let test1 = { x: 20, y: 100, z: 100 };
-    let test2 = { w: 1, x: 100, y: 100, z: 100 };
-    let test3 = {};
-    let test4 = { w: 1, x: 100 };
+    const spec = { x: 100 };
+    const spec2 = { w: 1, x: 100, y: 200 };
+    const test1 = { x: 20, y: 100, z: 100 };
+    const test2 = { w: 1, x: 100, y: 100, z: 100 };
+    const test3 = {};
+    const test4 = { w: 1, x: 100 };
 
     eq(whereEq(spec, test1), false);
     eq(whereEq(spec, test2), true);
@@ -49,9 +49,9 @@ describe('whereEq', () => {
   });
 
   it('should match specs that have undefined properties', () => {
-    let spec = { x: undefined };
-    let test1 = {};
-    let test2 = { x: 1 };
+    const spec = { x: undefined };
+    const test1 = {};
+    const test2 = { x: 1 };
 
     eq(whereEq(spec, test1), true);
     eq(whereEq(spec, test2), false);
@@ -62,9 +62,9 @@ describe('whereEq', () => {
   });
 
   it('should test curried versions too', () => {
-    let spec = { x: 20, z: 'foo' };
-    let test1 = { x: 125, y: 100, z: 100 };
-    let test2 = { x: 20, z: 'foo' };
+    const spec = { x: 20, z: 'foo' };
+    const test1 = { x: 125, y: 100, z: 100 };
+    const test2 = { x: 20, z: 'foo' };
 
     eq(whereEq(spec)(test1), false);
     eq(whereEq(_, test2)(spec), true);

@@ -4,10 +4,10 @@ import { eq } from './utils/utils.ts';
 
 describe('propOr', () => {
   type O = Record<string, string | null | undefined>;
-  let shubham = { name: 'shubham', age: 23 };
-  let shivam = { age: 99 };
+  const shubham = { name: 'shubham', age: 23 };
+  const shivam = { age: 99 };
 
-  let num = propOr('Unknown', 'name');
+  const num = propOr('Unknown', 'name');
 
   it('should return a function that fetches the appropriate property', () => {
     eq(typeof num, 'function');

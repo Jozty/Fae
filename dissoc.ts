@@ -16,7 +16,7 @@ type Dissoc =
 function _dissoc(prop: string | number, obj: ObjRec) {
   const result: ObjRec = {};
 
-  for (let p in obj) result[p] = obj[p];
+  for (const p in obj) result[p] = obj[p];
 
   delete result[prop];
   return result;

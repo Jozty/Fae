@@ -33,8 +33,8 @@ describe('max', () => {
   });
 
   it('should test curried versions too', () => {
-    let d1: Date = new Date('2001-01-01');
-    let d2: Date = new Date('2002-02-02');
+    const d1: Date = new Date('2001-01-01');
+    const d2: Date = new Date('2002-02-02');
 
     eq(max(d1)(d2), d2);
     // @ts-expect-error: because max(a, b) === max(b, a)

@@ -8,7 +8,7 @@ describe('chain', () => {
   const times2 = (x: number) => [x * 2];
 
   const list = [10, undefined, 35, Infinity];
-  let c = chain(_, list);
+  const c = chain(_, list);
 
   it('maps a function over a nested list and returns the result', function () {
     // fae-no-check
