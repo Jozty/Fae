@@ -1,21 +1,20 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import curryN from './utils/curry_n.ts'
-import type { PH } from './utils/types.ts'
+import curryN from './utils/curry_n.ts';
+import type { PH } from './utils/types.ts';
 
 // @types
-type Xor_2 = (b: any) => boolean
+type Xor_2 = (b: any) => boolean;
 
-type Xor_1 = (a: any) => boolean
+type Xor_1 = (a: any) => boolean;
 
-// prettier-ignore
 type Xor =
   & ((a: any) => Xor_2)
   & ((a: PH, b: any) => Xor_1)
-  & ((a: any, b: any) => boolean)
+  & ((a: any, b: any) => boolean);
 
 function _xor(a: any, b: any) {
-  return Boolean(a ? !b : b)
+  return Boolean(a ? !b : b);
 }
 
 /**
@@ -27,4 +26,4 @@ function _xor(a: any, b: any) {
  *      Fae.xor(false, true) //=> true
  *      Fae.xor(false, false) //=> false
  */
-export const xor: Xor = curryN(2, _xor)
+export const xor: Xor = curryN(2, _xor);

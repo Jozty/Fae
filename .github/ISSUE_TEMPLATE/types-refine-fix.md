@@ -17,5 +17,6 @@ A clear and concise description of problem along with an example code.
 A clear and concise description of what you expected to happen along with an example code.
 
 **Versions (please complete the following information):**
- - Deno: 
- - Fae:
+
+- Deno:
+- Fae:

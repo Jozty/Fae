@@ -1,31 +1,31 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import { concat } from './concat.ts'
-import curryN from './utils/curry_n.ts'
-import type { Func } from './utils/types.ts'
-import { getFunctionLength } from './utils/get.ts'
+import { concat } from './concat.ts';
+import curryN from './utils/curry_n.ts';
+import type { Func } from './utils/types.ts';
+import { getFunctionLength } from './utils/get.ts';
 
 // @types
-type AddIndex = (fn: Func) => Func
+type AddIndex = (fn: Func) => Func;
 
 function _addIndex(fn: Func) {
   return curryN(getFunctionLength(fn), function (this: any) {
-    let index = 0
-    const origFn = arguments[0]
-    const list = arguments[arguments.length - 1]
-    const args = [...arguments]
+    let index = 0;
+    const origFn = arguments[0];
+    const list = arguments[arguments.length - 1];
+    const args = [...arguments];
 
     args[0] = function () {
       let result = origFn.apply(
         this,
         concat([...arguments], [index, list]),
-      )
-      index += 1
-      return result
-    }
+      );
+      index += 1;
+      return result;
+    };
 
-    return fn.apply(this, args)
-  })
+    return fn.apply(this, args);
+  });
 }
 
 /**
@@ -41,4 +41,4 @@ function _addIndex(fn: Func) {
  *      indexedMap((val, idx) => idx + '-' + val, ['f', 'o', 'o', 'b', 'a', 'r'])
  *      // ['0-f', '1-o', '2-o', '3-b', '4-a', '5-r']
  */
-export const addIndex: AddIndex = curryN(1, _addIndex)
+export const addIndex: AddIndex = curryN(1, _addIndex);

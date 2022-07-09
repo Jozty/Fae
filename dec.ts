@@ -4,5 +4,5 @@
  * Decreases its argument by 1.
  */
 export function dec(element: number) {
-  return element - 1
+  return element - 1;
 }

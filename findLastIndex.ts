@@ -1,29 +1,28 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import type { Predicate1, PH } from './utils/types.ts'
-import curryN from './utils/curry_n.ts'
-import { dispatch } from './utils/dispatch.ts'
-import FindLastIdxTransformer from './utils/Transformers/findLastIndex.ts'
+import type { PH, Predicate1 } from './utils/types.ts';
+import curryN from './utils/curry_n.ts';
+import { dispatch } from './utils/dispatch.ts';
+import FindLastIdxTransformer from './utils/Transformers/findLastIndex.ts';
 
 // @types
-type FindLastIndex_2<T> = (list: T[]) => number
+type FindLastIndex_2<T> = (list: T[]) => number;
 
-type FindLastIndex_1<T> = (predicate: Predicate1<T>) => number
+type FindLastIndex_1<T> = (predicate: Predicate1<T>) => number;
 
-// prettier-ignore
 type FindLastIndex =
   & (<T>(predicate: Predicate1<T>) => FindLastIndex_2<T>)
   & (<T>(predicate: PH, list: T[]) => FindLastIndex_1<T>)
-  & (<T>(predicate: Predicate1<T>,list: T[]) => number)
+  & (<T>(predicate: Predicate1<T>, list: T[]) => number);
 
 function _findLastIndex<T>(predicate: Predicate1<T>, list: T[]) {
   for (let i = list.length - 1; i >= 0; i--) {
-    if (predicate(list[i])) return i
+    if (predicate(list[i])) return i;
   }
-  return -1
+  return -1;
 }
 
-const dispatched = dispatch(FindLastIdxTransformer, _findLastIndex)
+const dispatched = dispatch(FindLastIdxTransformer, _findLastIndex);
 
 /**
  * Returns index of last element of the list which matches the predicate, or
@@ -35,4 +34,4 @@ const dispatched = dispatch(FindLastIdxTransformer, _findLastIndex)
  *      Fae.find(Fae.propEq('a', 2))(xs) //=> {a: 2}
  *      Fae.find(Fae.propEq('a', 4))(xs) //=> undefined
  */
-export const findLastIndex: FindLastIndex = curryN(2, dispatched)
+export const findLastIndex: FindLastIndex = curryN(2, dispatched);

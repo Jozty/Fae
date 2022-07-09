@@ -1,20 +1,20 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import { dropRepeatsWith } from './dropRepeatsWith.ts'
-import { equals } from './equals.ts'
-import { dispatch } from './utils/dispatch.ts'
-import { DropRepeatsTransformer } from './utils/Transformers/dropRepeatsWith.ts'
-import curryN from './utils/curry_n.ts'
+import { dropRepeatsWith } from './dropRepeatsWith.ts';
+import { equals } from './equals.ts';
+import { dispatch } from './utils/dispatch.ts';
+import { DropRepeatsTransformer } from './utils/Transformers/dropRepeatsWith.ts';
+import curryN from './utils/curry_n.ts';
 
 // @types
-type DropRepeats = <T>(list: T[]) => T[]
+type DropRepeats = <T>(list: T[]) => T[];
 
-const _dropRepeats = dropRepeatsWith(equals)
+const _dropRepeats = dropRepeatsWith(equals);
 
 const dispatched = dispatch(
   DropRepeatsTransformer as any,
   _dropRepeats,
-)
+);
 
 /**
  * Returns a new list without any consecutively repeating elements.
@@ -22,4 +22,4 @@ const dispatched = dispatch(
  *
  *      Fae.dropRepeats([1, 1, 1, 2, 3, 4, 4, 2, 2]); //=> [1, 2, 3, 4, 2]
  */
-export const dropRepeats: DropRepeats = curryN(1, dispatched)
+export const dropRepeats: DropRepeats = curryN(1, dispatched);

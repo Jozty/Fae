@@ -4,5 +4,5 @@
  * Increases its argument by 1.
  */
 export function inc(element: number) {
-  return element + 1
+  return element + 1;
 }

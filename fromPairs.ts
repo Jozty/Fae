@@ -1,9 +1,9 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import type { Prop } from './prop.ts'
-import type { Obj } from './utils/types.ts'
+import type { Prop } from './prop.ts';
+import type { Obj } from './utils/types.ts';
 
-export type Pair<T = any> = [Prop, T]
+export type Pair<T = any> = [Prop, T];
 
 /**
  * Creates a new object from a list key-value pairs. If a key appears in
@@ -12,10 +12,10 @@ export type Pair<T = any> = [Prop, T]
  *      Fae.fromPairs([['a', 1], ['b', 2], ['c', 3]]); //=> {a: 1, b: 2, c: 3}
  */
 export function fromPairs<T>(pairs: Pair<T>[]): Obj<T> {
-  const result: Obj<T> = {}
+  const result: Obj<T> = {};
   pairs.forEach((p) => {
-    result[p[0]] = p[1]
-  })
+    result[p[0]] = p[1];
+  });
 
-  return result
+  return result;
 }

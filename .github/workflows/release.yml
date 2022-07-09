@@ -31,13 +31,13 @@ jobs:
         run: npm i -g dts-bundle-generator typescript
 
       - name: Generate declaration
-        run: deno run --allow-write --allow-read --allow-run --unstable declarations.ts
+        run: deno task gen-declarations
 
       - name: Compile files
         run: |
           cd temp/
           tsc --init
-          tsc --lib esnext --downlevelIteration --outDir compiled
+          tsc --lib esnext --target es6 --outDir compiled
           cd compiled
           zip -r bundle.zip .
 

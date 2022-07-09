@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "esnext",
+      "deno.window"
+    ],
+    "target": "es6"
+  },
+  "lint": {
+    "files": {
+      "exclude": ["temp", "coverage"]
+    },
+    "rules": {
+      "tags": ["recommended"],
+      "exclude": [
+        "no-explicit-any",
+        "prefer-const",
+        "ban-types",
+        "no-inferrable-types",
+        "no-fallthrough",
+        "no-prototype-builtins",
+        "ban-ts-comment"
+      ]
+    }
+  },
+  "fmt": {
+    "files": {
+      "exclude": ["temp", "coverage"]
+    },
+    "options": {
+      "indentWidth": 2,
+      "lineWidth": 80,
+      "singleQuote": true,
+      "useTabs": false,
+      "proseWrap": "preserve"
+    }
+  },
+  "tasks": {
+    "test": "deno test",
+    "examples": "deno run --allow-run --allow-read run-utils/examples.ts",
+    "gen-declarations": "deno run -A run-utils/declarations.ts"
+  }
+}

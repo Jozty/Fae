@@ -1,9 +1,9 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import type { Func } from './utils/types.ts'
-import type Transformer from './utils/Transformers/transformers.ts'
-import { reduce } from './reduce.ts'
-import { getTransformer } from './utils/get.ts'
+import type { Func } from './utils/types.ts';
+import type Transformer from './utils/Transformers/transformers.ts';
+import { reduce } from './reduce.ts';
+import { getTransformer } from './utils/get.ts';
 
 /**
  * Initializes a transducer using supplied iterator function `transformer2`.
@@ -11,7 +11,6 @@ import { getTransformer } from './utils/get.ts'
  * successively calling the transformed `transformer2` and passing it `acc`
  * and the current value from the array, and then passing through `transformer1`
  * and then passing the result to the next call.
- *
  *
  *      const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
  *      const t1 = Fae.pipe(
@@ -28,6 +27,6 @@ export function transduce<T, L = T>(
   acc: T,
   functor: L[],
 ): unknown {
-  transformer2 = getTransformer(transformer2)
-  return reduce(transformer1(transformer2), acc, functor)
+  transformer2 = getTransformer(transformer2);
+  return reduce(transformer1(transformer2), acc, functor);
 }

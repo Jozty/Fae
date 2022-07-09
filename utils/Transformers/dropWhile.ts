@@ -1,17 +1,17 @@
-import Transformer from './transformers.ts'
-import type { Func } from '../types.ts'
+import Transformer from './transformers.ts';
+import type { Func } from '../types.ts';
 
 export default class DropWhileTransformer extends Transformer {
-  private skippingDone = false
+  private skippingDone = false;
   constructor(f: Func, transformer: Transformer) {
-    super(f, transformer)
+    super(f, transformer);
   }
 
   step(result: any, input: any) {
     if (!this.skippingDone) {
-      if (this.f(input)) return result
-      this.skippingDone = true
+      if (this.f(input)) return result;
+      this.skippingDone = true;
     }
-    return this.transformer!.step(result, input)
+    return this.transformer!.step(result, input);
   }
 }
