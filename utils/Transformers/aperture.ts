@@ -4,7 +4,6 @@ export default class ApertureTransformer<
   T = any,
 > extends Transformer {
   private n: number;
-
   private i = 0;
   private buffer: T[];
   private full = false;
