@@ -34,12 +34,11 @@ export function isArrayLike<T = any>(x: any): x is ArrayLike<T> {
   if (isArray(x)) return true;
   if (x.length) {
     if (x.length === 0) return true;
+    console;
     if (
       x.length > 0 &&
-      // deno-lint-ignore no-prototype-builtins
-      x.hasOwnProperty(0) &&
-      // deno-lint-ignore no-prototype-builtins
-      x.hasOwnProperty(x.length - 1)
+      Object.prototype.hasOwnProperty.call(x, 0) &&
+      Object.prototype.hasOwnProperty.call(x, x.length - 1)
     ) {
       return true;
     }
