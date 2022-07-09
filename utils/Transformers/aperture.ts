@@ -4,6 +4,7 @@ export default class ApertureTransformer<
   T = any,
 > extends Transformer {
   private n: number;
+  // deno-lint-ignore no-inferrable-types
   private i: number = 0;
   private buffer: T[];
   private full = false;

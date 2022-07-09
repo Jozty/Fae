@@ -3,13 +3,13 @@ import { _, propEq } from '../mod.ts';
 import { eq } from './utils/utils.ts';
 
 describe('propEq', () => {
-  let obj1 = {
+  const obj1 = {
     name: 'Shubham',
     age: 22,
     hair: 'blue',
     isMarried: true,
   };
-  let obj2 = {
+  const obj2 = {
     name: 'Shivam',
     age: 21,
     hair: 'black',

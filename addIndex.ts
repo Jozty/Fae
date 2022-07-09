@@ -16,7 +16,7 @@ function _addIndex(fn: Func) {
     const args = [...arguments];
 
     args[0] = function () {
-      let result = origFn.apply(
+      const result = origFn.apply(
         this,
         concat([...arguments], [index, list]),
       );

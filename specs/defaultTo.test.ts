@@ -3,7 +3,7 @@ import { _, defaultTo } from '../mod.ts';
 import { eq } from './utils/utils.ts';
 
 describe('defaultTo', () => {
-  let defaultTo125 = defaultTo(125);
+  const defaultTo125 = defaultTo(125);
 
   it('should return the default value if input is null, undefined or NaN', () => {
     eq(defaultTo125(null), 125);
