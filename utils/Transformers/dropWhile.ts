@@ -1,17 +1,24 @@
-import Transformer from './transformers.ts';
-import type { Func } from '../types.ts';
+import { AbstractTransformer, ReducedTransformer } from './transformers.ts';
+import type { Predicate1 } from '../types.ts';
 
-export default class DropWhileTransformer extends Transformer {
+export default class DropWhileTransformer<T> extends AbstractTransformer<T, T> {
   private skippingDone = false;
-  constructor(f: Func, transformer: Transformer) {
-    super(f, transformer);
+  private predicate: Predicate1<T>;
+
+  constructor(
+    predicate: Predicate1<T>,
+    transformer: AbstractTransformer<T, T>,
+  ) {
+    super(transformer);
+    this.predicate = predicate;
   }
 
-  step(result: any, input: any) {
+  step(result: T | ReducedTransformer<T>, input: T) {
     if (!this.skippingDone) {
-      if (this.f(input)) return result;
+      if (this.predicate(input)) return result;
       this.skippingDone = true;
     }
+
     return this.transformer!.step(result, input);
   }
 }

@@ -1,5 +1,5 @@
 import type { Func } from './types.ts';
-import Transformer from './Transformers/transformers.ts';
+import { AbstractTransformer } from './Transformers/transformers.ts';
 
 export function is(x: any, type: string) {
   return Object.prototype.toString.call(x) === `[object ${type}]`;
@@ -53,8 +53,8 @@ export function isIterator<T = any>(x: any): x is Iterator<T> {
   return x && isFunction(x.next);
 }
 
-export function isTransformer(s: any): s is Transformer {
-  return s instanceof Transformer;
+export function isTransformer(s: any): s is AbstractTransformer {
+  return s instanceof AbstractTransformer;
 }
 
 export function isUndefinedOrNull(x: any): x is undefined | null {

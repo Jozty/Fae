@@ -1,31 +1,32 @@
-import Transformer from './transformers.ts';
-import type { Func } from '../types.ts';
+import { AbstractTransformer, ReducedTransformer } from './transformers.ts';
+import type { Predicate1 } from '../types.ts';
 import { reduce } from '../../reduce.ts';
 
-export default class DropLastWhileTransformer<
-  T = any,
-> extends Transformer {
+export default class DropLastWhileTransformer<T>
+  extends AbstractTransformer<T, T> {
   private buffer: T[] = [];
-  constructor(f: Func, transformer: Transformer) {
-    super(f, transformer);
+  private predicate: Predicate1<T>;
+  constructor(p: Predicate1<T>, transformer: AbstractTransformer<T, T>) {
+    super(transformer);
+    this.predicate = p;
   }
 
-  result(acc: any) {
+  override result(acc: T | ReducedTransformer<T>) {
     return this.transformer!.result(acc);
   }
 
-  step(result: any, input: any) {
-    if (this.f(input)) return this.push(result, input);
+  step(result: T | ReducedTransformer<T>, input: T) {
+    if (this.predicate(input)) return this.push(result, input);
     return this.flush(result, input);
   }
 
-  flush(result: any, input: any) {
+  flush(result: T | ReducedTransformer<T>, input: unknown) {
     result = reduce(this.transformer!.step, result, this.buffer);
     this.buffer = [];
     return this.transformer!.step(result, input);
   }
 
-  push(result: any, input: any) {
+  push(result: T | ReducedTransformer<T>, input: T) {
     this.buffer.push(input);
     return result;
   }

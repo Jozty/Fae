@@ -14,24 +14,27 @@ import curryN from './utils/curry_n.ts';
 // @types
 type DropLastWhile_2<T> = <L extends T[] | string>(list: L) => InferType<L>;
 
-type DropLastWhile_1<L extends any[] | string> = (
+type DropLastWhile_1<L extends unknown[] | string> = (
   predicate: Predicate1<InferElementType<L>>,
 ) => InferType<L>;
 
 type DropLastWhile =
   & (<T>(predicate: Predicate1<T>) => DropLastWhile_2<T>)
-  & (<L extends any[] | string>(predicate: PH, list: L) => DropLastWhile_1<L>)
+  & (<L extends unknown[] | string>(
+    predicate: PH,
+    list: L,
+  ) => DropLastWhile_1<L>)
   & (<T, L extends T[] | string>(
     predicate: Predicate1<T>,
     list: L,
   ) => InferType<L>);
 
 function _dropLastWhile<L extends T[] | string, T>(
-  predicate: Predicate1<T>,
+  predicate: Predicate1<InferElementType<T>>,
   list: L,
 ) {
   let i = list.length - 1;
-  while (i >= 0 && predicate(list[i] as any)) i--;
+  while (i >= 0 && predicate(list[i] as InferElementType<T>)) i--;
 
   return slice(0, i + 1, list);
 }

@@ -34,4 +34,4 @@ const dispatched = dispatch(FindLastTransformer, _findLast);
  *      Fae.findLast(Fae.propEq('a', 1))(xs) //=> {a: 1, b: 1}
  *      Fae.findLast(Fae.propEq('a', 4))(xs) //=> undefined
  */
-export const findLast: FindLast = curryN(2, dispatched);
+export const findLast = curryN(2, dispatched) as FindLast;

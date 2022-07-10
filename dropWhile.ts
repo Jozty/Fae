@@ -14,25 +14,25 @@ import DropWhileTransformer from './utils/Transformers/dropWhile.ts';
 // @types
 type DropWhile_2<T> = <L extends T[] | string>(list: L) => InferType<L>;
 
-type DropWhile_1<L extends any[] | string> = (
+type DropWhile_1<L extends unknown[] | string> = (
   predicate: Predicate1<InferElementType<L>>,
 ) => InferType<L>;
 
 type DropWhile =
   & (<T>(predicate: Predicate1<T>) => DropWhile_2<T>)
-  & (<L extends any[] | string>(predicate: PH, list: L) => DropWhile_1<L>)
+  & (<L extends unknown[] | string>(predicate: PH, list: L) => DropWhile_1<L>)
   & (<L extends T[] | string, T>(
     predicate: Predicate1<T>,
     list: L,
   ) => InferType<L>);
 
 function _dropWhile<L extends T[] | string, T>(
-  predicate: Predicate1<T>,
+  predicate: Predicate1<T | string>,
   functor: L,
 ) {
   const len = functor.length;
   let i = 0;
-  while (i < len && predicate(functor[i] as any)) i++;
+  while (i < len && predicate(functor[i])) i++;
   return slice(i, Infinity, functor);
 }
 

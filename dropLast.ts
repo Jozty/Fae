@@ -7,21 +7,21 @@ import { take } from './take.ts';
 import DropLastTransformer from './utils/Transformers/dropLast.ts';
 
 // @types
-type DropLast_2 = <L extends any[] | string>(list: L) => InferType<L>;
+type DropLast_2 = <L extends unknown[] | string>(list: L) => InferType<L>;
 
-type DropLast_1<L extends any[] | string> = (n: number) => InferType<L>;
+type DropLast_1<L extends unknown[] | string> = (n: number) => InferType<L>;
 
 type DropLast =
   & ((n: number) => DropLast_2)
-  & (<L extends any[] | string>(n: PH, list: L) => DropLast_1<L>)
-  & (<L extends any[] | string>(n: number, list: L) => InferType<L>);
+  & (<L extends unknown[] | string>(n: PH, list: L) => DropLast_1<L>)
+  & (<L extends unknown[] | string>(n: number, list: L) => InferType<L>);
 
 function _dropLast<L extends T[] | string, T>(n: number, list: L) {
   return take(n < list.length ? list.length - n : 0, list);
 }
 
 const dispatchedDropLast = dispatch(
-  DropLastTransformer as any,
+  DropLastTransformer,
   _dropLast,
 );
 

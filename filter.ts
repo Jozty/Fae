@@ -54,11 +54,12 @@ function _functorFilter<T>(
   );
 }
 
-function _filter<T = any>(
+function _filter<T = unknown>(
   predicate: Predicate1<T>,
   functor: FunctorWithArLk<T> | Obj<T>,
 ): T[] | Partial<Obj<T>> {
-  if (isArray(functor)) return functor.filter(predicate);
+  if (isArray(functor)) return (functor as T[]).filter(predicate) as T[];
+
   if (
     isArrayLike(functor) ||
     isIterable(functor) ||
@@ -66,6 +67,7 @@ function _filter<T = any>(
   ) {
     return _functorFilter(predicate, functor);
   }
+
   if (isObject(functor)) return _objectFilter(predicate, functor);
   throw throwFunctorError();
 }

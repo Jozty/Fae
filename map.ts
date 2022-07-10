@@ -30,7 +30,7 @@ type MapInferElementType<F> = F extends Func ? Func
   : F extends Obj<infer U> ? U
   : InferElementType<F>;
 
-type Map_2<T, R> = <F extends Obj<T> | Func<A, T> | T[], A extends Any[]>(
+type Map_2<T, R> = <F extends Obj<T> | Func<A, T> | T[], T, A extends Any[]>(
   functor: F,
 ) => MapReturnType<F, R>;
 

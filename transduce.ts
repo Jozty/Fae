@@ -1,7 +1,7 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
 import type { Func } from './utils/types.ts';
-import type Transformer from './utils/Transformers/transformers.ts';
+import type { AbstractTransformer } from './utils/Transformers/transformers.ts';
 import { reduce } from './reduce.ts';
 import { getTransformer } from './utils/get.ts';
 
@@ -23,7 +23,7 @@ import { getTransformer } from './utils/get.ts';
  */
 export function transduce<T, L = T>(
   transformer1: Func,
-  transformer2: Func | Transformer,
+  transformer2: Func | AbstractTransformer,
   acc: T,
   functor: L[],
 ): unknown {
