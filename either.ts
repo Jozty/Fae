@@ -18,11 +18,12 @@ type Either =
 
 function _either<T extends Func>(f: T, g: T): T {
   if (isFunction(f)) {
-    const __either = function (this: any, ...args: any[]) {
+    const __either = function (this: unknown, ...args: unknown[]) {
       return f.apply(this, args) || g.apply(this, args);
     };
     return __either as T;
   } else {
+    // @ts-ignore: will remove this in future
     return lift(or)(f, g);
   }
 }
@@ -39,4 +40,4 @@ function _either<T extends Func>(f: T, g: T): T {
  *      f(101) //=> true
  *      f(8) //=> true
  */
-export const either: Either = curryN(2, _either);
+export const either = curryN(2, _either) as Either;

@@ -51,4 +51,4 @@ function _adjust<T>(index: number, fn: FuncArr1<T, T>, list: T[]) {
  *      Fae.adjust(2, Fae.add(1), [0, 1, 2, 3]) // [0, 1, 3, 3]
  *      Fae.adjust(-3, Fae.add(1), [0, 1, 2, 3]) // [0, 2, 2, 3]
  */
-export const adjust: Adjust = curryN(3, _adjust);
+export const adjust = curryN(3, _adjust) as Adjust;

@@ -51,4 +51,4 @@ function _lens<T, F>(
  * the value of the focus; the setter "sets" the value of the focus. The `setter`
  * should not mutate the data structure.
  */
-export const lens: LensF = curryN(2, _lens);
+export const lens = curryN(2, _lens) as LensF;

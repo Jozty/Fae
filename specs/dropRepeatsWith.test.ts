@@ -23,7 +23,7 @@ describe('dropRepeatsWith', () => {
     { i: 5 },
     { i: 3 },
   ];
-  const eqI = (a: any, b: any) => a.i === b.i;
+  const eqI = (a: { i: number }, b: { i: number }) => a.i === b.i;
 
   it('should remove repeated elements based on predicate', () => {
     eq(dropRepeatsWith(eqI, obj2), obj);

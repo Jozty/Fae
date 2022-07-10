@@ -24,4 +24,4 @@ function _takeLast<F extends any[] | string>(n: number, functor: F) {
   return drop(n >= 0 ? functor.length - n : 0, functor);
 }
 
-export const takeLast: TakeLast = curryN(2, _takeLast);
+export const takeLast = curryN(2, _takeLast) as TakeLast;

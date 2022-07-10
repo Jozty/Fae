@@ -54,7 +54,7 @@ describe('when', () => {
   });
 
   it('should return the argument unmodified if the validator returns a falsy value', () => {
-    eq(when(isNumber, (add1 as any) as Y)('hello'), 'hello');
+    eq(when(isNumber, (add1 as unknown) as Y)('hello'), 'hello');
     eq(when(equals(person1), invoke)(person2), {
       firstname: 'Michael',
       lastname: 'Jordan',
@@ -72,11 +72,11 @@ describe('when', () => {
   });
 
   it('should test curried versions too', () => {
-    const ifIsNumber = when(isNumber);
-
-    eq(when(isNumber)(add(1))(15), 16);
-    eq(ifIsNumber((add(1) as any) as T)('hello'), 'hello');
-    eq(when(equals(_, 5))(g)(5), 15);
+    const ifIsNumber = when<number>(isNumber);
+    eq(when<number>(isNumber)(add(1))(15), 16);
+    // @ts-expect-error: string is passed instead of number
+    eq(ifIsNumber(add(1))('hello'), 'hello');
+    eq(when<number>(equals(5))(g)(5), 15);
     eq(when(_, g)(equals(5.1))(5), 5);
     eq(when(_, _, 10)(equals(_, 10))(g), 30);
     eq(when(equals(8), g)(5.2), 5.2);

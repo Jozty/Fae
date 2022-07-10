@@ -18,4 +18,4 @@ function _reverse<F extends T[] | string, T>(functor: F): F {
 }
 
 /** Reverses given string or array without affecting the original. */
-export const reverse: Reverse = curryN(1, _reverse);
+export const reverse = curryN(1, _reverse) as Reverse;

@@ -17,4 +17,4 @@ function _always<T>(value: T) {
  *      const f = Fae.always('Fae')
  *      f() // 'Fae'
  */
-export const always: Always = curryN(1, _always);
+export const always = curryN(1, _always) as Always;

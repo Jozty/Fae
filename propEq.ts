@@ -50,4 +50,4 @@ function _propEq<T>(name: Prop, val: T, obj: Obj<T>) {
  *      const hasBrownHair = Fae.propEq('hair', 'brown')
  *      Fae.filter(hasBrownHair, students) //=> [shubham]
  */
-export const propEq: PropEq = curryN(3, _propEq);
+export const propEq = curryN(3, _propEq) as PropEq;

@@ -31,4 +31,4 @@ function _crossProduct<T1, T2>(a: T1[], b: T2[]): [T1, T2][] {
  *
  *     Fae.crossProduct([1, 2, 3], ['a', 'b']); //=> [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b'], [3, 'a'], [3, 'b']]
  */
-export const crossProduct: CrossProduct = curryN(2, _crossProduct);
+export const crossProduct = curryN(2, _crossProduct) as CrossProduct;

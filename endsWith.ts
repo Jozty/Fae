@@ -31,4 +31,4 @@ function _endsWith<L extends any[] | string>(suffix: L, functor: L) {
  *      Fae.endsWith(['c'], ['a', 'b', 'c'])    //=> true
  *      Fae.endsWith(['b'], ['a', 'b', 'c'])    //=> false
  */
-export const endsWith: EndsWith = curryN(2, _endsWith);
+export const endsWith = curryN(2, _endsWith) as EndsWith;

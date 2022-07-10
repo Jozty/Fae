@@ -52,7 +52,7 @@ function _assocPath(path: Path, val: unknown, obj: ObjRec) {
       ? []
       : {};
 
-    val = _assocPath(tail(p) as Path, val, child);
+    val = _assocPath(tail(p) as Path, val, child as ObjRec);
   }
 
   if (isInteger(prop) && isArray(obj)) {
@@ -73,4 +73,4 @@ function _assocPath(path: Path, val: unknown, obj: ObjRec) {
  *      Fae.assocPath(['a', 'b', 'c'], 42, {a: {b: {c: 0}}}); //=> {a: {b: {c: 42}}}
  *      Fae.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
  */
-export const assocPath: AssocPath = curryN(3, _assocPath);
+export const assocPath = curryN(3, _assocPath) as AssocPath;

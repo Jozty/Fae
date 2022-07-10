@@ -30,4 +30,4 @@ const dispatched = dispatch(AnyTransformer, _any);
  *
  * Acts as a transducer if a transformer is passed in place of `list`
  */
-export const any: Any = curryN(2, dispatched);
+export const any = curryN(2, dispatched) as Any;

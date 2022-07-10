@@ -1,7 +1,7 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
 import curryN from './utils/curry_n.ts';
-import type { Curry2, Obj } from './utils/types.ts';
+import type { Any, Curry2, Func, Obj } from './utils/types.ts';
 import { isFunction } from './utils/is.ts';
 import { typ } from './typ.ts';
 import { getFunctionName } from './utils/get.ts';
@@ -15,7 +15,7 @@ function _keys(obj: Obj) {
 }
 
 // TODO: add to mod
-function _last(arr: any[]) {
+function _last(arr: unknown[]) {
   return nth(-1, arr);
 }
 
@@ -23,7 +23,7 @@ function _last(arr: any[]) {
  * Check equality of `a` and `b` by custom implentation provided
  * by `a` and `b`
  */
-function _isEqualByCustomImpl(a: any, b: any) {
+function _isEqualByCustomImpl(a: Any, b: Any) {
   return (
     isFunction(a.equals) &&
     isFunction(b.equals) &&
@@ -33,10 +33,10 @@ function _isEqualByCustomImpl(a: any, b: any) {
 }
 
 function _checkEnumerableProps(
-  a: any,
-  b: any,
-  stackA: any[],
-  stackB: any[],
+  a: Any,
+  b: Any,
+  stackA: unknown[],
+  stackB: unknown[],
 ) {
   // check recursive objects
   for (let i = stackA.length - 1; i >= 0; i--) {
@@ -49,8 +49,8 @@ function _checkEnumerableProps(
   const keysB = _keys(b);
   if (keysA.length != keysB.length) return false;
 
-  const s1 = concat(stackA, [a]) as any[];
-  const s2 = concat(stackB, [b]) as any[];
+  const s1 = concat(stackA, [a]) as unknown[];
+  const s2 = concat(stackB, [b]) as unknown[];
 
   for (let i = 0; i < keysA.length; i++) {
     const key = keysA[i];
@@ -62,13 +62,13 @@ function _checkEnumerableProps(
 }
 
 function _checkObjects(
-  a: IArguments | any[] | Object,
-  b: IArguments | any[] | Object,
-  stackA: any[],
-  stackB: any[],
+  a: Any,
+  b: Any,
+  stackA: unknown[],
+  stackB: unknown[],
 ) {
   const c = a.constructor;
-  if (isFunction(c) && getFunctionName(c) === 'Promise') {
+  if (isFunction(c as Func) && getFunctionName(c as Func) === 'Promise') {
     return a === b;
   }
   return _checkEnumerableProps(a, b, stackA, stackB);
@@ -77,8 +77,8 @@ function _checkObjects(
 function _checkPrimitives(
   a: Boolean | String | Number | boolean | string | number,
   b: Boolean | String | Number | boolean | string | number,
-  stackA: any[],
-  stackB: any[],
+  stackA: unknown[],
+  stackB: unknown[],
 ) {
   if (typeof a === typeof b && Object.is(a.valueOf(), b.valueOf())) {
     return _checkEnumerableProps(a, b, stackA, stackB);
@@ -86,7 +86,7 @@ function _checkPrimitives(
   return false;
 }
 
-function _checkDate(a: Date, b: Date, stackA: any[], stackB: any[]) {
+function _checkDate(a: Date, b: Date, stackA: unknown[], stackB: unknown[]) {
   if (Object.is(a.valueOf(), b.valueOf())) {
     return _checkEnumerableProps(a, b, stackA, stackB);
   }
@@ -96,8 +96,8 @@ function _checkDate(a: Date, b: Date, stackA: any[], stackB: any[]) {
 function _checkRegex(
   a: RegExp,
   b: RegExp,
-  stackA: any[],
-  stackB: any[],
+  stackA: unknown[],
+  stackB: unknown[],
 ) {
   if (
     a.source === b.source &&
@@ -115,8 +115,8 @@ function _checkRegex(
 function _checkError(
   a: Error,
   b: Error,
-  stackA: any[],
-  stackB: any[],
+  stackA: unknown[],
+  stackB: unknown[],
 ) {
   if (a.name === b.name && a.message === b.message) {
     return _checkEnumerableProps(a, b, stackA, stackB);
@@ -125,10 +125,10 @@ function _checkError(
 }
 
 function _checkMaps(
-  a: Map<any, any>,
-  b: Map<any, any>,
-  stackA: any[],
-  stackB: any[],
+  a: Map<unknown, unknown>,
+  b: Map<unknown, unknown>,
+  stackA: unknown[],
+  stackB: unknown[],
 ) {
   if (a.size !== b.size) {
     return false;
@@ -163,10 +163,10 @@ function _checkMaps(
 }
 
 function _checkSets(
-  a: Set<any>,
-  b: Set<any>,
-  stackA: any[],
-  stackB: any[],
+  a: Set<unknown>,
+  b: Set<unknown>,
+  stackA: unknown[],
+  stackB: unknown[],
 ) {
   if (a.size !== b.size) return false;
 
@@ -192,10 +192,10 @@ function _checkSets(
 }
 
 function _equals(
-  a: any,
-  b: any,
-  stackA: any[] = [],
-  stackB: any[] = [],
+  a: unknown,
+  b: unknown,
+  stackA: unknown[] = [],
+  stackB: unknown[] = [],
 ) {
   if (Object.is(a, b)) return true;
   const typeA = typ(a);
@@ -204,8 +204,8 @@ function _equals(
   // types are not same
   if (typeA !== typeB) return false;
 
-  // if any of the object has custom implementation of equals
-  if (isFunction(a.equals) || isFunction(b.equals)) {
+  // if unknown of the object has custom implementation of equals
+  if (isFunction((a as Any).equals) || isFunction((b as Any).equals)) {
     return _isEqualByCustomImpl(a, b);
   }
 
@@ -218,22 +218,32 @@ function _equals(
     case 'Boolean':
     case 'Number':
     case 'String':
-      return _checkPrimitives(a, b, stackA, stackB);
+      return _checkPrimitives(
+        a as boolean | string | number,
+        b as boolean | string | number,
+        stackA,
+        stackB,
+      );
 
     case 'Date':
-      return _checkDate(a, b, stackA, stackB);
+      return _checkDate(a as Date, b as Date, stackA, stackB);
 
     case 'RegExp':
-      return _checkRegex(a, b, stackA, stackB);
+      return _checkRegex(a as RegExp, b as RegExp, stackA, stackB);
 
     case 'Error':
-      return _checkError(a, b, stackA, stackB);
+      return _checkError(a as Error, b as Error, stackA, stackB);
 
     case 'Map':
-      return _checkMaps(a, b, stackA, stackB);
+      return _checkMaps(
+        a as Map<unknown, unknown>,
+        b as Map<unknown, unknown>,
+        stackA,
+        stackB,
+      );
 
     case 'Set':
-      return _checkSets(a, b, stackA, stackB);
+      return _checkSets(a as Set<unknown>, b as Set<unknown>, stackA, stackB);
 
     case 'Int8Array':
     case 'Uint8Array':
@@ -251,4 +261,4 @@ function _equals(
   return false;
 }
 
-export const equals: Curry2<any, any, boolean> = curryN(2, _equals);
+export const equals: Curry2<unknown, unknown, boolean> = curryN(2, _equals);

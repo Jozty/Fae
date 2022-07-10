@@ -27,4 +27,4 @@ function _prop<T>(
 }
 
 /** Returns p property `p` on the `obj` if exists */
-export const prop: PropF = curryN(2, _prop);
+export const prop = curryN(2, _prop) as PropF;

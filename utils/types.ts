@@ -1,5 +1,7 @@
 import { _, FUNCTION_LENGTH } from './constants.ts';
 
+export type Any = any
+
 /** Type of placeholder for curried functions */
 export type PlaceHolder = typeof _;
 export type PH = PlaceHolder;

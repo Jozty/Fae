@@ -25,4 +25,4 @@ function _zip<T1, T2>(list1: T1[], list2: T2[]): [T1, T2][] {
  *
  *      Fae.zip([100, 200, 300], [1, 2, 3]) // [[1, 100], [2, 200], [3, 300]]
  */
-export const zip: Zip = curryN(2, _zip);
+export const zip = curryN(2, _zip) as Zip;

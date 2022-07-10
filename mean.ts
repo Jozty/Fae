@@ -13,4 +13,4 @@ function _mean(list: number[]) {
 /**
  * Returns the mean of the given list of numbers.
  */
-export const mean: Mean = curryN(1, _mean);
+export const mean = curryN(1, _mean) as Mean;

@@ -5,6 +5,7 @@ import { eq, thr } from './utils/utils.ts';
 describe('andThen', () => {
   it('throws a typeError if the then method does not exist', () => {
     thr(
+      // @ts-expect-error: 1 is not a promise-like
       () => andThen(inc, 1),
       '`andThen` expected a Promise, received 1',
     );
@@ -45,6 +46,8 @@ describe('andThen', () => {
       eq(n, 42);
     };
 
+    // TODO
+    // @ts-ignore
     await andThen(f, thennable);
   });
 });

@@ -33,17 +33,25 @@ export function getPath(path: Path): Array<string | number> {
   return path;
 }
 
-function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {
-  return pathsArr.map((p) => {
+function _paths<T, R>(
+  pathsArr: Path[],
+  obj: ObjRec<T> | null,
+): (R | undefined)[] {
+  return pathsArr.map<R | undefined>((p) => {
     const path = getPath(p);
-    let val: any = obj;
+    let val: unknown = obj;
+
     for (let i = 0; i < path.length; i++) {
       if (isUndefinedOrNull(val)) return undefined;
+
       const p = path[i];
       const pInt = parseInt(p as string, 10);
-      val = isInteger(pInt) && isArrayLike(val) ? nth(pInt, val) : val[p];
+      val = isInteger(pInt) && isArrayLike(val)
+        ? nth(pInt, val)
+        : (val as ObjRec)[p];
     }
-    return val;
+
+    return val as R;
   });
 }
 
@@ -57,4 +65,4 @@ function _paths<T, R>(pathsArr: Path[], obj: ObjRec<T> | null): R[] {
  *      Fae.paths([[], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); // [ { a: { b: 2 }, p: [ { q: 3 } ] }, 3 ]
  *      Fae.paths([['a', ''], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); // [ undefined, 3 ]
  */
-export const paths: Paths = curryN(2, _paths);
+export const paths = curryN(2, _paths) as Paths;

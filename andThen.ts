@@ -5,16 +5,16 @@ import type { Func, PH } from './utils/types.ts';
 import { assertPromise } from './utils/assert.ts';
 
 // @types
-type AndThen_2 = (p: any) => PromiseLike<any>;
+type AndThen_2<T, R> = (p: PromiseLike<T>) => PromiseLike<R>;
 
-type AndThen_1 = (f: Func) => PromiseLike<any>;
+type AndThen_1<T> = <R>(f: Func<[T], R>) => PromiseLike<R>;
 
 type AndThen =
-  & ((f: Func) => AndThen_2)
-  & ((a: PH, p: any) => AndThen_1)
-  & ((f: Func, p: any) => PromiseLike<any>);
+  & (<T, R>(f: Func<[T], R>) => AndThen_2<T, R>)
+  & (<T>(a: PH, p: PromiseLike<T>) => AndThen_1<T>)
+  & (<T, R>(f: Func<[T], R>, p: PromiseLike<T>) => PromiseLike<R>);
 
-function _andThen(f: Func, p: any) {
+function _andThen<T, R>(f: Func<[T], R>, p: PromiseLike<T>) {
   assertPromise('andThen', p);
   return p.then(f);
 }
@@ -24,4 +24,4 @@ function _andThen(f: Func, p: any) {
  * a successfully resolved promise. This is useful for working with promises
  * inside function compositions.
  */
-export const andThen: AndThen = curryN(2, _andThen);
+export const andThen = curryN(2, _andThen) as AndThen;

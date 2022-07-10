@@ -18,4 +18,4 @@ function _min<T extends number | string | Date>(a: T, b: T) {
 /**
  * Returns the smaller of its two arguments.
  */
-export const min: Min = curryN(2, _min);
+export const min = curryN(2, _min) as Min;

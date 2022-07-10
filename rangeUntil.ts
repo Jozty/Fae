@@ -21,4 +21,4 @@ function _rangeUntil(from: number, to: number) {
 }
 
 /** Returns a list of numbers from `from` (**inclusive**) to `to` (**exclusive**). */
-export const rangeUntil: RangeUntil = curryN(2, _rangeUntil);
+export const rangeUntil = curryN(2, _rangeUntil) as RangeUntil;

@@ -14,10 +14,8 @@ describe('and', () => {
     eq(and(and(false, false), true), false);
     eq(and(undefined, true), false);
     eq(and(undefined, false), false);
-    // fae-no-check
-    eq(and(undefined, undefined as any), false);
-    // fae-no-check
-    eq(and(true, undefined as any), false);
+    eq(and(undefined, undefined), false);
+    eq(and(true, undefined), false);
     eq(and(2, 1), true);
     eq(and(0, true), false);
     eq(and('', true), false);
@@ -26,7 +24,7 @@ describe('and', () => {
     eq(and('a', true), true);
     eq(and([], true), true);
     eq(and({}, true), true);
-    eq(and({}, undefined as any), false);
+    eq(and({}, undefined), false);
     eq(and([1, 2], NaN), false);
     eq(and({ 1: 2 }, true), true);
     eq(and([1, 2, 3], true), true);

@@ -20,4 +20,4 @@ function _props<T>(p: Prop[], obj: Obj<T> | ArrayLike<T>) {
 }
 
 /** Returns an array of multiple on the `obj`. Order is preserved. */
-export const props: Props = curryN(2, _props);
+export const props = curryN(2, _props) as Props;

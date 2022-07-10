@@ -54,4 +54,4 @@ function _propOr<T, R>(d: R, p: Prop, obj: Obj<T> | null) {
  *      Great(fae)  //=> undefined
  *      GreatWithDefault(fae) //=> 'FaeModule'
  */
-export const propOr: PropOr = curryN(3, _propOr);
+export const propOr = curryN(3, _propOr) as PropOr;

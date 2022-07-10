@@ -4,16 +4,16 @@ import curryN from './utils/curry_n.ts';
 import type { PH } from './utils/types.ts';
 
 // @types
-type Xor_2 = (b: any) => boolean;
+type Xor_2 = <T2>(b: T2) => boolean;
 
-type Xor_1 = (a: any) => boolean;
+type Xor_1 = <T1>(a: T1) => boolean;
 
 type Xor =
-  & ((a: any) => Xor_2)
-  & ((a: PH, b: any) => Xor_1)
-  & ((a: any, b: any) => boolean);
+  & (<T1>(a: T1) => Xor_2)
+  & (<T2>(a: PH, b: T2) => Xor_1)
+  & (<T1, T2>(a: T1, b: T2) => boolean);
 
-function _xor(a: any, b: any) {
+function _xor<T1, T2>(a: T1, b: T2) {
   return Boolean(a ? !b : b);
 }
 
@@ -26,4 +26,4 @@ function _xor(a: any, b: any) {
  *      Fae.xor(false, true) //=> true
  *      Fae.xor(false, false) //=> false
  */
-export const xor: Xor = curryN(2, _xor);
+export const xor = curryN(2, _xor) as Xor;

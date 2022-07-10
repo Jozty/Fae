@@ -31,4 +31,4 @@ function _trim(str: string, t: string) {
  *      Fae.trim('[[Hello]]]', '[') // Hello]]]
  *      Fae.trim('[[Hello]]]', ']]') // [[Hello]]
  */
-export const trim: Trim = curryN(2, _trim);
+export const trim = curryN(2, _trim) as Trim;

@@ -22,4 +22,4 @@ function _lensProp<T, F>(prop: Prop): Lens<T, F> {
  *      const xLens = Fae.lensProp('x')
  *      Fae.view(xLens, {x: 1, y: 2})
  */
-export const lensProp: LensProp = curryN(1, _lensProp);
+export const lensProp = curryN(1, _lensProp) as LensProp;

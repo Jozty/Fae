@@ -41,4 +41,4 @@ function _addIndex(fn: Func) {
  *      indexedMap((val, idx) => idx + '-' + val, ['f', 'o', 'o', 'b', 'a', 'r'])
  *      // ['0-f', '1-o', '2-o', '3-b', '4-a', '5-r']
  */
-export const addIndex: AddIndex = curryN(1, _addIndex);
+export const addIndex = curryN(1, _addIndex) as AddIndex;

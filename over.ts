@@ -69,4 +69,4 @@ function _over<T, F>(
  *      Fae.over(headLens, (x: string) => x.toUpperCase(), ['foo', 'bar', 'baz']) // ['FOO', 'bar', 'baz']
  */
 
-export const over: Over = curryN(3, _over);
+export const over = curryN(3, _over) as Over;

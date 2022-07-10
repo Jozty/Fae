@@ -62,4 +62,4 @@ function _zipWith<T1, T2, R>(
  *
  *      Fae.zipWith(Fae.add, [100, 200, 300], [1, 2, 3]) // [101, 202, 303]
  */
-export const zipWith: ZipWith = curryN(3, _zipWith);
+export const zipWith = curryN(3, _zipWith) as ZipWith;

@@ -12,4 +12,4 @@ function _not<T>(a: T) {
 /**
  * Returns the not(complement) value of the given value
  */
-export const not: Not = curryN(1, _not);
+export const not = curryN(1, _not) as Not;

@@ -5,3 +5,4 @@ _test1.js
 .idea
 temp
 coverage
+**/**.log

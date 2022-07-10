@@ -10,6 +10,7 @@ describe('allPass', () => {
 
   it('should report whether all predicates are satisfied by a given value', () => {
     let ok = allPass([odd, lt20, gt5]);
+
     eq(ok(7), true);
     eq(ok(9), true);
     eq(ok(10), false);

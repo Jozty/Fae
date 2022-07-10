@@ -33,7 +33,7 @@ export function flip<T, A extends unknown[], R>(
   fn: (a: T, b: T, ...rest: A) => R,
 ) {
   return curryN(getFunctionLength(fn), function (
-    this: any,
+    this: unknown,
     b: T,
     a: T,
     ...rest: A

@@ -106,4 +106,4 @@ function _reduce<T, R, P>(
  *
  * Works on array-like/iterable/iterator
  */
-export const reduce: Reduce = curryN(3, _reduce);
+export const reduce = curryN(3, _reduce) as Reduce;

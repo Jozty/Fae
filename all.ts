@@ -34,4 +34,4 @@ const dispatchedAll = dispatch(AllTransformer, _all);
  *
  * Acts as a transducer if a transformer is passed in place of `functor`
  */
-export const all: All = curryN(2, dispatchedAll);
+export const all = curryN(2, dispatchedAll) as All;

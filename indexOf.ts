@@ -62,4 +62,4 @@ function _indexOf<T>(value: T, list: T[]) {
  *      Fae.indexOf(-0, [1, 2, 3, 0, -0, NaN]); //=> 4
  *      Fae.indexOf(NaN, [1, 2, 3, 0, -0, NaN]); //=> 5
  */
-export const indexOf: IndexOf = curryN(2, _indexOf);
+export const indexOf = curryN(2, _indexOf) as IndexOf;

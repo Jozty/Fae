@@ -24,4 +24,4 @@ function _prepend<T>(el: T, list: T[]) {
  *      Fae.prepend('tests', []); //=> ['tests']
  *      Fae.prepend(['tests'], ['write', 'more']); //=> [['tests'], 'write', 'more']
  */
-export const prepend: Prepend = curryN(2, _prepend);
+export const prepend = curryN(2, _prepend) as Prepend;

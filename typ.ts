@@ -17,7 +17,7 @@ import type { AllTypes } from './utils/types.ts';
  *      Fae.typ(() => {}); //=> "Function"
  *      Fae.typ(undefined); //=> "Undefined"
  */
-export function typ(a: any): AllTypes {
+export function typ<T>(a: T): AllTypes {
   if (a === null) return 'Null';
   if (a === undefined) return 'Undefined';
   return (slice(

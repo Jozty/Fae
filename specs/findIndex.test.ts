@@ -12,9 +12,9 @@ describe('findIndex', () => {
 
   // let even = (x: number) => x % 2 === 0
   // let odd = (x: number) => x % 2 === 1
-  // let gt5 = (x: any) => x > 5
-  // let isStr = (x: any) => { return typeof x === 'string'}
-  // let isObj = (x: any) => { return typeof x === 'object'}
+  // let gt5 = (x: unknown) => x > 5
+  // let isStr = (x: unknown) => { return typeof x === 'string'}
+  // let isObj = (x: unknown) => { return typeof x === 'object'}
 
   it('should return the index of the first element that satisfies the element equality', function () {
     eq(findIndex(a, 2), 0);

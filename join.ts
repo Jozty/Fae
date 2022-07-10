@@ -60,4 +60,4 @@ function _join<T extends EmptyObj>(
  * concatenating all the elements into a single string.
  * The functor may be array-like/iterable/iterator.
  */
-export const join: Join = curryN(2, _join);
+export const join = curryN(2, _join) as Join;

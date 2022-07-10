@@ -71,4 +71,4 @@ function _slice<L extends ArrayLike<any> | string>(
 }
 
 /** Returns the elements of the given list or string `fromIndex` (inclusive) to `toIndex` (exclusive). */
-export const slice: Slice = curryN(3, _slice);
+export const slice = curryN(3, _slice) as Slice;

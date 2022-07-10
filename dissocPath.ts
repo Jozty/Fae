@@ -55,4 +55,4 @@ function _dissocPath(path: Path, obj: ObjRec): ObjRec {
  *
  *      Fae.dissocPath(['a', 'b', 'c'], {a: {b: {c: 42}}}); //=> {a: {b: {}}}
  */
-export const dissocPath: DissocPath = curryN(2, _dissocPath);
+export const dissocPath = curryN(2, _dissocPath) as DissocPath;

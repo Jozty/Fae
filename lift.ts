@@ -12,4 +12,4 @@ function _lift(f: Func) {
   return liftN(getFunctionLength(f), f);
 }
 
-export const lift: Lift = curryN(1, _lift);
+export const lift = curryN(1, _lift) as Lift;

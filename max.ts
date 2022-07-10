@@ -21,4 +21,4 @@ function _max<T extends number | string | Date>(a: T, b: T) {
  *      Fae.max('abd', 'abc')  // => 'abd'
  *      Fae.max(1000, NaN)  // => NaN
  */
-export const max: Max = curryN(2, _max);
+export const max = curryN(2, _max) as Max;

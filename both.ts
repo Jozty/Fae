@@ -22,6 +22,7 @@ function _both<A extends unknown[]>(f: Func<A>, g: Func<A>): Func<A, boolean> {
       return !!(f.apply(this, args) && g.apply(this, args));
     };
   } else {
+    // @ts-ignore: we will remove it in future
     return lift(and)(f, g);
   }
 }
@@ -33,4 +34,4 @@ function _both<A extends unknown[]>(f: Func<A>, g: Func<A>): Func<A, boolean> {
  * of the second function otherwise. Second function will not be invoked if the first returns a
  * false value.
  */
-export const both: Both = curryN(2, _both);
+export const both = curryN(2, _both) as Both;

@@ -24,4 +24,4 @@ function _defaultTo<T1, T2>(defaultV: T1, value: T2) {
  *      defaultTo125(false)  //=> false
  *      defaultTo125('Fae')  //=> 'Fae'
  */
-export const defaultTo: DefaultTo = curryN(2, _defaultTo);
+export const defaultTo = curryN(2, _defaultTo) as DefaultTo;

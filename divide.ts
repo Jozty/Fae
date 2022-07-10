@@ -20,4 +20,4 @@ function _divide(a: number, b: number) {
 /**
  * Divides two numbers. Equivalent to `a / b`.
  */
-export const divide: Divide = curryN(2, _divide);
+export const divide = curryN(2, _divide) as Divide;

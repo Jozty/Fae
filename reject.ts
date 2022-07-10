@@ -31,4 +31,4 @@ function _reject<F extends T[] | Obj<T>, T>(
  *      const f = Fae.reject(isOdd, [1, 2, 3, 4])
  *      f() // [2, 4]
  */
-export const reject: Reject = curryN(2, _reject);
+export const reject = curryN(2, _reject) as Reject;

@@ -34,4 +34,4 @@ const dispatched = dispatch(ApertureTransformer as any, _aperture);
  *
  * Acts as a transducer if a transformer is passed in place of `list`
  */
-export const aperture: Aperture = curryN(2, dispatched);
+export const aperture = curryN(2, dispatched) as Aperture;

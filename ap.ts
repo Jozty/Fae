@@ -52,4 +52,4 @@ function _ap<T, R>(applyF: ApplyF<T, R>, applyX: T[] | Func) {
  *      const obj = {ap: (n: number) => 'called ap with ' + n}
  *      Fae.ap(obj, 10) // 'called ap with 10'
  */
-export const ap: Curry2<ApplyF, any, any> = curryN(2, _ap);
+export const ap = curryN(2, _ap) as Curry2<ApplyF, any, any>;

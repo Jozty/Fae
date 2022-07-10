@@ -28,4 +28,4 @@ function _dissoc(prop: string | number, obj: ObjRec) {
  *
  *      Fae.dissoc('b', {a: 1, b: 2, c: 3}); //=> {a: 1, c: 3}
  */
-export const dissoc: Dissoc = curryN(2, _dissoc);
+export const dissoc = curryN(2, _dissoc) as Dissoc;

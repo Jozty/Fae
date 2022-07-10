@@ -20,4 +20,4 @@ function _chain<T, R>(fun: (a: T) => R, list: ArrayLike<T>): R[] {
   return reduce(concat, [], map(fun, list));
 }
 
-export const chain: Chain = curryN(2, _chain);
+export const chain = curryN(2, _chain) as Chain;

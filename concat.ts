@@ -26,4 +26,4 @@ function _concat<L extends unknown[] | string, T>(a: L, b: L): L {
  * Concat two arrays or strings.
  * Both the arguments passed must be of same type.
  */
-export const concat: Concat = curryN(2, _concat);
+export const concat = curryN(2, _concat) as Concat;

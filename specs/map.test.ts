@@ -57,8 +57,8 @@ describe('map', () => {
     let a = 11;
     let b = 3;
     let result = add3(function1(a, b));
-    let x = map(add3);
-    const m1 = map(add3)(function1) as typeof function1;
+
+    const m1 = map(add3)(function1);
     const m2 = map(add3, function1) as Curry2<number>;
     eq(m1(a, b), result);
     eq(m2(a, b), result);

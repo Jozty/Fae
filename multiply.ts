@@ -16,4 +16,4 @@ function _multiply(a: number, b: number) {
 /**
  * Multiplies two numbers. Equivalent to `a * b` but curried.
  */
-export const multiply: Multiply = curryN(2, _multiply);
+export const multiply = curryN(2, _multiply) as Multiply;

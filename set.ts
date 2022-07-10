@@ -49,4 +49,4 @@ function _set<T, F>(lens: Lens<T, F>, value: F, target: T) {
  *      Fae.set(xLens, 4, {x: 1, y: 2})  // {x: 4, y: 2}
  *      Fae.set(xLens, 8, {x: 1, y: 2})  // {x: 8, y: 2}
  */
-export const set: Set = curryN(3, _set);
+export const set = curryN(3, _set) as Set;

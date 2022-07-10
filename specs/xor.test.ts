@@ -24,8 +24,7 @@ describe('xor', () => {
 
   it('should return false when both values are false', () => {
     eq(xor(null, false), false);
-    // fae-no-check
-    eq(xor(false, undefined as any), false);
+    eq(xor(false, undefined), false);
     eq(xor(undefined, null), false);
     eq(xor(0, false), false);
     eq(xor(false, NaN), false);
@@ -38,7 +37,7 @@ describe('xor', () => {
     eq(xor(null, 'foo'), true);
     eq(xor(undefined, 42), true);
     // fae-no-check
-    eq(xor(42, undefined as any), true);
+    eq(xor(42, undefined), true);
     eq(xor(Infinity, NaN), true);
     eq(xor(NaN, Infinity), true);
     eq(xor({}, ''), true);

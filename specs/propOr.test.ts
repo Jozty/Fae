@@ -20,8 +20,8 @@ describe('propOr', () => {
 
   it('should return the default value when the object is nil', () => {
     eq(num(null), 'Unknown');
-    // @ts-ignore
-    eq(num(void 0), 'Unknown' as any);
+    // @ts-expect-error: undefined object passed
+    eq(num(void 0), 'Unknown');
   });
 
   it('should use the default when supplied an object with a nil value', () => {
