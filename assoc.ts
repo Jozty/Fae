@@ -37,7 +37,7 @@ type Assoc =
 function _assoc(prop: string | number, val: unknown, obj: ObjRec) {
   const result: ObjRec = {};
 
-  for (let p in obj) result[p] = obj[p];
+  for (const p in obj) result[p] = obj[p];
 
   result[prop] = val;
   return result;

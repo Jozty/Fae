@@ -60,7 +60,6 @@ describe('join', () => {
 
   it('should join arrays', () => {
     const x = [1, 2, 3, 4, 5];
-    const y = [...x];
     const z = [1, 2, 3, 2, 5];
 
     eq(joinUnderScore(x), '1_2_3_4_5');

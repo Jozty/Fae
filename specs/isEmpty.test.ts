@@ -44,7 +44,7 @@ describe('isEmpty', () => {
     );
     eq(
       isEmpty(
-        (function (x) {
+        (function (_) {
           return arguments;
         })(0),
       ),

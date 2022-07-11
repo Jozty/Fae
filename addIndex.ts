@@ -25,7 +25,7 @@ export function addIndex<A extends unknown[], R, This>(fn: Func<A, R, This>) {
     const list = args[args.length - 1];
 
     args[0] = (...argsToActualFunction: A) => {
-      let result = origFn.apply(
+      const result = origFn.apply(
         this,
         concat([...argsToActualFunction], [index, list]) as A,
       );

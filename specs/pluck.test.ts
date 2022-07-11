@@ -10,7 +10,6 @@ describe('pluck', () => {
   ];
 
   it('should return a function that maps the appropriate property over an array', () => {
-    const x = pluck('age', peoples);
     eq(typeof pluck('name'), 'function');
     eq(pluck('name')(peoples), ['Shubham', 'Shivam', 'krish']);
     eq(pluck('age', peoples), [23, 21, 20]);

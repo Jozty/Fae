@@ -4,7 +4,7 @@ export default class ApertureTransformer<
   T,
 > extends AbstractTransformer<T[][], T> {
   private n: number;
-  private i: number = 0;
+  private i = 0;
   private buffer: T[];
   private full = false;
 

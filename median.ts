@@ -15,7 +15,7 @@ function _median(list: number[]) {
 
   if (len === 0) return NaN;
 
-  let listSorted: number[] = sort(
+  const listSorted: number[] = sort(
     comparator<number>((a, b) => a < b),
     list,
   );

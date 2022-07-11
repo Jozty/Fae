@@ -33,7 +33,6 @@ describe('zip', () => {
     const a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     const b = [100, 200, 300, 400];
     const c = [10, 20];
-    const d = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     function even(x: number) {
       return x % 2 === 0;
     }

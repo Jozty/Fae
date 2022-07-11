@@ -3,7 +3,7 @@ import { _, propSatisfies } from '../mod.ts';
 import { eq } from './utils/utils.ts';
 
 describe('propSatisfies', () => {
-  let isPositive = (n: number) => n > 0;
+  const isPositive = (n: number) => n > 0;
   const obj = { x: 1, y: 0 };
 
   it('should return true if the specified object property satisfies the given predicate', () => {
@@ -16,7 +16,6 @@ describe('propSatisfies', () => {
 
   it('should work with curried calls too', () => {
     const p_2_3 = propSatisfies(isPositive);
-    const x = p_2_3(_, obj)('y');
 
     eq(p_2_3('y')(obj), false);
     eq(p_2_3('y', obj), false);

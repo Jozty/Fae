@@ -1,11 +1,6 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
-import type {
-  GetTransformer,
-  Lens,
-  LensSetter,
-  LensTransformer,
-} from './lens.ts';
+import type { GetTransformer, Lens, LensTransformer } from './lens.ts';
 import curryN from './utils/curry_n.ts';
 import type { FuncArr1, PH } from './utils/types.ts';
 

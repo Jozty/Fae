@@ -76,9 +76,9 @@ describe('whereAny', () => {
   });
 
   it('should test curried versions too', () => {
-    let spec = { x: equals(20), z: equals('foo') };
-    let test1 = { x: 200, y: 100, z: 100 };
-    let test2 = { x: 10, z: 'foo' };
+    const spec = { x: equals(20), z: equals('foo') };
+    const test1 = { x: 200, y: 100, z: 100 };
+    const test2 = { x: 10, z: 'foo' };
 
     eq(whereAny(spec)(test1), false);
     eq(whereAny(_, test2)(spec), true);

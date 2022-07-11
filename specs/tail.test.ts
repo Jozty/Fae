@@ -21,7 +21,7 @@ describe('tail', () => {
       [1, 2],
     ]);
 
-    const arr = new Array(100000).fill(0).map((a, i) => i);
+    const arr = new Array(100000).fill(0).map((_, i) => i);
     const arr2 = [...arr];
     const expected = [...arr];
     expected.shift();

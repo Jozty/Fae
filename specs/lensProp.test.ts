@@ -29,7 +29,7 @@ describe('lensProp: view', () => {
 
 describe('lensProp: set', () => {
   it('should set the value of the object property specified', () => {
-    let result = set<TestObj, TestObjEl>(lensProp('a'), 0, testObj);
+    const result = set<TestObj, TestObjEl>(lensProp('a'), 0, testObj);
     eq(result, { a: 0, b: 2, c: 3 });
     // new object
     eq(result == testObj, false);

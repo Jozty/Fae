@@ -1,4 +1,4 @@
-import { describe, expect, it } from './_describe.ts';
+import { describe, it } from './_describe.ts';
 import { add, addIndex, map, multiply, reduce } from '../mod.ts';
 import { eq } from './utils/utils.ts';
 import type { Curry2, Func } from '../utils/types.ts';
@@ -16,11 +16,11 @@ describe('addIndex', () => {
 
   const indexedReduce = addIndex(reduce);
 
-  let sumArr = (tot: number, num: number, idx: number) => {
+  const sumArr = (tot: number, num: number, idx: number) => {
     return tot + num + idx;
   };
 
-  let squareEnds = (x: El, idx: number, list: El[]) => {
+  const squareEnds = (x: El, idx: number, list: El[]) => {
     // @ts-expect-error: x may be non-number too
     return idx === 0 || idx === list.length - 1 ? x * x : x;
   };

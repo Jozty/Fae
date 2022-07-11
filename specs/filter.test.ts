@@ -5,14 +5,12 @@ import {
   compose,
   filter,
   flip,
-  identity,
   map,
   pipe,
   reverse,
   transduce,
 } from '../mod.ts';
-import { eq, thr } from './utils/utils.ts';
-import type { FuncArr1 } from '../utils/types.ts';
+import { eq } from './utils/utils.ts';
 import type { DemoIterable } from './types.ts';
 
 const iterable: DemoIterable = {

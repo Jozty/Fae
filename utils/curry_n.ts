@@ -26,9 +26,7 @@ function _curryN<A extends unknown[], R, This = Any>(
       ? original.apply(this, allArgs)
       : _curryN(totalArgs, allArgs, original);
   }
-
-  let rem = received.filter((r) => r === UNDEFINED).length;
-
+  const rem = received.filter((r) => r === UNDEFINED).length;
   setFunctionLength(f, rem);
   return f;
 }

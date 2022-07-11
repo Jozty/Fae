@@ -4,7 +4,7 @@ import { eq } from './utils/utils.ts';
 
 describe('or', () => {
   it('should compare two values', () => {
-    let a = { a: 2 };
+    const a = { a: 2 };
     eq(or(true, true), true);
     eq(or(true, false), true);
     eq(or(false, true), true);

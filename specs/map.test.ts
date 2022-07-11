@@ -94,8 +94,6 @@ describe('map', () => {
     const b = [1, 2, 3, 4, 5, 6, 7, 8];
     const expected = [2, 3, 4, 5, 6, 7, 8, 9];
 
-    let x = map(_, b)(a);
-
     eq(map(a, b), expected);
     eq(map(a)(b), expected);
     eq(map(_, b)(a), expected);

@@ -4,9 +4,9 @@ import { eq } from './utils/utils.ts';
 import type { Func } from '../utils/types.ts';
 
 describe('findLastIndex', () => {
-  var obj1 = { x: 100 };
-  var obj2 = { x: 200 };
-  var a = [
+  const obj1 = { x: 100 };
+  const obj2 = { x: 200 };
+  const a = [
     11,
     10,
     9,

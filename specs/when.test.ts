@@ -15,9 +15,6 @@ describe('when', () => {
     return multiply(3)(x);
   }
 
-  let spec = { x: equals('foo'), y: equals(7) };
-  let test1 = { x: 12, y: 200 };
-  let test2 = { x: 'foo', y: 7 };
   const person1 = {
     firstname: 'Bob',
     lastname: 'Hanks',

@@ -3,7 +3,6 @@
 import { Lens, lens, LensGetter, LensSetter } from './lens.ts';
 import { prop as prp } from './prop.ts';
 import type { Prop } from './prop.ts';
-import curryN from './utils/curry_n.ts';
 import { assoc } from './assoc.ts';
 
 /**

@@ -12,8 +12,8 @@ describe('identity', () => {
   });
 
   it('should returns its return value of function being passes', function () {
-    let f = (x: number) => ++x;
-    let g = (y: string) => y + 'bar';
+    const f = (x: number) => ++x;
+    const g = (y: string) => y + 'bar';
     eq(identity(f(1)), 2);
     eq(identity(g('foo')), 'foobar');
   });

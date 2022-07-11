@@ -1,6 +1,6 @@
 import { describe, it } from './_describe.ts';
 import { comparator, flip } from '../mod.ts';
-import { eq, thr } from './utils/utils.ts';
+import { eq } from './utils/utils.ts';
 
 describe('comparator', () => {
   const func1 = (a: string, b: string) => a[2] < b[2];

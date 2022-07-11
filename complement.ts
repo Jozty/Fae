@@ -12,8 +12,8 @@ type Complement = <T extends unknown[]>(
 const _complement = lift(not);
 
 function _complement1<T extends unknown[]>(
-  a: (...args: T) => boolean,
-  // @ts-ignore
+  _a: (...args: T) => boolean,
+  // @ts-ignore: TODO
 ): (...args: T) => boolean {
   // ..
 }
