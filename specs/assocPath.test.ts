@@ -9,7 +9,7 @@ describe('assocPath', () => {
       f: { g: { h: 4, i: [5, 6, 7], j: { k: 6, l: 7 } } },
       m: 8,
     };
-    const obj2 = assocPath(['f', 'g', 'i', 1], 42, obj1);
+    const obj2 = assocPath(['f', 'g', 'i', 1], 42, obj1) as typeof obj1;
     eq(obj2.f.g.i, [5, 42, 7]);
     // Note: reference equality below!
     strictEq(obj2.a, obj1.a);
@@ -30,7 +30,9 @@ describe('assocPath', () => {
   });
 
   it('should replace the whole object if path is empty', () => {
-    eq(assocPath([], 3, { a: 1, b: 2 }), 3 as any);
+    // TODO
+    // @ts-ignore: fix later
+    eq(assocPath([], 3, { a: 1, b: 2 }), 3);
   });
 
   it('should replace `undefined` with a new object', () => {

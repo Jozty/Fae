@@ -1,6 +1,7 @@
 import { describe, it } from './_describe.ts';
 import { _, curry, reject } from '../mod.ts';
 import { eq } from './utils/utils.ts';
+import type { Curry2 } from '../utils/types.ts';
 
 type O = {
   x?: number;
@@ -9,7 +10,11 @@ type O = {
 };
 
 describe('reject', () => {
-  const equals = curry(2, (x: number, y: number) => x === y);
+  const equals = curry(2, (x: unknown, y: unknown) => x === y) as Curry2<
+    unknown,
+    unknown,
+    boolean
+  >;
   const even = (x: number) => (x & 1) === 0;
   const odd = (x: number) => (x & 1) === 1;
 

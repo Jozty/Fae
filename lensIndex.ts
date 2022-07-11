@@ -11,7 +11,7 @@ type LensIndex = <T, F>(index: number) => Lens<T, F>;
 function _lensIndex<T, F>(index: number): Lens<T, F> {
   return lens(
     nth(index) as LensGetter<T, F>,
-    (update(index) as any) as LensSetter<T, F>,
+    (update(index) as unknown) as LensSetter<T, F>,
   );
 }
 

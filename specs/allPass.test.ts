@@ -17,6 +17,7 @@ describe('allPass', () => {
     eq(ok(3), false);
     eq(ok(21), false);
     eq(allPass([odd, gt5, plusEq])(9, 9, 9, 9), true);
+    // @ts-expect-error: all pass does not return inferred types properly
     eq(allPass([odd, gt5, plusEq])(9)(9)(9)(9), true);
   });
 

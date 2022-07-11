@@ -20,31 +20,42 @@ type DissocPath =
   & ((path: Path, obj: ObjRec) => ObjRec);
 
 // TODO: move to mod
-function _remove(index: number, arr: any[]) {
+function _remove<T>(index: number, arr: T[]) {
   const result = [...arr];
   result.splice(index, 1);
   return result;
 }
 
-function _dissocPath(path: Path, obj: ObjRec): ObjRec {
+function _dissocPath<T extends ObjRec | unknown[]>(path: Path, obj: T): T {
   // create shallow clone of obj
-  let result: ObjRec;
-  if (isArray(obj)) result = [...obj];
+  let result: T;
+
+  if (isArray(obj)) result = [...obj] as T;
   else result = { ...obj };
+
   const p = getPath(path);
   const prop = p[0];
+
   if (p.length === 0) return result;
   if (p.length === 1) {
-    if (isInteger(prop) && isArray(obj)) return _remove(prop, obj);
-    return dissoc(prop, obj);
+    if (isInteger(prop) && isArray(result)) return _remove(prop, result) as T;
+    return dissoc(prop, result as ObjRec) as T;
   }
 
+  if (isUndefinedOrNull(result[prop as number])) return obj;
   const tl = tail(p) as typeof p;
-  if (isUndefinedOrNull(obj[prop])) return obj;
+
   if (isInteger(prop) && isArray(obj)) {
-    return update(prop, _dissocPath(tl, obj[prop]), obj);
+    const dissocedChild = _dissocPath(tl, obj[prop] as ObjRec);
+
+    return update(prop, dissocedChild, obj) as T;
   } else {
-    return assoc(prop, _dissocPath(tl, obj[prop]), obj);
+    return assoc(
+      prop,
+      // @ts-ignore: TODO
+      _dissocPath(tl, obj[prop]),
+      obj as ObjRec,
+    ) as T;
   }
 }
 

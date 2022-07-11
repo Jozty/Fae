@@ -8,14 +8,17 @@ import { filter } from './filter.ts';
 // @types
 type Reject_2<T> = <F extends T[] | Obj<T>>(filterable: F) => F;
 
-type Reject_1<F extends any[] | Obj<any>> = (
+type Reject_1<F extends unknown[] | Obj<unknown>> = (
   predicate: Predicate1<InferElementType<F>>,
 ) => F;
 
 type Reject =
   & (<F extends T[] | Obj<T>, T>(predicate: Predicate1<T>, filterable: F) => F)
   & (<T>(predicate: Predicate1<T>) => Reject_2<T>)
-  & (<F extends any[] | Obj<any>>(predicate: PH, filterable: F) => Reject_1<F>);
+  & (<F extends unknown[] | Obj<unknown>>(
+    predicate: PH,
+    filterable: F,
+  ) => Reject_1<F>);
 
 function _reject<F extends T[] | Obj<T>, T>(
   predicate: Predicate1<T>,

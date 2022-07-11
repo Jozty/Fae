@@ -21,7 +21,7 @@ function _liftN(arity: number, fn: Func): Func {
   const lifted = curryN(arity, fn);
   const f = function () {
     const args = tail(arguments);
-    const mapped = (map(lifted, arguments[0]) as any) as Func[];
+    const mapped = (map(lifted, arguments[0]) as unknown) as Func[];
     return reduce(ap, mapped, args);
   };
   return curryN(arity, f);

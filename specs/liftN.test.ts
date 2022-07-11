@@ -1,6 +1,7 @@
 import { describe, it } from './_describe.ts';
 import { _, add, curry, liftN, multiply, reduce, subtract } from '../mod.ts';
 import { eq } from './utils/utils.ts';
+import type { Curry2, Func } from '../utils/types.ts';
 
 function addN() {
   return reduce((a: number, b: number) => a + b, 0, arguments);
@@ -10,8 +11,16 @@ const add3 = curry(3, function (a: number, b: number, c: number) {
   return a + b + c;
 });
 
-const gt = curry(2, (a: number, b: number) => a > b);
-const lt = curry(2, (a: number, b: number) => a < b);
+const gt = curry(2, (a: number, b: number) => a > b) as Curry2<
+  number,
+  number,
+  boolean
+>;
+const lt = curry(2, (a: number, b: number) => a < b) as Curry2<
+  number,
+  number,
+  boolean
+>;
 
 function and(a: number, b: number) {
   return a && b;
@@ -30,7 +39,7 @@ describe('liftN', () => {
     eq(addN3([1, 10], [2], [3]), [6, 15]);
   });
 
-  it('can lift functions of any arity', () => {
+  it('can lift functions of unknown arity', () => {
     eq(addN3([1, 10], [2], [3]), [6, 15]);
     eq(addN4([1, 10], [2], [3], [40]), [46, 55]);
     eq(addN5([1, 10], [2], [3], [40], [500, 1000]), [
@@ -83,9 +92,11 @@ describe('liftN', () => {
 
   it('should interprets ((->) r) as a functor', () => {
     const convergedOnInt = addN3(add(2), multiply(3), subtract(4));
-    const convergedOnBool = liftN(2, and)(gt(_, 0), lt(_, 3));
+    // @ts-ignore: TODO
+    const convergedOnBool = (liftN(2, and) as Curry2<Func>)(gt(_, 0), lt(_, 3));
     eq(typeof convergedOnInt, 'function');
     eq(typeof convergedOnBool, 'function');
+    // @ts-ignore: TODO
     eq(convergedOnInt(10), 10 + 2 + 10 * 3 + (4 - 10));
     eq(convergedOnBool(0), 0 > 0 && 0 < 3);
     eq(convergedOnBool(1), 1 > 0 && 1 < 3);

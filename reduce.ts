@@ -7,6 +7,7 @@ import type { FuncArr2, FunctorWithArLk, PH } from './utils/types.ts';
 import {
   AbstractTransformer,
   ReducedTransformer,
+  TransformerFunc,
 } from './utils/Transformers/transformers.ts';
 import { throwFunctorError } from './utils/throw.ts';
 
@@ -92,7 +93,7 @@ function _reduce<R, T>(
   acc: R,
   functor: FunctorWithArLk<T>,
 ): R {
-  const trans = getTransformer<R, T>(func);
+  const trans = getTransformer<R, T>(func as TransformerFunc<R, T>);
 
   if (isArrayLike(functor)) return _arrayReduce<R, T>(trans, acc, functor);
   if (isIterable(functor)) {

@@ -12,7 +12,7 @@ type LensPath = <T, F>(path: Path) => Lens<T, F>;
 function _lensPath<T, F>(path: Path): Lens<T, F> {
   return lens(
     pth(path) as LensGetter<T, F>,
-    (assocPath(path) as any) as LensSetter<T, F>,
+    (assocPath(path) as unknown) as LensSetter<T, F>,
   );
 }
 

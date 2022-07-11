@@ -22,11 +22,16 @@ import { getTransformer } from './utils/get.ts';
  *      Fae.transduce(t1, Fae.flip(Fae.append), [], arr) // [3]
  */
 export function transduce<T, L = T>(
-  transformer1: Func,
-  transformer2: Func | AbstractTransformer,
+  // inferring the types of transformer1 and transformer2 is of no use
+  // because transduce works in opposite way, and so the type returned by
+  // transformer1 maybe different from output returned by the action of transduce
+  // deno-lint-ignore no-explicit-any
+  transformer1: Func<any[], any>,
+  // deno-lint-ignore no-explicit-any
+  transformer2: Func<any[], any> | AbstractTransformer,
   acc: T,
   functor: L[],
 ): unknown {
-  transformer2 = getTransformer(transformer2);
-  return reduce(transformer1(transformer2), acc, functor);
+  const trans2 = getTransformer(transformer2);
+  return reduce(transformer1(trans2), acc, functor);
 }

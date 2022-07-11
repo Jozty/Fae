@@ -88,9 +88,9 @@ function _map<F extends Obj<T> | Func<A, T> | T[], T, R, A extends Any[]>(
   fn: FuncArr1<T, R>,
   functor: F,
 ): MapReturnType<F, R> {
+  // @ts-ignore: TODO
   if (isFunction(functor)) {
-    // TODO
-    // @ts-ignore
+    // @ts-ignore: TODO
     return _functionMap(fn, functor) as MapReturnType<F, R>;
   }
 
@@ -99,7 +99,7 @@ function _map<F extends Obj<T> | Func<A, T> | T[], T, R, A extends Any[]>(
   }
 
   if (isObject(functor)) {
-    return _objectMap(fn, functor) as MapReturnType<F, R>;
+    return _objectMap(fn, functor as Obj<T>) as MapReturnType<F, R>;
   }
 
   throw new TypeError(

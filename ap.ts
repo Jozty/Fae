@@ -7,11 +7,11 @@ import { reduce } from './reduce.ts';
 import { map } from './map.ts';
 import { isFunction } from './utils/is.ts';
 
-type ApplyFAp<T = any, R = any> = {
+type ApplyFAp<T = unknown, R = unknown> = {
   ap: FuncArr1<T[] | Func | T, R>;
 };
 
-type ApplyF<T = any, R = any> =
+type ApplyF<T = unknown, R = unknown> =
   | FuncArr1<T, R>
   | FuncArr1<T, R>[]
   | ApplyFAp<T, R>;
@@ -28,14 +28,15 @@ function _ap<T, R>(applyF: ApplyF<T, R>, applyX: T[] | Func) {
   }
 
   if (isFunction(applyF) && isFunction(applyX)) {
-    return (x: T) => applyF(x)(applyX(x));
+    // deno-lint-ignore no-explicit-any
+    return (x: T) => (applyF(x) as any)(applyX(x));
   }
 
   return reduce(
-    // @ts-ignore
     (acc: T[], f: Func) => concat(acc, map(f, applyX) as T[]),
     [],
-    applyF as any[],
+    // @ts-ignore: fix later
+    applyF,
   );
 }
 
@@ -52,4 +53,5 @@ function _ap<T, R>(applyF: ApplyF<T, R>, applyX: T[] | Func) {
  *      const obj = {ap: (n: number) => 'called ap with ' + n}
  *      Fae.ap(obj, 10) // 'called ap with 10'
  */
+// deno-lint-ignore no-explicit-any
 export const ap = curryN(2, _ap) as Curry2<ApplyF, any, any>;

@@ -25,15 +25,15 @@ export abstract class AbstractTransformer<A = unknown, I = unknown> {
   ): A | ReducedTransformer<A>;
 }
 
-type TransformerFunc<T, R> =
+export type TransformerFunc<R, T> =
   & Func<[T], R | ReducedTransformer<R>>
   & Func<[R | ReducedTransformer<R>, T], R | ReducedTransformer<R>>;
 
 export class Transformer<A, I> extends AbstractTransformer<A, I> {
-  private f: TransformerFunc<I, A>;
+  private f: TransformerFunc<A, I>;
 
   constructor(
-    f: TransformerFunc<I, A>,
+    f: TransformerFunc<A, I>,
     transformer?: AbstractTransformer<A, I>,
   ) {
     super(transformer);

@@ -26,7 +26,7 @@ function _aperture<T>(n: number, list: T[]) {
   return result;
 }
 
-const dispatched = dispatch(ApertureTransformer as any, _aperture);
+const dispatched = dispatch(ApertureTransformer, _aperture);
 
 /**
  * Returns a new list, composed of n-tuples of consecutive elements. If `n` is

@@ -32,6 +32,8 @@ describe('andThen', () => {
 
     await andThen((result) => {
       eq(result, 4);
+      // TODO: check it later
+      // @ts-ignore: check it later
     })(asyncAddThree(1));
   });
 
@@ -46,8 +48,8 @@ describe('andThen', () => {
       eq(n, 42);
     };
 
-    // TODO
-    // @ts-ignore
+    // TODO: check it later
+    // @ts-ignore: check it later
     await andThen(f, thennable);
   });
 });
