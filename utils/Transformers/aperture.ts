@@ -4,7 +4,7 @@ export default class ApertureTransformer<
   T = any,
 > extends Transformer {
   private n: number;
-  private i: number = 0;
+  private i = 0;
   private buffer: T[];
   private full = false;
   constructor(n: number, transformer: Transformer) {

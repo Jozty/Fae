@@ -14,11 +14,8 @@
       "tags": ["recommended"],
       "exclude": [
         "no-explicit-any",
-        "prefer-const",
         "ban-types",
-        "no-inferrable-types",
         "no-fallthrough",
-        "no-prototype-builtins",
         "ban-ts-comment"
       ]
     }

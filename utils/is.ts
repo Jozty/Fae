@@ -36,8 +36,8 @@ export function isArrayLike<T = any>(x: any): x is ArrayLike<T> {
     if (x.length === 0) return true;
     if (
       x.length > 0 &&
-      x.hasOwnProperty(0) &&
-      x.hasOwnProperty(x.length - 1)
+      Object.prototype.hasOwnProperty.call(x, 0) &&
+      Object.prototype.hasOwnProperty.call(x, x.length - 1)
     ) {
       return true;
     }

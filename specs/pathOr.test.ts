@@ -4,7 +4,7 @@ import { _, pathOr } from '../mod.ts';
 import { eq } from './utils/utils.ts';
 
 describe('pathOr', () => {
-  let deepObject = {
+  const deepObject = {
     a: { b: { c: 'c' } },
     falseVal: false,
     nullVal: null,
@@ -13,7 +13,7 @@ describe('pathOr', () => {
   };
 
   it('should take a path and an object and returns the value at the path or the default value', () => {
-    let obj = {
+    const obj = {
       a: {
         b: {
           c: 100,

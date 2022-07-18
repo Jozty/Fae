@@ -9,11 +9,11 @@ describe('addIndex', () => {
 
   const indexedReduce = addIndex(reduce);
 
-  let sumArr = (tot: number, num: number, idx: number) => {
+  const sumArr = (tot: number, num: number, idx: number) => {
     return tot + num + idx;
   };
 
-  let squareEnds = (x: any, idx: number, list: ArrayLike<any>) => {
+  const squareEnds = (x: any, idx: number, list: ArrayLike<any>) => {
     return idx === 0 || idx === list.length - 1 ? x * x : x;
   };
 
@@ -34,7 +34,7 @@ describe('addIndex', () => {
   });
 
   it('should pass params in order: iteratorFunc, index, list', () => {
-    let makeSquareEnds = indexedMap(squareEnds);
+    const makeSquareEnds = indexedMap(squareEnds);
     eq(makeSquareEnds(list), [
       16,
       'f',

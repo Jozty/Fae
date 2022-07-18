@@ -85,7 +85,7 @@ function _reduce<T, R, P>(
   acc: R,
   functor: FunctorWithArLk<T>,
 ): R {
-  let trans = getTransformer(func);
+  const trans = getTransformer(func);
   if (isArrayLike(functor)) return _arrayReduce(trans, acc, functor);
   if (isIterable(functor)) {
     return _iterableReduce(trans, acc, getIterator<T>(functor));

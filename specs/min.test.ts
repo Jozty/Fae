@@ -33,8 +33,8 @@ describe('min', () => {
   });
 
   it('should work for any orderable type', () => {
-    let d1: Date = new Date('01-01-2001');
-    let d2: Date = new Date('01-01-2002');
+    const d1: Date = new Date('01-01-2001');
+    const d2: Date = new Date('01-01-2002');
 
     eq(min(d1)(d2), d1);
     // @ts-expect-error: because min(a, b) === min(b, a)
