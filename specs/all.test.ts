@@ -46,7 +46,7 @@ describe('all', () => {
         flip((a, _) => a),
         11,
         arr,
-      ) as any,
+      ),
       false,
     );
   });

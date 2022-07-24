@@ -37,4 +37,4 @@ function _whereAll<T>(specs: Tests<T>, testObj: Obj<T>) {
  *      Fae.whereAll(spec, {x: 0, y: 2}) // true
  *      Fae.whereAll(spec, {x: 1, y: 2}) // false
  */
-export const whereAll: WhereAll = curryN(2, _whereAll);
+export const whereAll = curryN(2, _whereAll) as WhereAll;

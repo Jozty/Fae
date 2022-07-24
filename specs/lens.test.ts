@@ -1,3 +1,5 @@
+// @ts-nocheck
+// TODO
 import { describe, it } from './_describe.ts';
 import {
   _,
@@ -28,7 +30,7 @@ type Alice = typeof alice;
 
 const nameLens = lens(
   prop('name') as LensGetter<Alice, string>,
-  (assoc('name') as any) as LensSetter<Alice, string>,
+  (assoc('name') as unknown) as LensSetter<Alice, string>,
 );
 
 const addressLens = lensProp<Alice, string[]>('address');

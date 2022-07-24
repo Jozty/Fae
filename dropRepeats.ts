@@ -12,12 +12,12 @@ type DropRepeats = <T>(list: T[]) => T[];
 const _dropRepeats = dropRepeatsWith(equals);
 
 const dispatched = dispatch(
-  DropRepeatsTransformer as any,
+  DropRepeatsTransformer,
   _dropRepeats,
 );
 
 /**
- * Returns a new list without any consecutively repeating elements.
+ * Returns a new list without unknown consecutively repeating elements.
  * Fae.equals is used for comparison
  *
  *      Fae.dropRepeats([1, 1, 1, 2, 3, 4, 4, 2, 2]); //=> [1, 2, 3, 4, 2]

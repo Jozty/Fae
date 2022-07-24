@@ -1,8 +1,9 @@
 import { describe, it } from './_describe.ts';
 import { _, nth } from '../mod.ts';
 import { eq, thr } from './utils/utils.ts';
+import type { DemoIterable } from './types.ts';
 
-const iterable: any = {
+const iterable: DemoIterable = {
   limit: 70,
   current: 65,
   [Symbol.iterator]: function () {
@@ -16,7 +17,7 @@ const iterable: any = {
             done: false,
           };
         }
-        return { done: true };
+        return { done: true } as IteratorReturnResult<string>;
       },
     };
   },
@@ -130,7 +131,9 @@ describe('nth', () => {
       a: 1,
       b: 2,
     };
-    const n = nth(_, ob as any);
+
+    // @ts-expect-error: object is passed to nth which is not a valid type
+    const n = nth(_, ob);
 
     thr(
       () => n(1),

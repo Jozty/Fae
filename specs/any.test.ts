@@ -1,6 +1,7 @@
 import { describe, it } from './_describe.ts';
 import { _, any, flip, inc, map, pipe, transduce } from '../mod.ts';
 import { eq } from './utils/utils.ts';
+import { Func } from '../utils/types.ts';
 
 describe('any', () => {
   const odd = (a: number) => (a & 1) === 1;
@@ -61,13 +62,13 @@ describe('any', () => {
   it('should work with transformers too', () => {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8];
     const less2 = (a: number) => a < 2;
-    const t1 = pipe(map(inc), any(less2));
+    const t1 = pipe(map(inc), any(less2)) as Func<[number[]], boolean>;
 
     eq(t1(arr), false);
     eq(
       transduce(
         t1,
-        flip((a: number, _: number) => a),
+        flip((a: number, _b: number) => a),
         11,
         arr,
       ),

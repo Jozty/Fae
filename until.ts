@@ -51,4 +51,4 @@ function _until<T>(pred: Predicate1<T>, fn: FuncArr1<T, T>, init: T) {
  * Takes a predicate, a transformation function, and an initial value,
  * and returns a value of the same type as the initial value.
  */
-export const until: Until = curryN(3, _until);
+export const until = curryN(3, _until) as Until;

@@ -46,4 +46,4 @@ function _update<T>(index: number, value: T, list: T[]) {
  *      Fae.adjust(2, Fae.add(1), [0, 1, 2, 3]) // [0, 1, 3, 3]
  *      Fae.adjust(-3, Fae.add(1), [0, 1, 2, 3]) // [0, 2, 2, 3]
  */
-export const update: Update = curryN(3, _update);
+export const update = curryN(3, _update) as Update;

@@ -33,4 +33,4 @@ function _groupWith<L extends T[] | string, T>(
   return result;
 }
 
-export const groupWith: GroupWith = curryN(2, _groupWith);
+export const groupWith = curryN(2, _groupWith) as GroupWith;

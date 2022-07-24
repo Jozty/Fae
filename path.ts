@@ -14,7 +14,7 @@ type PathF =
   & (<T, R>(ps: PH, obj: ObjRec<T> | null) => PathF_1<T, R>)
   & (<T, R>(ps: Path, obj: ObjRec<T> | null) => R);
 
-function _path<R, T = any>(ps: Path, obj: ObjRec<T> | null): R {
+function _path<R, T = unknown>(ps: Path, obj: ObjRec<T> | null): R {
   return paths<T, R>([ps], obj)[0];
 }
 
@@ -31,4 +31,4 @@ function _path<R, T = any>(ps: Path, obj: ObjRec<T> | null): R {
  *      Fae.path([], {a: [1, 2, {ab: 5, de: [12, 23, 25]}, "234"], 4: "sdf"}); // {a: [1, 2, {ab: 5, de: [12, 23, 25]}, "234"], 4: "sdf"}
  *      Fae.path(['a', ''], {a: {b: 2}}); // undefined
  */
-export const path: PathF = curryN(2, _path);
+export const path = curryN(2, _path) as PathF;

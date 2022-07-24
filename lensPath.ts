@@ -12,7 +12,7 @@ type LensPath = <T, F>(path: Path) => Lens<T, F>;
 function _lensPath<T, F>(path: Path): Lens<T, F> {
   return lens(
     pth(path) as LensGetter<T, F>,
-    (assocPath(path) as any) as LensSetter<T, F>,
+    (assocPath(path) as unknown) as LensSetter<T, F>,
   );
 }
 
@@ -22,4 +22,4 @@ function _lensPath<T, F>(path: Path): Lens<T, F> {
  *      const xHeadYLens = Fae.lensPath(['x', 0, 'y'])
  *      Fae.view(xHeadYLens, {x: [{y: 2, z: 3}, {y: 4, z: 5}]}) // {x: [{y: 1, z: 3}, {y: 4, z: 5}]}
  */
-export const lensPath: LensPath = curryN(1, _lensPath);
+export const lensPath = curryN(1, _lensPath) as LensPath;

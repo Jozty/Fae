@@ -53,4 +53,4 @@ function _when<T, R>(
  *      truncate('12345');         //=> '12345'
  *      truncate('0123456789ABC'); //=> '0123456789…'
  */
-export const when: When = curryN(3, _when);
+export const when = curryN(3, _when) as When;

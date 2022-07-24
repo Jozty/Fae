@@ -1,6 +1,7 @@
 import { describe, it } from './_describe.ts';
 import { _, find, pipe, transduce } from '../mod.ts';
 import { eq } from './utils/utils.ts';
+import type { Func } from '../utils/types.ts';
 
 describe('find', () => {
   const obj1 = { x: 100 };
@@ -23,11 +24,14 @@ describe('find', () => {
     1,
     0,
   ];
-  const even = (x: any) => typeof x === 'number' && x % 2 === 0;
-  const gt100 = (x: any) => typeof x === 'number' && x > 100;
-  const isStr = (x: any) => typeof x === 'string';
-  const xGt100 = (o: any) => o && o.x > 100;
-  const intoArray = (a: any) => [a];
+
+  type El = typeof a[number];
+
+  const even = (x: El) => typeof x === 'number' && x % 2 === 0;
+  const gt100 = (x: El) => typeof x === 'number' && x > 100;
+  const isStr = (x: El) => typeof x === 'string';
+  const xGt100 = (o: El) => typeof o === 'object' && o.x > 100;
+  const intoArray = (a?: El) => [a];
 
   it('should return the first element that satisfies the predicate', () => {
     eq(find(even, a), 10);
@@ -60,10 +64,11 @@ describe('find', () => {
   });
 
   it('should act as transducer', () => {
-    const t1 = pipe(find(even));
+    const t1 = pipe(find(even)) as Func<[El[]], El>;
     eq(t1(a), 10);
+
     eq(
-      transduce(t1, (_: number, b: number) => b, undefined, a),
+      transduce(t1, (_a: El | undefined, b: El | undefined) => b, undefined, a),
       10,
     );
   });

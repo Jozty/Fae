@@ -24,4 +24,4 @@ function _append<T>(el: T, list: T[]) {
  *      Fae.append('tests', []); //=> ['tests']
  *      Fae.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
  */
-export const append: Append = curryN(2, _append);
+export const append = curryN(2, _append) as Append;

@@ -1,69 +1,66 @@
-import type { Func } from './types.ts';
-import Transformer from './Transformers/transformers.ts';
+import type { Any, Func, Obj } from './types.ts';
+import { AbstractTransformer } from './Transformers/transformers.ts';
 
-export function is(x: any, type: string) {
+export function is(x: unknown, type: string) {
   return Object.prototype.toString.call(x) === `[object ${type}]`;
 }
 
-export function isNumber(x: any): x is Number | number {
+export function isNumber(x: unknown): x is Number | number {
   return is(x, 'Number');
 }
 
-export function isString(x: any): x is string {
+export function isString(x: unknown): x is string {
   return is(x, 'String');
 }
 
-export function isObject(x: any): x is Object {
+export function isObject(x: unknown): x is Object {
   return is(x, 'Object');
 }
 
-export function isFunction(x: any): x is Func {
+export function isFunction<
+  A extends Any[] = Any[],
+  R = Any,
+>(x: Func<A, R> | Obj | unknown[]): x is Func<A, R> {
   return is(x, 'Function') || typeof x === 'function';
 }
 
-export function isInteger(x: any): x is number {
+export function isInteger(x: unknown): x is number {
   return Number.isInteger(x);
 }
 
-export function isArray<T = any>(x: unknown): x is Array<T> {
+export function isArray<T = unknown>(x: unknown): x is Array<T> {
   return Array.isArray(x);
 }
 
-export function isArrayLike<T = any>(x: any): x is ArrayLike<T> {
+export function isArrayLike<T = unknown>(x: unknown): x is ArrayLike<T> {
   if (!x) return false;
   if (isArray(x)) return true;
-  if (x.length) {
-    if (x.length === 0) return true;
-    if (
-      x.length > 0 &&
-      Object.prototype.hasOwnProperty.call(x, 0) &&
-      Object.prototype.hasOwnProperty.call(x, x.length - 1)
-    ) {
-      return true;
-    }
-  }
-  return false;
+
+  // @ts-ignore: check is there to ensure length property is there
+  return typeof x === 'object' && 'length' in x && typeof x.length === 'number';
 }
 
-export function isIterable<T = any>(x: any): x is Iterable<T> {
+export function isIterable<T = unknown>(x: unknown): x is Iterable<T> {
   return Symbol.iterator in Object(x);
 }
 
-export function isIterator<T = any>(x: any): x is Iterator<T> {
-  return x && isFunction(x.next);
+export function isIterator<T = unknown>(x: unknown): x is Iterator<T> {
+  // @ts-ignore: check is there to ensure x is not null
+  return !!x && typeof x === 'object' && isFunction(x?.next);
 }
 
-export function isTransformer(s: any): s is Transformer {
-  return s instanceof Transformer;
+// deno-lint-ignore no-explicit-any
+export function isTransformer(s: any): s is AbstractTransformer {
+  return s instanceof AbstractTransformer;
 }
 
-export function isUndefinedOrNull(x: any): x is undefined | null {
+export function isUndefinedOrNull(x: unknown): x is undefined | null {
   return x === void 0 || x === null || x === undefined;
 }
-export function isNotUndefinedOrNull(x: any) {
+export function isNotUndefinedOrNull(x: unknown) {
   return !isUndefinedOrNull(x);
 }
 
-export function isArguments(x: any) {
+export function isArguments(x: unknown) {
   return is(x, 'Arguments');
 }

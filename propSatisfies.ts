@@ -49,4 +49,4 @@ function _propSatisfies<T>(
  *
  *      Fae.propSatisfies(x => x > 0, 'x', {x: 1, y: 2}); //=> true
  */
-export const propSatisfies: PropSatisfies = curryN(3, _propSatisfies);
+export const propSatisfies = curryN(3, _propSatisfies) as PropSatisfies;

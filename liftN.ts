@@ -21,7 +21,7 @@ function _liftN(arity: number, fn: Func): Func {
   const lifted = curryN(arity, fn);
   const f = function () {
     const args = tail(arguments);
-    const mapped = (map(lifted, arguments[0]) as any) as Func[];
+    const mapped = (map(lifted, arguments[0]) as unknown) as Func[];
     return reduce(ap, mapped, args);
   };
   return curryN(arity, f);
@@ -35,4 +35,4 @@ function _liftN(arity: number, fn: Func): Func {
  *      const add2 = Fae.liftN(3, (...args: number[]) => R.sum(args))
  *      add2([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
  */
-export const liftN: LiftN = curryN(2, _liftN);
+export const liftN = curryN(2, _liftN) as LiftN;

@@ -29,9 +29,10 @@ function _nth<F extends FunctorWithArLk<T> | string, T>(
   functor: F,
 ) {
   let f: ArrayLike<T> | string = '';
+
   if (isArrayLike(functor)) f = functor;
-  else if (isIterable(functor)) f = [...functor];
-  else if (isIterator(functor)) f = [...getIterable(functor)];
+  else if (isIterable(functor)) f = [...functor] as T[];
+  else if (isIterator(functor)) f = [...getIterable(functor)] as T[];
   else if (isString(functor)) f = functor;
   else throwFunctorError();
 
@@ -44,4 +45,4 @@ function _nth<F extends FunctorWithArLk<T> | string, T>(
  * Returns element counting from right end if `index` is -ve.
  * Works in array-like/string/iterable/iterator
  */
-export const nth: Nth = curryN(2, _nth);
+export const nth = curryN(2, _nth) as Nth;

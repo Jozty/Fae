@@ -48,4 +48,4 @@ function _pathOr<T, D, P>(d: D, p: Path, obj: ObjRec<T> | null) {
  *      Fae.pathOr('N/A', ['a', 'b'], {a: {b: 2}}); //=> 2
  *      Fae.pathOr('N/A', ['a', 'b'], {c: {b: 2}}); //=> "N/A"
  */
-export const pathOr: PathOr = curryN(3, _pathOr);
+export const pathOr = curryN(3, _pathOr) as PathOr;

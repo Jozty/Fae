@@ -1,8 +1,9 @@
 import { describe, it } from './_describe.ts';
 import { _, join } from '../mod.ts';
 import { eq, thr } from './utils/utils.ts';
+import type { DemoIterable } from './types.ts';
 
-const iterable: any = {
+const iterable: DemoIterable = {
   limit: 70,
   current: 65,
   [Symbol.iterator]: function () {
@@ -16,7 +17,7 @@ const iterable: any = {
             done: false,
           };
         }
-        return { done: true };
+        return { done: true } as IteratorReturnResult<string>;
       },
     };
   },
@@ -110,15 +111,18 @@ describe('join', () => {
     };
     const y = new XYZ();
     thr(
-      () => joinUnderScore(x as any),
+      // @ts-expect-error: passed arguement is not a functor
+      () => joinUnderScore(x),
       'The functor should be an array like or iterable/iterator',
     );
     thr(
-      () => joinUnderScore(y as any),
+      // @ts-expect-error: passed arguement is not a functor
+      () => joinUnderScore(y),
       'The functor should be an array like or iterable/iterator',
     );
     thr(
-      () => joinUnderScore(/regex/ as any),
+      // @ts-expect-error: passed arguement is not a functor
+      () => joinUnderScore(/regex/),
       'The functor should be an array like or iterable/iterator',
     );
   });

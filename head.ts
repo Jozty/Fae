@@ -4,7 +4,7 @@ import { nth } from './nth.ts';
 import type { InferElementType } from './utils/types.ts';
 
 // @types
-type Head = <L extends any[] | string>(functor: L) => InferElementType<L>;
+type Head = <L extends unknown[] | string>(functor: L) => InferElementType<L>;
 
 /**
  * Returns the first element of the given list or string. In some libraries

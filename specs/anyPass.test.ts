@@ -18,7 +18,8 @@ describe('anyPass', () => {
     eq(ok(3), true);
     eq(ok(22), true);
     eq(anyPass([odd, lt5, plusEq])(6, 7, 8, 9), false);
-    eq(anyPass([odd, lt5, plusEq])(6)(7)(8)(9), false);
+    // @ts-expect-error: all pass does not return inferred types properly
+    eq((anyPass([odd, lt5, plusEq]))(6)(7)(8)(9), false);
   });
 
   it('should return false for an empty predicate list', () => {

@@ -11,12 +11,14 @@ describe('allPass', () => {
 
   it('should report whether all predicates are satisfied by a given value', () => {
     const ok = allPass([odd, lt20, gt5]);
+
     eq(ok(7), true);
     eq(ok(9), true);
     eq(ok(10), false);
     eq(ok(3), false);
     eq(ok(21), false);
     eq(allPass([odd, gt5, plusEq])(9, 9, 9, 9), true);
+    // @ts-expect-error: all pass does not return inferred types properly
     eq(allPass([odd, gt5, plusEq])(9)(9)(9)(9), true);
   });
 

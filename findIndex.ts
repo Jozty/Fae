@@ -25,4 +25,4 @@ function _findIndex<T>(predicate: Predicate1<T>, arr: T[]) {
  * Takes in Array and Element as its 2 parameters
  * Return the 1st index If element is matched or -1 is unmatched.
  */
-export const findIndex: FindIndex = curryN(2, _findIndex);
+export const findIndex = curryN(2, _findIndex) as FindIndex;

@@ -1,11 +1,17 @@
-import Transformer from './transformers.ts';
-import type { Func } from '../types.ts';
+import { AbstractTransformer, ReducedTransformer } from './transformers.ts';
+import type { Predicate1 } from '../types.ts';
 
-export default class FilterTransformer extends Transformer {
-  constructor(f: Func, transformer: Transformer) {
-    super(f, transformer);
+export default class FilterTransformer<T> extends AbstractTransformer<T, T> {
+  private predicate: Predicate1<T>;
+
+  constructor(f: Predicate1<T>, transformer: AbstractTransformer<T, T>) {
+    super(transformer);
+    this.predicate = f;
   }
-  step(result: any, input: any) {
-    return this.f(input) ? this.transformer!.step(result, input) : result;
+
+  step(result: T | ReducedTransformer<T>, input: T) {
+    return this.predicate(input)
+      ? this.transformer!.step(result, input)
+      : result;
   }
 }

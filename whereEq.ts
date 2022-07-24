@@ -36,4 +36,4 @@ function _whereEq<T>(spec: Obj<T>, testObj: Obj<T>) {
  *      pred({a: 1, b: 2, c: 3})  //=> true
  *      pred({a: 1, b: 1})        //=> false
  */
-export const whereEq: WhereEq = curryN(2, _whereEq);
+export const whereEq = curryN(2, _whereEq) as WhereEq;

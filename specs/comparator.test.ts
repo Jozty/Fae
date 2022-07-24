@@ -6,7 +6,7 @@ describe('comparator', () => {
   const func1 = (a: string, b: string) => a[2] < b[2];
   const func2 = (a: number, b: number) => (a & b) === 0;
   const func3 = (a: number[], b: number[]) => a.length < b.length;
-  const func4 = (a: any, b: any) => a.x < b.x;
+  const func4 = (a: { x: number }, b: { x: number }) => a.x < b.x;
 
   const c1 = comparator(func1);
   const c2 = comparator(func2);

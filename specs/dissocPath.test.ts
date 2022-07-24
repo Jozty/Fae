@@ -9,9 +9,11 @@ describe('dissocPath', () => {
       f: [{ g: 4 }, { h: 5, i: 6, j: { k: 7, l: 8 } }],
       m: 9,
     };
-    const obj2 = dissocPath(['f', 1, 'i'], obj1);
+    const obj2 = dissocPath(['f', 1, 'i'], obj1) as typeof obj1;
+
     eq(obj2, {
       a: { b: 1, c: 2, d: { e: 3 } },
+      // @ts-ignore: obj2 is not properly typed
       f: [{ g: 4 }, { h: 5, j: { k: 7, l: 8 } }],
       m: 9,
     });

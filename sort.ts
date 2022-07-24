@@ -25,4 +25,4 @@ function _sort<T>(comparator: Comparator<T>, list: T[]) {
  *
  * It does not modify the original.
  */
-export const sort: Sort = curryN(2, _sort);
+export const sort = curryN(2, _sort) as Sort;

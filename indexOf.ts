@@ -21,15 +21,15 @@ function _indexOf<T>(value: T, list: T[]) {
         // handles +0 and -0
         const inf = 1 / value;
         for (let i = 0; i < list.length; i++) {
-          const x: any = list[i];
+          const x = list[i] as unknown as number;
           if (x === 0 && 1 / x === inf) return i;
         }
         return -1;
       } else if (value !== value) {
         // handles NaN
         for (let i = 0; i < list.length; i++) {
-          const x: any = list[i];
-          if (isNaN(x)) return i;
+          const x: unknown = list[i];
+          if (isNaN(x as number)) return i;
         }
         return -1;
       }
@@ -62,4 +62,4 @@ function _indexOf<T>(value: T, list: T[]) {
  *      Fae.indexOf(-0, [1, 2, 3, 0, -0, NaN]); //=> 4
  *      Fae.indexOf(NaN, [1, 2, 3, 0, -0, NaN]); //=> 5
  */
-export const indexOf: IndexOf = curryN(2, _indexOf);
+export const indexOf = curryN(2, _indexOf) as IndexOf;

@@ -7,20 +7,20 @@ import curryN from './utils/curry_n.ts';
 import type { InferType, PH } from './utils/types.ts';
 
 // @types
-type Drop_2 = <L extends any[] | string>(list: L) => InferType<L>;
+type Drop_2 = <L extends unknown[] | string>(list: L) => InferType<L>;
 
-type Drop_1<L extends any[] | string> = (n: number) => InferType<L>;
+type Drop_1<L extends unknown[] | string> = (n: number) => InferType<L>;
 
 type Drop =
   & ((n: number) => Drop_2)
-  & (<L extends any[] | string>(n: PH, list: L) => Drop_1<L>)
-  & (<L extends any[] | string>(n: number, list: L) => InferType<L>);
+  & (<L extends unknown[] | string>(n: PH, list: L) => Drop_1<L>)
+  & (<L extends unknown[] | string>(n: number, list: L) => InferType<L>);
 
-function _drop<L extends any[] | string>(n: number, list: L) {
+function _drop<L extends unknown[] | string>(n: number, list: L) {
   return slice(Math.max(0, n), Infinity, list);
 }
 
-const dispatchedDrop = dispatch(DropTransformer as any, _drop);
+const dispatchedDrop = dispatch(DropTransformer, _drop);
 
 /**
  * Returns all but first `n` elements of given list.

@@ -69,7 +69,9 @@ describe('lensProp: composability', () => {
     const nestedObj = { a: { b: 1 }, c: 2 };
     const composedLens = compose(lensProp('a'), lensProp('b'));
 
-    eq(view(composedLens, nestedObj), 1);
+    // TODO
+    // deno-lint-ignore no-explicit-any
+    eq(view(composedLens as any, nestedObj) as any, 1);
   });
 });
 

@@ -19,4 +19,4 @@ function _add(a: number, b: number) {
  *      const add5 = Fae.add(5, Fae._)
  *      const a = add5(4) // 9
  */
-export const add: Add = curryN(2, _add);
+export const add = curryN(2, _add) as Add;

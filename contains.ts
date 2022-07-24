@@ -27,4 +27,4 @@ function _contains<T>(element: T, list: ArrayLike<T>) {
 /**
  * Returns `true` or `false` based on the element found or not.
  */
-export const contains: Contains = curryN(2, _contains);
+export const contains = curryN(2, _contains) as Contains;

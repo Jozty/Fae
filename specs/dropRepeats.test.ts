@@ -22,12 +22,12 @@ describe('dropRepeats', () => {
 
   it('has Fae.equals semantics', () => {
     class Just {
-      private value: any;
-      constructor(x: any) {
+      private value: unknown;
+      constructor(x: unknown) {
         this.value = x;
       }
 
-      equals(x: any) {
+      equals(x: unknown) {
         return x instanceof Just && equals(x.value, this.value);
       }
     }

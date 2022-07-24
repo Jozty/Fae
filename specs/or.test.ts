@@ -13,10 +13,8 @@ describe('or', () => {
     eq(or('Fae', 'Best'), true);
     eq(or(a, 3), true);
     eq(or([1, 2, 3], [2, 10]), true);
-    // fae-no-check
-    eq(or(undefined, undefined as any), false);
-    // fae-no-check
-    eq(or(true, undefined as any), true);
+    eq(or(undefined, undefined), false);
+    eq(or(true, undefined), true);
     eq(or(0, true), true);
     eq(or('', false), false);
     eq(or(null, false), false);

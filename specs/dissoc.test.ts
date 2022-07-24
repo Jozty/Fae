@@ -9,26 +9,28 @@ describe('dissoc', () => {
   });
 
   it('should include prototype properties', () => {
-    function Rectangle(this: any, width: number, height: number) {
+    function Rectangle(this: unknown, width: number, height: number) {
+      // @ts-ignore: https://github.com/Jozty/Fae/issues/81
       this.width = width;
+      // @ts-ignore: https://github.com/Jozty/Fae/issues/81
       this.height = height;
     }
+
     const area = (Rectangle.prototype.area = () => {
-      // fae-no-check
-      // @ts-ignore
+      // @ts-ignore: https://github.com/Jozty/Fae/issues/81
       return this.width * this.height;
     });
-    // fae-no-check
-    // @ts-ignore
+
+    // @ts-ignore: https://github.com/Jozty/Fae/issues/81
     const rect = new Rectangle(7, 6);
 
-    // @ts-ignore
+    // @ts-ignore: https://github.com/Jozty/Fae/issues/81
     eq(dissoc('area', rect), { width: 7, height: 6 });
-    // fae-no-check
-    // @ts-ignore
+
+    // @ts-ignore: https://github.com/Jozty/Fae/issues/81
     eq(dissoc('width', rect), { height: 6, area: area });
-    // fae-no-check
-    // @ts-ignore
+
+    // @ts-ignore: https://github.com/Jozty/Fae/issues/81
     eq(dissoc('depth', rect), { width: 7, height: 6, area: area });
   });
 

@@ -35,4 +35,4 @@ function _whereAny<T>(specs: Tests<T>, testObj: Obj<T>) {
  *      Fae.whereAny(spec, {x: 1, y: 101}) // false
  *      Fae.whereAny(spec, {x: 1, y: 2}) // true
  */
-export const whereAny: WhereAny = curryN(2, _whereAny);
+export const whereAny = curryN(2, _whereAny) as WhereAny;

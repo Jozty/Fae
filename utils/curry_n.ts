@@ -1,17 +1,18 @@
 import { isPlaceHolder } from './is_placeholder.ts';
 import { _, UNDEFINED } from './constants.ts';
-import type { Func } from './types.ts';
+import type { Any, Func } from './types.ts';
 import { setFunctionLength } from './set.ts';
 
-function _curryN<F extends (...args: any[]) => any>(
+function _curryN<A extends unknown[], R, This = Any>(
   totalArgs: number,
-  received: Parameters<F>,
-  original: F,
+  received: A,
+  original: Func<A, R, This>,
 ) {
-  function f(this: any, ...passed: any[]) {
-    const allArgs = [...received] as Parameters<F>;
+  function f(this: This, ...passed: unknown[]) {
+    const allArgs = [...received] as Parameters<Func<A, R>>;
     let allArgsI = 0;
     let i = 0;
+
     while (i < passed.length && allArgsI < totalArgs) {
       if (allArgs[allArgsI] !== UNDEFINED) {
         allArgsI++;
@@ -30,12 +31,12 @@ function _curryN<F extends (...args: any[]) => any>(
   return f;
 }
 
-export default function curryN<F extends Func>(
+export default function curryN<A extends unknown[], R, This>(
   totalArgs: number,
-  original: F,
+  original: Func<A, R, This>,
 ) {
   const received = new Array(totalArgs).fill(UNDEFINED) as Parameters<
-    F
+    Func<A, R>
   >;
   return _curryN(totalArgs, received, original);
 }

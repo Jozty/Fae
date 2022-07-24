@@ -45,4 +45,4 @@ function _insert<T>(index: number, element: T, list: T[]) {
  * Returns a new array with `element` inserted at `index` to `list`
  * without affecting original one.
  */
-export const insert: Insert = curryN(3, _insert);
+export const insert = curryN(3, _insert) as Insert;

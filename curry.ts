@@ -1,7 +1,7 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
 import curryN from './utils/curry_n.ts';
-import type { Curry2, Func } from './utils/types.ts';
+import type { Any, Curry2, Func } from './utils/types.ts';
 
 /**
  * Returns the curried function
@@ -17,4 +17,8 @@ import type { Curry2, Func } from './utils/types.ts';
  *      g(_, 2, 3)(1) // [1, 2, 3]
  *      g(_, _, 3)(1, 2) // [1, 2, 3]
  *      g(_, _, 3)(1, 2, 4, 5, 6) // 11 - rest arguments are ignored */
-export const curry: Curry2<number, Func, Func> = curryN(2, curryN);
+export const curry = curryN(2, curryN) as Curry2<
+  number,
+  Func<Any, Any, Any>,
+  Func<Any, Any, Any>
+>;

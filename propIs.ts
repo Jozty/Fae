@@ -48,4 +48,4 @@ function _propIs<T>(type: string, name: Prop, obj: Obj<T>) {
  *      Fae.propIs('String', 'a', {a: 'foo'});    //=> true
  *      Fae.propIs('Number', 'a', {});            //=> false
  */
-export const propIs: PropIs = curryN(3, _propIs);
+export const propIs = curryN(3, _propIs) as PropIs;

@@ -1,9 +1,14 @@
 import { describe, it } from './_describe.ts';
 import { _, curry, whereAll } from '../mod.ts';
 import { eq } from './utils/utils.ts';
+import type { Curry2 } from '../utils/types.ts';
 
 describe('whereAll', () => {
-  const equals = curry(2, (x: number, y: number) => x === y);
+  const equals = curry(2, (x: unknown, y: unknown) => x === y) as Curry2<
+    unknown,
+    unknown,
+    boolean
+  >;
   const specP = {
     name: { firstName: equals('Bob'), lastname: equals('Hanks') },
     address: { city: equals('LA'), state: equals('California') },

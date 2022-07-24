@@ -11,7 +11,7 @@ type LensIndex = <T, F>(index: number) => Lens<T, F>;
 function _lensIndex<T, F>(index: number): Lens<T, F> {
   return lens(
     nth(index) as LensGetter<T, F>,
-    (update(index) as any) as LensSetter<T, F>,
+    (update(index) as unknown) as LensSetter<T, F>,
   );
 }
 
@@ -23,4 +23,4 @@ function _lensIndex<T, F>(index: number): Lens<T, F> {
  *      Fae.set(headLens, 'x', ['a', 'b', 'c'])        // ['x', 'b', 'c']
  *      Fae.over(headLens, (x: string) => x.toUpperCase(), ['a', 'b', 'c']) // ['A', 'b', 'c']
  */
-export const lensIndex: LensIndex = curryN(1, _lensIndex);
+export const lensIndex = curryN(1, _lensIndex) as LensIndex;

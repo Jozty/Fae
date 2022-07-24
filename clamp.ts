@@ -55,4 +55,4 @@ function _clamp<T extends number | string>(
  *      Fae.clamp(1, 10, 15) // => 10
  *      Fae.clamp(1, 10, 4)  // => 4
  */
-export const clamp: Clamp = curryN(3, _clamp);
+export const clamp = curryN(3, _clamp) as Clamp;

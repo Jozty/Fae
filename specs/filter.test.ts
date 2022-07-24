@@ -11,8 +11,9 @@ import {
   transduce,
 } from '../mod.ts';
 import { eq } from './utils/utils.ts';
+import type { DemoIterable } from './types.ts';
 
-const iterable: any = {
+const iterable: DemoIterable = {
   limit: 70,
   current: 65,
   [Symbol.iterator]: function () {
@@ -26,7 +27,7 @@ const iterable: any = {
             done: false,
           };
         }
-        return { done: true };
+        return { done: true } as IteratorReturnResult<string>;
       },
     };
   },

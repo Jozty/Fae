@@ -13,7 +13,6 @@
     "rules": {
       "tags": ["recommended"],
       "exclude": [
-        "no-explicit-any",
         "ban-types",
         "no-fallthrough",
         "ban-ts-comment"

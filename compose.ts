@@ -1,7 +1,7 @@
 // Copyright (c) 2020 Jozty. All rights reserved. MIT license.
 
 import { pipe } from './pipe.ts';
-import type { Func } from './utils/types.ts';
+import type { Any, Func, FuncArr1 } from './utils/types.ts';
 import { reverse } from './reverse.ts';
 
 /**
@@ -16,7 +16,10 @@ import { reverse } from './reverse.ts';
  *
  *      Fae.compose(Math.abs, Fae.add(1), Fae.multiply(2))(-4) //=> 7
  */
-export function compose(this: any, ...functions: Func[]) {
+export function compose<
+  A extends unknown[],
+  R,
+>(this: unknown, ...functions: [...FuncArr1<Any, Any>[], Func<A, R>]) {
   return pipe.apply(
     this,
     reverse(functions) as Parameters<typeof pipe>,

@@ -30,4 +30,4 @@ function _pluck<T>(p: Prop, list: Obj<T>[]): T[] {
  *      Fae.pluck(0, [[1, 2], [3, 4]])               //=> [1, 3]
  *      Fae.pluck('val', {a: {val: 3}, b: {val: 5}}) //=> {a: 3, b: 5}
  */
-export const pluck: Pluck = curryN(2, _pluck);
+export const pluck = curryN(2, _pluck) as Pluck;

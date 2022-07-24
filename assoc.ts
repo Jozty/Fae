@@ -50,4 +50,4 @@ function _assoc(prop: string | number, val: unknown, obj: ObjRec) {
  *
  *      Fae.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
  */
-export const assoc: Assoc = curryN(3, _assoc);
+export const assoc = curryN(3, _assoc) as Assoc;

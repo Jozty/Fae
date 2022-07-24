@@ -26,4 +26,4 @@ function _or(a: unknown, b: unknown) {
  *      Fae.or(false, true)   //=> true
  *      Fae.or(false, false)  //=> false
  */
-export const or: Or = curryN(2, _or);
+export const or = curryN(2, _or) as Or;

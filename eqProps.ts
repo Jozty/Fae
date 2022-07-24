@@ -39,4 +39,4 @@ function _eqProps<T>(prop: Prop, obj1: Obj<T>, obj2: Obj<T>) {
  *      Fae.eqProps('a', obj1, obj2) //=> false
  *      Fae.eqProps('c', obj1, obj2) //=> true
  */
-export const eqProps: EqProps = curryN(3, _eqProps);
+export const eqProps = curryN(3, _eqProps) as EqProps;

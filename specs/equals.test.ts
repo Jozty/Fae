@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 import { describe, it } from './_describe.ts';
 import { _, equals } from '../mod.ts';
 import { eq } from './utils/utils.ts';

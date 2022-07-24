@@ -2,20 +2,20 @@
 
 import { isString } from './utils/is.ts';
 import curryN from './utils/curry_n.ts';
+import { InferType } from './utils/types.ts';
 
 // @types
-type ReverseReturnType<F> = F extends (infer U)[] ? U[] : string;
-
-type Reverse = <F extends T[] | string, T = any>(
+type Reverse = <F extends T[] | string, T = unknown>(
   functor: F,
-) => ReverseReturnType<F>;
+) => InferType<F>;
 
-function _reverse<F extends T[] | string, T>(functor: F): F {
+function _reverse<F extends T[] | string, T>(functor: F): InferType<F> {
   if (isString(functor)) {
-    return functor.split('').reverse().join('') as F;
+    return functor.split('').reverse().join('') as InferType<F>;
   }
-  return [...functor].reverse() as F;
+
+  return [...functor].reverse() as InferType<F>;
 }
 
 /** Reverses given string or array without affecting the original. */
-export const reverse: Reverse = curryN(1, _reverse);
+export const reverse = curryN(1, _reverse) as Reverse;

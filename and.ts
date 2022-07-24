@@ -21,4 +21,4 @@ function _and(a: unknown, b: unknown) {
  *      Fae.and(false, true)  //=> false
  *      Fae.and(false, false) //=> false
  */
-export const and: And = curryN(2, _and);
+export const and = curryN(2, _and) as And;

@@ -29,4 +29,4 @@ function _median(list: number[]) {
  * Returns the median of the given list of numbers. NaNs are filtered out, if present.
  * Returns NaN if the list is empty.
  */
-export const median: Median = curryN(1, _median);
+export const median = curryN(1, _median) as Median;

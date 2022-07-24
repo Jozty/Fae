@@ -20,4 +20,4 @@ function _tail<T>(functor: ArrayLike<T> | string) {
  * Returns all but the first element of `functor`.
  * Accepts array-like(including string).
  */
-export const tail: Tail = curryN(1, _tail);
+export const tail = curryN(1, _tail) as Tail;

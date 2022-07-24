@@ -29,4 +29,4 @@ function _zipObj<T>(keys: string[], values: T[]): Obj<T> {
  *
  *      Fae.zipObj(['a', 'b', 'c'], [1, 2, 3]) // {a: 1, b: 2, c: 3}
  */
-export const zipObj: ZipObj = curryN(2, _zipObj);
+export const zipObj = curryN(2, _zipObj) as ZipObj;

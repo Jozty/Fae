@@ -37,4 +37,4 @@ function _range(from: number, to: number) {
 }
 
 /** Returns a list of numbers from `from` to `to` **both inclusive**. */
-export const range: Range = curryN(2, _range);
+export const range = curryN(2, _range) as Range;

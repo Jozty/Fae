@@ -27,4 +27,4 @@ function _view<T, F>(lens: Lens<T, F>, target: T): F {
   return lens(_viewTransformer)(target).value;
 }
 
-export const view: View = curryN(2, _view);
+export const view = curryN(2, _view) as View;

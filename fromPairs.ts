@@ -3,7 +3,7 @@
 import type { Prop } from './prop.ts';
 import type { Obj } from './utils/types.ts';
 
-export type Pair<T = any> = [Prop, T];
+export type Pair<T = unknown> = [Prop, T];
 
 /**
  * Creates a new object from a list key-value pairs. If a key appears in

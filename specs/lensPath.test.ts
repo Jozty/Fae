@@ -1,3 +1,5 @@
+// @ts-nocheck
+// TODO
 import { describe, it } from './_describe.ts';
 import { compose, identity, inc, lensPath, over, set, view } from '../mod.ts';
 import { eq } from './utils/utils.ts';
@@ -85,7 +87,7 @@ describe('lensPath: over', () => {
       a: [{ b: 1 }, { b: 2 }],
       d: 3,
       X: undefined,
-    } as any);
+    } as unknown);
     eq(
       over<TestObj, number>(
         lensPath(['a', 0, 'X']),

@@ -8,15 +8,16 @@ export function noEq<T>(actual: T, expected: T) {
   expect(actual).not.toEqual(expected);
 }
 
-export function strictEq(actual: any, expected: any) {
+export function strictEq<T1, T2>(actual: T1, expected: T2) {
   assertStrictEquals(actual, expected);
 }
-export function strictNotEq(actual: any, expected: any) {
+export function strictNotEq<T1, T2>(actual: T1, expected: T2) {
+  // @ts-ignore: T1 and T2 can be of same type
   if (actual !== expected) return;
   throw new AssertionError('The objects passes has same reference');
 }
 
-export function thr(func: Function, expected: any) {
+export function thr(func: Function, expected: unknown) {
   let f = true;
   try {
     func();

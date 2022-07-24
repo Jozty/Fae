@@ -18,4 +18,4 @@ function _subtract(a: number, b: number) {
 }
 
 /** Subtracts its second argument from its first argument. */
-export const subtract: Subtract = curryN(2, _subtract);
+export const subtract = curryN(2, _subtract) as Subtract;
