@@ -44,8 +44,8 @@ describe('any', () => {
       { name: 'Betty', age: 18 },
       { name: 'Cindy', age: 17 },
     ];
-    const atLeast = (age: number) =>
-      (person: typeof teens[number]) => person.age >= age;
+    const atLeast = (age: number) => (person: typeof teens[number]) =>
+      person.age >= age;
 
     eq(any(atLeast(16), teens), true);
     eq(any(atLeast(21), teens), false);
