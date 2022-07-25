@@ -1,5 +1,8 @@
 import { AssertionError, assertStrictEquals, expect } from '../_describe.ts';
 
+export function exactType<T>(_actual: T, _expected: T) {
+}
+
 export function eq<T>(actual: T, expected: T) {
   expect(actual).toEqual(expected);
 }
