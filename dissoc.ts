@@ -4,14 +4,14 @@ import type { ObjRec, PH } from './utils/types.ts';
 import curryN from './utils/curry_n.ts';
 
 // @types
-type Dissoc_2 = (obj: ObjRec) => ObjRec;
+type Dissoc_2<P extends string | number> = <T>(obj: T) => Omit<T, P>;
 
-type Dissoc_1 = (prop: string | number) => ObjRec;
+type Dissoc_1<T> = <P extends keyof T>(prop: P) => Omit<T, P>;
 
 type Dissoc =
-  & ((prop: string | number) => Dissoc_2)
-  & ((prop: PH, obj: ObjRec) => Dissoc_1)
-  & ((prop: string | number, obj: ObjRec) => ObjRec);
+  & (<P extends string | number>(prop: P) => Dissoc_2<P>)
+  & (<T>(prop: PH, obj: T) => Dissoc_1<T>)
+  & (<T, P extends keyof T>(prop: P, obj: T) => Omit<T, P>);
 
 function _dissoc(prop: string | number, obj: ObjRec) {
   const result: ObjRec = {};
